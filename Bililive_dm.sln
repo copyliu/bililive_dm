@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bililive_dm", "Bililive_dm\Bililive_dm.csproj", "{545A89C8-2276-498D-B892-6AA3AF0ED1F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiliDMLib", "BiliDMLib\BiliDMLib.csproj", "{76778870-A6F5-43F4-9BAA-DEC0473F217E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
