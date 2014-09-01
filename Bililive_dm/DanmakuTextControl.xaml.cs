@@ -22,8 +22,18 @@ namespace Bililive_dm
 		public DanmakuTextControl()
 		{
 			this.InitializeComponent();
-            this.Loaded += DanmakuTextControl_Loaded;
+          //  this.Loaded += DanmakuTextControl_Loaded;
 		}
+
+	    public void ChangeHeight()
+	    {
+            this.TextBox.Measure(new Size(250, int.MaxValue));
+	        var sb = (Storyboard) this.Resources["Storyboard1"];
+            var kf1 = sb.Children[0] as DoubleAnimationUsingKeyFrames;
+            kf1.KeyFrames[1].Value = this.TextBox.DesiredSize.Height;
+
+
+	    }
 
         void DanmakuTextControl_Loaded(object sender, RoutedEventArgs e)
         {

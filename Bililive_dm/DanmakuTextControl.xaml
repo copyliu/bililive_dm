@@ -13,11 +13,16 @@
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="60"/>
 			</DoubleAnimationUsingKeyFrames>
-			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Text">
-				<EasingColorKeyFrame KeyTime="0" Value="#00000000"/>
-				<EasingColorKeyFrame KeyTime="0:0:0.8" Value="#00000000"/>
-				<EasingColorKeyFrame KeyTime="0:0:1.6" Value="Black"/>
-			</ColorAnimationUsingKeyFrames>
+			
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UserControl">
+				<EasingDoubleKeyFrame KeyTime="0:0:6" Value="1"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:7" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TextBox">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:1.7" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</UserControl.Resources>
 	<UserControl.Triggers>
@@ -27,6 +32,11 @@
 	</UserControl.Triggers>
 
 	<Grid x:Name="LayoutRoot" Background="#7B303030" Height="0">
-		<TextBlock x:Name="Text" TextWrapping="Wrap" Text="TextBlock" FontSize="14.667"/>
+		<RichTextBox x:Name="TextBox"  Background="{x:Null}"  FontSize="18.667" BorderThickness="0" Foreground="White"><FlowDocument>
+			<Paragraph>
+			 <Run Foreground="Yellow" x:Name="UserName">U</Run><Run Foreground="White"> : </Run><Run Foreground="White" x:Name="Text">Text</Run>
+			 </Paragraph>
+			 </FlowDocument>
+		</RichTextBox>
 	</Grid>
 </UserControl>
