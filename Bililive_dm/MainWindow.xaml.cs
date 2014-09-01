@@ -95,6 +95,7 @@ namespace Bililive_dm
             if (log.Dispatcher.CheckAccess())
             {
                 this.log.Text = this.log.Text + text + "\n";
+                log.ScrollToEnd();
             }
             else
             {
