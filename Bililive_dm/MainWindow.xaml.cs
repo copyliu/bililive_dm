@@ -20,9 +20,17 @@ namespace Bililive_dm
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainOverlay overlay;
         public MainWindow()
         {
             InitializeComponent();
+            overlay = new MainOverlay();
+            overlay.ShowInTaskbar = false;
+            overlay.Top = SystemParameters.WorkArea.Top;
+            overlay.Left = SystemParameters.WorkArea.Right - 250;
+            overlay.Height = SystemParameters.WorkArea.Height;
+            overlay.Width = 250;
+            overlay.Show();
         }
 
         private async void connbtn_Click(object sender, RoutedEventArgs e)
@@ -35,7 +43,7 @@ namespace Bililive_dm
                 if (connectresult)
                 {
                     logging("連接成功");
-
+                    
                     b.Disconnected += b_Disconnected;
                     b.ReceivedDanmaku += b_ReceivedDanmaku;
                 }
@@ -53,6 +61,7 @@ namespace Bililive_dm
         void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
         {
             logging("收到彈幕:" + e.Danmaku.CommentUser+" 說: "+e.Danmaku.CommentText);
+            AddDMText(e.Danmaku.CommentText);
         }
 
         void b_Disconnected(object sender, DisconnectEvtArgs args)
@@ -68,6 +77,20 @@ namespace Bililive_dm
             else
             {
                 log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => logging(text)));
+            }
+        }
+
+        public void AddDMText(string text)
+        {
+            if (overlay.Dispatcher.CheckAccess())
+            {
+                DanmakuTextControl c=new DanmakuTextControl();
+                c.Text.Text = text;
+                overlay.LayoutRoot.Children.Add(c);
+            }
+            else
+            {
+                log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => AddDMText(text)));
             }
         }
     }
