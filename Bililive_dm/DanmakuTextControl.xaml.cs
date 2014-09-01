@@ -31,7 +31,7 @@ namespace Bililive_dm
 	        var sb = (Storyboard) this.Resources["Storyboard1"];
             var kf1 = sb.Children[0] as DoubleAnimationUsingKeyFrames;
             kf1.KeyFrames[1].Value = this.TextBox.DesiredSize.Height;
-
+           Storyboard.SetTarget(sb.Children[1],this);
 
 	    }
 

@@ -120,6 +120,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="FullOverlay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FullScreenDanmaku.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainOverlay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -132,8 +140,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Class1.cs" />
     <Compile Include="DanmakuTextControl.xaml.cs">
       <DependentUpon>DanmakuTextControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FullOverlay.xaml.cs">
+      <DependentUpon>FullOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FullScreenDanmaku.xaml.cs">
+      <DependentUpon>FullScreenDanmaku.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainOverlay.xaml.cs">
       <DependentUpon>MainOverlay.xaml</DependentUpon>

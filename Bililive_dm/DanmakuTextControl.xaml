@@ -8,7 +8,7 @@
 	x:Name="UserControl"
 	d:DesignWidth="247" d:DesignHeight="67">
 	<UserControl.Resources>
-		<Storyboard x:Key="Storyboard1">
+		<Storyboard x:Key="Storyboard1" >
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LayoutRoot">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="60"/>

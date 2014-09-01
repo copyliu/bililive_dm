@@ -24,6 +24,7 @@ namespace Bililive_dm
     public partial class MainWindow : Window
     {
         private MainOverlay overlay;
+        private FullOverlay fulloverlay;
         private const int WS_EX_TRANSPARENT = 0x20;
         private const int GWL_EXSTYLE = (-20);
         [DllImport("user32", EntryPoint = "SetWindowLong")]
@@ -34,7 +35,34 @@ namespace Bililive_dm
         DanmakuLoader b = new BiliDMLib.DanmakuLoader();
         public MainWindow()
         {
+           
             InitializeComponent();
+           
+
+//            fulloverlay.Show();
+            
+        }
+
+        private void OpenFullOverlay()
+        {
+            fulloverlay = new FullOverlay();
+            fulloverlay.Background = Brushes.Transparent;
+            fulloverlay.SourceInitialized += delegate
+            {
+                IntPtr hwnd = new WindowInteropHelper(overlay).Handle;
+                uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
+                SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
+            };
+            fulloverlay.ShowInTaskbar = false;
+            fulloverlay.Topmost = true;
+            fulloverlay.Top = SystemParameters.WorkArea.Top;
+            fulloverlay.Left = SystemParameters.WorkArea.Left;
+            fulloverlay.Width = SystemParameters.WorkArea.Width;
+            fulloverlay.Height = 550;
+        }
+
+        private void OpenOverlay()
+        {
             overlay = new MainOverlay();
             overlay.SourceInitialized += delegate
             {
@@ -42,13 +70,13 @@ namespace Bililive_dm
                 uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
                 SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
             };
+            overlay.Background = Brushes.Transparent;
             overlay.ShowInTaskbar = false;
+            overlay.Topmost = true;
             overlay.Top = SystemParameters.WorkArea.Top;
             overlay.Left = SystemParameters.WorkArea.Right - 250;
             overlay.Height = SystemParameters.WorkArea.Height;
             overlay.Width = 250;
-            overlay.Show();
-            
         }
 
         private async void connbtn_Click(object sender, RoutedEventArgs e)
@@ -115,9 +143,9 @@ namespace Bililive_dm
         {
             if (overlay.Dispatcher.CheckAccess())
             {
+                if (this.SideBar.IsChecked==true){
                 DanmakuTextControl c=new DanmakuTextControl();
-                var sb = (Storyboard)c.Resources["Storyboard1"];
-                sb.Completed += sb_Completed;
+
                 c.UserName.Text = user;
                 if (warn)
                 {
@@ -125,7 +153,63 @@ namespace Bililive_dm
                 }
                 c.Text.Text = text;
                 c.ChangeHeight();
+                var sb = (Storyboard)c.Resources["Storyboard1"];
+                //Storyboard.SetTarget(sb,c);
+                sb.Completed += sb_Completed;
                 overlay.LayoutRoot.Children.Add(c);
+                }
+                if (this.Full.IsChecked == true)
+                {
+                   //<Storyboard x:Key="Storyboard1">
+//			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="fullScreenDanmaku">
+//				<EasingThicknessKeyFrame KeyTime="0" Value="3,0,0,0"/>
+//				<EasingThicknessKeyFrame KeyTime="0:0:1.9" Value="220,0,0,0"/>
+//			</ThicknessAnimationUsingKeyFrames>
+//		</Storyboard>
+                    var v = new FullScreenDanmaku();
+                    v.Text.Text = text;
+                    v.ChangeHeight();
+                    var wd = v.Text.DesiredSize.Width;
+                    Dictionary<double,bool> dd=new Dictionary<double, bool>();
+                    dd.Add(0, true);
+                    foreach (var child in fulloverlay.LayoutRoot.Children)
+                    {
+                        if (child is FullScreenDanmaku)
+                        {
+                            var c = child as FullScreenDanmaku;
+                            if (!dd.ContainsKey(c.Margin.Top))
+                            {
+                                dd.Add(c.Margin.Top,true);
+                            }
+                            if (c.Margin.Left > (SystemParameters.PrimaryScreenWidth - wd - 10))
+                            {
+                                dd[c.Margin.Top] = false;
+                            }
+                        }
+                    }
+                    double top;
+                    if (dd.All(p => p.Value == false))
+                    {
+                        top = dd.Max(p => p.Key) + v.Text.DesiredSize.Height;
+                    }
+                    else
+                    {
+                        top = dd.Where(p=>p.Value).Min(p => p.Key) ;
+                    }
+                    Storyboard s=new Storyboard();
+                    Duration duration = new Duration(TimeSpan.FromSeconds(wd/50));
+                    ThicknessAnimation f = new ThicknessAnimation(new Thickness(SystemParameters.PrimaryScreenWidth, top, 0, 0), new Thickness(-wd, top, 0, 0), duration);
+                    s.Children.Add(f);
+                    s.Duration = duration;
+                    Storyboard.SetTarget(f, v);
+                    Storyboard.SetTargetProperty(f, new PropertyPath("(FrameworkElement.Margin)"));
+                    fulloverlay.LayoutRoot.Children.Add(v);
+                    s.Completed += s_Completed;
+                    s.Begin();
+                   
+
+
+                }
             }
             else
             {
@@ -133,9 +217,22 @@ namespace Bililive_dm
             }
         }
 
+        void s_Completed(object sender, EventArgs e)
+        {
+            var s = sender as AnimationClock;
+            if (s == null) return;
+            var c = Storyboard.GetTarget(s.Timeline) as FullScreenDanmaku;
+            if (c != null)
+            {
+                fulloverlay.LayoutRoot.Children.Remove(c);
+            }
+        }
+
         void sb_Completed(object sender, EventArgs e)
         {
-            var c = sender as DanmakuTextControl;
+            var s = sender as ClockGroup;
+            if (s == null) return;
+            var c = Storyboard.GetTarget(s.Children[1].Timeline) as DanmakuTextControl;
             if (c != null)
             {
                 overlay.LayoutRoot.Children.Remove(c);
@@ -145,6 +242,33 @@ namespace Bililive_dm
         private void Test_OnClick(object sender, RoutedEventArgs e)
         {
             AddDMText("彈幕姬報告", "這是一個測試", true);
+        }
+
+        private void Full_Checked(object sender, RoutedEventArgs e)
+        {
+           
+            //            overlay.Show();
+            OpenFullOverlay();
+                fulloverlay.Show();
+           
+        }
+
+        private void SideBar_Checked(object sender, RoutedEventArgs e)
+        {
+            OpenOverlay();
+                overlay.Show();
+           
+            
+        }
+
+        private void SideBar_Unchecked(object sender, RoutedEventArgs e)
+        {
+            overlay.Close();
+        }
+
+        private void Full_Unchecked(object sender, RoutedEventArgs e)
+        {
+            fulloverlay.Close();
         }
     }
 }
