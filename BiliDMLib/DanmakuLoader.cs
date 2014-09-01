@@ -21,7 +21,7 @@ namespace BiliDMLib
         public Exception Error;
         public event ReceivedDanmakuEvt ReceivedDanmaku;
         public event DisconnectEvt Disconnected;
-
+        public event ReceivedRoomCountEvt ReceivedRoomCount;
 
         public async Task<bool> ConnectAsync(int roomId)
         {
@@ -93,7 +93,11 @@ namespace BiliDMLib
                             NetStream.Read(stableBuffer, 0, 4);
                             var viewer = BitConverter.ToInt32(stableBuffer, 0);
                             viewer = IPAddress.NetworkToHostOrder(viewer); //Ó^±ŠÈË”µ
-                            //TODO: event
+                            if (ReceivedRoomCount != null)
+                            {
+                                ReceivedRoomCount(this, new ReceivedRoomCountArgs(){UserCount = viewer}); 
+                            }
+
                             break;
                         case 2://newCommentString
                         {
@@ -162,8 +166,9 @@ namespace BiliDMLib
             {
                 while (this.Connected)
                 {
-                    await TaskEx.Delay(30);
+                    
                     this.SendHeartbeatAsync();
+                    await TaskEx.Delay(30000);
                 }
             }
             catch

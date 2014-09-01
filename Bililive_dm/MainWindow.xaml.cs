@@ -65,6 +65,7 @@ namespace Bililive_dm
                     this.connbtn.IsEnabled = false;
                     b.Disconnected += b_Disconnected;
                     b.ReceivedDanmaku += b_ReceivedDanmaku;
+                    b.ReceivedRoomCount += b_ReceivedRoomCount;
                 }
                 else
                 {
@@ -76,6 +77,13 @@ namespace Bililive_dm
             {
                 MessageBox.Show("ID非法");
             }
+        }
+
+        void b_ReceivedRoomCount(object sender, ReceivedRoomCountArgs e)
+        {
+            logging("當前房間人數:" + e.UserCount);
+            AddDMText("當前房間人數", e.UserCount+"", true);
+            //AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
         }
 
         void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
