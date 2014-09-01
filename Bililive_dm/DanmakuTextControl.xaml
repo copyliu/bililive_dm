@@ -7,8 +7,26 @@
 	x:Class="Bililive_dm.DanmakuTextControl"
 	x:Name="UserControl"
 	d:DesignWidth="247" d:DesignHeight="67">
+	<UserControl.Resources>
+		<Storyboard x:Key="Storyboard1">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="LayoutRoot">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="60"/>
+			</DoubleAnimationUsingKeyFrames>
+			<ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="Text">
+				<EasingColorKeyFrame KeyTime="0" Value="#00000000"/>
+				<EasingColorKeyFrame KeyTime="0:0:0.8" Value="#00000000"/>
+				<EasingColorKeyFrame KeyTime="0:0:1.6" Value="Black"/>
+			</ColorAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<UserControl.Triggers>
+		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
+			<BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+		</EventTrigger>
+	</UserControl.Triggers>
 
-	<Grid x:Name="LayoutRoot" Background="#7B303030">
-		<TextBlock x:Name="Text" TextWrapping="Wrap" Text="TextBlock"/>
+	<Grid x:Name="LayoutRoot" Background="#7B303030" Height="0">
+		<TextBlock x:Name="Text" TextWrapping="Wrap" Text="TextBlock" FontSize="14.667"/>
 	</Grid>
 </UserControl>
