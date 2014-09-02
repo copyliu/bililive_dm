@@ -49,7 +49,7 @@ namespace Bililive_dm
             fulloverlay.Background = Brushes.Transparent;
             fulloverlay.SourceInitialized += delegate
             {
-                IntPtr hwnd = new WindowInteropHelper(overlay).Handle;
+                IntPtr hwnd = new WindowInteropHelper(fulloverlay).Handle;
                 uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
                 SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
             };
