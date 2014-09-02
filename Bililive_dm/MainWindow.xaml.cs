@@ -197,7 +197,7 @@ namespace Bililive_dm
                         top = dd.Where(p=>p.Value).Min(p => p.Key) ;
                     }
                     Storyboard s=new Storyboard();
-                    Duration duration = new Duration(TimeSpan.FromSeconds(wd/50));
+                    Duration duration = new Duration(TimeSpan.FromSeconds((SystemParameters.PrimaryScreenWidth+wd*2)/400));
                     ThicknessAnimation f = new ThicknessAnimation(new Thickness(SystemParameters.PrimaryScreenWidth, top, 0, 0), new Thickness(-wd, top, 0, 0), duration);
                     s.Children.Add(f);
                     s.Duration = duration;
