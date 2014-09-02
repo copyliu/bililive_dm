@@ -46,6 +46,7 @@ namespace Bililive_dm
         private void OpenFullOverlay()
         {
             fulloverlay = new FullOverlay();
+            fulloverlay.Deactivated += fulloverlay_Deactivated;
             fulloverlay.Background = Brushes.Transparent;
             fulloverlay.SourceInitialized += delegate
             {
@@ -61,9 +62,18 @@ namespace Bililive_dm
             fulloverlay.Height = 550;
         }
 
+        void fulloverlay_Deactivated(object sender, EventArgs e)
+        {
+            if (sender is FullOverlay)
+            {
+                (sender as FullOverlay).Topmost = true;
+            }
+        }
+
         private void OpenOverlay()
         {
             overlay = new MainOverlay();
+            overlay.Deactivated += overlay_Deactivated;
             overlay.SourceInitialized += delegate
             {
                 IntPtr hwnd = new WindowInteropHelper(overlay).Handle;
@@ -77,6 +87,14 @@ namespace Bililive_dm
             overlay.Left = SystemParameters.WorkArea.Right - 250;
             overlay.Height = SystemParameters.WorkArea.Height;
             overlay.Width = 250;
+        }
+
+        void overlay_Deactivated(object sender, EventArgs e)
+        {
+            if (sender is MainOverlay)
+            {
+                (sender as MainOverlay).Topmost = true;
+            }
         }
 
         private async void connbtn_Click(object sender, RoutedEventArgs e)
