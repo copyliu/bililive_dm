@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -33,15 +34,32 @@ namespace Bililive_dm
         [DllImport("user32", EntryPoint = "GetWindowLong")]
         private static extern uint GetWindowLong(IntPtr hwnd, int nIndex);
         DanmakuLoader b = new BiliDMLib.DanmakuLoader();
+        private DispatcherTimer timer;
         public MainWindow()
         {
-           
             InitializeComponent();
-           
-
+             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, FuckMicrosoft,
+                this.Dispatcher);
+           timer.Start();
 //            fulloverlay.Show();
             
         }
+
+        private void FuckMicrosoft(object sender, EventArgs eventArgs)
+        {
+            if (fulloverlay != null)
+            {
+                fulloverlay.Topmost = false;
+                fulloverlay.Topmost = true;
+            }
+            if (overlay != null)
+            {
+                overlay.Topmost = false;
+                overlay.Topmost = true;
+            }
+        }
+
+       
 
         private void OpenFullOverlay()
         {
