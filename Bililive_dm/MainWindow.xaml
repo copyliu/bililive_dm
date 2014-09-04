@@ -9,10 +9,12 @@
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text=".html" VerticalAlignment="Center"/>
 			<Button x:Name="connbtn" Content="连接" HorizontalAlignment="Left" VerticalAlignment="Center" Click="connbtn_Click" Margin="28,0,0,0" Width="70" />
 			<Button x:Name="test" Content="测试效果" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Test_OnClick" Margin="28,2.88,0,2.88" Width="70"/>
+            
 		</StackPanel>
 		<StackPanel VerticalAlignment="Top" DockPanel.Dock="Top" Orientation="Horizontal">
-			<CheckBox x:Name="SideBar" Content="侧边栏" IsChecked="True" Checked="SideBar_Checked" Unchecked="SideBar_Unchecked"/>
-			<CheckBox x:Name="Full" Content="全屏弹幕" Checked="Full_Checked" Unchecked="Full_Unchecked"/>
+            <CheckBox x:Name="SideBar" Content="侧边栏" IsChecked="True" Checked="SideBar_Checked" VerticalAlignment="Center" Unchecked="SideBar_Unchecked"/>
+            <CheckBox x:Name="Full" Content="全屏弹幕" Checked="Full_Checked" VerticalAlignment="Center" Unchecked="Full_Unchecked"/>
+            <Button x:Name="Option" Content="設置" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="28,0,0,0" Width="70" Click="Option_OnClick"/>
 		</StackPanel>
 
 		<TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>

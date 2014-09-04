@@ -21,10 +21,14 @@ namespace Bililive_dm
 		public FullScreenDanmaku()
 		{
 			this.InitializeComponent();
-
+          
+		    
 		}
+
+      
         public void ChangeHeight()
         {
+            this.Text.FontSize = Store.FullOverlayFontsize;
             this.Text.Measure(new Size(int.MaxValue, int.MaxValue));
             
 

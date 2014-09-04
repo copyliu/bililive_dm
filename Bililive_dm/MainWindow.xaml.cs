@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -24,8 +26,8 @@ namespace Bililive_dm
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainOverlay overlay;
-        private FullOverlay fulloverlay;
+        public  MainOverlay overlay;
+        public  FullOverlay fulloverlay;
         private const int WS_EX_TRANSPARENT = 0x20;
         private const int GWL_EXSTYLE = (-20);
         [DllImport("user32", EntryPoint = "SetWindowLong")]
@@ -38,12 +40,32 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
+           
+            try
+            {
+                IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
+                IsolatedStorageScope.Domain | IsolatedStorageScope.Assembly, null, null);
+                System.Xml.Serialization.XmlSerializer settingsreader = new System.Xml.Serialization.XmlSerializer(typeof(StoreModel));
+                StreamReader reader = new StreamReader(new IsolatedStorageFileStream(
+                "settings.xml", FileMode.Open, isoStore));
+                var settings = (StoreModel)settingsreader.Deserialize(reader);
+                settings.toStatic();
+            }
+            catch (Exception)
+            {
+                
+                
+            }
+           
+
              timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, FuckMicrosoft,
                 this.Dispatcher);
            timer.Start();
 //            fulloverlay.Show();
             
         }
+
+       
 
         private void FuckMicrosoft(object sender, EventArgs eventArgs)
         {
@@ -101,10 +123,10 @@ namespace Bililive_dm
             overlay.Background = Brushes.Transparent;
             overlay.ShowInTaskbar = false;
             overlay.Topmost = true;
-            overlay.Top = SystemParameters.WorkArea.Top;
-            overlay.Left = SystemParameters.WorkArea.Right - 250;
+            overlay.Top = SystemParameters.WorkArea.Top+Store.MainOverlayXoffset;
+            overlay.Left = SystemParameters.WorkArea.Right - Store.MainOverlayWidth + Store.MainOverlayYoffset;
             overlay.Height = SystemParameters.WorkArea.Height;
-            overlay.Width = 250;
+            overlay.Width = Store.MainOverlayWidth;
         }
 
         void overlay_Deactivated(object sender, EventArgs e)
@@ -194,7 +216,7 @@ namespace Bililive_dm
                 sb.Completed += sb_Completed;
                 overlay.LayoutRoot.Children.Add(c);
                 }
-                if (this.Full.IsChecked == true)
+                if (this.Full.IsChecked == true && !warn)
                 {
                    //<Storyboard x:Key="Storyboard1">
 //			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="fullScreenDanmaku">
@@ -233,7 +255,7 @@ namespace Bililive_dm
                         top = dd.Where(p=>p.Value).Min(p => p.Key) ;
                     }
                     Storyboard s=new Storyboard();
-                    Duration duration = new Duration(TimeSpan.FromSeconds((SystemParameters.PrimaryScreenWidth+wd*2)/400));
+                    Duration duration = new Duration(TimeSpan.FromSeconds((SystemParameters.PrimaryScreenWidth+wd*2)/Store.FullOverlayEffect1));
                     ThicknessAnimation f = new ThicknessAnimation(new Thickness(SystemParameters.PrimaryScreenWidth, top, 0, 0), new Thickness(-wd, top, 0, 0), duration);
                     s.Children.Add(f);
                     s.Duration = duration;
@@ -268,16 +290,16 @@ namespace Bililive_dm
         {
             var s = sender as ClockGroup;
             if (s == null) return;
-            var c = Storyboard.GetTarget(s.Children[1].Timeline) as DanmakuTextControl;
+            var c = Storyboard.GetTarget(s.Children[2].Timeline) as DanmakuTextControl;
             if (c != null)
             {
                 overlay.LayoutRoot.Children.Remove(c);
             }
         }
 
-        private void Test_OnClick(object sender, RoutedEventArgs e)
+        public  void Test_OnClick(object sender, RoutedEventArgs e)
         {
-            AddDMText("彈幕姬報告", "這是一個測試", true);
+            AddDMText("彈幕姬報告", "這是一個測試", false);
         }
 
         private void Full_Checked(object sender, RoutedEventArgs e)
@@ -305,6 +327,14 @@ namespace Bililive_dm
         private void Full_Unchecked(object sender, RoutedEventArgs e)
         {
             fulloverlay.Close();
+        }
+
+        private void Option_OnClick(object sender, RoutedEventArgs e)
+        {
+            OptionDialog d=new OptionDialog();
+            d.LayoutRoot.DataContext = new StoreModel();
+            d.ShowDialog();
+
         }
     }
 }

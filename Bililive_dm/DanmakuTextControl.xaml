@@ -14,16 +14,17 @@
 				<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="60"/>
 			</DoubleAnimationUsingKeyFrames>
 			
-			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UserControl">
-				<EasingDoubleKeyFrame KeyTime="0:0:6" Value="1"/>
-				<EasingDoubleKeyFrame KeyTime="0:0:7" Value="0"/>
-			</DoubleAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="TextBox">
 				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0"/>
 				<EasingDoubleKeyFrame KeyTime="0:0:1.4" Value="1"/>
 			</DoubleAnimationUsingKeyFrames>
-		</Storyboard>
+
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="UserControl">
+                <EasingDoubleKeyFrame KeyTime="0:0:6" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:7" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 	</UserControl.Resources>
 	<UserControl.Triggers>
 		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
