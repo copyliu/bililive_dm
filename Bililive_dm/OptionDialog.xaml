@@ -6,7 +6,7 @@
     mc:Ignorable="d"
     x:Class="Bililive_dm.OptionDialog" MinWidth="640"
 	x:Name="Window" SizeToContent="WidthAndHeight"
-	Title="OptionDialog">
+	Title="設置">
 
 	<StackPanel x:Name="LayoutRoot" d:DataContext="{d:DesignInstance bililiveDm:StoreModel}">
 		<DockPanel >
