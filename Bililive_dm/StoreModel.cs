@@ -44,6 +44,8 @@ namespace Bililive_dm
                 if (value.Equals(_mainOverlayWidth)) return;
                 _mainOverlayWidth = Store.MainOverlayWidth = value;
                 ((MainWindow) (Application.Current.MainWindow)).overlay.Width = value;
+                ((MainWindow)(Application.Current.MainWindow)).overlay.Left = SystemParameters.WorkArea.Right -
+                                                                             value + Store.MainOverlayYoffset;
                 OnPropertyChanged();
             }
         }
