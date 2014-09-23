@@ -251,7 +251,7 @@ namespace Bililive_dm
 //				<EasingThicknessKeyFrame KeyTime="0:0:1.9" Value="220,0,0,0"/>
 //			</ThicknessAnimationUsingKeyFrames>
 //		</Storyboard>
-                    lock (fulloverlay)
+                    lock (fulloverlay.LayoutRoot.Children)
                     {
 
 
@@ -267,7 +267,7 @@ namespace Bililive_dm
                             if (child is FullScreenDanmaku)
                             {
                                 var c = child as FullScreenDanmaku;
-                                if (!dd.ContainsKey(c.Margin.Top))
+                                if (!dd.ContainsKey(Convert.ToInt32(c.Margin.Top)))
                                 {
                                     dd.Add(Convert.ToInt32(c.Margin.Top), true);
                                 }
