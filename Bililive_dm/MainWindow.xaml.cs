@@ -37,6 +37,9 @@ namespace Bililive_dm
         private static extern uint GetWindowLong(IntPtr hwnd, int nIndex);
         DanmakuLoader b = new BiliDMLib.DanmakuLoader();
         private DispatcherTimer timer;
+        private const int _maxCapacity = 100;
+
+        private Queue<string> _messageQueue = new Queue<string>(_maxCapacity);
         public MainWindow()
         {
             InitializeComponent();
@@ -167,9 +170,18 @@ namespace Bililive_dm
 
         void b_ReceivedRoomCount(object sender, ReceivedRoomCountArgs e)
         {
-            logging("當前房間人數:" + e.UserCount);
-            AddDMText("當前房間人數", e.UserCount+"", true);
+//            logging("當前房間人數:" + e.UserCount);
+//            AddDMText("當前房間人數", e.UserCount+"", true);
             //AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
+            if (this.CheckAccess())
+            {
+                OnlineBlock.Text = e.UserCount + "";
+            }
+            else
+            {
+                this.Dispatcher.BeginInvoke(new Action(() => OnlineBlock.Text = e.UserCount + ""));
+            }
+            
         }
 
         void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
@@ -182,13 +194,27 @@ namespace Bililive_dm
         {
             logging("連接被斷開:"+ args.Error);
             AddDMText("彈幕姬報告", "連接被斷開",true);
-            this.connbtn.IsEnabled = true;
+            if (this.CheckAccess())
+            {
+                this.connbtn.IsEnabled = true;
+            }
+            else
+            {
+                this.Dispatcher.BeginInvoke(new Action(() => this.connbtn.IsEnabled = true));
+            }
         }
         public void logging(string text)
         {
             if (log.Dispatcher.CheckAccess())
             {
-                this.log.Text = this.log.Text + text + "\n";
+
+                if (_messageQueue.Count >= _maxCapacity)
+                {
+                    _messageQueue.Dequeue();
+                }
+
+                _messageQueue.Enqueue(text);
+                this.log.Text = string.Join("\n", _messageQueue);
                 log.ScrollToEnd();
             }
             else
@@ -197,89 +223,102 @@ namespace Bililive_dm
             }
         }
 
-        public void AddDMText(string user,string text,bool warn=false)
+        public void AddDMText(string user, string text, bool warn = false)
         {
             if (overlay.Dispatcher.CheckAccess())
             {
-                if (this.SideBar.IsChecked==true){
-                DanmakuTextControl c=new DanmakuTextControl();
-
-                c.UserName.Text = user;
-                if (warn)
+                if (this.SideBar.IsChecked == true)
                 {
-                    c.UserName.Foreground=Brushes.Red;
-                }
-                c.Text.Text = text;
-                c.ChangeHeight();
-                var sb = (Storyboard)c.Resources["Storyboard1"];
-                //Storyboard.SetTarget(sb,c);
-                sb.Completed += sb_Completed;
-                overlay.LayoutRoot.Children.Add(c);
+                    DanmakuTextControl c = new DanmakuTextControl();
+
+                    c.UserName.Text = user;
+                    if (warn)
+                    {
+                        c.UserName.Foreground = Brushes.Red;
+                    }
+                    c.Text.Text = text;
+                    c.ChangeHeight();
+                    var sb = (Storyboard) c.Resources["Storyboard1"];
+                    //Storyboard.SetTarget(sb,c);
+                    sb.Completed += sb_Completed;
+                    overlay.LayoutRoot.Children.Add(c);
                 }
                 if (this.Full.IsChecked == true && !warn)
                 {
-                   //<Storyboard x:Key="Storyboard1">
+                    //<Storyboard x:Key="Storyboard1">
 //			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="fullScreenDanmaku">
 //				<EasingThicknessKeyFrame KeyTime="0" Value="3,0,0,0"/>
 //				<EasingThicknessKeyFrame KeyTime="0:0:1.9" Value="220,0,0,0"/>
 //			</ThicknessAnimationUsingKeyFrames>
 //		</Storyboard>
-                    var v = new FullScreenDanmaku();
-                    v.Text.Text = text;
-                    v.ChangeHeight();
-                    var wd = v.Text.DesiredSize.Width;
-                    Dictionary<double,bool> dd=new Dictionary<double, bool>();
-                    dd.Add(0, true);
-                    foreach (var child in fulloverlay.LayoutRoot.Children)
+                    lock (fulloverlay)
                     {
-                        if (child is FullScreenDanmaku)
+
+
+                        var v = new FullScreenDanmaku();
+                        v.Text.Text = text;
+                        v.ChangeHeight();
+                        var wd = v.Text.DesiredSize.Width;
+                        
+                        Dictionary<double, bool> dd = new Dictionary<double, bool>();
+                        dd.Add(0, true);
+                        foreach (var child in fulloverlay.LayoutRoot.Children)
                         {
-                            var c = child as FullScreenDanmaku;
-                            if (!dd.ContainsKey(c.Margin.Top))
+                            if (child is FullScreenDanmaku)
                             {
-                                dd.Add(c.Margin.Top,true);
-                            }
-                            if (c.Margin.Left > (SystemParameters.PrimaryScreenWidth - wd - 10))
-                            {
-                                dd[c.Margin.Top] = false;
+                                var c = child as FullScreenDanmaku;
+                                if (!dd.ContainsKey(c.Margin.Top))
+                                {
+                                    dd.Add(Convert.ToInt32(c.Margin.Top), true);
+                                }
+                                if (c.Margin.Left > (SystemParameters.PrimaryScreenWidth - wd - 50))
+                                {
+                                    dd[Convert.ToInt32(c.Margin.Top)] = false;
+                                }
                             }
                         }
-                    }
-                    double top;
-                    if (dd.All(p => p.Value == false))
-                    {
-                        top = dd.Max(p => p.Key) + v.Text.DesiredSize.Height;
-                    }
-                    else
-                    {
-                        top = dd.Where(p=>p.Value).Min(p => p.Key) ;
-                    }
-                    Storyboard s=new Storyboard();
-                    Duration duration = new Duration(TimeSpan.FromSeconds((SystemParameters.PrimaryScreenWidth+wd*2)/Store.FullOverlayEffect1));
-                    ThicknessAnimation f = new ThicknessAnimation(new Thickness(SystemParameters.PrimaryScreenWidth, top, 0, 0), new Thickness(-wd, top, 0, 0), duration);
-                    s.Children.Add(f);
-                    s.Duration = duration;
-                    Storyboard.SetTarget(f, v);
-                    Storyboard.SetTargetProperty(f, new PropertyPath("(FrameworkElement.Margin)"));
-                    fulloverlay.LayoutRoot.Children.Add(v);
-                    s.Completed += s_Completed;
-                    s.Begin();
-                   
+                        double top;
+                        if (dd.All(p => p.Value == false))
+                        {
+                            top = dd.Max(p => p.Key) + v.Text.DesiredSize.Height;
+                        }
+                        else
+                        {
+                            top = dd.Where(p => p.Value).Min(p => p.Key);
+                        }
+//                        v.Height = v.Text.DesiredSize.Height;
+//                        v.Width = v.Text.DesiredSize.Width;
+                        Storyboard s = new Storyboard();
+                        Duration duration =
+                            new Duration(
+                                TimeSpan.FromTicks(Convert.ToInt64((SystemParameters.PrimaryScreenWidth + wd)/
+                                                   Store.FullOverlayEffect1*TimeSpan.TicksPerSecond)));
+                        ThicknessAnimation f =
+                            new ThicknessAnimation(new Thickness(SystemParameters.PrimaryScreenWidth, top, 0, 0),
+                                new Thickness(-wd, top, 0, 0), duration);
+                        s.Children.Add(f);
+                        s.Duration = duration;
+                        Storyboard.SetTarget(f, v);
+                        Storyboard.SetTargetProperty(f, new PropertyPath("(FrameworkElement.Margin)"));
+                        fulloverlay.LayoutRoot.Children.Add(v);
+                        s.Completed += s_Completed;
+                        s.Begin();
 
+                    }
 
                 }
             }
             else
             {
-                log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => AddDMText(user,text)));
+                log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => AddDMText(user, text)));
             }
         }
 
         void s_Completed(object sender, EventArgs e)
         {
-            var s = sender as AnimationClock;
+            var s = sender as ClockGroup;
             if (s == null) return;
-            var c = Storyboard.GetTarget(s.Timeline) as FullScreenDanmaku;
+            var c = Storyboard.GetTarget(s.Children[0].Timeline) as FullScreenDanmaku;
             if (c != null)
             {
                 fulloverlay.LayoutRoot.Children.Remove(c);
@@ -300,6 +339,7 @@ namespace Bililive_dm
         public  void Test_OnClick(object sender, RoutedEventArgs e)
         {
             AddDMText("彈幕姬報告", "這是一個測試", false);
+//            logging(DateTime.Now.Ticks+"");
         }
 
         private void Full_Checked(object sender, RoutedEventArgs e)

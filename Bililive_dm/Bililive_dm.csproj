@@ -154,7 +154,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="OutlinedTextBlock.cs" />
     <Compile Include="DanmakuTextControl.xaml.cs">
       <DependentUpon>DanmakuTextControl.xaml</DependentUpon>
     </Compile>

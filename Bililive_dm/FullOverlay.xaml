@@ -14,5 +14,7 @@
 		</EventTrigger>
 	</Window.Triggers>
 
-	<Grid x:Name="LayoutRoot"/>
+    <Grid x:Name="LayoutRoot" TextOptions.TextRenderingMode="Grayscale" RenderOptions.ClearTypeHint="Enabled"
+                    RenderOptions.BitmapScalingMode="NearestNeighbor"
+                    RenderOptions.EdgeMode="Aliased" TextOptions.TextHintingMode="Fixed" />
 </Window>
