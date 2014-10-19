@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using Newtonsoft.Json.Linq;
 
 namespace BiliDMLib
@@ -17,6 +18,7 @@ namespace BiliDMLib
         private TcpClient Client;
         private NetworkStream NetStream;
         private string RoomInfoUrl = "http://live.bilibili.com/sch_list/";
+        private string CIDInfoUrl = "http://interface.bilibili.com/player?id=cid:";
         private bool Connected = false;
         public Exception Error;
         public event ReceivedDanmakuEvt ReceivedDanmaku;
@@ -43,7 +45,24 @@ namespace BiliDMLib
                 }
 
 
+
+                var request2 = WebRequest.Create(CIDInfoUrl + channelId);
+                var response2 = request2.GetResponse();
+                using (var stream = response2.GetResponseStream())
+                {
+                    using (var sr = new StreamReader(stream))
+                    {
+                        var text = await sr.ReadToEndAsync();
+                        var xml = "<root>" + text + "</root>";
+                        XmlDocument doc=new XmlDocument();
+                        doc.LoadXml(xml);
+                        ChatHost = doc["root"]["server"].InnerText;
+                    }
+                }
+
+
                 Client = new TcpClient();
+
                 Client.Connect(ChatHost, ChatPort);
 
                 NetStream = Client.GetStream();
@@ -86,7 +105,7 @@ namespace BiliDMLib
                     NetStream.Read(stableBuffer, 0, 2);
                     var typeId = BitConverter.ToInt16(stableBuffer, 0);
                     typeId = IPAddress.NetworkToHostOrder(typeId);
-
+                    Console.WriteLine(typeId);
                     switch (typeId)
                     {
                         case 1:
@@ -111,6 +130,7 @@ namespace BiliDMLib
                             NetStream.Read(buffer, 0, packetlength);
                             var json = Encoding.UTF8.GetString(buffer, 0, packetlength);
                             DanmakuModel dama = new DanmakuModel(json);
+//                            Console.WriteLine(dama.CommentText);
                             if (ReceivedDanmaku != null)
                             {
                                 ReceivedDanmaku(this, new ReceivedDanmakuArgs() {Danmaku = dama});
