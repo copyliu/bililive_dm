@@ -43,7 +43,9 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
-           
+            b.Disconnected += b_Disconnected;
+            b.ReceivedDanmaku += b_ReceivedDanmaku;
+            b.ReceivedRoomCount += b_ReceivedRoomCount;
             try
             {
                 IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
@@ -152,9 +154,7 @@ namespace Bililive_dm
                     logging("連接成功");
                     AddDMText("彈幕姬報告", "連接成功", true);
                     this.connbtn.IsEnabled = false;
-                    b.Disconnected += b_Disconnected;
-                    b.ReceivedDanmaku += b_ReceivedDanmaku;
-                    b.ReceivedRoomCount += b_ReceivedRoomCount;
+
                 }
                 else
                 {
