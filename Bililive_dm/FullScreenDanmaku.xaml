@@ -1,18 +1,18 @@
 ﻿<UserControl
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:bililiveDm="clr-namespace:Bililive_dm"
-	mc:Ignorable="d"
-	x:Class="Bililive_dm.FullScreenDanmaku" 
-	x:Name="UserControl">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:bililiveDm="clr-namespace:Bililive_dm"
+    mc:Ignorable="d"
+    x:Class="Bililive_dm.FullScreenDanmaku"
+    x:Name="UserControl">
 
-	<StackPanel x:Name="LayoutRoot">
-<!--        <bililiveDm:OutlinedTextBlock TextOptions.TextRenderingMode="Grayscale" RenderOptions.ClearTypeHint="Enabled"-->
-<!--                    RenderOptions.BitmapScalingMode="NearestNeighbor"-->
-<!--                    RenderOptions.EdgeMode="Aliased" TextOptions.TextHintingMode="Fixed"  x:Name="Text" Text="TextBlock" FontSize="40" Fill="White" Stroke="Black" StrokeThickness="1" FontWeight="Bold"/>-->
-        <TextBlock   x:Name="Text" Text="TextBlock" FontSize="40" Foreground="White" FontWeight="Bold">
+    <StackPanel x:Name="LayoutRoot">
+        <!--        <bililiveDm:OutlinedTextBlock TextOptions.TextRenderingMode="Grayscale" RenderOptions.ClearTypeHint="Enabled"-->
+        <!--                    RenderOptions.BitmapScalingMode="NearestNeighbor"-->
+        <!--                    RenderOptions.EdgeMode="Aliased" TextOptions.TextHintingMode="Fixed"  x:Name="Text" Text="TextBlock" FontSize="40" Fill="White" Stroke="Black" StrokeThickness="1" FontWeight="Bold"/>-->
+        <TextBlock x:Name="Text" Text="TextBlock" FontSize="40" Foreground="White" FontWeight="Bold">
             <TextBlock.Effect>
                 <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FF000000" />
 

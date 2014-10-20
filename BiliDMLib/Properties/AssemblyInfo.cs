@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
+
 [assembly: AssemblyTitle("BiliDMLib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
@@ -17,9 +18,11 @@ using System.Runtime.InteropServices;
 // 將 ComVisible 設定為 false 會使得這個組件中的型別
 // 對 COM 元件而言為不可見。如果您需要從 COM 存取這個組件中
 // 的型別，請在該型別上將 ComVisible 屬性設定為 true。
+
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
+
 [assembly: Guid("4024b754-da6f-44f7-a9cf-144038213bc9")]
 
 // 組件的版本資訊是由下列四項值構成:
@@ -32,5 +35,6 @@ using System.Runtime.InteropServices;
 // 您可以指定所有的值，也可以依照以下的方式，使用 '*' 將組建和修訂編號
 // 指定為預設值:
 // [assembly: AssemblyVersion("1.0.*")]
+
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]

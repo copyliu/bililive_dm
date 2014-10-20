@@ -6,7 +6,7 @@ using Bililive_dm.Annotations;
 
 namespace Bililive_dm
 {
-       [Serializable]
+    [Serializable]
     public class StoreModel : INotifyPropertyChanged
     {
         public double MainOverlayXoffset
@@ -44,8 +44,8 @@ namespace Bililive_dm
                 if (value.Equals(_mainOverlayWidth)) return;
                 _mainOverlayWidth = Store.MainOverlayWidth = value;
                 ((MainWindow) (Application.Current.MainWindow)).overlay.Width = value;
-                ((MainWindow)(Application.Current.MainWindow)).overlay.Left = SystemParameters.WorkArea.Right -
-                                                                             value + Store.MainOverlayYoffset;
+                ((MainWindow) (Application.Current.MainWindow)).overlay.Left = SystemParameters.WorkArea.Right -
+                                                                               value + Store.MainOverlayYoffset;
                 OnPropertyChanged();
             }
         }
@@ -124,7 +124,6 @@ namespace Bililive_dm
                 if (value.Equals(_fullOverlayFontsize)) return;
                 Store.FullOverlayFontsize = _fullOverlayFontsize = value;
                 OnPropertyChanged();
-
             }
         }
 
@@ -155,21 +154,21 @@ namespace Bililive_dm
             _mainOverlayYoffset = Store.MainOverlayYoffset;
         }
 
-           public void toStatic()
-           {
-               Store.FullOverlayFontsize = FullOverlayFontsize;
-               Store.FullOverlayEffect1 = FullOverlayEffect1;
-               Store.MainOverlayFontsize = MainOverlayFontsize;
-               Store.MainOverlayEffect4 = MainOverlayEffect4;
-               Store.MainOverlayEffect3 = MainOverlayEffect3;
-               Store.MainOverlayEffect2 = MainOverlayEffect2;
-               Store.MainOverlayEffect1 = MainOverlayEffect1;
-               Store.MainOverlayWidth = MainOverlayWidth;
-               Store.MainOverlayXoffset = MainOverlayXoffset;
-               Store.MainOverlayYoffset = MainOverlayYoffset;
-           }
+        public void toStatic()
+        {
+            Store.FullOverlayFontsize = FullOverlayFontsize;
+            Store.FullOverlayEffect1 = FullOverlayEffect1;
+            Store.MainOverlayFontsize = MainOverlayFontsize;
+            Store.MainOverlayEffect4 = MainOverlayEffect4;
+            Store.MainOverlayEffect3 = MainOverlayEffect3;
+            Store.MainOverlayEffect2 = MainOverlayEffect2;
+            Store.MainOverlayEffect1 = MainOverlayEffect1;
+            Store.MainOverlayWidth = MainOverlayWidth;
+            Store.MainOverlayXoffset = MainOverlayXoffset;
+            Store.MainOverlayYoffset = MainOverlayYoffset;
+        }
 
-           public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

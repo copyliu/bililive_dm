@@ -9,10 +9,12 @@ namespace BiliDMLib
         {
             if (BitConverter.IsLittleEndian)
             {
-               return b.Reverse().ToArray();
+                return b.Reverse().ToArray();
             }
-            else{return b;}
+            else
+            {
+                return b;
+            }
         }
-
     }
 }

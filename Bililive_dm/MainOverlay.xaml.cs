@@ -12,16 +12,16 @@ using System.Windows.Shapes;
 
 namespace Bililive_dm
 {
-	/// <summary>
-	/// MainOverlay.xaml 的互動邏輯
-	/// </summary>
-	public partial class MainOverlay : Window
-	{
-		public MainOverlay()
-		{
-			this.InitializeComponent();
+    /// <summary>
+    /// MainOverlay.xaml 的互動邏輯
+    /// </summary>
+    public partial class MainOverlay : Window
+    {
+        public MainOverlay()
+        {
+            this.InitializeComponent();
             this.Topmost = true;
-			// 在此點下方插入建立物件所需的程式碼。
-		}
-	}
+            // 在此點下方插入建立物件所需的程式碼。
+        }
+    }
 }

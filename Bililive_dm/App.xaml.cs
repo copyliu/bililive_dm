@@ -13,19 +13,18 @@ namespace Bililive_dm
     /// </summary>
     public partial class App : Application
     {
-
         public App()
         {
             Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
         }
 
-        void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        private void App_DispatcherUnhandledException(object sender,
+            System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(System.Windows.Application.Current.MainWindow, "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
+            MessageBox.Show(System.Windows.Application.Current.MainWindow,
+                "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
             try
             {
-
-
                 string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
@@ -34,13 +33,9 @@ namespace Bililive_dm
                     outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
                     outfile.Write(e.Exception.ToString());
                 }
-
             }
             catch (Exception)
             {
-
-
-
             }
         }
     }

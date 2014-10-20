@@ -12,16 +12,16 @@ using System.Windows.Shapes;
 
 namespace Bililive_dm
 {
-	/// <summary>
-	/// FullOverlay.xaml 的互動邏輯
-	/// </summary>
-	public partial class FullOverlay : Window
-	{
-		public FullOverlay()
-		{
-			this.InitializeComponent();
-			
-			// 在此點下方插入建立物件所需的程式碼。
-		}
-	}
+    /// <summary>
+    /// FullOverlay.xaml 的互動邏輯
+    /// </summary>
+    public partial class FullOverlay : Window
+    {
+        public FullOverlay()
+        {
+            this.InitializeComponent();
+
+            // 在此點下方插入建立物件所需的程式碼。
+        }
+    }
 }

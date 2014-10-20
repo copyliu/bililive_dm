@@ -31,7 +31,7 @@ namespace BiliDMLib
             {
                 if (this.Connected) throw new InvalidOperationException();
 
-                var request = WebRequest.Create(RoomInfoUrl + roomId+".json");
+                var request = WebRequest.Create(RoomInfoUrl + roomId + ".json");
                 var response = request.GetResponse();
 
                 int channelId;
@@ -45,7 +45,6 @@ namespace BiliDMLib
                 }
 
 
-
                 var request2 = WebRequest.Create(CIDInfoUrl + channelId);
                 var response2 = request2.GetResponse();
                 using (var stream = response2.GetResponseStream())
@@ -54,7 +53,7 @@ namespace BiliDMLib
                     {
                         var text = await sr.ReadToEndAsync();
                         var xml = "<root>" + text + "</root>";
-                        XmlDocument doc=new XmlDocument();
+                        XmlDocument doc = new XmlDocument();
                         doc.LoadXml(xml);
                         ChatHost = doc["root"]["server"].InnerText;
                     }
@@ -68,8 +67,6 @@ namespace BiliDMLib
                 NetStream = Client.GetStream();
 
 
-
-
                 if (SendJoinChannel(channelId))
                 {
                     Connected = true;
@@ -81,16 +78,12 @@ namespace BiliDMLib
                     return true;
                 }
                 return false;
-
-
             }
             catch (Exception ex)
             {
                 this.Error = ex;
                 return false;
-
             }
-
         }
 
         private void ReceiveMessageLoop()
@@ -101,7 +94,6 @@ namespace BiliDMLib
 
                 while (this.Connected)
                 {
-
                     NetStream.Read(stableBuffer, 0, 2);
                     var typeId = BitConverter.ToInt16(stableBuffer, 0);
                     typeId = IPAddress.NetworkToHostOrder(typeId);
@@ -114,13 +106,12 @@ namespace BiliDMLib
                             viewer = IPAddress.NetworkToHostOrder(viewer); //觀眾人數
                             if (ReceivedRoomCount != null)
                             {
-                                ReceivedRoomCount(this, new ReceivedRoomCountArgs(){UserCount = viewer}); 
+                                ReceivedRoomCount(this, new ReceivedRoomCountArgs() {UserCount = viewer});
                             }
 
                             break;
-                        case 2://newCommentString
+                        case 2: //newCommentString
                         {
-
                             NetStream.Read(stableBuffer, 0, 2);
                             var packetlength = BitConverter.ToInt16(stableBuffer, 0);
                             packetlength = (short) (IPAddress.NetworkToHostOrder(packetlength) - 4);
@@ -138,20 +129,20 @@ namespace BiliDMLib
 
                             break;
                         }
-                        case 8://x 条新的评论信息
+                        case 8: //x 条新的评论信息
                         {
                             NetStream.Read(stableBuffer, 0, 2);
 
                             break;
                         }
-                        case 17://_playerDebug
+                        case 17: //_playerDebug
                         {
                             //server updated
                             break;
                         }
-                        case 4://playerCommand
-                        case 5://playerBroadcast
-                        case 6://newScrollMessage
+                        case 4: //playerCommand
+                        case 5: //playerBroadcast
+                        case 6: //newScrollMessage
                         default:
                         {
                             NetStream.Read(stableBuffer, 0, 2);
@@ -161,15 +152,14 @@ namespace BiliDMLib
                             var buffer = new byte[packetlength];
 
                             NetStream.Read(buffer, 0, packetlength);
-                            
+
                             break;
                         }
-                            
+
 //                        
 //                            Disconnect();
 //                            this.Error = new Exception("收到非法包");
 //                            break;
-
                     }
                 }
             }
@@ -186,7 +176,6 @@ namespace BiliDMLib
             {
                 while (this.Connected)
                 {
-                    
                     this.SendHeartbeatAsync();
                     await TaskEx.Delay(30000);
                 }
@@ -239,7 +228,6 @@ namespace BiliDMLib
                 NetStream.FlushAsync();
 
                 Debug.WriteLine("Message Sent: Join Channel");
-
             }
 
             return true;
@@ -248,8 +236,6 @@ namespace BiliDMLib
 
         public DanmakuLoader()
         {
-
         }
-
     }
 }

@@ -13,70 +13,70 @@ namespace Bililive_dm
     {
         public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
             "Fill",
-            typeof(Brush),
-            typeof(OutlinedTextBlock),
+            typeof (Brush),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(
             "Stroke",
-            typeof(Brush),
-            typeof(OutlinedTextBlock),
+            typeof (Brush),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
             "StrokeThickness",
-            typeof(double),
-            typeof(OutlinedTextBlock),
+            typeof (double),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(1d, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty FontFamilyProperty = TextElement.FontFamilyProperty.AddOwner(
-            typeof(OutlinedTextBlock),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty FontSizeProperty = TextElement.FontSizeProperty.AddOwner(
-            typeof(OutlinedTextBlock),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty FontStretchProperty = TextElement.FontStretchProperty.AddOwner(
-            typeof(OutlinedTextBlock),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty FontStyleProperty = TextElement.FontStyleProperty.AddOwner(
-            typeof(OutlinedTextBlock),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty FontWeightProperty = TextElement.FontWeightProperty.AddOwner(
-            typeof(OutlinedTextBlock),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
             "Text",
-            typeof(string),
-            typeof(OutlinedTextBlock),
+            typeof (string),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextInvalidated));
 
         public static readonly DependencyProperty TextAlignmentProperty = DependencyProperty.Register(
             "TextAlignment",
-            typeof(TextAlignment),
-            typeof(OutlinedTextBlock),
+            typeof (TextAlignment),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty TextDecorationsProperty = DependencyProperty.Register(
             "TextDecorations",
-            typeof(TextDecorationCollection),
-            typeof(OutlinedTextBlock),
+            typeof (TextDecorationCollection),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty TextTrimmingProperty = DependencyProperty.Register(
             "TextTrimming",
-            typeof(TextTrimming),
-            typeof(OutlinedTextBlock),
+            typeof (TextTrimming),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(
             "TextWrapping",
-            typeof(TextWrapping),
-            typeof(OutlinedTextBlock),
+            typeof (TextWrapping),
+            typeof (OutlinedTextBlock),
             new FrameworkPropertyMetadata(TextWrapping.NoWrap, OnFormattedTextUpdated));
 
         private FormattedText formattedText;
@@ -89,80 +89,80 @@ namespace Bililive_dm
 
         public Brush Fill
         {
-            get { return (Brush)GetValue(FillProperty); }
+            get { return (Brush) GetValue(FillProperty); }
             set { SetValue(FillProperty, value); }
         }
 
         public FontFamily FontFamily
         {
-            get { return (FontFamily)GetValue(FontFamilyProperty); }
+            get { return (FontFamily) GetValue(FontFamilyProperty); }
             set { SetValue(FontFamilyProperty, value); }
         }
 
-        [TypeConverter(typeof(FontSizeConverter))]
+        [TypeConverter(typeof (FontSizeConverter))]
         public double FontSize
         {
-            get { return (double)GetValue(FontSizeProperty); }
+            get { return (double) GetValue(FontSizeProperty); }
             set { SetValue(FontSizeProperty, value); }
         }
 
         public FontStretch FontStretch
         {
-            get { return (FontStretch)GetValue(FontStretchProperty); }
+            get { return (FontStretch) GetValue(FontStretchProperty); }
             set { SetValue(FontStretchProperty, value); }
         }
 
         public FontStyle FontStyle
         {
-            get { return (FontStyle)GetValue(FontStyleProperty); }
+            get { return (FontStyle) GetValue(FontStyleProperty); }
             set { SetValue(FontStyleProperty, value); }
         }
 
         public FontWeight FontWeight
         {
-            get { return (FontWeight)GetValue(FontWeightProperty); }
+            get { return (FontWeight) GetValue(FontWeightProperty); }
             set { SetValue(FontWeightProperty, value); }
         }
 
         public Brush Stroke
         {
-            get { return (Brush)GetValue(StrokeProperty); }
+            get { return (Brush) GetValue(StrokeProperty); }
             set { SetValue(StrokeProperty, value); }
         }
 
         public double StrokeThickness
         {
-            get { return (double)GetValue(StrokeThicknessProperty); }
+            get { return (double) GetValue(StrokeThicknessProperty); }
             set { SetValue(StrokeThicknessProperty, value); }
         }
 
         public string Text
         {
-            get { return (string)GetValue(TextProperty); }
+            get { return (string) GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
 
         public TextAlignment TextAlignment
         {
-            get { return (TextAlignment)GetValue(TextAlignmentProperty); }
+            get { return (TextAlignment) GetValue(TextAlignmentProperty); }
             set { SetValue(TextAlignmentProperty, value); }
         }
 
         public TextDecorationCollection TextDecorations
         {
-            get { return (TextDecorationCollection)this.GetValue(TextDecorationsProperty); }
+            get { return (TextDecorationCollection) this.GetValue(TextDecorationsProperty); }
             set { this.SetValue(TextDecorationsProperty, value); }
         }
 
         public TextTrimming TextTrimming
         {
-            get { return (TextTrimming)GetValue(TextTrimmingProperty); }
+            get { return (TextTrimming) GetValue(TextTrimmingProperty); }
             set { SetValue(TextTrimmingProperty, value); }
         }
 
         public TextWrapping TextWrapping
         {
-            get { return (TextWrapping)GetValue(TextWrappingProperty); }
+            get { return (TextWrapping) GetValue(TextWrappingProperty); }
             set { SetValue(TextWrappingProperty, value); }
         }
 
@@ -201,9 +201,10 @@ namespace Bililive_dm
             return finalSize;
         }
 
-        private static void OnFormattedTextInvalidated(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        private static void OnFormattedTextInvalidated(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e)
         {
-            var outlinedTextBlock = (OutlinedTextBlock)dependencyObject;
+            var outlinedTextBlock = (OutlinedTextBlock) dependencyObject;
             outlinedTextBlock.formattedText = null;
             outlinedTextBlock.textGeometry = null;
 
@@ -211,9 +212,10 @@ namespace Bililive_dm
             outlinedTextBlock.InvalidateVisual();
         }
 
-        private static void OnFormattedTextUpdated(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        private static void OnFormattedTextUpdated(DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e)
         {
-            var outlinedTextBlock = (OutlinedTextBlock)dependencyObject;
+            var outlinedTextBlock = (OutlinedTextBlock) dependencyObject;
             outlinedTextBlock.UpdateFormattedText();
             outlinedTextBlock.textGeometry = null;
 
