@@ -17,8 +17,8 @@ namespace BiliDMLib
         private int ChatPort = 88;
         private TcpClient Client;
         private NetworkStream NetStream;
-        private string RoomInfoUrl = "http://live.bilibili.com/sch_list/";
-        private string CIDInfoUrl = "http://interface.bilibili.com/player?id=cid:";
+//        private string RoomInfoUrl = "http://live.bilibili.com/sch_list/";
+        private string CIDInfoUrl = "http://live.bilibili.com/api/player?id=cid:";
         private bool Connected = false;
         public Exception Error;
         public event ReceivedDanmakuEvt ReceivedDanmaku;
@@ -30,19 +30,20 @@ namespace BiliDMLib
             try
             {
                 if (this.Connected) throw new InvalidOperationException();
-
-                var request = WebRequest.Create(RoomInfoUrl + roomId + ".json");
-                var response = request.GetResponse();
-
-                int channelId;
-                using (var stream = response.GetResponseStream())
-                using (var sr = new StreamReader(stream))
-                {
-                    var json = await sr.ReadToEndAsync();
-                    Debug.WriteLine(json);
-                    dynamic jo = JObject.Parse(json);
-                    channelId = (int) jo.list[0].cid;
-                }
+                int channelId = roomId;
+//
+//                var request = WebRequest.Create(RoomInfoUrl + roomId + ".json");
+//                var response = request.GetResponse();
+//
+//                int channelId;
+//                using (var stream = response.GetResponseStream())
+//                using (var sr = new StreamReader(stream))
+//                {
+//                    var json = await sr.ReadToEndAsync();
+//                    Debug.WriteLine(json);
+//                    dynamic jo = JObject.Parse(json);
+//                    channelId = (int) jo.list[0].cid;
+//                }
 
 
                 var request2 = WebRequest.Create(CIDInfoUrl + channelId);
