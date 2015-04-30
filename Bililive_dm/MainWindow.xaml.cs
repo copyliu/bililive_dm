@@ -145,7 +145,18 @@ namespace Bililive_dm
 
         private async void connbtn_Click(object sender, RoutedEventArgs e)
         {
-            int roomid = Convert.ToInt32(this.romid.Text.Trim());
+            int roomid;
+            try
+            {
+                roomid = Convert.ToInt32(this.romid.Text.Trim());
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("请输入房间号,房间号是!数!字!");
+                return;
+            }
+             
             if (roomid > 0)
             {
                 var connectresult = await b.ConnectAsync(roomid);

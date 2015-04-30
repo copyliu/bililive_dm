@@ -142,6 +142,31 @@ namespace BiliDMLib
                             break;
                         }
                         case 4: //playerCommand
+                        {
+                            NetStream.Read(stableBuffer, 0, 2);
+                            var packetlength = BitConverter.ToInt16(stableBuffer, 0);
+                            packetlength = (short)(IPAddress.NetworkToHostOrder(packetlength) - 4);
+
+                            var buffer = new byte[packetlength];
+
+                            NetStream.Read(buffer, 0, packetlength);
+                            var json = Encoding.UTF8.GetString(buffer, 0, packetlength);
+                            try
+                            {
+                                DanmakuModel dama = new DanmakuModel(json, 2);
+                                if (ReceivedDanmaku != null)
+                                {
+                                    ReceivedDanmaku(this, new ReceivedDanmakuArgs() { Danmaku = dama });
+                                }
+
+                            }
+                            catch (Exception)
+                            {
+                                // ignored
+                            }
+
+                            break;
+                        }
                         case 5: //playerBroadcast
                         case 6: //newScrollMessage
                         default:

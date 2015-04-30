@@ -18,14 +18,14 @@
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="当前房间人数: " VerticalAlignment="Center" />
             <TextBlock x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
                        VerticalAlignment="Center" />
-            <CheckBox x:Name="SideBar" Content="侧边栏" IsChecked="True" Checked="SideBar_Checked"
+            <CheckBox x:Name="SideBar" Content="侧边栏模式" IsChecked="True" Checked="SideBar_Checked"
                       VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
-            <CheckBox x:Name="Full" Content="全屏弹幕" Checked="Full_Checked" VerticalAlignment="Center"
+            <CheckBox x:Name="Full" Content="弹幕模式" Checked="Full_Checked" VerticalAlignment="Center"
                       Unchecked="Full_Unchecked" />
             <Button x:Name="Option" Content="設置" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Margin="28,0,0,0" Width="70" Click="Option_OnClick" />
         </StackPanel>
-
+<TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom"/>
         <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True"
                  VerticalScrollBarVisibility="Auto" />
 
