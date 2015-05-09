@@ -145,7 +145,7 @@ namespace BiliDMLib
                         {
                             NetStream.Read(stableBuffer, 0, 2);
                             var packetlength = BitConverter.ToInt16(stableBuffer, 0);
-                            packetlength = (short)(IPAddress.NetworkToHostOrder(packetlength) - 4);
+                            packetlength = (short) (IPAddress.NetworkToHostOrder(packetlength) - 4);
 
                             var buffer = new byte[packetlength];
 
@@ -156,7 +156,7 @@ namespace BiliDMLib
                                 DanmakuModel dama = new DanmakuModel(json, 2);
                                 if (ReceivedDanmaku != null)
                                 {
-                                    ReceivedDanmaku(this, new ReceivedDanmakuArgs() { Danmaku = dama });
+                                    ReceivedDanmaku(this, new ReceivedDanmakuArgs() {Danmaku = dama});
                                 }
 
                             }
@@ -189,6 +189,10 @@ namespace BiliDMLib
                     }
                 }
             }
+            catch (NotSupportedException ex)
+            {
+                throw;
+            }
             catch (Exception ex)
             {
                 Disconnect();
@@ -198,12 +202,13 @@ namespace BiliDMLib
 
         private async void HeartbeatLoop()
         {
+            
             try
             {
                 while (this.Connected)
                 {
                     this.SendHeartbeatAsync();
-                    await TaskEx.Delay(30000);
+                    await TaskEx.Delay(60000);
                 }
             }
             catch
@@ -263,5 +268,7 @@ namespace BiliDMLib
         public DanmakuLoader()
         {
         }
+
+
     }
 }
