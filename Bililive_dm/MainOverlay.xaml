@@ -5,5 +5,5 @@
     x:Name="Window"
     Title="MainOverlay" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
 
-    <StackPanel x:Name="LayoutRoot" VerticalAlignment="Bottom" />
+    <StackPanel x:Name="LayoutRoot" VerticalAlignment="Bottom" SnapsToDevicePixels="True" />
 </Window>
