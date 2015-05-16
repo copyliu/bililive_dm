@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
@@ -159,7 +160,17 @@ namespace Bililive_dm
              
             if (roomid > 0)
             {
-                var connectresult = await b.ConnectAsync(roomid);
+                var connectresult = false;
+                logging("正在连接");
+                connectresult = await b.ConnectAsync(roomid);
+                while (!connectresult && sender==null && AutoReconnect.IsChecked==true)
+                {
+                    logging("正在连接");
+                    connectresult = await b.ConnectAsync(roomid);
+                    
+                }
+                
+                
                 if (connectresult)
                 {
                     logging("連接成功");
@@ -203,13 +214,35 @@ namespace Bililive_dm
         {
             logging("連接被斷開:" + args.Error);
             AddDMText("彈幕姬報告", "連接被斷開", true);
+
             if (this.CheckAccess())
             {
-                this.connbtn.IsEnabled = true;
+                if (AutoReconnect.IsChecked == true && args.Error != null)
+                {
+                    logging("正在自动重连...");
+                    AddDMText("彈幕姬報告", "正在自动重连", true);
+                    connbtn_Click(null, null);
+                }
+                else
+                {
+                    this.connbtn.IsEnabled = true;
+                }
             }
             else
             {
-                this.Dispatcher.BeginInvoke(new Action(() => this.connbtn.IsEnabled = true));
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    if (AutoReconnect.IsChecked == true && args.Error != null)
+                    {
+                        logging("正在自动重连...");
+                        AddDMText("彈幕姬報告", "正在自动重连", true);
+                        connbtn_Click(null, null);
+                    }
+                    else
+                    {
+                        this.connbtn.IsEnabled = true;
+                    }
+                }));
             }
         }
 
@@ -222,7 +255,7 @@ namespace Bililive_dm
                     _messageQueue.Dequeue();
                 }
 
-                _messageQueue.Enqueue(text);
+                _messageQueue.Enqueue(DateTime.Now.ToString("T")+" : " +text);
                 this.log.Text = string.Join("\n", _messageQueue);
                 log.ScrollToEnd();
             }
@@ -343,7 +376,16 @@ namespace Bililive_dm
 
         public void Test_OnClick(object sender, RoutedEventArgs e)
         {
+            Random ran = new Random();
+
+            int n = ran.Next(100);
+            if (n > 98)
+            {
+                AddDMText("彈幕姬報告", "這不是個測試", false);
+            }
+            else{
             AddDMText("彈幕姬報告", "這是一個測試", false);
+            }
 //            logging(DateTime.Now.Ticks+"");
         }
 
@@ -375,6 +417,12 @@ namespace Bililive_dm
             OptionDialog d = new OptionDialog();
             d.LayoutRoot.DataContext = new StoreModel();
             d.ShowDialog();
+        }
+
+        private void Disconnbtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            b.Disconnect();
+            this.connbtn.IsEnabled = true;
         }
     }
 }

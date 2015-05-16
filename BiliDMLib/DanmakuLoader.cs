@@ -191,18 +191,20 @@ namespace BiliDMLib
             }
             catch (NotSupportedException ex)
             {
-                throw;
+                this.Error = ex;
+                _disconnect();
             }
             catch (Exception ex)
             {
-                Disconnect();
                 this.Error = ex;
+                _disconnect();
+
             }
         }
 
         private async void HeartbeatLoop()
         {
-            
+
             try
             {
                 while (this.Connected)
@@ -211,26 +213,48 @@ namespace BiliDMLib
                     await TaskEx.Delay(60000);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                this.Disconnect();
-                throw;
+                this.Error = ex;
+                _disconnect();
+
             }
         }
 
-        private void Disconnect()
+        public void Disconnect()
         {
-            Debug.WriteLine("Disconnected");
 
             Connected = false;
+            try
+            {
+                Client.Close();
+            }
+            catch (Exception)
+            {
 
-            Client.Close();
+            }
+
 
             NetStream = null;
-            if (Disconnected != null)
+        }
+
+        private void _disconnect()
+        {
+            if (Connected)
             {
-                Disconnected(this, new DisconnectEvtArgs() {Error = Error});
+                Debug.WriteLine("Disconnected");
+
+                Connected = false;
+
+                Client.Close();
+
+                NetStream = null;
+                if (Disconnected != null)
+                {
+                    Disconnected(this, new DisconnectEvtArgs() {Error = Error});
+                }
             }
+
         }
 
         private void SendHeartbeatAsync()
