@@ -79,6 +79,9 @@ namespace Bililive_dm
             DataGrid.ItemsSource = Ranking;
             DataGrid2.ItemsSource = SessionItems;
 //            fulloverlay.Show();
+logging("<---左边是弹幕姬打开之后的投喂统计, 可以在上面↑清空统计");
+            logging("然而右边是对应直播页面上的本月统计 不太像有卵用--->");
+            logging("投喂记录只会出现在这个窗口, 不会在边栏和弹幕模式上出现, 这不是bug");
         }
 
 
