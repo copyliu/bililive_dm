@@ -24,7 +24,7 @@ namespace BiliDMLib
         public event ReceivedDanmakuEvt ReceivedDanmaku;
         public event DisconnectEvt Disconnected;
         public event ReceivedRoomCountEvt ReceivedRoomCount;
-
+        private bool debuglog = true;
         public async Task<bool> ConnectAsync(int roomId)
         {
             try
@@ -121,8 +121,15 @@ namespace BiliDMLib
 
                             NetStream.Read(buffer, 0, packetlength);
                             var json = Encoding.UTF8.GetString(buffer, 0, packetlength);
-                            DanmakuModel dama = new DanmakuModel(json);
-//                            Console.WriteLine(dama.CommentText);
+                                if (debuglog)
+                                {
+                                    Console.WriteLine(json);
+
+                                }
+
+                                DanmakuModel dama = new DanmakuModel(json);
+                            
+                            
                             if (ReceivedDanmaku != null)
                             {
                                 ReceivedDanmaku(this, new ReceivedDanmakuArgs() {Danmaku = dama});
@@ -151,7 +158,12 @@ namespace BiliDMLib
 
                             NetStream.Read(buffer, 0, packetlength);
                             var json = Encoding.UTF8.GetString(buffer, 0, packetlength);
-                            try
+                                if (debuglog)
+                                {
+                                    Console.WriteLine(json);
+
+                                }
+                                try
                             {
                                 DanmakuModel dama = new DanmakuModel(json, 2);
                                 if (ReceivedDanmaku != null)
@@ -160,7 +172,7 @@ namespace BiliDMLib
                                 }
 
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
                                 // ignored
                             }

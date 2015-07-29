@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -20,6 +23,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using BiliDMLib;
+using Bililive_dm.Annotations;
 
 namespace Bililive_dm
 {
@@ -44,7 +48,7 @@ namespace Bililive_dm
         private const int _maxCapacity = 100;
 
         private Queue<string> _messageQueue = new Queue<string>(_maxCapacity);
-
+        private ObservableCollection<SessionItem> SessionItems=new ObservableCollection<SessionItem>();
         public MainWindow()
         {
             InitializeComponent();
@@ -71,6 +75,9 @@ namespace Bililive_dm
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, FuckMicrosoft,
                 this.Dispatcher);
             timer.Start();
+            
+            DataGrid.ItemsSource = Ranking;
+            DataGrid2.ItemsSource = SessionItems;
 //            fulloverlay.Show();
         }
 
@@ -175,6 +182,7 @@ namespace Bililive_dm
                 {
                     logging("連接成功");
                     AddDMText("彈幕姬報告", "連接成功", true);
+                    Ranking.Clear();
                     this.connbtn.IsEnabled = false;
                 }
                 else
@@ -204,10 +212,65 @@ namespace Bililive_dm
             }
         }
 
+        private ObservableCollection<BiliDMLib.GiftRank> Ranking = new ObservableCollection<GiftRank>(); 
         private void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
         {
-            logging("收到彈幕:" + e.Danmaku.CommentUser + " 說: " + e.Danmaku.CommentText);
-            AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
+            switch (e.Danmaku.MsgType)
+            {
+                    case MsgTypeEnum.Comment:
+                    logging("收到彈幕:" + e.Danmaku.CommentUser + " 說: " + e.Danmaku.CommentText);
+
+                    AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
+                    break;
+                    case MsgTypeEnum.GiftTop:
+                    foreach (var giftRank in e.Danmaku.GiftRanking)
+                    {
+                        var query = Ranking.Where(p => p.uid == giftRank.uid);
+                        if (query.Any())
+                        {
+                            var f = query.First();
+                            this.Dispatcher.BeginInvoke(new Action(() => f.coin = giftRank.coin));
+                            
+                        }
+                        else
+                        {
+                            this.Dispatcher.BeginInvoke(new Action(() => Ranking.Add(new GiftRank()
+                            {
+                                uid = giftRank.uid,
+                                coin = giftRank.coin,
+                                UserName = giftRank.UserName
+                            })));
+                           
+                        }
+                    }
+                    break;
+                    case MsgTypeEnum.GiftSend:
+                    { var query = SessionItems.Where(p => p.UserName == e.Danmaku.GiftUser && p.Item == e.Danmaku.GiftName);
+                        if (query.Any())
+                        {
+                            this.Dispatcher.BeginInvoke(
+                                new Action(() => query.First().num += Convert.ToDecimal(e.Danmaku.GiftNum)));
+
+                        }
+                        else
+                        {
+                            this.Dispatcher.BeginInvoke(new Action(() => SessionItems.Add(
+                                new SessionItem()
+                                {
+                                    Item = e.Danmaku.GiftName,
+                                    UserName = e.Danmaku.GiftUser,
+                                    num=Convert.ToDecimal(e.Danmaku.GiftNum)
+                                }
+                                )));
+
+                        }
+                    logging("收到道具:" + e.Danmaku.GiftUser + " 赠送的: " + e.Danmaku.GiftName+" x "+e.Danmaku.GiftNum);
+                    break;
+                    }
+
+
+            }
+
         }
 
         private void b_Disconnected(object sender, DisconnectEvtArgs args)
@@ -423,6 +486,65 @@ namespace Bililive_dm
         {
             b.Disconnect();
             this.connbtn.IsEnabled = true;
+        }
+
+        private void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+
+        private void ClearMe_OnClick(object sender, RoutedEventArgs e)
+        {
+            SessionItems.Clear();
+            
+        }
+    }
+
+    public class SessionItem : INotifyPropertyChanged
+    {
+        private string _userName;
+        private string _item;
+        private decimal _num;
+
+        public string UserName
+        {
+            get { return _userName; }
+            set
+            {
+                if (value == _userName) return;
+                _userName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Item
+        {
+            get { return _item; }
+            set
+            {
+                if (value == _item) return;
+                _item = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal num
+        {
+            get { return _num; }
+            set
+            {
+                if (value == _num) return;
+                _num = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

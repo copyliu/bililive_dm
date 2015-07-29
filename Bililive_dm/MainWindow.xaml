@@ -1,6 +1,11 @@
 ﻿<Window x:Class="Bililive_dm.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:biliDmLib="clr-namespace:BiliDMLib;assembly=BiliDMLib"
+        xmlns:bililiveDm="clr-namespace:Bililive_dm"
+        mc:Ignorable="d"
         Title="B站彈幕姬" Height="335" Width="589">
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Height="25" DockPanel.Dock="Top">
@@ -27,11 +32,27 @@
             <CheckBox Content="断线自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
             <Button x:Name="Option" Content="設置" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Margin="28,0,0,0" Width="70" Click="Option_OnClick" />
-            
+            <Button x:Name="ClearMe" Content="清空统计" HorizontalAlignment="Left" VerticalAlignment="Center"
+                    Margin="28,0,0,0" Width="70" Click="ClearMe_OnClick" />
         </StackPanel>
-<TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom"/>
-        <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True"
-                 VerticalScrollBarVisibility="Auto" />
-
+        
+        <TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
+        <DataGrid CanUserAddRows="False" x:Name="DataGrid" Width="150"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Right"
+                  d:DataContext="{d:DesignInstance biliDmLib:GiftRank}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
+                <DataGridTextColumn Binding="{Binding coin}" ClipboardContentBinding="{Binding coin}" Header="本月投喂瓜子" SortDirection="Descending"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid CanUserAddRows="False" x:Name="DataGrid2" Width="150"  IsReadOnly="True" AutoGenerateColumns="False"
+                  d:DataContext="{d:DesignInstance bililiveDm:SessionItem}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
+                <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="數量" SortDirection="Descending"/>
+                <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="物品" SortDirection="Descending"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
+                 VerticalScrollBarVisibility="Auto"  />
     </DockPanel>
 </Window>
