@@ -78,6 +78,8 @@ namespace BiliDMLib
                             }
                             break;
                         }
+                            default:
+                                throw new Exception();
                     }
 
                     break;

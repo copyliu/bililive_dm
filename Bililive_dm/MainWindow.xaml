@@ -30,29 +30,48 @@
             <CheckBox x:Name="Full" Content="弹幕模式" Checked="Full_Checked" VerticalAlignment="Center"
                       Unchecked="Full_Unchecked" />
             <CheckBox Content="断线自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
+            <CheckBox Content="保存日志到我的文档" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True"/>
             <Button x:Name="Option" Content="設置" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Margin="28,0,0,0" Width="70" Click="Option_OnClick" />
-            <Button x:Name="ClearMe" Content="清空统计" HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Margin="28,0,0,0" Width="70" Click="ClearMe_OnClick" />
+          
         </StackPanel>
         
         <TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
-        <DataGrid CanUserAddRows="False" x:Name="DataGrid" Width="150"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Right"
-                  d:DataContext="{d:DesignInstance biliDmLib:GiftRank}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
-                <DataGridTextColumn Binding="{Binding coin}" ClipboardContentBinding="{Binding coin}" Header="本月投喂瓜子" SortDirection="Descending"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid CanUserAddRows="False" x:Name="DataGrid2" Width="150"  IsReadOnly="True" AutoGenerateColumns="False"
-                  d:DataContext="{d:DesignInstance bililiveDm:SessionItem}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
-                <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="數量" SortDirection="Descending"/>
-                <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="物品" SortDirection="Descending"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
+
+        <TabControl x:Name="tabControl">
+            <TabItem Header="日志">
+                <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />
+            </TabItem>
+           
+            <TabItem Header="投喂榜">
+                <DataGrid CanUserAddRows="False" x:Name="DataGrid2"  IsReadOnly="True" AutoGenerateColumns="False"
+                  d:DataContext="{d:DesignInstance bililiveDm:SessionItem}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
+                        <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="數量" SortDirection="Descending"/>
+                        <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="物品" SortDirection="Descending"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+            <TabItem Header="瓜子月榜">
+                <DockPanel>
+                    <Button x:Name="ClearMe" Content="清空统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Margin="0,0,0,0" Width="70" Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" />
+                    <DataGrid CanUserAddRows="False" x:Name="DataGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Right"
+                  d:DataContext="{d:DesignInstance biliDmLib:GiftRank}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
+                            <DataGridTextColumn Binding="{Binding coin}" ClipboardContentBinding="{Binding coin}" Header="本月投喂瓜子" SortDirection="Descending"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                   
+                </DockPanel>
+                
+            </TabItem>
+        </TabControl>
+
+
+
     </DockPanel>
 </Window>

@@ -79,8 +79,6 @@ namespace Bililive_dm
             DataGrid.ItemsSource = Ranking;
             DataGrid2.ItemsSource = SessionItems;
 //            fulloverlay.Show();
-logging("<---左边是弹幕姬打开之后的投喂统计, 可以在上面↑清空统计");
-            logging("然而右边是对应直播页面上的本月统计 不太像有卵用--->");
             logging("投喂记录只会出现在这个窗口, 不会在边栏和弹幕模式上出现, 这不是bug");
         }
 
@@ -314,6 +312,8 @@ logging("<---左边是弹幕姬打开之后的投喂统计, 可以在上面↑�
 
         public void logging(string text)
         {
+
+
             if (log.Dispatcher.CheckAccess())
             {
                 if (_messageQueue.Count >= _maxCapacity)
@@ -324,6 +324,25 @@ logging("<---左边是弹幕姬打开之后的投喂统计, 可以在上面↑�
                 _messageQueue.Enqueue(DateTime.Now.ToString("T")+" : " +text);
                 this.log.Text = string.Join("\n", _messageQueue);
                 log.ScrollToEnd();
+
+                if (this.SaveLog.IsChecked == true) { 
+                try
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+
+                    path = System.IO.Path.Combine(path, "弹幕姬");
+                    System.IO.Directory.CreateDirectory(path);
+                    using (StreamWriter outfile = new StreamWriter(System.IO.Path.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".txt")))
+                    {
+                        outfile.WriteLine(DateTime.Now.ToString("T") + " : " + text);
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+                }
+
             }
             else
             {
