@@ -55,6 +55,7 @@ namespace Bililive_dm
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
             b.ReceivedRoomCount += b_ReceivedRoomCount;
+            StoreModel settings;
             try
             {
                 IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
@@ -64,13 +65,15 @@ namespace Bililive_dm
                     new System.Xml.Serialization.XmlSerializer(typeof (StoreModel));
                 StreamReader reader = new StreamReader(new IsolatedStorageFileStream(
                     "settings.xml", FileMode.Open, isoStore));
-                var settings = (StoreModel) settingsreader.Deserialize(reader);
-                settings.toStatic();
+                settings = (StoreModel) settingsreader.Deserialize(reader);
+                
             }
             catch (Exception)
             {
+                settings=new StoreModel();
             }
-
+            settings.toStatic();
+            OptionDialog.LayoutRoot.DataContext = settings;
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, FuckMicrosoft,
                 this.Dispatcher);
@@ -79,7 +82,7 @@ namespace Bililive_dm
             DataGrid.ItemsSource = Ranking;
             DataGrid2.ItemsSource = SessionItems;
 //            fulloverlay.Show();
-            logging("投喂记录只会出现在这个窗口, 不会在边栏和弹幕模式上出现, 这不是bug");
+            logging("投喂记录不会在弹幕模式上出现, 这不是bug");
         }
 
 
@@ -213,17 +216,18 @@ namespace Bililive_dm
             }
         }
 
-        private ObservableCollection<BiliDMLib.GiftRank> Ranking = new ObservableCollection<GiftRank>(); 
+        private ObservableCollection<BiliDMLib.GiftRank> Ranking = new ObservableCollection<GiftRank>();
+
         private void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
         {
             switch (e.Danmaku.MsgType)
             {
-                    case MsgTypeEnum.Comment:
+                case MsgTypeEnum.Comment:
                     logging("收到彈幕:" + e.Danmaku.CommentUser + " 說: " + e.Danmaku.CommentText);
 
                     AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
                     break;
-                    case MsgTypeEnum.GiftTop:
+                case MsgTypeEnum.GiftTop:
                     foreach (var giftRank in e.Danmaku.GiftRanking)
                     {
                         var query = Ranking.Where(p => p.uid == giftRank.uid);
@@ -231,7 +235,7 @@ namespace Bililive_dm
                         {
                             var f = query.First();
                             this.Dispatcher.BeginInvoke(new Action(() => f.coin = giftRank.coin));
-                            
+
                         }
                         else
                         {
@@ -241,33 +245,42 @@ namespace Bililive_dm
                                 coin = giftRank.coin,
                                 UserName = giftRank.UserName
                             })));
-                           
+
                         }
                     }
                     break;
-                    case MsgTypeEnum.GiftSend:
-                    { var query = SessionItems.Where(p => p.UserName == e.Danmaku.GiftUser && p.Item == e.Danmaku.GiftName);
-                        if (query.Any())
-                        {
-                            this.Dispatcher.BeginInvoke(
-                                new Action(() => query.First().num += Convert.ToDecimal(e.Danmaku.GiftNum)));
+                case MsgTypeEnum.GiftSend:
+                {
+                    var query = SessionItems.Where(p => p.UserName == e.Danmaku.GiftUser && p.Item == e.Danmaku.GiftName);
+                    if (query.Any())
+                    {
+                        this.Dispatcher.BeginInvoke(
+                            new Action(() => query.First().num += Convert.ToDecimal(e.Danmaku.GiftNum)));
 
-                        }
-                        else
-                        {
-                            this.Dispatcher.BeginInvoke(new Action(() => SessionItems.Add(
-                                new SessionItem()
-                                {
-                                    Item = e.Danmaku.GiftName,
-                                    UserName = e.Danmaku.GiftUser,
-                                    num=Convert.ToDecimal(e.Danmaku.GiftNum)
-                                }
-                                )));
-
-                        }
-                    logging("收到道具:" + e.Danmaku.GiftUser + " 赠送的: " + e.Danmaku.GiftName+" x "+e.Danmaku.GiftNum);
-                    break;
                     }
+                    else
+                    {
+                        this.Dispatcher.BeginInvoke(new Action(() => SessionItems.Add(
+                            new SessionItem()
+                            {
+                                Item = e.Danmaku.GiftName,
+                                UserName = e.Danmaku.GiftUser,
+                                num = Convert.ToDecimal(e.Danmaku.GiftNum)
+                            }
+                            )));
+
+                    }
+                    logging("收到道具:" + e.Danmaku.GiftUser + " 赠送的: " + e.Danmaku.GiftName + " x " + e.Danmaku.GiftNum);
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (ShowItem.IsChecked == true)
+                        {
+                            AddDMText("收到道具",
+                                e.Danmaku.GiftUser + " 赠送的: " + e.Danmaku.GiftName + " x " + e.Danmaku.GiftNum, true);
+                        }
+                    }));
+                    break;
+                }
 
 
             }
@@ -276,7 +289,7 @@ namespace Bililive_dm
 
         private void b_Disconnected(object sender, DisconnectEvtArgs args)
         {
-            logging("連接被斷開:" + args.Error);
+            logging("連接被斷開: 开发者信息" + args.Error);
             AddDMText("彈幕姬報告", "連接被斷開", true);
 
             if (this.CheckAccess())
@@ -323,6 +336,7 @@ namespace Bililive_dm
 
                 _messageQueue.Enqueue(DateTime.Now.ToString("T")+" : " +text);
                 this.log.Text = string.Join("\n", _messageQueue);
+                
                 log.ScrollToEnd();
 
                 if (this.SaveLog.IsChecked == true) { 
@@ -350,7 +364,7 @@ namespace Bililive_dm
             }
         }
 
-        public void AddDMText(string user, string text, bool warn = false)
+        public void AddDMText(string user, string text, bool warn = false,bool foreceenablefullscreen=false)
         {
             if (overlay.Dispatcher.CheckAccess())
             {
@@ -370,7 +384,7 @@ namespace Bililive_dm
                     sb.Completed += sb_Completed;
                     overlay.LayoutRoot.Children.Add(c);
                 }
-                if (this.Full.IsChecked == true && !warn)
+                if (this.Full.IsChecked == true && (!warn || foreceenablefullscreen))
                 {
                     //<Storyboard x:Key="Storyboard1">
 //			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="fullScreenDanmaku">
@@ -497,12 +511,7 @@ namespace Bililive_dm
             fulloverlay.Close();
         }
 
-        private void Option_OnClick(object sender, RoutedEventArgs e)
-        {
-            OptionDialog d = new OptionDialog();
-            d.LayoutRoot.DataContext = new StoreModel();
-            d.ShowDialog();
-        }
+      
 
         private void Disconnbtn_OnClick(object sender, RoutedEventArgs e)
         {

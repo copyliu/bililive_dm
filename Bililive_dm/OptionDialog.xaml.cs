@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Text;
@@ -14,35 +15,42 @@ using System.Windows.Shapes;
 
 namespace Bililive_dm
 {
+    public class FontSizeValidationRule : ValidationRule
+    {
+
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            var str = value as string;
+            if (str == null)
+            {
+                return new ValidationResult(false, "不可为空");
+            }
+            float ftvalue;
+            if (!float.TryParse(str,out ftvalue))
+            {
+                return new ValidationResult(false, "不是数字");
+            }
+            if (ftvalue < 0)
+            {
+                return new ValidationResult(false, "必须是正数");
+            }
+            return new ValidationResult(true, null);
+
+        }
+    }
     /// <summary>
     /// OptionDialog.xaml 的互動邏輯
     /// </summary>
-    public partial class OptionDialog : Window
+    public partial class OptionDialog 
     {
         public OptionDialog()
         {
             this.InitializeComponent();
-            this.Closed += OptionDialog_Closed;
             // 在此點下方插入建立物件所需的程式碼。
         }
 
-        private void OptionDialog_Closed(object sender, EventArgs e)
-        {
-            try
-            {
-                IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
-                                                                            IsolatedStorageScope.Domain |
-                                                                            IsolatedStorageScope.Assembly, null, null);
-                System.Xml.Serialization.XmlSerializer settingsreader =
-                    new System.Xml.Serialization.XmlSerializer(typeof (StoreModel));
-                StreamWriter reader =
-                    new StreamWriter(new IsolatedStorageFileStream("settings.xml", FileMode.Create, isoStore));
-                settingsreader.Serialize(reader, (StoreModel) this.LayoutRoot.DataContext);
-            }
-            catch (Exception)
-            {
-            }
-        }
+
+       
 
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using Bililive_dm.Annotations;
@@ -9,6 +11,23 @@ namespace Bililive_dm
     [Serializable]
     public class StoreModel : INotifyPropertyChanged
     {
+        private void SaveConfig()
+        {
+            try
+            {
+                IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
+                                                                            IsolatedStorageScope.Domain |
+                                                                            IsolatedStorageScope.Assembly, null, null);
+                System.Xml.Serialization.XmlSerializer settingsreader =
+                    new System.Xml.Serialization.XmlSerializer(typeof(StoreModel));
+                StreamWriter reader =
+                    new StreamWriter(new IsolatedStorageFileStream("settings.xml", FileMode.Create, isoStore));
+                settingsreader.Serialize(reader, (StoreModel)this);
+            }
+            catch (Exception)
+            {
+            }
+        }
         public double MainOverlayXoffset
         {
             get { return _mainOverlayXoffset; }
@@ -99,6 +118,10 @@ namespace Bililive_dm
             get { return _mainOverlayFontsize; }
             set
             {
+                if (value <= 0)
+                {
+                    throw new Exception("不可为0");
+                }
                 if (value.Equals(_mainOverlayFontsize)) return;
                 _mainOverlayFontsize = Store.MainOverlayFontsize = value;
                 OnPropertyChanged();
@@ -121,6 +144,10 @@ namespace Bililive_dm
             get { return _fullOverlayFontsize; }
             set
             {
+                if (value <= 0)
+                {
+                    throw new Exception("不可为0");
+                }
                 if (value.Equals(_fullOverlayFontsize)) return;
                 Store.FullOverlayFontsize = _fullOverlayFontsize = value;
                 OnPropertyChanged();
@@ -173,8 +200,10 @@ namespace Bililive_dm
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
+            SaveConfig();
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            
         }
     }
 }

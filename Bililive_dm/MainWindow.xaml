@@ -31,16 +31,14 @@
                       Unchecked="Full_Unchecked" />
             <CheckBox Content="断线自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
             <CheckBox Content="保存日志到我的文档" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True"/>
-            <Button x:Name="Option" Content="設置" HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Margin="28,0,0,0" Width="70" Click="Option_OnClick" />
-          
+            <CheckBox Content="道具提示" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True"/>
         </StackPanel>
         
         <TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
 
         <TabControl x:Name="tabControl">
             <TabItem Header="日志">
-                <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
+                <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True"  Focusable="False"
                  VerticalScrollBarVisibility="Auto"  />
             </TabItem>
            
@@ -54,7 +52,38 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
-            <TabItem Header="瓜子月榜">
+            <TabItem Header="设置">
+                <bililiveDm:OptionDialog x:Name="OptionDialog"></bililiveDm:OptionDialog>
+            </TabItem>
+            <TabItem Header="说明">
+                <DockPanel>
+                    <RichTextBox >
+                        <FlowDocument>
+                            <Paragraph>
+                                <Run>这个地方是给作者玩的</Run>
+                            </Paragraph>
+                            <Paragraph>
+                                <Run FontWeight="Bold" >更新日志</Run>
+                            </Paragraph>
+                            <Paragraph>
+                                <Run>2015-08-20: 黑历史之后的初版</Run>
+                                
+                            </Paragraph>
+                            <Paragraph>
+                                <Run>之前的版本我都忘记了更新啥了</Run>
+
+                            </Paragraph>
+
+                            <Paragraph>
+                                <Run>非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com</Run>
+
+                            </Paragraph>
+                        </FlowDocument>
+
+                    </RichTextBox>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="瓜子月榜" Visibility="Collapsed">
                 <DockPanel>
                     <Button x:Name="ClearMe" Content="清空统计" HorizontalAlignment="Right" VerticalAlignment="Center"
                     Margin="0,0,0,0" Width="70" Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" />
