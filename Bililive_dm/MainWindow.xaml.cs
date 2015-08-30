@@ -223,9 +223,9 @@ namespace Bililive_dm
             switch (e.Danmaku.MsgType)
             {
                 case MsgTypeEnum.Comment:
-                    logging("收到彈幕:" + e.Danmaku.CommentUser + " 說: " + e.Danmaku.CommentText);
+                    logging("收到彈幕:" + (e.Danmaku.isAdmin?"[管]":"")+ (e.Danmaku.isVIP ? "[爷]" : "") +e.Danmaku.CommentUser + " 說: " + e.Danmaku.CommentText);
 
-                    AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
+                    AddDMText((e.Danmaku.isAdmin ? "[管]" : "") + (e.Danmaku.isVIP ? "[爷]" : "") + e.Danmaku.CommentUser, e.Danmaku.CommentText);
                     break;
                 case MsgTypeEnum.GiftTop:
                     foreach (var giftRank in e.Danmaku.GiftRanking)
@@ -283,12 +283,12 @@ namespace Bililive_dm
                 }
                 case MsgTypeEnum.Welcome:
                 {
-                        logging("欢迎"+(e.Danmaku.isAdmin?"管理":"老爷")+": " + e.Danmaku.CommentUser + " 进入直播间");
+                        logging("欢迎老爷"+(e.Danmaku.isAdmin?"和管理":"")+": " + e.Danmaku.CommentUser + " 进入直播间");
                         this.Dispatcher.BeginInvoke(new Action(() =>
                         {
                             if (ShowItem.IsChecked == true)
                             {
-                                AddDMText("欢迎" + (e.Danmaku.isAdmin ? "管理" : "老爷"),
+                                AddDMText("欢迎老爷" + (e.Danmaku.isAdmin ? "和管理" : ""),
                                     e.Danmaku.CommentUser + " 进入直播间", true);
                             }
                         }));

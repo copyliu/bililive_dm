@@ -24,6 +24,7 @@ namespace BiliDMLib
         public string Giftrcost { get; set; }
         public List<GiftRank> GiftRanking { get; set; }
         public bool isAdmin { get; set; }
+        public bool isVIP { get; set; }
         public DanmakuModel()
         {
         }
@@ -52,6 +53,8 @@ namespace BiliDMLib
                         case "DANMU_MSG":
                             CommentText = obj["info"][1].ToString();
                             CommentUser = obj["info"][2][1].ToString();
+                            isAdmin = obj["info"][2][2].ToString() == "1";
+                            isVIP = obj["info"][2][3].ToString() == "1";
                             MsgType = MsgTypeEnum.Comment;
                             break;
                         case "SEND_GIFT":
@@ -82,7 +85,8 @@ namespace BiliDMLib
                         {
                             MsgType=MsgTypeEnum.Welcome;
                             CommentUser = obj["data"]["uname"].ToString();
-                            isAdmin = obj["data"].Value<int>("isadmin") == 1;
+                            isVIP = true;
+                            isAdmin = obj["data"]["isadmin"].ToString() == "1";
                             break;
 
                         }
