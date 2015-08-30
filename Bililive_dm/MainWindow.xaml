@@ -31,7 +31,7 @@
                       Unchecked="Full_Unchecked" />
             <CheckBox Content="断线自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
             <CheckBox Content="保存日志到我的文档" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True"/>
-            <CheckBox Content="道具提示" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True"/>
+            <CheckBox Content="道具和老爷提示" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True"/>
         </StackPanel>
         
         <TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
@@ -64,6 +64,9 @@
                             </Paragraph>
                             <Paragraph>
                                 <Run FontWeight="Bold" >更新日志</Run>
+                            </Paragraph>
+                            <Paragraph>
+                                <Run>2015-08-30: 日志终于能正确保存了, 以及欢迎老爷</Run>
                             </Paragraph>
                             <Paragraph>
                                 <Run>2015-08-20: 黑历史之后的初版</Run>

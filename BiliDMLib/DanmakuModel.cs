@@ -8,7 +8,7 @@ namespace BiliDMLib
 {
     public enum MsgTypeEnum
     {
-        Comment,GiftSend,GiftTop
+        Comment,GiftSend,GiftTop,Welcome
     }
 
     public class DanmakuModel
@@ -23,7 +23,7 @@ namespace BiliDMLib
         public string GiftNum { get; set; }
         public string Giftrcost { get; set; }
         public List<GiftRank> GiftRanking { get; set; }
-        
+        public bool isAdmin { get; set; }
         public DanmakuModel()
         {
         }
@@ -77,6 +77,14 @@ namespace BiliDMLib
                                 });
                             }
                             break;
+                        }
+                            case "WELCOME":
+                        {
+                            MsgType=MsgTypeEnum.Welcome;
+                            CommentUser = obj["data"]["uname"].ToString();
+                            isAdmin = obj["data"].Value<int>("isadmin") == 1;
+                            break;
+
                         }
                             default:
                                 throw new Exception();

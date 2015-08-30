@@ -281,6 +281,21 @@ namespace Bililive_dm
                     }));
                     break;
                 }
+                case MsgTypeEnum.Welcome:
+                {
+                        logging("欢迎"+(e.Danmaku.isAdmin?"管理":"老爷")+": " + e.Danmaku.CommentUser + " 进入直播间");
+                        this.Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if (ShowItem.IsChecked == true)
+                            {
+                                AddDMText("欢迎" + (e.Danmaku.isAdmin ? "管理" : "老爷"),
+                                    e.Danmaku.CommentUser + " 进入直播间", true);
+                            }
+                        }));
+                        
+                        break;
+                    }
+
 
 
             }
@@ -347,7 +362,7 @@ namespace Bililive_dm
 
                     path = System.IO.Path.Combine(path, "弹幕姬");
                     System.IO.Directory.CreateDirectory(path);
-                    using (StreamWriter outfile = new StreamWriter(System.IO.Path.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".txt")))
+                    using (StreamWriter outfile = new StreamWriter(System.IO.Path.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"),true))
                     {
                         outfile.WriteLine(DateTime.Now.ToString("T") + " : " + text);
                     }
