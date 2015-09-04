@@ -11,7 +11,7 @@ namespace Bililive_dm
     [Serializable]
     public class StoreModel : INotifyPropertyChanged
     {
-        private void SaveConfig()
+        public void SaveConfig()
         {
             try
             {

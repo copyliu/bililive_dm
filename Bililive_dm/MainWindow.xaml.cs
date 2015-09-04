@@ -72,7 +72,9 @@ namespace Bililive_dm
             catch (Exception)
             {
                 settings=new StoreModel();
+                
             }
+            settings.SaveConfig();
             settings.toStatic();
             OptionDialog.LayoutRoot.DataContext = settings;
 
@@ -84,6 +86,10 @@ namespace Bililive_dm
             DataGrid2.ItemsSource = SessionItems;
 //            fulloverlay.Show();
             logging("投喂记录不会在弹幕模式上出现, 这不是bug");
+//            for (int i = 0; i < 150; i++)
+//            {
+//                logging("投喂记录不会在弹幕模式上出现, 这不是bug");
+//            }
         }
 
 
@@ -345,6 +351,7 @@ namespace Bililive_dm
 
             if (log.Dispatcher.CheckAccess())
             {
+                
                 if (_messageQueue.Count >= _maxCapacity)
                 {
                     _messageQueue.Dequeue();
@@ -352,7 +359,7 @@ namespace Bililive_dm
 
                 _messageQueue.Enqueue(DateTime.Now.ToString("T")+" : " +text);
                 this.log.Text = string.Join("\n", _messageQueue);
-                
+                log.CaretIndex = this.log.Text.Length;
                 log.ScrollToEnd();
 
                 if (this.SaveLog.IsChecked == true) { 
@@ -491,6 +498,7 @@ namespace Bililive_dm
 
         public void Test_OnClick(object sender, RoutedEventArgs e)
         {
+//            logging("投喂记录不会在弹幕模式上出现, 这不是bug");
             Random ran = new Random();
 
             int n = ran.Next(100);

@@ -38,7 +38,7 @@
 
         <TabControl x:Name="tabControl">
             <TabItem Header="日志">
-                <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True"  Focusable="False"
+                <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />
             </TabItem>
            
