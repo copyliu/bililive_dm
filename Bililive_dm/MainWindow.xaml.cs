@@ -67,6 +67,7 @@ namespace Bililive_dm
                 StreamReader reader = new StreamReader(new IsolatedStorageFileStream(
                     "settings.xml", FileMode.Open, isoStore));
                 settings = (StoreModel) settingsreader.Deserialize(reader);
+                reader.Close();
                 
             }
             catch (Exception)

@@ -23,6 +23,7 @@ namespace Bililive_dm
                 StreamWriter reader =
                     new StreamWriter(new IsolatedStorageFileStream("settings.xml", FileMode.Create, isoStore));
                 settingsreader.Serialize(reader, (StoreModel)this);
+                reader.Close();
             }
             catch (Exception)
             {
