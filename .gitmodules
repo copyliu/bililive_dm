@@ -1,0 +1,3 @@
+[submodule "libwtfdanmaku"]
+	path = libwtfdanmaku
+	url = https://github.com/xqq/libwtfdanmaku.git
