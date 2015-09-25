@@ -73,7 +73,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ico.ico</ApplicationIcon>
@@ -115,6 +115,7 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -134,17 +135,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="IDanmakuWindow.cs" />
     <Compile Include="OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="StoreModel.cs" />
+    <Compile Include="WtfDanmakuWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WtfDanmakuWindow.Designer.cs">
+      <DependentUpon>WtfDanmakuWindow.cs</DependentUpon>
+    </Compile>
     <Page Include="DanmakuTextControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="FullOverlay.xaml">
+    <Page Include="WpfDanmakuOverlay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -168,8 +176,8 @@
     <Compile Include="DanmakuTextControl.xaml.cs">
       <DependentUpon>DanmakuTextControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FullOverlay.xaml.cs">
-      <DependentUpon>FullOverlay.xaml</DependentUpon>
+    <Compile Include="WpfDanmakuOverlay.xaml.cs">
+      <DependentUpon>WpfDanmakuOverlay.xaml</DependentUpon>
     </Compile>
     <Compile Include="FullScreenDanmaku.xaml.cs">
       <DependentUpon>FullScreenDanmaku.xaml</DependentUpon>
@@ -207,6 +215,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WtfDanmakuWindow.resx">
+      <DependentUpon>WtfDanmakuWindow.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Bililive_dm_NewKey.pfx" />
