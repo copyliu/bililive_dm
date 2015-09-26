@@ -93,6 +93,14 @@ namespace Bililive_dm
 //            }
         }
 
+        ~MainWindow()
+        {
+            if (fulloverlay != null)
+            {
+                fulloverlay.Dispose();
+                fulloverlay = null;
+            }
+        }
 
         private void FuckMicrosoft(object sender, EventArgs eventArgs)
         {
@@ -107,10 +115,15 @@ namespace Bililive_dm
             }
         }
 
-
         private void OpenFullOverlay()
         {
-            fulloverlay = new WtfDanmakuWindow();
+            var win8Version = new Version(6, 2, 9200);
+            bool isWin8OrLater = Environment.OSVersion.Platform == PlatformID.Win32NT
+                              && Environment.OSVersion.Version >= win8Version;
+            if (isWin8OrLater)
+                fulloverlay = new WtfDanmakuWindow();
+            else
+                fulloverlay = new WpfDanmakuOverlay();
             settings.PropertyChanged += fulloverlay.OnPropertyChanged;
             fulloverlay.Show();
         }
