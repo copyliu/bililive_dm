@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bililive_dm", "Bililive_dm\Bililive_dm.csproj", "{545A89C8-2276-498D-B892-6AA3AF0ED1F7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{817EBE08-2BE4-4251-92D0-117822D8F16A} = {817EBE08-2BE4-4251-92D0-117822D8F16A}
+		{36EE8076-FD50-4A1F-8853-D70C0D921711} = {36EE8076-FD50-4A1F-8853-D70C0D921711}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiliDMLib", "BiliDMLib\BiliDMLib.csproj", "{76778870-A6F5-43F4-9BAA-DEC0473F217E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwtfdanmaku", "libwtfdanmaku\libwtfdanmaku.vcxproj", "{817EBE08-2BE4-4251-92D0-117822D8F16A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wtf_lib_builder", "wtf_lib_builder\wtf_lib_builder.vcxproj", "{36EE8076-FD50-4A1F-8853-D70C0D921711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +29,12 @@ Global
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{817EBE08-2BE4-4251-92D0-117822D8F16A}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{817EBE08-2BE4-4251-92D0-117822D8F16A}.Release|Any CPU.ActiveCfg = Release|Win32
+		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Debug|Any CPU.Build.0 = Debug|Win32
+		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Release|Any CPU.ActiveCfg = Release|Win32
+		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Release|Any CPU.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

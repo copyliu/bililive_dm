@@ -14,11 +14,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Interop;
+using System.ComponentModel;
 
 namespace Bililive_dm
 {
     /// <summary>
-    /// FullOverlay.xaml 的互動邏輯
+    /// WpfDanmakuOverlay.xaml 的互動邏輯
     /// </summary>
     public partial class WpfDanmakuOverlay : Window, IDanmakuWindow
     {
@@ -36,7 +37,6 @@ namespace Bililive_dm
         {
             this.InitializeComponent();
 
-            // 在此點下方插入建立物件所需的程式碼。
             this.Deactivated += Overlay_Deactivated;
             this.Background = Brushes.Transparent;
             this.SourceInitialized += delegate
@@ -53,12 +53,7 @@ namespace Bililive_dm
             this.Height = 550;
         }
 
-        void IDanmakuWindow.Initialize()
-        {
-            // do nothing
-        }
-
-        void IDanmakuWindow.Terminate()
+        void IDisposable.Dispose()
         {
             // do nothing
         }
@@ -71,6 +66,12 @@ namespace Bililive_dm
         void IDanmakuWindow.Close()
         {
             (this as Window).Close();
+        }
+
+        void IDanmakuWindow.ForceTopmost()
+        {
+            this.Topmost = false;
+            this.Topmost = true;
         }
 
         void IDanmakuWindow.AddDanmaku(DanmakuType type, string comment, uint color)
@@ -160,6 +161,11 @@ namespace Bililive_dm
             {
                 (sender as WpfDanmakuOverlay).Topmost = true;
             }
+        }
+
+        void IDanmakuWindow.OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            // ignore
         }
     }
 }

@@ -1,0 +1,2 @@
+MSBuild /nologo /verbosity:n /maxcpucount /p:Configuration="Release",Platform="Win32",SolutionDir="../" "../libwtfdanmaku/libwtfdanmaku.vcxproj"
+MSBuild /nologo /verbosity:n /maxcpucount /p:Configuration="Release",Platform="x64",SolutionDir="../" "../libwtfdanmaku/libwtfdanmaku.vcxproj"

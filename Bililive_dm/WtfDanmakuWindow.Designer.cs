@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(915, 534);
             this.Name = "WtfDanmakuWindow";
             this.Text = "WtfDanmakuWindow";
             this.Load += new System.EventHandler(this.WtfDanmakuWindow_Load);

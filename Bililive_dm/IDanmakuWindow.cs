@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
 
 namespace Bililive_dm
 {
@@ -12,12 +14,12 @@ namespace Bililive_dm
         Reserve = 6
     }
 
-    public interface IDanmakuWindow
+    public interface IDanmakuWindow : IDisposable
     {
-        void Initialize();
-        void Terminate();
         void Show();
         void Close();
+        void ForceTopmost();
+        void OnPropertyChanged(object sender, PropertyChangedEventArgs e);
         void AddDanmaku(DanmakuType type, string comment, uint color);
     }
 }

@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Runtime.InteropServices;
 
 namespace Bililive_dm
 {
@@ -13,9 +14,21 @@ namespace Bililive_dm
     /// </summary>
     public partial class App : Application
     {
+        [DllImport("kernel32", EntryPoint = "SetDllDirectoryW", CharSet = CharSet.Unicode, SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool SetDllDirectory(string lpPathName);
+
         public App()
         {
+            AddArchSpecificDirectory();
             Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
+        }
+
+        private void AddArchSpecificDirectory()
+        {
+            string archPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                           IntPtr.Size == 8 ? "x64" : "Win32");
+            SetDllDirectory(archPath);
         }
 
         private void App_DispatcherUnhandledException(object sender,

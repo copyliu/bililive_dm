@@ -43,6 +43,7 @@ namespace Bililive_dm
         [DllImport("user32", EntryPoint = "GetWindowLong")]
         private static extern uint GetWindowLong(IntPtr hwnd, int nIndex);
 
+        private StoreModel settings = null;
         private DanmakuLoader b = new BiliDMLib.DanmakuLoader();
         private DispatcherTimer timer;
         private const int _maxCapacity = 100;
@@ -56,7 +57,6 @@ namespace Bililive_dm
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
             b.ReceivedRoomCount += b_ReceivedRoomCount;
-            StoreModel settings;
             try
             {
                 IsolatedStorageFile isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
@@ -96,11 +96,10 @@ namespace Bililive_dm
 
         private void FuckMicrosoft(object sender, EventArgs eventArgs)
         {
-            /*if (fulloverlay != null)
+            if (fulloverlay != null)
             {
-                fulloverlay.Topmost = false;
-                fulloverlay.Topmost = true;
-            }*/
+                fulloverlay.ForceTopmost();
+            }
             if (overlay != null)
             {
                 overlay.Topmost = false;
@@ -111,8 +110,8 @@ namespace Bililive_dm
 
         private void OpenFullOverlay()
         {
-            fulloverlay = new WpfDanmakuOverlay();
-            fulloverlay.Initialize();
+            fulloverlay = new WtfDanmakuWindow();
+            settings.PropertyChanged += fulloverlay.OnPropertyChanged;
             fulloverlay.Show();
         }
 
