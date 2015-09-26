@@ -34,7 +34,7 @@ namespace Bililive_dm
         private void App_DispatcherUnhandledException(object sender,
             System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(System.Windows.Application.Current.MainWindow,
+            MessageBox.Show(
                 "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
             try
             {
