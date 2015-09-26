@@ -88,6 +88,9 @@
             <Slider Style="{DynamicResource SimpleSlider}" VerticalAlignment="Center" Maximum="1010" Minimum="1"
                     Value="{Binding FullOverlayEffect1,Mode=TwoWay}" />
         </DockPanel>
+        <CheckBox x:Name="WTFEngineEnable" IsChecked="{Binding WtfEngineEnabled,Mode=TwoWay}" Content="弹幕模式使用新弹幕引擎(Windows 8 以上)" />
+        <TextBlock TextWrapping="Wrap" Text="注意: 新弹幕引擎下文字速度选项无效" VerticalAlignment="Center" TextAlignment="Right"
+                       Margin="0,0,20,0" HorizontalAlignment="Left" />
         <Button Content="测试效果" Click="ButtonBase_OnClick" />
         <Button Content="還原默認" Click="ButtonBase_OnClick2" />
     </StackPanel>

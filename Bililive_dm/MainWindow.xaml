@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:biliDmLib="clr-namespace:BiliDMLib;assembly=BiliDMLib"
         xmlns:bililiveDm="clr-namespace:Bililive_dm"
-        mc:Ignorable="d"
-        Title="B站彈幕姬" Height="335" Width="589">
+        mc:Ignorable="d" 
+        Title="B站彈幕姬" Height="367" Width="619">
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Height="25" DockPanel.Dock="Top">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="直播间地址: http://live.bilibili.com/"

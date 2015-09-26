@@ -16,6 +16,7 @@ namespace Bililive_dm
 
         public static double FullOverlayEffect1 = 400; //文字速度
         public static double FullOverlayFontsize = 35;
+        public static bool WtfEngineEnabled = true;
     }
 
 
@@ -33,5 +34,6 @@ namespace Bililive_dm
 
         public static double FullOverlayEffect1 = 400; //文字速度
         public static double FullOverlayFontsize = 35;
+        public static bool WtfEngineEnabled = true;
     }
 }

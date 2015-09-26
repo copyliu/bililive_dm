@@ -155,6 +155,17 @@ namespace Bililive_dm
             }
         }
 
+        public bool WtfEngineEnabled
+        {
+            get { return _wtfEngineEnabled; }
+            set
+            {
+                if (value == _wtfEngineEnabled) return;
+                Store.WtfEngineEnabled=_wtfEngineEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
         private double _mainOverlayYoffset;
         private double _mainOverlayWidth;
         private double _mainOverlayEffect1; //拉伸
@@ -167,6 +178,7 @@ namespace Bililive_dm
         private double _fullOverlayEffect1; //文字速度
         private double _fullOverlayFontsize;
         private double _mainOverlayXoffset;
+        private bool _wtfEngineEnabled;
 
         public StoreModel()
         {
@@ -180,6 +192,8 @@ namespace Bililive_dm
             _mainOverlayWidth = Store.MainOverlayWidth;
             _mainOverlayXoffset = Store.MainOverlayXoffset;
             _mainOverlayYoffset = Store.MainOverlayYoffset;
+            _wtfEngineEnabled = Store.WtfEngineEnabled;
+
         }
 
         public void toStatic()
@@ -194,6 +208,7 @@ namespace Bililive_dm
             Store.MainOverlayWidth = MainOverlayWidth;
             Store.MainOverlayXoffset = MainOverlayXoffset;
             Store.MainOverlayYoffset = MainOverlayYoffset;
+            Store.WtfEngineEnabled = WtfEngineEnabled;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

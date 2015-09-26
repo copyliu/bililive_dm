@@ -120,7 +120,7 @@ namespace Bililive_dm
             var win8Version = new Version(6, 2, 9200);
             bool isWin8OrLater = Environment.OSVersion.Platform == PlatformID.Win32NT
                               && Environment.OSVersion.Version >= win8Version;
-            if (isWin8OrLater)
+            if (isWin8OrLater && Store.WtfEngineEnabled)
                 fulloverlay = new WtfDanmakuWindow();
             else
                 fulloverlay = new WpfDanmakuOverlay();

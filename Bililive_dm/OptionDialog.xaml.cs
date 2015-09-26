@@ -71,6 +71,7 @@ namespace Bililive_dm
             a.MainOverlayWidth = DefaultStore.MainOverlayWidth;
             a.MainOverlayXoffset = DefaultStore.MainOverlayXoffset;
             a.MainOverlayYoffset = DefaultStore.MainOverlayYoffset;
+            a.WtfEngineEnabled = DefaultStore.WtfEngineEnabled;
             a.SaveConfig();
         }
     }
