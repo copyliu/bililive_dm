@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
-namespace BiliDMLib
+namespace BilibiliDM_PluginFramework
 {
     public enum MsgTypeEnum
     {

@@ -1,14 +1,14 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
+using Bililive_dm.Annotations;
 
-namespace BiliDMLib
+namespace Bililive_dm
 {
-    public class GiftRank:INotifyPropertyChanged
+    public class SessionItem : INotifyPropertyChanged
     {
         private string _userName;
-        private decimal _coin;
-        private int _uid;
+        private string _item;
+        private decimal _num;
 
         public string UserName
         {
@@ -21,28 +21,27 @@ namespace BiliDMLib
             }
         }
 
-        public decimal coin
+        public string Item
         {
-            get { return _coin; }
+            get { return _item; }
             set
             {
-                if (value == _coin) return;
-                _coin = value;
+                if (value == _item) return;
+                _item = value;
                 OnPropertyChanged();
             }
         }
 
-        public int uid
+        public decimal num
         {
-            get { return _uid; }
+            get { return _num; }
             set
             {
-                if (value == _uid) return;
-                _uid = value;
+                if (value == _num) return;
+                _num = value;
                 OnPropertyChanged();
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

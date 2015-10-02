@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -22,8 +21,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using BilibiliDM_PluginFramework;
 using BiliDMLib;
-using Bililive_dm.Annotations;
 
 namespace Bililive_dm
 {
@@ -53,6 +52,7 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
+            InitPlugins();
             web.Source=new Uri("http://soft.ceve-market.org/bilibili_dm/app.htm?"+DateTime.Now.Ticks); //fuck you IE cache
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
@@ -91,6 +91,7 @@ namespace Bililive_dm
 //            {
 //                logging("投喂记录不会在弹幕模式上出现, 这不是bug");
 //            }
+            PluginGrid.ItemsSource = Plugins;
         }
 
         ~MainWindow()
@@ -188,6 +189,10 @@ namespace Bililive_dm
                     AddDMText("彈幕姬報告", "連接成功", true);
                     Ranking.Clear();
                     this.connbtn.IsEnabled = false;
+                    foreach (var dmPlugin in Plugins)
+                    {
+                       new Thread(()=>dmPlugin.MainConnected(roomid)).Start();
+                    }
                 }
                 else
                 {
@@ -214,12 +219,22 @@ namespace Bililive_dm
             {
                 this.Dispatcher.BeginInvoke(new Action(() => OnlineBlock.Text = e.UserCount + ""));
             }
+            foreach (var dmPlugin in Plugins)
+            {
+                if (dmPlugin.Status)
+                new Thread(() => dmPlugin.MainReceivedRoomCount(e)).Start();
+            }
         }
 
-        private ObservableCollection<BiliDMLib.GiftRank> Ranking = new ObservableCollection<GiftRank>();
+        private ObservableCollection<GiftRank> Ranking = new ObservableCollection<GiftRank>();
 
         private void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
         {
+            foreach (var dmPlugin in Plugins)
+            {
+                if (dmPlugin.Status)
+                    new Thread(() => dmPlugin.MainReceivedDanMaku(e)).Start();
+            }
             switch (e.Danmaku.MsgType)
             {
                 case MsgTypeEnum.Comment:
@@ -304,6 +319,10 @@ namespace Bililive_dm
 
         private void b_Disconnected(object sender, DisconnectEvtArgs args)
         {
+            foreach (var dmPlugin in Plugins)
+            {
+                    new Thread(() => dmPlugin.MainDisconnected()).Start();
+            }
             logging("連接被斷開: 开发者信息" + args.Error);
             AddDMText("彈幕姬報告", "連接被斷開", true);
 
@@ -467,6 +486,10 @@ namespace Bililive_dm
         {
             b.Disconnect();
             this.connbtn.IsEnabled = true;
+            foreach (var dmPlugin in Plugins)
+            {
+                new Thread(() => dmPlugin.MainDisconnected()).Start();
+            }
         }
 
         private void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
@@ -479,53 +502,156 @@ namespace Bililive_dm
             SessionItems.Clear();
             
         }
-    }
 
-    public class SessionItem : INotifyPropertyChanged
-    {
-        private string _userName;
-        private string _item;
-        private decimal _num;
-
-        public string UserName
+        private void Plugin_Enable(object sender, RoutedEventArgs e)
         {
-            get { return _userName; }
-            set
+            var menuItem = (MenuItem)sender;
+
+            var contextMenu = (ContextMenu)menuItem.Parent;
+
+            var item = (DataGrid)contextMenu.PlacementTarget;
+            var plugin = item.SelectedCells[0].Item as DMPlugin;
+            if (plugin == null) return;
+
+            try
             {
-                if (value == _userName) return;
-                _userName = value;
-                OnPropertyChanged();
+                if (!plugin.Status) plugin.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " + plugin.PluginCont);
+                try
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                    {
+                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.Write(ex.ToString());
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
-
-        public string Item
+        private void Plugin_Disable(object sender, RoutedEventArgs e)
         {
-            get { return _item; }
-            set
+            var menuItem = (MenuItem)sender;
+
+            var contextMenu = (ContextMenu)menuItem.Parent;
+
+            var item = (DataGrid)contextMenu.PlacementTarget;
+            var plugin = item.SelectedCells[0].Item as DMPlugin;
+            if (plugin == null) return;
+
+            try
             {
-                if (value == _item) return;
-                _item = value;
-                OnPropertyChanged();
+                if (plugin.Status) plugin.Stop();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "插件"+plugin.PluginName+"遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 "+plugin.PluginAuth+", 聯繫方式 "+plugin.PluginCont);
+                try
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                    {
+                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.Write(ex.ToString());
+                    }
+
+                }
+                catch (Exception)
+                {
+                    
+                }
+            }
+
+        }
+        private void Plugin_admin(object sender, RoutedEventArgs e)
+        {
+            var menuItem = (MenuItem)sender;
+
+            var contextMenu = (ContextMenu)menuItem.Parent;
+
+            var item = (DataGrid)contextMenu.PlacementTarget;
+            var plugin = item.SelectedCells[0].Item as DMPlugin;
+            if (plugin == null) return;
+
+            try
+            {
+                if (plugin.Status) plugin.Admin();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " + plugin.PluginCont);
+                try
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                    {
+                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.Write(ex.ToString());
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
-
-        public decimal num
+        ObservableCollection<DMPlugin> Plugins=new ObservableCollection<DMPlugin>();
+        void InitPlugins()
         {
-            get { return _num; }
-            set
+            string path = "";
+            try
             {
-                if (value == _num) return;
-                _num = value;
-                OnPropertyChanged();
+                path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+
+                path = System.IO.Path.Combine(path, "弹幕姬","Plugins");
+                System.IO.Directory.CreateDirectory(path);
+                
+
+
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            catch (Exception ex)
+            {
+                return;
+            }
+            var files = Directory.GetFiles(path);
+            foreach (var file in files)
+            {
+                try
+                {
+                    var dll=Assembly.LoadFrom(file);
+                    foreach (var exportedType in dll.GetExportedTypes())
+                    {
+                        if (exportedType.BaseType == typeof (DMPlugin))
+                        {
+                           var plugin= (DMPlugin)Activator.CreateInstance(exportedType);
+                            Plugins.Add(plugin);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    
+                }
+            }
+            
         }
     }
 }

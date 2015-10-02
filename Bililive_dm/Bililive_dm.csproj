@@ -139,7 +139,9 @@
     <Compile Include="OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PluginStatusConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="SessionItem.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="StoreModel.cs" />
     <Compile Include="WtfDanmakuWindow.cs">
@@ -230,6 +232,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BilibiliDM_PluginFramework\BilibiliDM_PluginFramework.csproj">
+      <Project>{62fe6607-fe23-4df0-bf23-9fb7d70c829a}</Project>
+      <Name>BilibiliDM_PluginFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BiliDMLib\BiliDMLib.csproj">
       <Project>{76778870-a6f5-43f4-9baa-dec0473f217e}</Project>
       <Name>BiliDMLib</Name>

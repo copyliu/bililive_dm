@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:biliDmLib="clr-namespace:BiliDMLib;assembly=BiliDMLib"
         xmlns:bililiveDm="clr-namespace:Bililive_dm"
+        xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
         mc:Ignorable="d" 
         Title="B站彈幕姬" Height="367" Width="619">
+    <Window.Resources>
+        <bililiveDm:PluginStatusConverter x:Key="converter"></bililiveDm:PluginStatusConverter>
+    </Window.Resources>
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Height="25" DockPanel.Dock="Top">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="直播间地址: http://live.bilibili.com/"
@@ -55,6 +59,26 @@
             <TabItem Header="设置">
                 <bililiveDm:OptionDialog x:Name="OptionDialog"></bililiveDm:OptionDialog>
             </TabItem>
+            <TabItem Header="插件">
+                <DataGrid CanUserAddRows="False" x:Name="PluginGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Right" SelectionMode="Single" SelectionUnit="FullRow"
+                  d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="插件名称"/>
+                        <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
+                        <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="插件作者"/>
+                        <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource converter}}" Header="插件狀態"/>
+                        <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="啟用插件" Click="Plugin_Enable"/>
+                            <MenuItem Header="停用插件" Click="Plugin_Disable"/>
+                            <MenuItem Header="管理" Click="Plugin_admin"/>
+                            
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
+            </TabItem>
             <TabItem Header="说明">
                 <WebBrowser x:Name="web" Source="http://soft.ceve-market.org/bilibili_dm/app.htm" />
               
@@ -64,7 +88,7 @@
                     <Button x:Name="ClearMe" Content="清空统计" HorizontalAlignment="Right" VerticalAlignment="Center"
                     Margin="0,0,0,0" Width="70" Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" />
                     <DataGrid CanUserAddRows="False" x:Name="DataGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Right"
-                  d:DataContext="{d:DesignInstance biliDmLib:GiftRank}">
+                  d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:GiftRank}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
                             <DataGridTextColumn Binding="{Binding coin}" ClipboardContentBinding="{Binding coin}" Header="本月投喂瓜子" SortDirection="Descending"/>
