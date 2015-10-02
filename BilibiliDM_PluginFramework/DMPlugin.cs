@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows;
 using JetBrains.Annotations;
 
 namespace BilibiliDM_PluginFramework
@@ -20,22 +22,125 @@ namespace BilibiliDM_PluginFramework
 
          public  void MainConnected(int roomid)
          {
-             Connected?.Invoke(null,new ConnectedEvtArgs() {roomid = roomid} );
+            try
+            {
+                Connected?.Invoke(null, new ConnectedEvtArgs() { roomid = roomid });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "插件" + PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + PluginAuth + ", 聯繫方式 " + PluginCont);
+                try
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
+                    {
+                        outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.Write(ex.ToString());
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            
          }
 
         public void MainReceivedDanMaku(ReceivedDanmakuArgs e)
         {
-            ReceivedDanmaku?.Invoke(null,e);
+            try
+            {
+                ReceivedDanmaku?.Invoke(null, e);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(
+                    "插件" + PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + PluginAuth + ", 聯繫方式 " + PluginCont);
+                try
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
+                    {
+                        outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.Write(ex.ToString());
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            
         }
 
         public void MainReceivedRoomCount(ReceivedRoomCountArgs e)
         {
-            ReceivedRoomCount?.Invoke(null,e);
+            try
+            {
+                ReceivedRoomCount?.Invoke(null, e);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(
+                    "插件" + PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + PluginAuth + ", 聯繫方式 " + PluginCont);
+                try
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
+                    {
+                        outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.Write(ex.ToString());
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+           
         }
 
         public void MainDisconnected()
         {
-            Disconnected?.Invoke(null,null);
+            try
+            {
+                Disconnected?.Invoke(null, null);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(
+                    "插件" + PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + PluginAuth + ", 聯繫方式 " + PluginCont);
+                try
+                {
+                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
+                    {
+                        outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.Write(ex.ToString());
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+           
         }
 
         /// <summary>

@@ -20,22 +20,22 @@ namespace DMPluginTest
 
         private void Class1_ReceivedRoomCount(object sender, BilibiliDM_PluginFramework.ReceivedRoomCountArgs e)
         {
-            Console.WriteLine(e.UserCount+"");
+           throw new NotImplementedException();
         }
 
         private void Class1_ReceivedDanmaku(object sender, BilibiliDM_PluginFramework.ReceivedDanmakuArgs e)
         {
-            Console.WriteLine(e+"");
+            throw new NotImplementedException();
         }
 
         private void Class1_Disconnected(object sender, BilibiliDM_PluginFramework.DisconnectEvtArgs e)
         {
-            Console.WriteLine(e + "");
+            throw new NotImplementedException();
         }
 
         private void Class1_Connected(object sender, BilibiliDM_PluginFramework.ConnectedEvtArgs e)
         {
-            Console.WriteLine(e + "");
+            throw new NotImplementedException();
         }
     }
 }
