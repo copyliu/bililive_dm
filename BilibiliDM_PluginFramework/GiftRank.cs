@@ -9,7 +9,9 @@ namespace BilibiliDM_PluginFramework
         private string _userName;
         private decimal _coin;
         private int _uid;
-
+        /// <summary>
+        /// 用戶名
+        /// </summary>
         public string UserName
         {
             get { return _userName; }
@@ -20,7 +22,9 @@ namespace BilibiliDM_PluginFramework
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// 花銷
+        /// </summary>
         public decimal coin
         {
             get { return _coin; }
@@ -31,7 +35,9 @@ namespace BilibiliDM_PluginFramework
                 OnPropertyChanged();
             }
         }
-
+        /// <summary>
+        /// UID
+        /// </summary>
         public int uid
         {
             get { return _uid; }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DMPluginTest
 {
-    public class Class1:BilibiliDM_PluginFramework.DMPlugin
+    public class Class1 : BilibiliDM_PluginFramework.DMPlugin
     {
         public Class1()
         {
@@ -14,13 +14,16 @@ namespace DMPluginTest
             this.Disconnected += Class1_Disconnected;
             this.ReceivedDanmaku += Class1_ReceivedDanmaku;
             this.ReceivedRoomCount += Class1_ReceivedRoomCount;
-
+            this.PluginAuth = "示例作者";
+            this.PluginName = "示例插件";
+            this.PluginCont = "example@example.com";
+            this.PluginVer = "v0.0.1";
         }
 
 
         private void Class1_ReceivedRoomCount(object sender, BilibiliDM_PluginFramework.ReceivedRoomCountArgs e)
         {
-           throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void Class1_ReceivedDanmaku(object sender, BilibiliDM_PluginFramework.ReceivedDanmakuArgs e)
@@ -36,6 +39,26 @@ namespace DMPluginTest
         private void Class1_Connected(object sender, BilibiliDM_PluginFramework.ConnectedEvtArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        public override void Admin()
+        {
+            base.Admin();
+            Console.WriteLine("Hello World");
+        }
+
+        public override void Stop()
+        {
+            base.Stop();
+            //請勿使用任何阻塞方法
+            Console.WriteLine("Plugin Stoped!");
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            //請勿使用任何阻塞方法
+            Console.WriteLine("Plugin Started!");
         }
     }
 }

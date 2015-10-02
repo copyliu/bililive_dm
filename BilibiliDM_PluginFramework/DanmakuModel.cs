@@ -8,22 +8,65 @@ namespace BilibiliDM_PluginFramework
 {
     public enum MsgTypeEnum
     {
-        Comment,GiftSend,GiftTop,Welcome
+        /// <summary>
+        /// 彈幕
+        /// </summary>
+        Comment,
+        /// <summary>
+        /// 禮物
+        /// </summary>
+        GiftSend,
+        /// <summary>
+        /// 禮物排名
+        /// </summary>
+        GiftTop,
+        /// <summary>
+        /// 歡迎
+        /// </summary>
+        Welcome
     }
 
     public class DanmakuModel
     {
+        /// <summary>
+        /// 彈幕內容
+        /// </summary>
         public string CommentText { get; set; }
+        /// <summary>
+        /// 彈幕用戶
+        /// </summary>
         public string CommentUser { get; set; }
-
+        /// <summary>
+        /// 消息類型
+        /// </summary>
         public MsgTypeEnum MsgType { get; set; }
-
+        /// <summary>
+        /// 禮物用戶
+        /// </summary>
         public string GiftUser { get; set; }
+        /// <summary>
+        /// 禮物名稱
+        /// </summary>
         public string GiftName { get; set; }
+        /// <summary>
+        /// 禮物數量
+        /// </summary>
         public string GiftNum { get; set; }
+        /// <summary>
+        /// 禮物花銷
+        /// </summary>
         public string Giftrcost { get; set; }
+        /// <summary>
+        /// 禮物排行
+        /// </summary>
         public List<GiftRank> GiftRanking { get; set; }
+        /// <summary>
+        /// 該用戶是否為管理員
+        /// </summary>
         public bool isAdmin { get; set; }
+        /// <summary>
+        /// 是否VIP用戶(老爺)
+        /// </summary>
         public bool isVIP { get; set; }
         public DanmakuModel()
         {
