@@ -22,6 +22,7 @@ namespace BilibiliDM_PluginFramework
 
          public  void MainConnected(int roomid)
          {
+             this.RoomID = roomid;
             try
             {
                 Connected?.Invoke(null, new ConnectedEvtArgs() { roomid = roomid });
@@ -114,6 +115,7 @@ namespace BilibiliDM_PluginFramework
 
         public void MainDisconnected()
         {
+            this.RoomID = null;
             try
             {
                 Disconnected?.Invoke(null, null);
@@ -176,7 +178,12 @@ namespace BilibiliDM_PluginFramework
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// 當前連接中的房間
+        /// </summary>
+        public int? RoomId => RoomID;
 
+        private int? RoomID;
 
         public DMPlugin()
         {
