@@ -60,24 +60,27 @@
                 <bililiveDm:OptionDialog x:Name="OptionDialog"></bililiveDm:OptionDialog>
             </TabItem>
             <TabItem Header="插件">
-                <DataGrid CanUserAddRows="False" x:Name="PluginGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Right" SelectionMode="Single" SelectionUnit="FullRow"
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="插件目录: 我的文档\弹幕姬\Plugins"></TextBlock>
+                    <DataGrid CanUserAddRows="False" x:Name="PluginGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Top" SelectionMode="Single" SelectionUnit="FullRow"
                   d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="插件名称"/>
-                        <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
-                        <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="插件作者"/>
-                        <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource converter}}" Header="插件狀態"/>
-                        <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
-                    </DataGrid.Columns>
-                    <DataGrid.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="啟用插件" Click="Plugin_Enable"/>
-                            <MenuItem Header="停用插件" Click="Plugin_Disable"/>
-                            <MenuItem Header="管理" Click="Plugin_admin"/>
-                            
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
-                </DataGrid>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="插件名称"/>
+                            <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
+                            <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="插件作者"/>
+                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource converter}}" Header="插件狀態"/>
+                            <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
+                        </DataGrid.Columns>
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="啟用插件" Click="Plugin_Enable"/>
+                                <MenuItem Header="停用插件" Click="Plugin_Disable"/>
+                                <MenuItem Header="管理" Click="Plugin_admin"/>
+
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+                    </DataGrid>
+                </DockPanel>
             </TabItem>
             <TabItem Header="说明">
                 <WebBrowser x:Name="web" Source="http://soft.ceve-market.org/bilibili_dm/app.htm" />
