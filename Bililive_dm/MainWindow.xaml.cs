@@ -510,6 +510,7 @@ namespace Bililive_dm
             var contextMenu = (ContextMenu)menuItem.Parent;
 
             var item = (DataGrid)contextMenu.PlacementTarget;
+            if (item.SelectedCells.Count == 0) return;
             var plugin = item.SelectedCells[0].Item as DMPlugin;
             if (plugin == null) return;
 
@@ -546,6 +547,7 @@ namespace Bililive_dm
             var contextMenu = (ContextMenu)menuItem.Parent;
 
             var item = (DataGrid)contextMenu.PlacementTarget;
+            if (item.SelectedCells.Count == 0) return;
             var plugin = item.SelectedCells[0].Item as DMPlugin;
             if (plugin == null) return;
 
@@ -583,6 +585,7 @@ namespace Bililive_dm
             var contextMenu = (ContextMenu)menuItem.Parent;
 
             var item = (DataGrid)contextMenu.PlacementTarget;
+            if (item.SelectedCells.Count == 0) return;
             var plugin = item.SelectedCells[0].Item as DMPlugin;
             if (plugin == null) return;
 
