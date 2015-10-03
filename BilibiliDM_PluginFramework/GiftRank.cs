@@ -19,7 +19,7 @@ namespace BilibiliDM_PluginFramework
             {
                 if (value == _userName) return;
                 _userName = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(UserName));
             }
         }
         /// <summary>
@@ -32,7 +32,7 @@ namespace BilibiliDM_PluginFramework
             {
                 if (value == _coin) return;
                 _coin = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(coin));
             }
         }
         /// <summary>
@@ -45,7 +45,7 @@ namespace BilibiliDM_PluginFramework
             {
                 if (value == _uid) return;
                 _uid = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(uid));
             }
         }
 
@@ -53,7 +53,7 @@ namespace BilibiliDM_PluginFramework
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

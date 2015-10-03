@@ -175,7 +175,7 @@ namespace BilibiliDM_PluginFramework
             {
                 if (value == _status) return;
                 _status = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Status));
             }
         }
         /// <summary>
@@ -214,10 +214,11 @@ namespace BilibiliDM_PluginFramework
             
         }
 
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
