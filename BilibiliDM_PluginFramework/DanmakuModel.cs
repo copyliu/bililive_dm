@@ -71,7 +71,6 @@ namespace BilibiliDM_PluginFramework
         public DanmakuModel()
         {
         }
-
         public DanmakuModel(string JSON, int version = 1)
         {
 

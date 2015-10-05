@@ -23,28 +23,30 @@ namespace DMPluginTest
 
         private void Class1_ReceivedRoomCount(object sender, BilibiliDM_PluginFramework.ReceivedRoomCountArgs e)
         {
-            throw new NotImplementedException();
+           
         }
 
         private void Class1_ReceivedDanmaku(object sender, BilibiliDM_PluginFramework.ReceivedDanmakuArgs e)
         {
-            throw new NotImplementedException();
+           this.Log("BBB");
+            this.AddDM("bbb",true);
         }
 
         private void Class1_Disconnected(object sender, BilibiliDM_PluginFramework.DisconnectEvtArgs e)
         {
-            throw new NotImplementedException();
+//            throw new NotImplementedException();
         }
 
         private void Class1_Connected(object sender, BilibiliDM_PluginFramework.ConnectedEvtArgs e)
         {
-            throw new NotImplementedException();
+//            throw new NotImplementedException();
         }
 
         public override void Admin()
         {
             base.Admin();
             Console.WriteLine("Hello World");
+            this.Log("BBB");
         }
 
         public override void Stop()
@@ -52,6 +54,7 @@ namespace DMPluginTest
             base.Stop();
             //請勿使用任何阻塞方法
             Console.WriteLine("Plugin Stoped!");
+            this.Log("BBB");
         }
 
         public override void Start()
@@ -59,6 +62,7 @@ namespace DMPluginTest
             base.Start();
             //請勿使用任何阻塞方法
             Console.WriteLine("Plugin Started!");
+            this.Log("BBB");
         }
     }
 }

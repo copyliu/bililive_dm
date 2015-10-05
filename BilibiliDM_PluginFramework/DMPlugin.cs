@@ -6,13 +6,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
+using System.Windows.Threading;
 using JetBrains.Annotations;
 
 namespace BilibiliDM_PluginFramework
 {
 
    
-    public  class DMPlugin:INotifyPropertyChanged
+    public  class DMPlugin: DispatcherObject,INotifyPropertyChanged
     {
         private bool _status = false;
         public event ReceivedDanmakuEvt ReceivedDanmaku;
@@ -214,6 +215,36 @@ namespace BilibiliDM_PluginFramework
             
         }
 
+        /// <summary>
+        /// 打日志
+        /// </summary>
+        /// <param name="text"></param>
+        public void Log(string text)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                dynamic mw = Application.Current.MainWindow;
+                mw.logging(this.PluginName + " " + text);
+
+            }));
+            
+        }
+        /// <summary>
+        /// 打彈幕
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="fullscreen"></param>
+        public void AddDM(string text, bool fullscreen = false)
+        {
+
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                dynamic mw = Application.Current.MainWindow;
+                mw.AddDMText(this.PluginName, text, true, fullscreen);
+
+            }));
+           
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

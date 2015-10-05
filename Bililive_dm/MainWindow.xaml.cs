@@ -645,6 +645,7 @@ namespace Bililive_dm
                         if (exportedType.BaseType == typeof (DMPlugin))
                         {
                            var plugin= (DMPlugin)Activator.CreateInstance(exportedType);
+                            
                             Plugins.Add(plugin);
                         }
                     }
