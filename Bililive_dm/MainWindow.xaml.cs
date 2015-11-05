@@ -591,7 +591,7 @@ namespace Bililive_dm
 
             try
             {
-                if (plugin.Status) plugin.Admin();
+                 plugin.Admin();
             }
             catch (Exception ex)
             {
