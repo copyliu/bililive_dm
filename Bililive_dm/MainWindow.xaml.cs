@@ -53,6 +53,7 @@ namespace Bililive_dm
         {
             InitializeComponent();
             InitPlugins();
+            this.Closed += MainWindow_Closed;
             web.Source=new Uri("http://soft.ceve-market.org/bilibili_dm/app.htm?"+DateTime.Now.Ticks); //fuck you IE cache
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
@@ -92,6 +93,39 @@ namespace Bililive_dm
 //                logging("投喂记录不会在弹幕模式上出现, 这不是bug");
 //            }
             PluginGrid.ItemsSource = Plugins;
+        }
+
+        private void MainWindow_Closed  (object sender, EventArgs e)
+        {
+            foreach (var dmPlugin in Plugins)
+            {
+                try
+                {
+                    dmPlugin.DeInit();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                    "插件" + dmPlugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + dmPlugin.PluginAuth + ", 聯繫方式 " + dmPlugin.PluginCont);
+                    try
+                    {
+                        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                        using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + dmPlugin.PluginName + "錯誤報告.txt"))
+                        {
+                            outfile.WriteLine("請有空發給聯繫方式 " + dmPlugin.PluginCont + " 謝謝");
+                            outfile.Write(ex.ToString());
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+                
+            }
         }
 
         ~MainWindow()

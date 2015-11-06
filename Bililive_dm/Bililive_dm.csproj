@@ -33,10 +33,10 @@
     <ProductName>B站彈幕姬</ProductName>
     <PublisherName>CopyLiu</PublisherName>
     <SuiteName>BiliBili_DM</SuiteName>
-    <MinimumRequiredVersion>1.0.1.49</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.1.72</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>72</ApplicationRevision>
+    <ApplicationRevision>75</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -84,6 +84,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestTimestampUrl>http://timestamp.wosign.com/timestamp</ManifestTimestampUrl>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -316,7 +319,11 @@
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign /tr http://www.startssl.com/timestamp /n JianShen $(ProjectDir)Win32\*.dll $(ProjectDir)x64\*.dll</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign  /t http://timestamp.wosign.com/timestamp /n JianShen $(ProjectDir)Win32\*.dll $(ProjectDir)x64\*.dll</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

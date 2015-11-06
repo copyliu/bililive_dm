@@ -214,7 +214,13 @@ namespace BilibiliDM_PluginFramework
         {
             
         }
-
+        /// <summary>
+        /// 反初始化方法, 在弹幕姬主程序退出时调用, 若有需要请重写,
+        /// </summary>
+        public virtual void DeInit()
+        {
+            
+        }
         /// <summary>
         /// 打日志
         /// </summary>
