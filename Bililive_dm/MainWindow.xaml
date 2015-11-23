@@ -29,13 +29,14 @@
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="当前房间人数: " VerticalAlignment="Center" />
             <TextBlock x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
                        VerticalAlignment="Center" />
-            <CheckBox x:Name="SideBar" Content="侧边栏模式" IsChecked="True" Checked="SideBar_Checked"
+            <CheckBox x:Name="SideBar" Content="侧边栏" IsChecked="True" Checked="SideBar_Checked"
                       VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
-            <CheckBox x:Name="Full" Content="弹幕模式" Checked="Full_Checked" VerticalAlignment="Center"
+            <CheckBox x:Name="Full" Content="弹幕" Checked="Full_Checked" VerticalAlignment="Center"
                       Unchecked="Full_Unchecked" />
-            <CheckBox Content="断线自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
-            <CheckBox Content="保存日志到我的文档" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True"/>
-            <CheckBox Content="道具和老爷提示" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True"/>
+            <CheckBox Content="自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
+            <CheckBox Content="保存到我的文档" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True"/>
+            <CheckBox Content="道具和老爷" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True"/>
+            <CheckBox Content="窗口置顶" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
         </StackPanel>
         
         <TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>

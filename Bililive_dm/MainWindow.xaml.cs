@@ -691,5 +691,10 @@ namespace Bililive_dm
             }
             
         }
+
+        private void WindowTop_OnChecked(object sender, RoutedEventArgs e)
+        {
+            Topmost = WindowTop.IsChecked==true;
+        }
     }
 }

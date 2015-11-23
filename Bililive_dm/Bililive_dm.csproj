@@ -62,6 +62,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign  /t http://timestamp.wosign.com/timestamp /n JianShen $(ProjectDir)Win32\*.dll $(ProjectDir)x64\*.dll</PreBuildEvent>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>B155E3606D4369433598F64C2FCDD963FAFB914C</ManifestCertificateThumbprint>
@@ -74,7 +76,6 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>ico.ico</ApplicationIcon>
@@ -321,9 +322,6 @@
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign  /t http://timestamp.wosign.com/timestamp /n JianShen $(ProjectDir)Win32\*.dll $(ProjectDir)x64\*.dll</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
