@@ -52,6 +52,27 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
+            DateTime dt = new DateTime(2000, 1, 1);
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            String version = assembly.FullName.Split(',')[1];
+
+            String fullversion = version.Split('=')[1];
+            int dates = int.Parse(fullversion.Split('.')[2]);
+
+            int seconds = int.Parse(fullversion.Split('.')[3]);
+            dt = dt.AddDays(dates);
+            dt = dt.AddSeconds(seconds * 2);
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                this.Title += "   版本号: " +
+                System.Deployment.Application.ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString();
+            }
+            else
+            {
+                this.Title += "   *傻逼版本*";
+            }
+            this.Title += "   编译时间: " + dt.ToString();
+
             InitPlugins();
             this.Closed += MainWindow_Closed;
             web.Source=new Uri("http://soft.ceve-market.org/bilibili_dm/app.htm?"+DateTime.Now.Ticks); //fuck you IE cache
