@@ -154,18 +154,21 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 插件作者
         /// </summary>
-        public string PluginAuth { get; set; } = "CopyLiu";
+        public string PluginAuth { get; set; } = "這是作者";
 
         /// <summary>
         /// 插件作者聯繫方式
         /// </summary>
-        public string PluginCont { get; set; } = "copyliu@gmail.com";
+        public string PluginCont { get; set; } = "這是聯繫方式";
 
         /// <summary>
         /// 插件版本號
         /// </summary>
-        public string PluginVer { get; set; } = "0.0.1";
-
+        public string PluginVer { get; set; } = "這是版本號";
+        /// <summary>
+        /// 插件描述
+        /// </summary>
+        public string PlubinDesc { get; set; } = "描述還沒填";
         /// <summary>
         /// 插件狀態
         /// </summary>

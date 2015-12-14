@@ -67,7 +67,7 @@
                   d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="插件名称"/>
-                            <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
+                            <DataGridTextColumn Binding="{Binding PlubinDesc}" ClipboardContentBinding="{Binding PluginVer}" Header="插件描述"/>
                             <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="插件作者"/>
                             <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource converter}}" Header="插件狀態"/>
                             <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>

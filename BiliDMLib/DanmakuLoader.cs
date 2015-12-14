@@ -106,6 +106,7 @@ namespace BiliDMLib
                             NetStream.Read(stableBuffer, 0, 4);
                             var viewer = BitConverter.ToInt32(stableBuffer, 0);
                             viewer = IPAddress.NetworkToHostOrder(viewer); //Ó^±ŠÈË”µ
+                            Console.WriteLine(viewer);
                             if (ReceivedRoomCount != null)
                             {
                                 ReceivedRoomCount(this, new ReceivedRoomCountArgs() {UserCount = viewer});

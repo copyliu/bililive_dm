@@ -33,10 +33,10 @@
     <ProductName>B站彈幕姬</ProductName>
     <PublisherName>CopyLiu</PublisherName>
     <SuiteName>BiliBili_DM</SuiteName>
-    <MinimumRequiredVersion>1.0.1.77</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.1.80</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>78</ApplicationRevision>
+    <ApplicationRevision>83</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -62,7 +62,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign  /t http://timestamp.wosign.com/timestamp /n JianShen $(ProjectDir)Win32\*.dll $(ProjectDir)x64\*.dll</PreBuildEvent>
+    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign  /t http://timestamp.wosign.com/timestamp /n JianShen $(MSBuildProjectDirectory)\Win32\*.dll $(MSBuildProjectDirectory)\x64\*.dll</PreBuildEvent>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
@@ -143,6 +143,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FuckMePlugin.cs" />
     <Compile Include="IDanmakuWindow.cs" />
     <Compile Include="OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>

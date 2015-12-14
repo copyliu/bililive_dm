@@ -673,6 +673,7 @@ namespace Bililive_dm
         ObservableCollection<DMPlugin> Plugins=new ObservableCollection<DMPlugin>();
         void InitPlugins()
         {
+//            Plugins.Add(new FuckMePlugin());
             string path = "";
             try
             {
