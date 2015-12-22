@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -104,8 +105,9 @@ namespace BiliDMLib
                     {
                         case 1:
                             NetStream.Read(stableBuffer, 0, 4);
-                            var viewer = BitConverter.ToInt32(stableBuffer, 0);
-                            viewer = IPAddress.NetworkToHostOrder(viewer); //Ó^±ŠÈË”µ
+                            byte[] b=new byte[4];
+                            
+                            var viewer =  BitConverter.ToUInt32(stableBuffer.Take(4).Reverse().ToArray(),0); //Ó^±ŠÈË”µ
                             Console.WriteLine(viewer);
                             if (ReceivedRoomCount != null)
                             {

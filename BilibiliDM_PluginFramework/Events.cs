@@ -13,7 +13,7 @@ namespace BilibiliDM_PluginFramework
 
     public class ReceivedRoomCountArgs
     {
-        public int UserCount;
+        public uint UserCount;
     }
 
     public class DisconnectEvtArgs

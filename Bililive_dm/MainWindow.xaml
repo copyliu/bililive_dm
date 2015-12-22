@@ -6,8 +6,8 @@
         xmlns:biliDmLib="clr-namespace:BiliDMLib;assembly=BiliDMLib"
         xmlns:bililiveDm="clr-namespace:Bililive_dm"
         xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
-        mc:Ignorable="d" 
-        Title="B站彈幕姬" Height="367" Width="619">
+        mc:Ignorable="d"
+        Title="B站彈幕姬" Height="362" Width="601">
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="converter"></bililiveDm:PluginStatusConverter>
     </Window.Resources>
@@ -38,7 +38,7 @@
             <CheckBox Content="道具和老爷" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True"/>
             <CheckBox Content="窗口置顶" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
         </StackPanel>
-        
+
         <TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
 
         <TabControl x:Name="tabControl">
@@ -46,7 +46,7 @@
                 <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />
             </TabItem>
-           
+
             <TabItem Header="投喂榜">
                 <DataGrid CanUserAddRows="False" x:Name="DataGrid2"  IsReadOnly="True" AutoGenerateColumns="False"
                   d:DataContext="{d:DesignInstance bililiveDm:SessionItem}">
@@ -58,7 +58,10 @@
                 </DataGrid>
             </TabItem>
             <TabItem Header="设置">
-                <bililiveDm:OptionDialog x:Name="OptionDialog"></bililiveDm:OptionDialog>
+                <Grid>
+                    <bililiveDm:OptionDialog x:Name="OptionDialog"/>
+                    <CheckBox Content="伪春菜联动" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="True" Panel.ZIndex="-1" Margin="0,500,0,0"/>
+                </Grid>
             </TabItem>
             <TabItem Header="插件">
                 <DockPanel>
@@ -85,7 +88,7 @@
             </TabItem>
             <TabItem Header="说明">
                 <WebBrowser x:Name="web" Source="http://soft.ceve-market.org/bilibili_dm/app.htm" />
-              
+
             </TabItem>
             <TabItem Header="瓜子月榜" Visibility="Collapsed">
                 <DockPanel>
@@ -98,9 +101,9 @@
                             <DataGridTextColumn Binding="{Binding coin}" ClipboardContentBinding="{Binding coin}" Header="本月投喂瓜子" SortDirection="Descending"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                   
+
                 </DockPanel>
-                
+
             </TabItem>
         </TabControl>
 

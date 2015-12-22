@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -242,6 +243,7 @@ namespace Bililive_dm
                 {
                     logging("連接成功");
                     AddDMText("彈幕姬報告", "連接成功", true);
+                    SendSSP("連接成功");
                     Ranking.Clear();
                     this.connbtn.IsEnabled = false;
                     foreach (var dmPlugin in Plugins)
@@ -252,6 +254,7 @@ namespace Bililive_dm
                 else
                 {
                     logging("連接失敗");
+                    SendSSP("連接失敗");
                     AddDMText("彈幕姬報告", "連接失敗", true);
                 }
             }
@@ -269,16 +272,24 @@ namespace Bililive_dm
             if (this.CheckAccess())
             {
                 OnlineBlock.Text = e.UserCount + "";
+                
+                
             }
             else
             {
-                this.Dispatcher.BeginInvoke(new Action(() => OnlineBlock.Text = e.UserCount + ""));
+                this.Dispatcher.BeginInvoke(new Action(() =>
+                {
+                    OnlineBlock.Text = e.UserCount + "";
+                   
+                }));
             }
             foreach (var dmPlugin in Plugins)
             {
                 if (dmPlugin.Status)
                 new Thread(() => dmPlugin.MainReceivedRoomCount(e)).Start();
             }
+
+            SendSSP("当前房间人数:" + e.UserCount);
         }
 
         private ObservableCollection<GiftRank> Ranking = new ObservableCollection<GiftRank>();
@@ -296,6 +307,10 @@ namespace Bililive_dm
                     logging("收到彈幕:" + (e.Danmaku.isAdmin?"[管]":"")+ (e.Danmaku.isVIP ? "[爷]" : "") +e.Danmaku.CommentUser + " 說: " + e.Danmaku.CommentText);
 
                     AddDMText((e.Danmaku.isAdmin ? "[管]" : "") + (e.Danmaku.isVIP ? "[爷]" : "") + e.Danmaku.CommentUser, e.Danmaku.CommentText);
+                    SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
+                        (e.Danmaku.isAdmin ? "[管]" : "") + (e.Danmaku.isVIP ? "[爷]" : "") + e.Danmaku.CommentUser,
+                        e.Danmaku.CommentText));
+                    
                     break;
                 case MsgTypeEnum.GiftTop:
                     foreach (var giftRank in e.Danmaku.GiftRanking)
@@ -372,6 +387,24 @@ namespace Bililive_dm
 
         }
 
+        private void SendSSP(string msg)
+        {
+            if (SSTP.Dispatcher.CheckAccess())
+            {
+
+                if (SSTP.IsChecked == true)
+                {
+                    SSTPProtocol.SendSSPMsg(msg);
+                }
+
+            }
+            else
+            {
+                SSTP.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => SendSSP(msg)));
+            }
+            
+        }
+
         private void b_Disconnected(object sender, DisconnectEvtArgs args)
         {
             foreach (var dmPlugin in Plugins)
@@ -380,7 +413,7 @@ namespace Bililive_dm
             }
             logging("連接被斷開: 开发者信息" + args.Error);
             AddDMText("彈幕姬報告", "連接被斷開", true);
-
+            SendSSP("連接被斷開");
             if (this.CheckAccess())
             {
                 if (AutoReconnect.IsChecked == true && args.Error != null)
@@ -509,6 +542,7 @@ namespace Bililive_dm
             else{
             AddDMText("彈幕姬報告", "這是一個測試", false);
             }
+            SendSSP("彈幕姬測試");
 //            logging(DateTime.Now.Ticks+"");
         }
 

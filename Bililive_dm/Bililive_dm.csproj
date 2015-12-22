@@ -33,10 +33,10 @@
     <ProductName>B站彈幕姬</ProductName>
     <PublisherName>CopyLiu</PublisherName>
     <SuiteName>BiliBili_DM</SuiteName>
-    <MinimumRequiredVersion>1.0.1.80</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.1.85</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>83</ApplicationRevision>
+    <ApplicationRevision>86</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -151,6 +151,7 @@
     <Compile Include="PluginStatusConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SessionItem.cs" />
+    <Compile Include="SSTPProtocol.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="StoreModel.cs" />
     <Compile Include="WtfDanmakuWindow.cs">

@@ -254,7 +254,20 @@ namespace BilibiliDM_PluginFramework
             }));
            
         }
+        /// <summary>
+        /// 发送伪春菜脚本, 前提是用户有打开伪春菜并允许弹幕姬和伪春菜联动(默认允许)
+        /// </summary>
+        /// <param name="text">Sakura Script脚本</param>
+        public void SendSSPMsg(string text)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                dynamic mw = Application.Current.MainWindow;
+                mw.SendSSP(text);
 
+            }));
+            
+        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
