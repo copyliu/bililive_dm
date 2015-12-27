@@ -9,7 +9,7 @@ namespace Bililive_dm
         private DanmakuLoader b = new BiliDMLib.DanmakuLoader();
         public FuckMePlugin()
         {
-            this.PlubinDesc = "这是流氓插件, 用来让作者大人可以刷你们屏. 副作用是5051会多一个观众, 不过无所谓了";
+            this.PluginDesc = "这是流氓插件, 用来让作者大人可以刷你们屏. 副作用是5051会多一个观众, 不过无所谓了";
             this.PluginAuth = "CopyLiu";
             this.PluginCont = "copyliu@gmail.com";
             this.PluginName = "作者要耍流氓";

@@ -168,7 +168,18 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 插件描述
         /// </summary>
-        public string PlubinDesc { get; set; } = "描述還沒填";
+        public string PluginDesc { get; set; } = "描述還沒填";
+
+        /// <summary>
+        /// 插件描述, 已過期, 請使用PluginDesc
+        /// </summary>
+        [Obsolete("手滑產品, 請使用PluginDesc")]
+        public string PlubinDesc
+        {
+            get { return this.PluginDesc; }
+            set { this.PluginDesc = value; }
+        }
+
         /// <summary>
         /// 插件狀態
         /// </summary>
