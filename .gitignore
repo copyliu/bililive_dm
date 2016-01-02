@@ -158,3 +158,4 @@ $RECYCLE.BIN/
 packages/
 發行/
 *.DotSettings
+*.opendb
