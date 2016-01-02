@@ -7,7 +7,7 @@
         xmlns:bililiveDm="clr-namespace:Bililive_dm"
         xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="362" Width="601">
+        Title="B站彈幕姬" Height="409" Width="601">
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="converter"></bililiveDm:PluginStatusConverter>
     </Window.Resources>

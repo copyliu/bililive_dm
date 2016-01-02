@@ -619,6 +619,7 @@ namespace Bililive_dm
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
 
@@ -656,6 +657,7 @@ namespace Bililive_dm
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(plugin.PluginName+" "+plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
 
@@ -694,6 +696,7 @@ namespace Bililive_dm
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
 

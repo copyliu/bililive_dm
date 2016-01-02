@@ -40,6 +40,7 @@ namespace BilibiliDM_PluginFramework
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.WriteLine(PluginName + " " + PluginVer);
                         outfile.Write(ex.ToString());
                     }
 
@@ -71,6 +72,7 @@ namespace BilibiliDM_PluginFramework
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.WriteLine(PluginName + " " + PluginVer);
                         outfile.Write(ex.ToString());
                     }
 
@@ -102,6 +104,7 @@ namespace BilibiliDM_PluginFramework
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.WriteLine(PluginName + " " + PluginVer);
                         outfile.Write(ex.ToString());
                     }
 
@@ -134,6 +137,7 @@ namespace BilibiliDM_PluginFramework
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.WriteLine(PluginName + " " + PluginVer);
                         outfile.Write(ex.ToString());
                     }
 
