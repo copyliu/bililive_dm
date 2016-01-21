@@ -4,11 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using BilibiliDM_PluginFramework;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace BiliDMLib
@@ -16,7 +18,7 @@ namespace BiliDMLib
     public class DanmakuLoader
     {
         private string ChatHost = "chat.bilibili.com";
-        private int ChatPort = 88;
+        private int ChatPort = 788;
         private TcpClient Client;
         private NetworkStream NetStream;
 //        private string RoomInfoUrl = "http://live.bilibili.com/sch_list/";
@@ -27,6 +29,7 @@ namespace BiliDMLib
         public event DisconnectEvt Disconnected;
         public event ReceivedRoomCountEvt ReceivedRoomCount;
         private bool debuglog = true;
+        private short protocolversion = 1;
         public async Task<bool> ConnectAsync(int roomId)
         {
             try
@@ -97,111 +100,99 @@ namespace BiliDMLib
 
                 while (this.Connected)
                 {
-                    NetStream.Read(stableBuffer, 0, 2);
-                    var typeId = BitConverter.ToInt16(stableBuffer, 0);
+
+                    NetStream.Read(stableBuffer, 0, 4);
+                    var packetlength = BitConverter.ToInt32(stableBuffer, 0);
+                    packetlength= IPAddress.NetworkToHostOrder(packetlength) ;
+
+                    if (packetlength < 16)
+                    {
+                        throw new NotSupportedException("协议失败");
+                    }
+
+                    NetStream.Read(stableBuffer, 0, 2);//magic
+                    NetStream.Read(stableBuffer, 0, 2);//protocol_version 
+
+                    NetStream.Read(stableBuffer, 0, 4);
+                    var typeId = BitConverter.ToInt32(stableBuffer, 0);
                     typeId = IPAddress.NetworkToHostOrder(typeId);
+
                     Console.WriteLine(typeId);
+                    NetStream.Read(stableBuffer, 0, 4);//magic, params?
+                    var playloadlength = packetlength - 16;
+                    if (playloadlength == 0)
+                    {
+                        continue;//没有内容了
+                        
+                    }
+                    typeId = typeId - 1;//和反编译的代码对应 妈个鸡为毛你要减一
                     switch (typeId)
                     {
+                        case 0:
                         case 1:
-                            NetStream.Read(stableBuffer, 0, 4);
-                            byte[] b=new byte[4];
-                            
-                            var viewer =  BitConverter.ToUInt32(stableBuffer.Take(4).Reverse().ToArray(),0); //觀眾人數
-                            Console.WriteLine(viewer);
-                            if (ReceivedRoomCount != null)
-                            {
-                                ReceivedRoomCount(this, new ReceivedRoomCountArgs() {UserCount = viewer});
-                            }
-
-                            break;
-                        case 2: //newCommentString
+                        case 2:
                         {
-                            NetStream.Read(stableBuffer, 0, 2);
-                            var packetlength = BitConverter.ToInt16(stableBuffer, 0);
-                            packetlength = (short) (IPAddress.NetworkToHostOrder(packetlength) - 4);
+                                NetStream.Read(stableBuffer, 0, 4);
 
-                            var buffer = new byte[packetlength];
-
-                            NetStream.Read(buffer, 0, packetlength);
-                            var json = Encoding.UTF8.GetString(buffer, 0, packetlength);
-                                if (debuglog)
+                                var viewer = BitConverter.ToUInt32(stableBuffer.Take(4).Reverse().ToArray(), 0); //观众人数
+                                Console.WriteLine(viewer);
+                                if (ReceivedRoomCount != null)
                                 {
-                                    Console.WriteLine(json);
-
+                                    ReceivedRoomCount(this, new ReceivedRoomCountArgs() { UserCount = viewer });
                                 }
-
-                                DanmakuModel dama = new DanmakuModel(json);
-                            
-                            
-                            if (ReceivedDanmaku != null)
+                            break;
+                        }
+                        case 3:
+                        case 4://playerCommand
                             {
-                                ReceivedDanmaku(this, new ReceivedDanmakuArgs() {Danmaku = dama});
-                            }
+                                var buffer = new byte[playloadlength];
 
-                            break;
-                        }
-                        case 8: //x 条新的评论信息
-                        {
-                            NetStream.Read(stableBuffer, 0, 2);
-
-                            break;
-                        }
-                        case 17: //_playerDebug
-                        {
-                            //server updated
-                            break;
-                        }
-                        case 4: //playerCommand
-                        {
-                            NetStream.Read(stableBuffer, 0, 2);
-                            var packetlength = BitConverter.ToInt16(stableBuffer, 0);
-                            packetlength = (short) (IPAddress.NetworkToHostOrder(packetlength) - 4);
-
-                            var buffer = new byte[packetlength];
-
-                            NetStream.Read(buffer, 0, packetlength);
-                            var json = Encoding.UTF8.GetString(buffer, 0, packetlength);
+                                NetStream.Read(buffer, 0, playloadlength);
+                                var json = Encoding.UTF8.GetString(buffer, 0, playloadlength);
                                 if (debuglog)
                                 {
                                     Console.WriteLine(json);
 
                                 }
                                 try
-                            {
-                                DanmakuModel dama = new DanmakuModel(json, 2);
-                                if (ReceivedDanmaku != null)
                                 {
-                                    ReceivedDanmaku(this, new ReceivedDanmakuArgs() {Danmaku = dama});
+                                    DanmakuModel dama = new DanmakuModel(json, 2);
+                                    if (ReceivedDanmaku != null)
+                                    {
+                                        ReceivedDanmaku(this, new ReceivedDanmakuArgs() { Danmaku = dama });
+                                    }
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    // ignored
                                 }
 
+                                break;
                             }
-                            catch (Exception ex)
-                            {
-                                // ignored
-                            }
-
+                        case 5://newScrollMessage
+                        {
+                            var buffer = new byte[playloadlength];
+                            NetStream.Read(buffer, 0, playloadlength);
                             break;
                         }
-                        case 5: //playerBroadcast
-                        case 6: //newScrollMessage
+                        case 7:
+                        {
+                            var buffer = new byte[playloadlength];
+                            NetStream.Read(buffer, 0, playloadlength);
+                            break;
+                        }
+                        case 16:
+                        {
+                            break;
+                        }
                         default:
                         {
-                            NetStream.Read(stableBuffer, 0, 2);
-                            var packetlength = BitConverter.ToInt16(stableBuffer, 0);
-                            packetlength = (short) (IPAddress.NetworkToHostOrder(packetlength) - 4);
-
-                            var buffer = new byte[packetlength];
-
-                            NetStream.Read(buffer, 0, packetlength);
-
+                            var buffer = new byte[playloadlength];
+                            NetStream.Read(buffer, 0, playloadlength);
                             break;
                         }
-
-//                        
-//                            Disconnect();
-//                            this.Error = new Exception("收到非法包");
-//                            break;
+//                     
                     }
                 }
             }
@@ -275,32 +266,54 @@ namespace BiliDMLib
 
         private void SendHeartbeatAsync()
         {
-            var buffer = BitConverter.GetBytes(16908292).ToBE(); //0x01,0x02,0x00,0x04
-
-            NetStream.WriteAsync(buffer, 0, buffer.Length);
-            NetStream.FlushAsync();
+            SendSocketData(2);
             Debug.WriteLine("Message Sent: Heartbeat");
+        }
+
+        void SendSocketData(int action, string body = "")
+        {
+            SendSocketData(0, 16, protocolversion, action, 1, body);
+        }
+        void SendSocketData(int packetlength, short magic, short ver, int action, int param = 1, string body = "")
+        {
+            var playload = Encoding.UTF8.GetBytes(body);
+            if (packetlength == 0)
+            {
+                packetlength = playload.Length + 16;
+            }
+            var buffer = new byte[packetlength];
+            using (var ms = new MemoryStream(buffer))
+            {
+
+
+                var b = BitConverter.GetBytes(buffer.Length).ToBE();
+
+                ms.Write(b, 0, 4);
+                b = BitConverter.GetBytes(magic).ToBE();
+                ms.Write(b, 0, 2);
+                b = BitConverter.GetBytes(ver).ToBE();
+                ms.Write(b, 0, 2);
+                b = BitConverter.GetBytes(action).ToBE();
+                ms.Write(b, 0, 4);
+                b = BitConverter.GetBytes(param).ToBE();
+                ms.Write(b, 0, 4);
+                if (playload.Length > 0)
+                {
+                    ms.Write(playload, 0, playload.Length);
+                }
+                NetStream.WriteAsync(buffer, 0, buffer.Length);
+                NetStream.FlushAsync();
+            }
         }
 
         private bool SendJoinChannel(int channelId)
         {
-            var buffer = new byte[12];
-
-            using (var ms = new MemoryStream(buffer))
-            {
-                var b = BitConverter.GetBytes(16842764).ToBE(); //0x01,0x01,0x00,0x0C
-
-                ms.Write(b, 0, 4);
-                b = BitConverter.GetBytes(channelId).ToBE();
-                ms.Write(b, 0, 4);
-                b = BitConverter.GetBytes(0).ToBE();
-                ms.Write(b, 0, 4);
-                NetStream.WriteAsync(buffer, 0, buffer.Length);
-                NetStream.FlushAsync();
-
-                Debug.WriteLine("Message Sent: Join Channel");
-            }
-
+            
+            Random r=new Random();
+            var tmpuid = (long)(1e14 + 2e14*r.NextDouble());
+            var packetModel = new {roomid = channelId, uid = tmpuid};
+            var playload = JsonConvert.SerializeObject(packetModel);
+            SendSocketData(7, playload);
             return true;
         }
 
