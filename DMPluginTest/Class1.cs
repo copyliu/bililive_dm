@@ -28,18 +28,19 @@ namespace DMPluginTest
 
         private void Class1_ReceivedDanmaku(object sender, BilibiliDM_PluginFramework.ReceivedDanmakuArgs e)
         {
-           this.Log("BBB");
+            throw new NotImplementedException();
+            this.Log("BBB");
             this.AddDM("bbb",true);
         }
 
         private void Class1_Disconnected(object sender, BilibiliDM_PluginFramework.DisconnectEvtArgs e)
         {
-//            throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         private void Class1_Connected(object sender, BilibiliDM_PluginFramework.ConnectedEvtArgs e)
         {
-//            throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public override void Admin()

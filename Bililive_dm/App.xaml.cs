@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Runtime.InteropServices;
+using System.Threading;
+using BilibiliDM_PluginFramework;
 
 namespace Bililive_dm
 {
@@ -22,6 +24,7 @@ namespace Bililive_dm
         {
             AddArchSpecificDirectory();
             Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            
         }
 
         private void AddArchSpecificDirectory()
@@ -44,6 +47,7 @@ namespace Bililive_dm
                 using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬錯誤報告.txt"))
                 {
                     outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
+                    outfile.WriteLine(DateTime.Now +"");
                     outfile.Write(e.Exception.ToString());
                 }
             }

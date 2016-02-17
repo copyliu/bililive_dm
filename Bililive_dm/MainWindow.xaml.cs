@@ -46,6 +46,7 @@ namespace Bililive_dm
         private StoreModel settings = null;
         private DanmakuLoader b = new BiliDMLib.DanmakuLoader();
         private DispatcherTimer timer;
+        private DispatcherTimer timer_magic;
         private const int _maxCapacity = 100;
 
         private Queue<string> _messageQueue = new Queue<string>(_maxCapacity);
@@ -115,6 +116,31 @@ namespace Bililive_dm
 //                logging("投喂记录不会在弹幕模式上出现, 这不是bug");
 //            }
             PluginGrid.ItemsSource = Plugins;
+
+            if (DateTime.Today.Month == 4 && DateTime.Today.Day == 1)
+            {
+                //MAGIC!
+                timer_magic=new DispatcherTimer(new TimeSpan(0,30,0),DispatcherPriority.Normal, (sender, args) =>
+                {
+                    var query=this.Plugins.Where(p => p.PluginName.Contains("点歌"));
+                    if (query.Any())
+                    {
+                        query.First().MainReceivedDanMaku(new ReceivedDanmakuArgs()
+                        {
+                            Danmaku = new DanmakuModel()
+                            {
+                                MsgType = MsgTypeEnum.Comment,
+                                CommentText = "点歌 34376018",
+                                CommentUser = "弹幕姬",
+                                isAdmin = true,
+                                isVIP = true,
+                                
+                            }
+                        });
+                    }
+                },this.Dispatcher);
+                timer_magic.Start();
+            }
         }
 
         private void MainWindow_Closed  (object sender, EventArgs e)
@@ -248,7 +274,17 @@ namespace Bililive_dm
                     this.connbtn.IsEnabled = false;
                     foreach (var dmPlugin in Plugins)
                     {
-                       new Thread(()=>dmPlugin.MainConnected(roomid)).Start();
+                     
+                        new Thread(()=> {
+                                            try
+                                            {
+                                                dmPlugin.MainConnected(roomid);
+                                            }
+                                            catch (Exception ex)
+                                            {
+                                                Utils.PluginExceptionHandler(ex, dmPlugin);
+                                            }
+                                            }).Start();
                     }
                 }
                 else
@@ -286,7 +322,17 @@ namespace Bililive_dm
             foreach (var dmPlugin in Plugins)
             {
                 if (dmPlugin.Status)
-                new Thread(() => dmPlugin.MainReceivedRoomCount(e)).Start();
+                new Thread(() =>
+                {
+                    try
+                    {
+                        dmPlugin.MainReceivedRoomCount(e);
+                    }
+                    catch(Exception ex)
+                    {
+                        Utils.PluginExceptionHandler(ex, dmPlugin);
+                    }
+                }).Start();
             }
 
             SendSSP("当前房间人数:" + e.UserCount);
@@ -299,7 +345,16 @@ namespace Bililive_dm
             foreach (var dmPlugin in Plugins)
             {
                 if (dmPlugin.Status)
-                    new Thread(() => dmPlugin.MainReceivedDanMaku(e)).Start();
+                    new Thread(() => {
+                                         try
+                                         {
+                                             dmPlugin.MainReceivedDanMaku(e);
+                                         }
+                                         catch (Exception ex)
+                                         {
+                            Utils.PluginExceptionHandler(ex, dmPlugin);
+                        }
+                    }).Start();
             }
             switch (e.Danmaku.MsgType)
             {
@@ -409,7 +464,16 @@ namespace Bililive_dm
         {
             foreach (var dmPlugin in Plugins)
             {
-                    new Thread(() => dmPlugin.MainDisconnected()).Start();
+                    new Thread(() => {
+                                         try
+                                         {
+                                             dmPlugin.MainDisconnected();
+                                         }
+                                         catch (Exception ex)
+                                         {
+                            Utils.PluginExceptionHandler(ex, dmPlugin);
+                        }
+                    }).Start();
             }
             logging("連接被斷開: 开发者信息" + args.Error);
             AddDMText("彈幕姬報告", "連接被斷開", true);
@@ -577,7 +641,16 @@ namespace Bililive_dm
             this.connbtn.IsEnabled = true;
             foreach (var dmPlugin in Plugins)
             {
-                new Thread(() => dmPlugin.MainDisconnected()).Start();
+                new Thread(() => {
+                                     try
+                                     {
+                                         dmPlugin.MainDisconnected();
+                                     }
+                                     catch (Exception ex)
+                                     {
+                        Utils.PluginExceptionHandler(ex, dmPlugin);
+                    }
+                }).Start();
             }
         }
 
@@ -619,7 +692,7 @@ namespace Bililive_dm
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
-                        outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
+                        outfile.WriteLine(DateTime.Now+" "+ plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
 
@@ -657,7 +730,7 @@ namespace Bililive_dm
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
                         outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
-                        outfile.WriteLine(plugin.PluginName+" "+plugin.PluginVer);
+                        outfile.WriteLine(DateTime.Now + " " + plugin.PluginName+" "+plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
 
@@ -695,7 +768,7 @@ namespace Bililive_dm
 
                     using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(DateTime.Now + " " + "請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
                         outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }

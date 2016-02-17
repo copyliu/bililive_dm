@@ -290,6 +290,7 @@ namespace BilibiliDM_PluginFramework
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
     }
 
   

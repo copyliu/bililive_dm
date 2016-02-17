@@ -1,4 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Threading;
+using System.Windows;
+using BilibiliDM_PluginFramework;
 
 namespace Bililive_dm
 {
@@ -35,5 +39,59 @@ namespace Bililive_dm
         public static double FullOverlayEffect1 = 400; //文字速度
         public static double FullOverlayFontsize = 35;
         public static bool WtfEngineEnabled = true;
+    }
+
+    public static class Utils
+    {
+        public static void PluginExceptionHandler(Exception ex, DMPlugin plugin=null)
+        {
+           
+                if (plugin != null)
+                {
+                    MessageBox.Show(
+                        "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
+                        plugin.PluginCont);
+                    try
+                    {
+                        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                        using (
+                            StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt")
+                            )
+                        {
+                            outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                            outfile.WriteLine(DateTime.Now + " " + plugin.PluginName + " " + plugin.PluginVer);
+                            outfile.Write(ex.ToString());
+                        }
+
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(
+               "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
+                    try
+                    {
+                        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                        using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬錯誤報告.txt"))
+                        {
+                            outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
+                            outfile.WriteLine(DateTime.Now + "");
+                            outfile.Write(ex.ToString());
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+           
+        }
     }
 }

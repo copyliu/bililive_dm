@@ -39,7 +39,7 @@
             <CheckBox Content="窗口置顶" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
         </StackPanel>
 
-        <TextBlock Text="非B站出品 ©2014-2015 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
+        <TextBlock Text="非B站出品 ©2014-2016 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
 
         <TabControl x:Name="tabControl">
             <TabItem Header="日志">
