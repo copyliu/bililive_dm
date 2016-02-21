@@ -30,6 +30,9 @@ namespace BiliDMLib
         public event ReceivedRoomCountEvt ReceivedRoomCount;
         private bool debuglog = true;
         private short protocolversion = 1;
+        private static int lastroomid ;
+        private static string lastserver;
+
         public async Task<bool> ConnectAsync(int roomId)
         {
             try
@@ -50,25 +53,31 @@ namespace BiliDMLib
 //                    channelId = (int) jo.list[0].cid;
 //                }
 
-
-                var request2 = WebRequest.Create(CIDInfoUrl + channelId);
-                var response2 = request2.GetResponse();
-                using (var stream = response2.GetResponseStream())
+                if (channelId != lastroomid)
                 {
-                    using (var sr = new StreamReader(stream))
+                    var request2 = WebRequest.Create(CIDInfoUrl + channelId);
+                    request2.Timeout = 2000;
+                    var response2 = await request2.GetResponseAsync();
+                    using (var stream = response2.GetResponseStream())
                     {
-                        var text = await sr.ReadToEndAsync();
-                        var xml = "<root>" + text + "</root>";
-                        XmlDocument doc = new XmlDocument();
-                        doc.LoadXml(xml);
-                        ChatHost = doc["root"]["server"].InnerText;
+                        using (var sr = new StreamReader(stream))
+                        {
+                            var text = await sr.ReadToEndAsync();
+                            var xml = "<root>" + text + "</root>";
+                            XmlDocument doc = new XmlDocument();
+                            doc.LoadXml(xml);
+                            ChatHost = doc["root"]["server"].InnerText;
+                        }
                     }
+
                 }
-
-
+                else
+                {
+                    ChatHost = lastserver;
+                }
                 Client = new TcpClient();
 
-                Client.Connect(ChatHost, ChatPort);
+                await  Client.ConnectAsync(ChatHost, ChatPort);
 
                 NetStream = Client.GetStream();
 
@@ -80,7 +89,8 @@ namespace BiliDMLib
                     var thread = new Thread(this.ReceiveMessageLoop);
                     thread.IsBackground = true;
                     thread.Start();
-
+                    lastserver = ChatHost;
+                    lastroomid = roomId;
                     return true;
                 }
                 return false;

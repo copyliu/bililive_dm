@@ -251,9 +251,11 @@ namespace Bililive_dm
                 MessageBox.Show("请输入房间号,房间号是!数!字!");
                 return;
             }
-             
             if (roomid > 0)
             {
+
+                this.connbtn.IsEnabled = false;
+                this.disconnbtn.IsEnabled = false;
                 var connectresult = false;
                 logging("正在连接");
                 connectresult = await b.ConnectAsync(roomid);
@@ -271,7 +273,7 @@ namespace Bililive_dm
                     AddDMText("彈幕姬報告", "連接成功", true);
                     SendSSP("連接成功");
                     Ranking.Clear();
-                    this.connbtn.IsEnabled = false;
+                    
                     foreach (var dmPlugin in Plugins)
                     {
                      
@@ -292,7 +294,10 @@ namespace Bililive_dm
                     logging("連接失敗");
                     SendSSP("連接失敗");
                     AddDMText("彈幕姬報告", "連接失敗", true);
+
+                    this.connbtn.IsEnabled = true;
                 }
+                this.disconnbtn.IsEnabled = true;
             }
             else
             {
