@@ -612,6 +612,31 @@ namespace Bililive_dm
             AddDMText("彈幕姬報告", "這是一個測試", false);
             }
             SendSSP("彈幕姬測試");
+            foreach (var dmPlugin in Plugins)
+            {
+                if (dmPlugin.Status)
+                    new Thread(() => {
+                        try
+                        {
+                            var m = new ReceivedDanmakuArgs()
+                            {
+                                Danmaku =
+                                    new DanmakuModel()
+                                    {
+                                        CommentText = "插件彈幕測試",
+                                        CommentUser = "彈幕姬",
+                                        MsgType = MsgTypeEnum.Comment
+                                    },
+                            };
+                            dmPlugin.MainReceivedDanMaku(m);
+                        }
+                        catch (Exception ex)
+                        {
+                            Utils.PluginExceptionHandler(ex, dmPlugin);
+                        }
+                    }).Start();
+            }
+          
 //            logging(DateTime.Now.Ticks+"");
         }
 
@@ -788,7 +813,7 @@ namespace Bililive_dm
         ObservableCollection<DMPlugin> Plugins=new ObservableCollection<DMPlugin>();
         void InitPlugins()
         {
-//            Plugins.Add(new FuckMePlugin());
+            Plugins.Add(new MobileService());
             string path = "";
             try
             {
