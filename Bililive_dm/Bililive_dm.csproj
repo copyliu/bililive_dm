@@ -36,7 +36,7 @@
     <MinimumRequiredVersion>1.0.1.97</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>98</ApplicationRevision>
+    <ApplicationRevision>99</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -175,6 +175,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="SessionItem.cs" />
     <Compile Include="SSTPProtocol.cs" />
+    <Compile Include="StaticModel.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="StoreModel.cs" />
     <Compile Include="WtfDanmakuWindow.cs">

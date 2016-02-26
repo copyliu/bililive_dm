@@ -49,8 +49,30 @@ namespace Bililive_dm
         private DispatcherTimer timer_magic;
         private const int _maxCapacity = 100;
 
-        private Queue<string> _messageQueue = new Queue<string>(_maxCapacity);
+        private ObservableCollection<string> _messageQueue = new ObservableCollection<string>();
         private ObservableCollection<SessionItem> SessionItems=new ObservableCollection<SessionItem>();
+
+        private  Queue<DanmakuModel> _danmakuQueue=new Queue<DanmakuModel>();
+
+        private Thread ProcDanmakuThread;
+
+        private StaticModel Static=new StaticModel();
+
+
+
+
+
+#region Runtime settings
+
+        private bool fulloverlay_enabled = false;
+        private bool overlay_enabled = true;
+        private bool savelog_enabled = true;
+        private bool sendssp_enabled = true;
+        private bool showvip_enabled = true;
+        private bool showerror_enabled = true;
+
+#endregion
+
         public MainWindow()
         {
             InitializeComponent();
@@ -107,14 +129,15 @@ namespace Bililive_dm
                 this.Dispatcher);
             timer.Start();
             
-            DataGrid.ItemsSource = Ranking;
             DataGrid2.ItemsSource = SessionItems;
 //            fulloverlay.Show();
-            logging("投喂记录不会在弹幕模式上出现, 这不是bug");
-//            for (int i = 0; i < 150; i++)
-//            {
-//                logging("投喂记录不会在弹幕模式上出现, 这不是bug");
-//            }
+           
+            this.log.DataContext = _messageQueue;
+//            log.ScrollToEnd();
+            //            for (int i = 0; i < 150; i++)
+            //            {
+            //                logging("投喂记录不会在弹幕模式上出现, 这不是bug");
+            //            }
             PluginGrid.ItemsSource = Plugins;
 
             if (DateTime.Today.Month == 4 && DateTime.Today.Day == 1)
@@ -141,6 +164,103 @@ namespace Bililive_dm
                 },this.Dispatcher);
                 timer_magic.Start();
             }
+
+            
+
+
+            ProcDanmakuThread = new Thread(() =>
+            {
+                while (true)
+                {
+                    lock (_danmakuQueue)
+                    {
+                        int count = 0;
+                        if (_danmakuQueue.Any())
+                        {
+                            count = (int) Math.Ceiling(_danmakuQueue.Count/30.0);
+                        }
+
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (_danmakuQueue.Any())
+                            {
+                                var danmaku = _danmakuQueue.Dequeue();
+                                ProcDanmaku(danmaku);
+                                if (danmaku.MsgType==MsgTypeEnum.Comment)
+                                { lock (Static)
+                                {
+                                    Static.DanmakuCountShow += 1;
+                                    Static.AddUser(danmaku.CommentUser);
+                                }}
+                            }
+                            
+                        }
+
+
+                    }
+                    
+                    Thread.Sleep(30);
+                }
+            });
+            ProcDanmakuThread.IsBackground = true;
+            ProcDanmakuThread.Start();
+            StaticPanel.DataContext = Static;
+
+
+            for (int i = 0; i < 100; i++)
+            {
+                _messageQueue.Add("");
+            }
+            logging("投喂记录不会在弹幕模式上出现, 这不是bug");
+            logging("可以点击日志复制到剪贴板");
+            this.Loaded += MainWindow_Loaded;
+        }
+
+        private void MainWindow_Loaded  (object sender, RoutedEventArgs e)
+        {
+            Full.IsChecked = fulloverlay_enabled;
+            SideBar.IsChecked = overlay_enabled;
+            SaveLog.IsChecked = savelog_enabled;
+            SSTP.IsChecked = sendssp_enabled;
+            ShowItem.IsChecked=showvip_enabled;
+            ShowError.IsChecked=showerror_enabled;
+            ScrollViewer sc=log.Template.FindName("LogScroll", log) as ScrollViewer;
+            sc?.ScrollToEnd();
+
+            var shit = new Thread(() =>
+            {
+                int bbb = 5;
+                while (true)
+                {
+                    Random r = new Random();
+                    
+                    lock (_danmakuQueue)
+                    {
+
+                        for (int i = 0; i < bbb; i++)
+                        {
+                            string a1 = r.NextDouble().ToString();
+                            string b1 = r.NextDouble().ToString();
+                            _danmakuQueue.Enqueue(new DanmakuModel()
+
+                            {
+                                CommentUser = "asf",
+                                CommentText = b1,
+                                MsgType = MsgTypeEnum.Comment
+                            });
+                        }
+                    }
+                    lock (Static)
+                    {
+                        Static.DanmakuCountRaw += bbb;
+                    }
+
+                    Thread.Sleep(1000);
+                }
+            }
+             );
+            shit.IsBackground = true;
+//            shit.Start();
         }
 
         private void MainWindow_Closed  (object sender, EventArgs e)
@@ -269,7 +389,8 @@ namespace Bililive_dm
                 
                 if (connectresult)
                 {
-                    logging("連接成功");
+
+                    errorlogging("連接成功");
                     AddDMText("彈幕姬報告", "連接成功", true);
                     SendSSP("連接成功");
                     Ranking.Clear();
@@ -361,26 +482,48 @@ namespace Bililive_dm
                         }
                     }).Start();
             }
-            switch (e.Danmaku.MsgType)
+
+            if (e.Danmaku.MsgType == MsgTypeEnum.Comment)
+            {
+                lock (Static)
+                {
+                    Static.DanmakuCountRaw += 1;
+                }
+            }
+
+            lock (_danmakuQueue)
+            {
+                var danmakuModel = e.Danmaku;
+                _danmakuQueue.Enqueue(danmakuModel);
+            }
+            
+
+        }
+
+        private  void ProcDanmaku(DanmakuModel danmakuModel)
+        {
+            switch (danmakuModel.MsgType)
             {
                 case MsgTypeEnum.Comment:
-                    logging("收到彈幕:" + (e.Danmaku.isAdmin?"[管]":"")+ (e.Danmaku.isVIP ? "[爷]" : "") +e.Danmaku.CommentUser + " 說: " + e.Danmaku.CommentText);
+                    logging("收到彈幕:" + (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
+                            danmakuModel.CommentUser + " 說: " + danmakuModel.CommentText);
 
-                    AddDMText((e.Danmaku.isAdmin ? "[管]" : "") + (e.Danmaku.isVIP ? "[爷]" : "") + e.Danmaku.CommentUser, e.Danmaku.CommentText);
+                    AddDMText(
+                        (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") + danmakuModel.CommentUser,
+                        danmakuModel.CommentText);
                     SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
-                        (e.Danmaku.isAdmin ? "[管]" : "") + (e.Danmaku.isVIP ? "[爷]" : "") + e.Danmaku.CommentUser,
-                        e.Danmaku.CommentText));
-                    
+                        (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") + danmakuModel.CommentUser,
+                        danmakuModel.CommentText));
+
                     break;
                 case MsgTypeEnum.GiftTop:
-                    foreach (var giftRank in e.Danmaku.GiftRanking)
+                    foreach (var giftRank in danmakuModel.GiftRanking)
                     {
                         var query = Ranking.Where(p => p.uid == giftRank.uid);
                         if (query.Any())
                         {
                             var f = query.First();
                             this.Dispatcher.BeginInvoke(new Action(() => f.coin = giftRank.coin));
-
                         }
                         else
                         {
@@ -390,61 +533,54 @@ namespace Bililive_dm
                                 coin = giftRank.coin,
                                 UserName = giftRank.UserName
                             })));
-
                         }
                     }
                     break;
                 case MsgTypeEnum.GiftSend:
                 {
-                    var query = SessionItems.Where(p => p.UserName == e.Danmaku.GiftUser && p.Item == e.Danmaku.GiftName);
+                    var query = SessionItems.Where(p => p.UserName == danmakuModel.GiftUser && p.Item == danmakuModel.GiftName);
                     if (query.Any())
                     {
                         this.Dispatcher.BeginInvoke(
-                            new Action(() => query.First().num += Convert.ToDecimal(e.Danmaku.GiftNum)));
-
+                            new Action(() => query.First().num += Convert.ToDecimal(danmakuModel.GiftNum)));
                     }
                     else
                     {
                         this.Dispatcher.BeginInvoke(new Action(() => SessionItems.Add(
                             new SessionItem()
                             {
-                                Item = e.Danmaku.GiftName,
-                                UserName = e.Danmaku.GiftUser,
-                                num = Convert.ToDecimal(e.Danmaku.GiftNum)
+                                Item = danmakuModel.GiftName,
+                                UserName = danmakuModel.GiftUser,
+                                num = Convert.ToDecimal(danmakuModel.GiftNum)
                             }
                             )));
-
                     }
-                    logging("收到道具:" + e.Danmaku.GiftUser + " 赠送的: " + e.Danmaku.GiftName + " x " + e.Danmaku.GiftNum);
+                    logging("收到道具:" + danmakuModel.GiftUser + " 赠送的: " + danmakuModel.GiftName + " x " + danmakuModel.GiftNum);
                     this.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowItem.IsChecked == true)
                         {
                             AddDMText("收到道具",
-                                e.Danmaku.GiftUser + " 赠送的: " + e.Danmaku.GiftName + " x " + e.Danmaku.GiftNum, true);
+                                danmakuModel.GiftUser + " 赠送的: " + danmakuModel.GiftName + " x " + danmakuModel.GiftNum, true);
                         }
                     }));
                     break;
                 }
                 case MsgTypeEnum.Welcome:
                 {
-                        logging("欢迎老爷"+(e.Danmaku.isAdmin?"和管理":"")+": " + e.Danmaku.CommentUser + " 进入直播间");
-                        this.Dispatcher.BeginInvoke(new Action(() =>
+                    logging("欢迎老爷" + (danmakuModel.isAdmin ? "和管理" : "") + ": " + danmakuModel.CommentUser + " 进入直播间");
+                    this.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (ShowItem.IsChecked == true)
                         {
-                            if (ShowItem.IsChecked == true)
-                            {
-                                AddDMText("欢迎老爷" + (e.Danmaku.isAdmin ? "和管理" : ""),
-                                    e.Danmaku.CommentUser + " 进入直播间", true);
-                            }
-                        }));
-                        
-                        break;
-                    }
+                            AddDMText("欢迎老爷" + (danmakuModel.isAdmin ? "和管理" : ""),
+                                danmakuModel.CommentUser + " 进入直播间", true);
+                        }
+                    }));
 
-
-
+                    break;
+                }
             }
-
         }
 
         private void SendSSP(string msg)
@@ -480,14 +616,15 @@ namespace Bililive_dm
                         }
                     }).Start();
             }
-            logging("連接被斷開: 开发者信息" + args.Error);
+            
+            errorlogging("連接被斷開: 开发者信息" + args.Error);
             AddDMText("彈幕姬報告", "連接被斷開", true);
             SendSSP("連接被斷開");
             if (this.CheckAccess())
             {
                 if (AutoReconnect.IsChecked == true && args.Error != null)
                 {
-                    logging("正在自动重连...");
+                    errorlogging("正在自动重连...");
                     AddDMText("彈幕姬報告", "正在自动重连", true);
                     connbtn_Click(null, null);
                 }
@@ -502,7 +639,7 @@ namespace Bililive_dm
                 {
                     if (AutoReconnect.IsChecked == true && args.Error != null)
                     {
-                        logging("正在自动重连...");
+                        errorlogging("正在自动重连...");
                         AddDMText("彈幕姬報告", "正在自动重连", true);
                         connbtn_Click(null, null);
                     }
@@ -514,24 +651,39 @@ namespace Bililive_dm
             }
         }
 
+        public void errorlogging(string text)
+        {
+            if (!showerror_enabled) return;
+            if (ShowError.Dispatcher.CheckAccess())
+            {
+
+                logging(text);
+
+            }
+            else
+            {
+                ShowError.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => errorlogging(text)));
+            }
+        }
+
         public void logging(string text)
         {
 
-
+            
             if (log.Dispatcher.CheckAccess())
             {
                 
                 if (_messageQueue.Count >= _maxCapacity)
                 {
-                    _messageQueue.Dequeue();
+                    _messageQueue.RemoveAt(0);
                 }
 
-                _messageQueue.Enqueue(DateTime.Now.ToString("T")+" : " +text);
-                this.log.Text = string.Join("\n", _messageQueue);
-                log.CaretIndex = this.log.Text.Length;
-                log.ScrollToEnd();
+                _messageQueue.Add(DateTime.Now.ToString("T")+" : " +text);
+//                this.log.Text = string.Join("\n", _messageQueue);
+//                log.CaretIndex = this.log.Text.Length;
 
-                if (this.SaveLog.IsChecked == true) { 
+
+                if (savelog_enabled) { 
                 try
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -558,8 +710,14 @@ namespace Bililive_dm
 
         public void AddDMText(string user, string text, bool warn = false,bool foreceenablefullscreen=false)
         {
-            if (overlay.Dispatcher.CheckAccess())
+            if (showerror_enabled && warn)
             {
+                return;
+            }
+            if (!overlay_enabled && !fulloverlay_enabled) return;
+            if (this.Dispatcher.CheckAccess())
+            {
+               
                 if (this.SideBar.IsChecked == true)
                 {
                     DanmakuTextControl c = new DanmakuTextControl();
@@ -643,23 +801,27 @@ namespace Bililive_dm
         private void Full_Checked(object sender, RoutedEventArgs e)
         {
             //            overlay.Show();
+            fulloverlay_enabled = true;
             OpenFullOverlay();
             fulloverlay.Show();
         }
 
         private void SideBar_Checked(object sender, RoutedEventArgs e)
         {
+            overlay_enabled = true;
             OpenOverlay();
             overlay.Show();
         }
 
         private void SideBar_Unchecked(object sender, RoutedEventArgs e)
         {
+            overlay_enabled = false;
             overlay.Close();
         }
 
         private void Full_Unchecked(object sender, RoutedEventArgs e)
         {
+            fulloverlay_enabled = false;
             fulloverlay.Close();
         }
 
@@ -694,7 +856,32 @@ namespace Bililive_dm
             SessionItems.Clear();
             
         }
+        private void ClearMe2_OnClick(object sender, RoutedEventArgs e)
+        {
+            lock (Static)
+            {
+                Static.DanmakuCountShow = 0;
+            }
 
+        }
+        private void ClearMe3_OnClick(object sender, RoutedEventArgs e)
+        {
+            lock (Static)
+            {
+                Static.ClearUser();
+            }
+
+        }
+
+        private void ClearMe4_OnClick(object sender, RoutedEventArgs e)
+        {
+            lock (Static)
+            {
+                Static.DanmakuCountRaw = 0;
+            }
+
+
+        }
         private void Plugin_Enable(object sender, RoutedEventArgs e)
         {
             var menuItem = (MenuItem)sender;
@@ -857,6 +1044,65 @@ namespace Bililive_dm
         private void WindowTop_OnChecked(object sender, RoutedEventArgs e)
         {
             Topmost = WindowTop.IsChecked==true;
+        }
+
+        private void SaveLog_OnChecked(object sender, RoutedEventArgs e)
+        {
+            this.savelog_enabled = true;
+        }
+
+        private void SaveLog_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            savelog_enabled = false;
+        }
+
+        private void ShowItem_OnChecked(object sender, RoutedEventArgs e)
+        {
+            showvip_enabled = true;
+        }
+
+        private void ShowItem_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            showvip_enabled = false;
+        }
+
+        private void SSTP_OnChecked(object sender, RoutedEventArgs e)
+        {
+            sendssp_enabled = true;
+        }
+
+        private void SSTP_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            sendssp_enabled = false;
+        }
+
+        private void ShowError_OnChecked(object sender, RoutedEventArgs e)
+        {
+            showerror_enabled = true;
+        }
+
+        private void ShowError_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            showerror_enabled = false;
+        }
+
+        private void UIElement_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                var textBlock = sender as TextBlock;
+                if (textBlock != null)
+                {
+                    Clipboard.SetText(textBlock.Text);
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => { MessageBox.Show("本行记录已复制到剪贴板"); }));
+                    
+                }
+                
+            }
+            catch (Exception)
+            {
+               
+            }
         }
     }
 }

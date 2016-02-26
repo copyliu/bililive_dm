@@ -6,10 +6,21 @@
         xmlns:biliDmLib="clr-namespace:BiliDMLib;assembly=BiliDMLib"
         xmlns:bililiveDm="clr-namespace:Bililive_dm"
         xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="B站彈幕姬" Height="409" Width="601">
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="converter"></bililiveDm:PluginStatusConverter>
+
+        <DataTemplate x:Key="logtemplate" >
+
+
+
+            <TextBlock Text="{Binding }"
+                       TextWrapping="Wrap" Cursor="Hand" MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"/>
+
+        </DataTemplate>
+
     </Window.Resources>
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Height="25" DockPanel.Dock="Top">
@@ -29,13 +40,13 @@
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="当前房间人数: " VerticalAlignment="Center" />
             <TextBlock x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
                        VerticalAlignment="Center" />
-            <CheckBox x:Name="SideBar" Content="侧边栏" IsChecked="True" Checked="SideBar_Checked"
+            <CheckBox x:Name="SideBar" Content="侧边栏"  Checked="SideBar_Checked"
                       VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
             <CheckBox x:Name="Full" Content="弹幕" Checked="Full_Checked" VerticalAlignment="Center"
                       Unchecked="Full_Unchecked" />
             <CheckBox Content="自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
-            <CheckBox Content="保存到我的文档" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True"/>
-            <CheckBox Content="道具和老爷" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True"/>
+            <CheckBox Content="保存到我的文档" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True" Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
+            <CheckBox Content="道具和老爷" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True" Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
             <CheckBox Content="窗口置顶" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
         </StackPanel>
 
@@ -43,8 +54,27 @@
 
         <TabControl x:Name="tabControl">
             <TabItem Header="日志">
-                <TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
-                 VerticalScrollBarVisibility="Auto"  />
+                <!--<TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
+                 VerticalScrollBarVisibility="Auto"  />-->
+
+
+                <ItemsControl  x:Name="log" ItemsSource="{Binding}" ItemTemplate="{StaticResource logtemplate}" >
+      
+                    <ItemsControl.Template>
+                        <ControlTemplate>
+                            <ScrollViewer x:Name="LogScroll" CanContentScroll="True">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel IsItemsHost="True"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+
+
             </TabItem>
 
             <TabItem Header="投喂榜">
@@ -60,7 +90,8 @@
             <TabItem Header="设置">
                 <Grid>
                     <bililiveDm:OptionDialog x:Name="OptionDialog"/>
-                    <CheckBox Content="伪春菜联动" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="True" Panel.ZIndex="-1" Margin="0,500,0,0"/>
+                    <CheckBox Content="伪春菜联动" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="-1" Margin="0,500,0,0" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
+                    <CheckBox Content="顯示出錯信息" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="-1" Margin="0,514,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
                 </Grid>
             </TabItem>
             <TabItem Header="插件">
@@ -86,23 +117,42 @@
                     </DataGrid>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="说明">
-                <WebBrowser x:Name="web" Source="http://soft.ceve-market.org/bilibili_dm/app.htm" />
-
-            </TabItem>
-            <TabItem Header="瓜子月榜" Visibility="Collapsed">
+            <TabItem Header="统计" >
                 <DockPanel>
-                    <Button x:Name="ClearMe" Content="清空统计" HorizontalAlignment="Right" VerticalAlignment="Center"
-                    Margin="0,0,0,0" Width="70" Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" />
-                    <DataGrid CanUserAddRows="False" x:Name="DataGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Right"
-                  d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:GiftRank}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
-                            <DataGridTextColumn Binding="{Binding coin}" ClipboardContentBinding="{Binding coin}" Header="本月投喂瓜子" SortDirection="Descending"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" >
+                        <Button x:Name="ClearMe" Content="清空投喂统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                     Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe2" Content="清空弹幕统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Click="ClearMe2_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe4" Content="清空弹幕统计(总)" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Click="ClearMe4_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe3" Content="清空用户统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                      Click="ClearMe3_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+
+
+                    </StackPanel>
+
+                    <StackPanel x:Name="StaticPanel">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="总共收到弹幕(原始数据)" Width="150"></TextBlock>
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountRaw}" Width="100" TextAlignment="Right"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Text="总共收到弹幕(已显示)" Width="150"></TextBlock>
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountShow}" Width="100" TextAlignment="Right"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Text="参与评论的用户" Width="150"></TextBlock>
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding UserCount}" Width="100" TextAlignment="Right"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
 
                 </DockPanel>
+
+            </TabItem>
+
+            <TabItem Header="说明">
+                <WebBrowser x:Name="web" Source="http://soft.ceve-market.org/bilibili_dm/app.htm" />
 
             </TabItem>
         </TabControl>
