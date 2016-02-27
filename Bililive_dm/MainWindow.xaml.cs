@@ -554,7 +554,7 @@ namespace Bililive_dm
             }
         }
 
-        private void SendSSP(string msg)
+        public void SendSSP(string msg)
         {
             if (SSTP.Dispatcher.CheckAccess())
             {
@@ -633,7 +633,7 @@ namespace Bililive_dm
             }
         }
 
-        private void logging(string text)
+        public void logging(string text)
         {
             if (log.Dispatcher.CheckAccess())
             {
@@ -675,7 +675,7 @@ namespace Bililive_dm
             }
         }
 
-        private void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false)
+        public void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false)
         {
             if (!showerror_enabled && warn)
             {
