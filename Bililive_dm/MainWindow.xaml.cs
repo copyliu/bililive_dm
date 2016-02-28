@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Deployment.Application;
 using System.IO;
 using System.IO.IsolatedStorage;
@@ -52,6 +53,7 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
+            this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
             var dt = new DateTime(2000, 1, 1);
             var assembly = Assembly.GetExecutingAssembly();
             var version = assembly.FullName.Split(',')[1];
@@ -75,7 +77,7 @@ namespace Bililive_dm
 
             InitPlugins();
             Closed += MainWindow_Closed;
-            web.Source = new Uri("http://soft.ceve-market.org/bilibili_dm/app.htm?" + DateTime.Now.Ticks);
+            HelpWeb.Source = new Uri("http://soft.ceve-market.org/bilibili_dm/app.htm?" + DateTime.Now.Ticks);
                 //fuck you IE cache
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
@@ -107,7 +109,7 @@ namespace Bililive_dm
             DataGrid2.ItemsSource = SessionItems;
 //            fulloverlay.Show();
 
-            log.DataContext = _messageQueue;
+            Log.DataContext = _messageQueue;
 //            log.ScrollToEnd();
             //            for (int i = 0; i < 150; i++)
             //            {
@@ -201,7 +203,7 @@ namespace Bililive_dm
             SSTP.IsChecked = sendssp_enabled;
             ShowItem.IsChecked = showvip_enabled;
             ShowError.IsChecked = showerror_enabled;
-            var sc = log.Template.FindName("LogScroll", log) as ScrollViewer;
+            var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
             sc?.ScrollToEnd();
 
             var shit = new Thread(() =>
@@ -334,27 +336,27 @@ namespace Bililive_dm
 
         private async void connbtn_Click(object sender, RoutedEventArgs e)
         {
-            int roomid;
+            int roomId;
             try
             {
-                roomid = Convert.ToInt32(romid.Text.Trim());
+                roomId = Convert.ToInt32(RoomId.Text.Trim());
             }
             catch (Exception)
             {
                 MessageBox.Show("请输入房间号,房间号是!数!字!");
                 return;
             }
-            if (roomid > 0)
+            if (roomId > 0)
             {
-                connbtn.IsEnabled = false;
-                disconnbtn.IsEnabled = false;
+                ConnBtn.IsEnabled = false;
+                DisconnBtn.IsEnabled = false;
                 var connectresult = false;
                 logging("正在连接");
-                connectresult = await b.ConnectAsync(roomid);
+                connectresult = await b.ConnectAsync(roomId);
                 while (!connectresult && sender == null && AutoReconnect.IsChecked == true)
                 {
                     logging("正在连接");
-                    connectresult = await b.ConnectAsync(roomid);
+                    connectresult = await b.ConnectAsync(roomId);
                 }
 
 
@@ -364,6 +366,7 @@ namespace Bililive_dm
                     AddDMText("彈幕姬報告", "連接成功", true);
                     SendSSP("連接成功");
                     Ranking.Clear();
+                    SaveRoomId(roomId);
 
                     foreach (var dmPlugin in Plugins)
                     {
@@ -371,7 +374,7 @@ namespace Bililive_dm
                         {
                             try
                             {
-                                dmPlugin.MainConnected(roomid);
+                                dmPlugin.MainConnected(roomId);
                             }
                             catch (Exception ex)
                             {
@@ -386,9 +389,9 @@ namespace Bililive_dm
                     SendSSP("連接失敗");
                     AddDMText("彈幕姬報告", "連接失敗", true);
 
-                    connbtn.IsEnabled = true;
+                    ConnBtn.IsEnabled = true;
                 }
-                disconnbtn.IsEnabled = true;
+                DisconnBtn.IsEnabled = true;
             }
             else
             {
@@ -599,7 +602,7 @@ namespace Bililive_dm
                 }
                 else
                 {
-                    connbtn.IsEnabled = true;
+                    ConnBtn.IsEnabled = true;
                 }
             }
             else
@@ -614,7 +617,7 @@ namespace Bililive_dm
                     }
                     else
                     {
-                        connbtn.IsEnabled = true;
+                        ConnBtn.IsEnabled = true;
                     }
                 }));
             }
@@ -635,7 +638,7 @@ namespace Bililive_dm
 
         public void logging(string text)
         {
-            if (log.Dispatcher.CheckAccess())
+            if (Log.Dispatcher.CheckAccess())
             {
                 if (_messageQueue.Count >= _maxCapacity)
                 {
@@ -664,14 +667,15 @@ namespace Bililive_dm
                             outfile.WriteLine(DateTime.Now.ToString("T") + " : " + text);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
+                        // ignored
                     }
                 }
             }
             else
             {
-                log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => logging(text)));
+                Log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => logging(text)));
             }
         }
 
@@ -707,7 +711,7 @@ namespace Bililive_dm
             }
             else
             {
-                log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => AddDMText(user, text)));
+                Log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => AddDMText(user, text)));
             }
         }
 
@@ -796,7 +800,7 @@ namespace Bililive_dm
         private void Disconnbtn_OnClick(object sender, RoutedEventArgs e)
         {
             b.Disconnect();
-            connbtn.IsEnabled = true;
+            ConnBtn.IsEnabled = true;
             foreach (var dmPlugin in Plugins)
             {
                 new Thread(() =>
@@ -976,7 +980,7 @@ namespace Bililive_dm
                 path = Path.Combine(path, "弹幕姬", "Plugins");
                 Directory.CreateDirectory(path);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return;
             }
@@ -1062,6 +1066,20 @@ namespace Bililive_dm
             catch (Exception)
             {
             }
+        }
+
+        private void SaveRoomId(int roomId)
+        {
+            try
+            {
+                Properties.Settings.Default.roomId = roomId;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+            //Do whatever you want here..
         }
 
         #region Runtime settings

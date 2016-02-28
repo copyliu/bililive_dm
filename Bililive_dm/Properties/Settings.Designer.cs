@@ -22,5 +22,17 @@ namespace Bililive_dm.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int roomId {
+            get {
+                return ((int)(this["roomId"]));
+            }
+            set {
+                this["roomId"] = value;
+            }
+        }
     }
 }
