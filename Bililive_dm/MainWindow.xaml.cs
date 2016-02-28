@@ -366,6 +366,7 @@ namespace Bililive_dm
                     AddDMText("彈幕姬報告", "連接成功", true);
                     SendSSP("連接成功");
                     Ranking.Clear();
+                    SaveRoomId(roomId);
 
                     foreach (var dmPlugin in Plugins)
                     {
@@ -1067,11 +1068,10 @@ namespace Bililive_dm
             }
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        private void SaveRoomId(int roomId)
         {
             try
             {
-                int roomId = Convert.ToInt32(this.RoomId.Text);
                 Properties.Settings.Default.roomId = roomId;
                 Properties.Settings.Default.Save();
             }
