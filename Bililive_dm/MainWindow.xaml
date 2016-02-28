@@ -10,9 +10,9 @@
         mc:Ignorable="d"
         Title="B站彈幕姬" Height="409" Width="601">
     <Window.Resources>
-        <bililiveDm:PluginStatusConverter x:Key="converter"></bililiveDm:PluginStatusConverter>
+        <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
 
-        <DataTemplate x:Key="logtemplate" >
+        <DataTemplate x:Key="LogTemplate" >
 
 
 
@@ -26,13 +26,13 @@
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Height="25" DockPanel.Dock="Top">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="直播间地址: http://live.bilibili.com/"
                        VerticalAlignment="Center" />
-            <TextBox x:Name="romid" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"
+            <TextBox x:Name="RoomId" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"
                      Width="50" />
-            <Button x:Name="connbtn" Content="连接" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Button x:Name="ConnBtn" Content="连接" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Click="connbtn_Click" Margin="28,0,0,0" Width="70" />
 
-            <Button Content="斷開" Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" x:Name="disconnbtn" Click="Disconnbtn_OnClick"/>
-            <Button x:Name="test" Content="测试效果" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Button Content="斷開" Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" x:Name="DisconnBtn" Click="Disconnbtn_OnClick"/>
+            <Button x:Name="Test" Content="测试效果" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Click="Test_OnClick" Margin="28,0,0,0" Width="70" />
 
         </StackPanel>
@@ -52,13 +52,13 @@
 
         <TextBlock Text="非B站出品 ©2014-2016 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
 
-        <TabControl x:Name="tabControl">
+        <TabControl x:Name="TabControl">
             <TabItem Header="日志">
                 <!--<TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />-->
 
 
-                <ItemsControl  x:Name="log" ItemsSource="{Binding}" ItemTemplate="{StaticResource logtemplate}" >
+                <ItemsControl  x:Name="Log" ItemsSource="{Binding}" ItemTemplate="{StaticResource LogTemplate}" >
       
                     <ItemsControl.Template>
                         <ControlTemplate>
@@ -103,7 +103,7 @@
                             <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="插件名称"/>
                             <DataGridTextColumn Binding="{Binding PluginDesc}" ClipboardContentBinding="{Binding PluginDesc}" Header="插件描述"/>
                             <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="插件作者"/>
-                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource converter}}" Header="插件狀態"/>
+                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource Converter}}" Header="插件狀態"/>
                             <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
                         </DataGrid.Columns>
                         <DataGrid.ContextMenu>
@@ -152,7 +152,7 @@
             </TabItem>
 
             <TabItem Header="说明">
-                <WebBrowser x:Name="web" Source="http://soft.ceve-market.org/bilibili_dm/app.htm" />
+                <WebBrowser x:Name="HelpWeb" Source="http://soft.ceve-market.org/bilibili_dm/app.htm" />
 
             </TabItem>
         </TabControl>

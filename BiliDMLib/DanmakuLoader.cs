@@ -173,7 +173,7 @@ namespace BiliDMLib
                                     }
 
                                 }
-                                catch (Exception ex)
+                                catch (Exception)
                                 {
                                     // ignored
                                 }
