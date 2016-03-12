@@ -23,7 +23,7 @@ namespace Bililive_dm
 //            this.Start();
         }
 
-      
+
 
         private void B_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
         {
@@ -31,14 +31,20 @@ namespace Bililive_dm
             {
                 if (e.Danmaku.MsgType == MsgTypeEnum.Comment)
                 {
+                    foreach (var i in System.Net.NetworkInformation.NetworkInterface.GetAllNetworkInterfaces())
+                        foreach (var ua in i.GetIPProperties().UnicastAddresses)
+                        {
+                        
                     UdpClient client = new UdpClient();
-                    IPEndPoint ip = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 45695);
-                    var obj = JObject.FromObject(new { User = e.Danmaku.CommentUser + "", Comment = e.Danmaku.CommentText + "" });
+                    IPEndPoint ip = new IPEndPoint(ua.Address.GetBroadcastAddress(ua.IPv4Mask), 45695);
+                    var obj =
+                        JObject.FromObject(new {User = e.Danmaku.CommentUser + "", Comment = e.Danmaku.CommentText + ""});
                     byte[] sendbuf = Encoding.UTF8.GetBytes(obj.ToString());
                     client.Send(sendbuf, sendbuf.Length, ip);
                     client.Close();
-
                 }
+
+            }
             }
             catch (Exception)
             {

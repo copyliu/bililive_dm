@@ -117,7 +117,7 @@ namespace BiliDMLib
 
                     if (packetlength < 16)
                     {
-                        throw new NotSupportedException("协议失败");
+                        throw new NotSupportedException("协议失败: (L:"+packetlength+")");
                     }
 
                     NetStream.Read(stableBuffer, 0, 2);//magic

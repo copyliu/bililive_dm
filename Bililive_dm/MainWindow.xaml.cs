@@ -44,7 +44,7 @@ namespace Bililive_dm
         private readonly ObservableCollection<GiftRank> Ranking = new ObservableCollection<GiftRank>();
         private readonly ObservableCollection<SessionItem> SessionItems = new ObservableCollection<SessionItem>();
 
-        private readonly StoreModel settings;
+        private StoreModel settings;
 
         private readonly StaticModel Static = new StaticModel();
         private readonly DispatcherTimer timer;
@@ -53,7 +53,15 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
-            this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
+            try
+            {
+                this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
+            }
+            catch
+            {
+                this.RoomId.Text = "";
+            }
+            
             var dt = new DateTime(2000, 1, 1);
             var assembly = Assembly.GetExecutingAssembly();
             var version = assembly.FullName.Split(',')[1];
@@ -82,25 +90,7 @@ namespace Bililive_dm
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
             b.ReceivedRoomCount += b_ReceivedRoomCount;
-            try
-            {
-                var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
-                                                            IsolatedStorageScope.Domain |
-                                                            IsolatedStorageScope.Assembly, null, null);
-                var settingsreader =
-                    new XmlSerializer(typeof (StoreModel));
-                var reader = new StreamReader(new IsolatedStorageFileStream(
-                    "settings.xml", FileMode.Open, isoStore));
-                settings = (StoreModel) settingsreader.Deserialize(reader);
-                reader.Close();
-            }
-            catch (Exception)
-            {
-                settings = new StoreModel();
-            }
-            settings.SaveConfig();
-            settings.toStatic();
-            OptionDialog.LayoutRoot.DataContext = settings;
+            
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, FuckMicrosoft,
                 Dispatcher);
@@ -238,7 +228,30 @@ namespace Bililive_dm
             }
                 );
             shit.IsBackground = true;
-//            shit.Start();
+
+            //            shit.Start();
+
+
+
+            try
+            {
+                var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
+                                                            IsolatedStorageScope.Domain |
+                                                            IsolatedStorageScope.Assembly, null, null);
+                var settingsreader =
+                    new XmlSerializer(typeof(StoreModel));
+                var reader = new StreamReader(new IsolatedStorageFileStream(
+                    "settings.xml", FileMode.Open, isoStore));
+                settings = (StoreModel)settingsreader.Deserialize(reader);
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                settings = new StoreModel();
+            }
+            settings.SaveConfig();
+            settings.toStatic();
+            OptionDialog.LayoutRoot.DataContext = settings;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
