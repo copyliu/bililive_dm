@@ -32,6 +32,7 @@ namespace BiliDMLib
         private short protocolversion = 1;
         private static int lastroomid ;
         private static string lastserver;
+        private object shit_lock=new object();//ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
 
         public async Task<bool> ConnectAsync(int roomId)
         {
@@ -104,119 +105,121 @@ namespace BiliDMLib
 
         private void ReceiveMessageLoop()
         {
-            try
+            lock (shit_lock)
+            //ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
             {
-                var stableBuffer = new byte[Client.ReceiveBufferSize];
-
-                while (this.Connected)
+                try
                 {
+                    var stableBuffer = new byte[Client.ReceiveBufferSize];
 
-                    NetStream.Read(stableBuffer, 0, 4);
-                    var packetlength = BitConverter.ToInt32(stableBuffer, 0);
-                    packetlength= IPAddress.NetworkToHostOrder(packetlength) ;
-
-                    if (packetlength < 16)
+                    while (this.Connected)
                     {
-                        throw new NotSupportedException("协议失败: (L:"+packetlength+")");
-                    }
 
-                    NetStream.Read(stableBuffer, 0, 2);//magic
-                    NetStream.Read(stableBuffer, 0, 2);//protocol_version 
+                        NetStream.Read(stableBuffer, 0, 4);
+                        var packetlength = BitConverter.ToInt32(stableBuffer, 0);
+                        packetlength = IPAddress.NetworkToHostOrder(packetlength);
 
-                    NetStream.Read(stableBuffer, 0, 4);
-                    var typeId = BitConverter.ToInt32(stableBuffer, 0);
-                    typeId = IPAddress.NetworkToHostOrder(typeId);
-
-                    Console.WriteLine(typeId);
-                    NetStream.Read(stableBuffer, 0, 4);//magic, params?
-                    var playloadlength = packetlength - 16;
-                    if (playloadlength == 0)
-                    {
-                        continue;//没有内容了
-                        
-                    }
-                    typeId = typeId - 1;//和反编译的代码对应 妈个鸡为毛你要减一
-                    switch (typeId)
-                    {
-                        case 0:
-                        case 1:
-                        case 2:
+                        if (packetlength < 16)
                         {
-                                NetStream.Read(stableBuffer, 0, 4);
-
-                                var viewer = BitConverter.ToUInt32(stableBuffer.Take(4).Reverse().ToArray(), 0); //观众人数
-                                Console.WriteLine(viewer);
-                                if (ReceivedRoomCount != null)
-                                {
-                                    ReceivedRoomCount(this, new ReceivedRoomCountArgs() { UserCount = viewer });
-                                }
-                            break;
+                            throw new NotSupportedException("协议失败: (L:" + packetlength + ")");
                         }
-                        case 3:
-                        case 4://playerCommand
-                            {
-                                var buffer = new byte[playloadlength];
 
-                                NetStream.Read(buffer, 0, playloadlength);
-                                var json = Encoding.UTF8.GetString(buffer, 0, playloadlength);
-                                if (debuglog)
-                                {
-                                    Console.WriteLine(json);
+                        NetStream.Read(stableBuffer, 0, 2);//magic
+                        NetStream.Read(stableBuffer, 0, 2);//protocol_version 
 
-                                }
-                                try
+                        NetStream.Read(stableBuffer, 0, 4);
+                        var typeId = BitConverter.ToInt32(stableBuffer, 0);
+                        typeId = IPAddress.NetworkToHostOrder(typeId);
+
+                        Console.WriteLine(typeId);
+                        NetStream.Read(stableBuffer, 0, 4);//magic, params?
+                        var playloadlength = packetlength - 16;
+                        if (playloadlength == 0)
+                        {
+                            continue;//没有内容了
+
+                        }
+                        typeId = typeId - 1;//和反编译的代码对应 
+                        var buffer = new byte[playloadlength];
+                        NetStream.Read(buffer, 0, playloadlength);
+                        switch (typeId)
+                        {
+                            case 0:
+                            case 1:
+                            case 2:
                                 {
-                                    DanmakuModel dama = new DanmakuModel(json, 2);
-                                    if (ReceivedDanmaku != null)
+                                    
+
+                                    var viewer = BitConverter.ToUInt32(buffer.Take(4).Reverse().ToArray(), 0); //观众人数
+                                    Console.WriteLine(viewer);
+                                    if (ReceivedRoomCount != null)
                                     {
-                                        ReceivedDanmaku(this, new ReceivedDanmakuArgs() { Danmaku = dama });
+                                        ReceivedRoomCount(this, new ReceivedRoomCountArgs() { UserCount = viewer });
+                                    }
+                                    break;
+                                }
+                            case 3:
+                            case 4://playerCommand
+                                {
+                                   
+                                    var json = Encoding.UTF8.GetString(buffer, 0, playloadlength);
+                                    if (debuglog)
+                                    {
+                                        Console.WriteLine(json);
+
+                                    }
+                                    try
+                                    {
+                                        DanmakuModel dama = new DanmakuModel(json, 2);
+                                        if (ReceivedDanmaku != null)
+                                        {
+                                            ReceivedDanmaku(this, new ReceivedDanmakuArgs() { Danmaku = dama });
+                                        }
+
+                                    }
+                                    catch (Exception)
+                                    {
+                                        // ignored
                                     }
 
+                                    break;
                                 }
-                                catch (Exception)
+                            case 5://newScrollMessage
                                 {
-                                    // ignored
+                                    
+                                    break;
                                 }
-
-                                break;
-                            }
-                        case 5://newScrollMessage
-                        {
-                            var buffer = new byte[playloadlength];
-                            NetStream.Read(buffer, 0, playloadlength);
-                            break;
+                            case 7:
+                                {
+                                   
+                                    break;
+                                }
+                            case 16:
+                                {
+                                    break;
+                                }
+                            default:
+                                {
+                                   
+                                    break;
+                                }
+                                //                     
                         }
-                        case 7:
-                        {
-                            var buffer = new byte[playloadlength];
-                            NetStream.Read(buffer, 0, playloadlength);
-                            break;
-                        }
-                        case 16:
-                        {
-                            break;
-                        }
-                        default:
-                        {
-                            var buffer = new byte[playloadlength];
-                            NetStream.Read(buffer, 0, playloadlength);
-                            break;
-                        }
-//                     
                     }
                 }
-            }
-            catch (NotSupportedException ex)
-            {
-                this.Error = ex;
-                _disconnect();
-            }
-            catch (Exception ex)
-            {
-                this.Error = ex;
-                _disconnect();
+                catch (NotSupportedException ex)
+                {
+                    this.Error = ex;
+                    _disconnect();
+                }
+                catch (Exception ex)
+                {
+                    this.Error = ex;
+                    _disconnect();
 
+                }
             }
+            
         }
 
         private async void HeartbeatLoop()
