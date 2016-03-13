@@ -32,7 +32,7 @@ namespace BiliDMLib
         private short protocolversion = 1;
         private static int lastroomid ;
         private static string lastserver;
-        private object shit_lock=new object();//ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
+//        private object shit_lock=new object();//ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
 
         public async Task<bool> ConnectAsync(int roomId)
         {
@@ -105,9 +105,9 @@ namespace BiliDMLib
 
         private void ReceiveMessageLoop()
         {
-            lock (shit_lock)
-            //ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
-            {
+//            lock (shit_lock)
+//            //ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
+//            {
                 try
                 {
                     var stableBuffer = new byte[Client.ReceiveBufferSize];
@@ -115,7 +115,7 @@ namespace BiliDMLib
                     while (this.Connected)
                     {
 
-                        NetStream.Read(stableBuffer, 0, 4);
+                        NetStream.ReadB(stableBuffer, 0, 4);
                         var packetlength = BitConverter.ToInt32(stableBuffer, 0);
                         packetlength = IPAddress.NetworkToHostOrder(packetlength);
 
@@ -124,15 +124,15 @@ namespace BiliDMLib
                             throw new NotSupportedException("协议失败: (L:" + packetlength + ")");
                         }
 
-                        NetStream.Read(stableBuffer, 0, 2);//magic
-                        NetStream.Read(stableBuffer, 0, 2);//protocol_version 
+                        NetStream.ReadB(stableBuffer, 0, 2);//magic
+                        NetStream.ReadB(stableBuffer, 0, 2);//protocol_version 
 
-                        NetStream.Read(stableBuffer, 0, 4);
+                        NetStream.ReadB(stableBuffer, 0, 4);
                         var typeId = BitConverter.ToInt32(stableBuffer, 0);
                         typeId = IPAddress.NetworkToHostOrder(typeId);
 
                         Console.WriteLine(typeId);
-                        NetStream.Read(stableBuffer, 0, 4);//magic, params?
+                        NetStream.ReadB(stableBuffer, 0, 4);//magic, params?
                         var playloadlength = packetlength - 16;
                         if (playloadlength == 0)
                         {
@@ -141,7 +141,7 @@ namespace BiliDMLib
                         }
                         typeId = typeId - 1;//和反编译的代码对应 
                         var buffer = new byte[playloadlength];
-                        NetStream.Read(buffer, 0, playloadlength);
+                        NetStream.ReadB(buffer, 0, playloadlength);
                         switch (typeId)
                         {
                             case 0:
@@ -218,7 +218,7 @@ namespace BiliDMLib
                     _disconnect();
 
                 }
-            }
+//            }
             
         }
 
