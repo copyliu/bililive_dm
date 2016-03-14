@@ -34,5 +34,53 @@ namespace Bililive_dm.Properties {
                 this["roomId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool showItem {
+            get {
+                return ((bool)(this["showItem"]));
+            }
+            set {
+                this["showItem"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool showSidebar {
+            get {
+                return ((bool)(this["showSidebar"]));
+            }
+            set {
+                this["showSidebar"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool showFullWindow {
+            get {
+                return ((bool)(this["showFullWindow"]));
+            }
+            set {
+                this["showFullWindow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool onTop {
+            get {
+                return ((bool)(this["onTop"]));
+            }
+            set {
+                this["onTop"] = value;
+            }
+        }
     }
 }

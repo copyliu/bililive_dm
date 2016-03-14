@@ -37,7 +37,7 @@ namespace Bililive_dm
                 if (value.Equals(_mainOverlayXoffset)) return;
                 _mainOverlayXoffset = Store.MainOverlayXoffset = value;
 
-                ((MainWindow) (Application.Current.MainWindow)).overlay.Top = SystemParameters.WorkArea.Top + value;
+                ((MainWindow) (Application.Current.MainWindow)).Overlay.Top = SystemParameters.WorkArea.Top + value;
 
                 OnPropertyChanged();
             }
@@ -50,7 +50,7 @@ namespace Bililive_dm
             {
                 if (value.Equals(_mainOverlayYoffset)) return;
                 _mainOverlayYoffset = Store.MainOverlayYoffset = value;
-                ((MainWindow) (Application.Current.MainWindow)).overlay.Left = SystemParameters.WorkArea.Right -
+                ((MainWindow) (Application.Current.MainWindow)).Overlay.Left = SystemParameters.WorkArea.Right -
                                                                                Store.MainOverlayWidth + value;
                 OnPropertyChanged();
             }
@@ -63,8 +63,8 @@ namespace Bililive_dm
             {
                 if (value.Equals(_mainOverlayWidth)) return;
                 _mainOverlayWidth = Store.MainOverlayWidth = value;
-                ((MainWindow) (Application.Current.MainWindow)).overlay.Width = value;
-                ((MainWindow) (Application.Current.MainWindow)).overlay.Left = SystemParameters.WorkArea.Right -
+                ((MainWindow) (Application.Current.MainWindow)).Overlay.Width = value;
+                ((MainWindow) (Application.Current.MainWindow)).Overlay.Left = SystemParameters.WorkArea.Right -
                                                                                value + Store.MainOverlayYoffset;
                 OnPropertyChanged();
             }
