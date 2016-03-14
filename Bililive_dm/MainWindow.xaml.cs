@@ -27,16 +27,16 @@ namespace Bililive_dm
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const int WS_EX_TRANSPARENT = 0x20;
-        private const int GWL_EXSTYLE = -20;
-        private const int _maxCapacity = 100;
+        private const int WsExTransparent = 0x20;
+        private const int GwlExstyle = -20;
+        private const int MaxCapacity = 100;
 
         private readonly Queue<DanmakuModel> _danmakuQueue = new Queue<DanmakuModel>();
 
         private readonly ObservableCollection<string> _messageQueue = new ObservableCollection<string>();
         private readonly DanmakuLoader b = new DanmakuLoader();
-        private IDanmakuWindow fulloverlay;
-        public MainOverlay overlay;
+        private IDanmakuWindow _fulloverlay;
+        public MainOverlay Overlay;
         private readonly ObservableCollection<DMPlugin> Plugins = new ObservableCollection<DMPlugin>();
 
         private readonly Thread ProcDanmakuThread;
@@ -44,15 +44,22 @@ namespace Bililive_dm
         private readonly ObservableCollection<GiftRank> Ranking = new ObservableCollection<GiftRank>();
         private readonly ObservableCollection<SessionItem> SessionItems = new ObservableCollection<SessionItem>();
 
-        private StoreModel settings;
+        private StoreModel _settings;
 
-        private readonly StaticModel Static = new StaticModel();
+        private readonly StaticModel _static = new StaticModel();
         private readonly DispatcherTimer timer;
         private readonly DispatcherTimer timer_magic;
 
         public MainWindow()
         {
             InitializeComponent();
+            //reload becase window init will change some value
+            Properties.Settings.Default.Reload();
+            this._showvipEnabled = Properties.Settings.Default.showItem;
+            this._overlayEnabled = Properties.Settings.Default.showSidebar;
+            this._fulloverlayEnabled = Properties.Settings.Default.showFullWindow;
+            this.Topmost = Properties.Settings.Default.onTop;
+
             try
             {
                 this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
@@ -152,10 +159,10 @@ namespace Bililive_dm
                                 ProcDanmaku(danmaku);
                                 if (danmaku.MsgType == MsgTypeEnum.Comment)
                                 {
-                                    lock (Static)
+                                    lock (_static)
                                     {
-                                        Static.DanmakuCountShow += 1;
-                                        Static.AddUser(danmaku.CommentUser);
+                                        _static.DanmakuCountShow += 1;
+                                        _static.AddUser(danmaku.CommentUser);
                                     }
                                 }
                             }
@@ -167,7 +174,7 @@ namespace Bililive_dm
             });
             ProcDanmakuThread.IsBackground = true;
             ProcDanmakuThread.Start();
-            StaticPanel.DataContext = Static;
+            StaticPanel.DataContext = _static;
 
 
             for (var i = 0; i < 100; i++)
@@ -187,12 +194,13 @@ namespace Bililive_dm
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            Full.IsChecked = fulloverlay_enabled;
-            SideBar.IsChecked = overlay_enabled;
-            SaveLog.IsChecked = savelog_enabled;
-            SSTP.IsChecked = sendssp_enabled;
-            ShowItem.IsChecked = showvip_enabled;
-            ShowError.IsChecked = showerror_enabled;
+            //Full.IsChecked = _fulloverlayEnabled;
+            SideBar.IsChecked = _overlayEnabled;
+            SaveLog.IsChecked = _savelogEnabled;
+            SSTP.IsChecked = _sendsspEnabled;
+            ShowItem.IsChecked = _showvipEnabled;
+            ShowError.IsChecked = _showerrorEnabled;
+            WindowTop.IsChecked = Topmost;
             var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
             sc?.ScrollToEnd();
 
@@ -218,9 +226,9 @@ namespace Bililive_dm
                             });
                         }
                     }
-                    lock (Static)
+                    lock (_static)
                     {
-                        Static.DanmakuCountRaw += bbb;
+                        _static.DanmakuCountRaw += bbb;
                     }
 
                     Thread.Sleep(1000);
@@ -242,16 +250,18 @@ namespace Bililive_dm
                     new XmlSerializer(typeof(StoreModel));
                 var reader = new StreamReader(new IsolatedStorageFileStream(
                     "settings.xml", FileMode.Open, isoStore));
-                settings = (StoreModel)settingsreader.Deserialize(reader);
+                _settings = (StoreModel)settingsreader.Deserialize(reader);
                 reader.Close();
             }
             catch (Exception)
             {
-                settings = new StoreModel();
+                _settings = new StoreModel();
             }
-            settings.SaveConfig();
-            settings.toStatic();
-            OptionDialog.LayoutRoot.DataContext = settings;
+            _settings.SaveConfig();
+            _settings.toStatic();
+            OptionDialog.LayoutRoot.DataContext = _settings;
+            // Full overlay need be loaded after _settings
+            Full.IsChecked = _fulloverlayEnabled;
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
@@ -287,23 +297,23 @@ namespace Bililive_dm
 
         ~MainWindow()
         {
-            if (fulloverlay != null)
+            if (_fulloverlay != null)
             {
-                fulloverlay.Dispose();
-                fulloverlay = null;
+                _fulloverlay.Dispose();
+                _fulloverlay = null;
             }
         }
 
         private void FuckMicrosoft(object sender, EventArgs eventArgs)
         {
-            if (fulloverlay != null)
+            if (_fulloverlay != null)
             {
-                fulloverlay.ForceTopmost();
+                _fulloverlay.ForceTopmost();
             }
-            if (overlay != null)
+            if (Overlay != null)
             {
-                overlay.Topmost = false;
-                overlay.Topmost = true;
+                Overlay.Topmost = false;
+                Overlay.Topmost = true;
             }
         }
 
@@ -313,30 +323,30 @@ namespace Bililive_dm
             var isWin8OrLater = Environment.OSVersion.Platform == PlatformID.Win32NT
                                 && Environment.OSVersion.Version >= win8Version;
             if (isWin8OrLater && Store.WtfEngineEnabled)
-                fulloverlay = new WtfDanmakuWindow();
+                _fulloverlay = new WtfDanmakuWindow();
             else
-                fulloverlay = new WpfDanmakuOverlay();
-            settings.PropertyChanged += fulloverlay.OnPropertyChanged;
-            fulloverlay.Show();
+                _fulloverlay = new WpfDanmakuOverlay();
+            _settings.PropertyChanged += _fulloverlay.OnPropertyChanged;
+            _fulloverlay.Show();
         }
 
         private void OpenOverlay()
         {
-            overlay = new MainOverlay();
-            overlay.Deactivated += overlay_Deactivated;
-            overlay.SourceInitialized += delegate
+            Overlay = new MainOverlay();
+            Overlay.Deactivated += overlay_Deactivated;
+            Overlay.SourceInitialized += delegate
             {
-                var hwnd = new WindowInteropHelper(overlay).Handle;
-                var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-                SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
+                var hwnd = new WindowInteropHelper(Overlay).Handle;
+                var extendedStyle = GetWindowLong(hwnd, GwlExstyle);
+                SetWindowLong(hwnd, GwlExstyle, extendedStyle | WsExTransparent);
             };
-            overlay.Background = Brushes.Transparent;
-            overlay.ShowInTaskbar = false;
-            overlay.Topmost = true;
-            overlay.Top = SystemParameters.WorkArea.Top + Store.MainOverlayXoffset;
-            overlay.Left = SystemParameters.WorkArea.Right - Store.MainOverlayWidth + Store.MainOverlayYoffset;
-            overlay.Height = SystemParameters.WorkArea.Height;
-            overlay.Width = Store.MainOverlayWidth;
+            Overlay.Background = Brushes.Transparent;
+            Overlay.ShowInTaskbar = false;
+            Overlay.Topmost = true;
+            Overlay.Top = SystemParameters.WorkArea.Top + Store.MainOverlayXoffset;
+            Overlay.Left = SystemParameters.WorkArea.Right - Store.MainOverlayWidth + Store.MainOverlayYoffset;
+            Overlay.Height = SystemParameters.WorkArea.Height;
+            Overlay.Width = Store.MainOverlayWidth;
         }
 
         private void overlay_Deactivated(object sender, EventArgs e)
@@ -464,9 +474,9 @@ namespace Bililive_dm
 
             if (e.Danmaku.MsgType == MsgTypeEnum.Comment)
             {
-                lock (Static)
+                lock (_static)
                 {
-                    Static.DanmakuCountRaw += 1;
+                    _static.DanmakuCountRaw += 1;
                 }
             }
 
@@ -638,7 +648,7 @@ namespace Bililive_dm
 
         private void errorlogging(string text)
         {
-            if (!showerror_enabled) return;
+            if (!_showerrorEnabled) return;
             if (ShowError.Dispatcher.CheckAccess())
             {
                 logging(text);
@@ -653,7 +663,7 @@ namespace Bililive_dm
         {
             if (Log.Dispatcher.CheckAccess())
             {
-                if (_messageQueue.Count >= _maxCapacity)
+                if (_messageQueue.Count >= MaxCapacity)
                 {
                     _messageQueue.RemoveAt(0);
                 }
@@ -663,7 +673,7 @@ namespace Bililive_dm
 //                log.CaretIndex = this.log.Text.Length;
 
 
-                if (savelog_enabled)
+                if (_savelogEnabled)
                 {
                     try
                     {
@@ -694,11 +704,11 @@ namespace Bililive_dm
 
         public void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false)
         {
-            if (!showerror_enabled && warn)
+            if (!_showerrorEnabled && warn)
             {
                 return;
             }
-            if (!overlay_enabled && !fulloverlay_enabled) return;
+            if (!_overlayEnabled && !_fulloverlayEnabled) return;
             if (Dispatcher.CheckAccess())
             {
                 if (SideBar.IsChecked == true)
@@ -715,11 +725,11 @@ namespace Bililive_dm
                     var sb = (Storyboard) c.Resources["Storyboard1"];
                     //Storyboard.SetTarget(sb,c);
                     sb.Completed += sb_Completed;
-                    overlay.LayoutRoot.Children.Add(c);
+                    Overlay.LayoutRoot.Children.Add(c);
                 }
                 if (Full.IsChecked == true && (!warn || foreceenablefullscreen))
                 {
-                    fulloverlay.AddDanmaku(DanmakuType.Scrolling, text, 0xFFFFFFFF);
+                    _fulloverlay.AddDanmaku(DanmakuType.Scrolling, text, 0xFFFFFFFF);
                 }
             }
             else
@@ -735,7 +745,7 @@ namespace Bililive_dm
             var c = Storyboard.GetTarget(s.Children[2].Timeline) as DanmakuTextControl;
             if (c != null)
             {
-                overlay.LayoutRoot.Children.Remove(c);
+                Overlay.LayoutRoot.Children.Remove(c);
             }
         }
 
@@ -785,28 +795,32 @@ namespace Bililive_dm
         private void Full_Checked(object sender, RoutedEventArgs e)
         {
             //            overlay.Show();
-            fulloverlay_enabled = true;
+            _fulloverlayEnabled = true;
             OpenFullOverlay();
-            fulloverlay.Show();
+            _fulloverlay.Show();
+            Properties.Settings.Default.showFullWindow = true;
         }
 
         private void SideBar_Checked(object sender, RoutedEventArgs e)
         {
-            overlay_enabled = true;
+            _overlayEnabled = true;
             OpenOverlay();
-            overlay.Show();
+            Overlay.Show();
+            Properties.Settings.Default.showSidebar = true;
         }
 
         private void SideBar_Unchecked(object sender, RoutedEventArgs e)
         {
-            overlay_enabled = false;
-            overlay.Close();
+            _overlayEnabled = false;
+            Overlay.Close();
+            Properties.Settings.Default.showSidebar = false;
         }
 
         private void Full_Unchecked(object sender, RoutedEventArgs e)
         {
-            fulloverlay_enabled = false;
-            fulloverlay.Close();
+            _fulloverlayEnabled = false;
+            _fulloverlay.Close();
+            Properties.Settings.Default.showFullWindow = false;
         }
 
 
@@ -814,6 +828,7 @@ namespace Bililive_dm
         {
             b.Disconnect();
             ConnBtn.IsEnabled = true;
+            Properties.Settings.Default.Save();
             foreach (var dmPlugin in Plugins)
             {
                 new Thread(() =>
@@ -845,25 +860,25 @@ namespace Bililive_dm
 
         private void ClearMe2_OnClick(object sender, RoutedEventArgs e)
         {
-            lock (Static)
+            lock (_static)
             {
-                Static.DanmakuCountShow = 0;
+                _static.DanmakuCountShow = 0;
             }
         }
 
         private void ClearMe3_OnClick(object sender, RoutedEventArgs e)
         {
-            lock (Static)
+            lock (_static)
             {
-                Static.ClearUser();
+                _static.ClearUser();
             }
         }
 
         private void ClearMe4_OnClick(object sender, RoutedEventArgs e)
         {
-            lock (Static)
+            lock (_static)
             {
-                Static.DanmakuCountRaw = 0;
+                _static.DanmakuCountRaw = 0;
             }
         }
 
@@ -1022,46 +1037,49 @@ namespace Bililive_dm
         private void WindowTop_OnChecked(object sender, RoutedEventArgs e)
         {
             Topmost = WindowTop.IsChecked == true;
+            Properties.Settings.Default.onTop = Topmost;
         }
 
         private void SaveLog_OnChecked(object sender, RoutedEventArgs e)
         {
-            savelog_enabled = true;
+            _savelogEnabled = true;
         }
 
         private void SaveLog_OnUnchecked(object sender, RoutedEventArgs e)
         {
-            savelog_enabled = false;
+            _savelogEnabled = false;
         }
 
         private void ShowItem_OnChecked(object sender, RoutedEventArgs e)
         {
-            showvip_enabled = true;
+            _showvipEnabled = true;
+            Properties.Settings.Default.showItem = true;
         }
 
         private void ShowItem_OnUnchecked(object sender, RoutedEventArgs e)
         {
-            showvip_enabled = false;
+            _showvipEnabled = false;
+            Properties.Settings.Default.showItem = false;
         }
 
         private void SSTP_OnChecked(object sender, RoutedEventArgs e)
         {
-            sendssp_enabled = true;
+            _sendsspEnabled = true;
         }
 
         private void SSTP_OnUnchecked(object sender, RoutedEventArgs e)
         {
-            sendssp_enabled = false;
+            _sendsspEnabled = false;
         }
 
         private void ShowError_OnChecked(object sender, RoutedEventArgs e)
         {
-            showerror_enabled = true;
+            _showerrorEnabled = true;
         }
 
         private void ShowError_OnUnchecked(object sender, RoutedEventArgs e)
         {
-            showerror_enabled = false;
+            _showerrorEnabled = false;
         }
 
         private void UIElement_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -1094,16 +1112,31 @@ namespace Bililive_dm
             }
             //Do whatever you want here..
         }
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                if (!this.ConnBtn.IsEnabled)
+                {
+                    Properties.Settings.Default.Save();
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
 
         #region Runtime settings
 
-        private bool fulloverlay_enabled;
-        private bool overlay_enabled = true;
-        private bool savelog_enabled = true;
-        private bool sendssp_enabled = true;
-        private bool showvip_enabled = true;
-        private bool showerror_enabled = true;
+        private bool _fulloverlayEnabled;
+        private bool _overlayEnabled;
+        private bool _savelogEnabled = true;
+        private bool _sendsspEnabled = true;
+        private bool _showvipEnabled;
+        private bool _showerrorEnabled = true;
 
         #endregion
+
     }
 }
