@@ -521,23 +521,29 @@ namespace Bililive_dm
                     {
                         var query =
                             SessionItems.Where(
-                                p => p.UserName == danmakuModel.GiftUser && p.Item == danmakuModel.GiftName);
-                        var sessionItems = query as SessionItem[] ?? query.ToArray();
-                        if (sessionItems.Any())
+                                p => p.UserName == danmakuModel.GiftUser && p.Item == danmakuModel.GiftName).ToArray();
+                        if (query.Any())
                         {
                             Dispatcher.BeginInvoke(
-                                new Action(() => sessionItems.First().num += Convert.ToDecimal(danmakuModel.GiftNum)));
+                                new Action(() => query.First().num += Convert.ToDecimal(danmakuModel.GiftNum)));
                         }
                         else
                         {
-                            Dispatcher.BeginInvoke(new Action(() => SessionItems.Add(
-                                new SessionItem
+                            Dispatcher.BeginInvoke(new Action(() =>
+                            {
+                                lock (SessionItems)
                                 {
-                                    Item = danmakuModel.GiftName,
-                                    UserName = danmakuModel.GiftUser,
-                                    num = Convert.ToDecimal(danmakuModel.GiftNum)
+                                    SessionItems.Add(
+                                        new SessionItem
+                                        {
+                                            Item = danmakuModel.GiftName,
+                                            UserName = danmakuModel.GiftUser,
+                                            num = Convert.ToDecimal(danmakuModel.GiftNum)
+                                        }
+                                        );
+
                                 }
-                                )));
+                            }));
                         }
                         logging("收到道具:" + danmakuModel.GiftUser + " 赠送的: " + danmakuModel.GiftName + " x " +
                                 danmakuModel.GiftNum);
@@ -653,16 +659,17 @@ namespace Bililive_dm
         {
             if (Log.Dispatcher.CheckAccess())
             {
+                lock (_messageQueue) { 
                 if (_messageQueue.Count >= _maxCapacity)
                 {
                     _messageQueue.RemoveAt(0);
                 }
 
                 _messageQueue.Add(DateTime.Now.ToString("T") + " : " + text);
-//                this.log.Text = string.Join("\n", _messageQueue);
-//                log.CaretIndex = this.log.Text.Length;
+                    //                this.log.Text = string.Join("\n", _messageQueue);
+                    //                log.CaretIndex = this.log.Text.Length;
 
-
+                }
                 if (savelog_enabled)
                 {
                     try

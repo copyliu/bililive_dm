@@ -29,10 +29,10 @@ namespace BiliDMLib
                 {
                     throw new ObjectDisposedException(null);
                 }
-                if (available != count)
-                {
-                    throw new NotSupportedException();
-                }
+//                if (available != count)
+//                {
+//                    throw new NotSupportedException();
+//                }
                 read += available;
                 offset += available;
 
