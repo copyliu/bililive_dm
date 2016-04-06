@@ -92,6 +92,7 @@
                     <bililiveDm:OptionDialog x:Name="OptionDialog"/>
                     <CheckBox Content="伪春菜联动" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="-1" Margin="0,500,0,0" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
                     <CheckBox Content="顯示出錯信息" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="-1" Margin="0,514,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
+<!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
                 </Grid>
             </TabItem>
             <TabItem Header="插件">

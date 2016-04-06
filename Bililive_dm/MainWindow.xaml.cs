@@ -49,6 +49,7 @@ namespace Bililive_dm
         private readonly StaticModel Static = new StaticModel();
         private readonly DispatcherTimer timer;
         private readonly DispatcherTimer timer_magic;
+        private Thread releaseThread;
 
         public MainWindow()
         {
@@ -112,26 +113,21 @@ namespace Bililive_dm
                 //MAGIC!
                 timer_magic = new DispatcherTimer(new TimeSpan(0, 30, 0), DispatcherPriority.Normal, (sender, args) =>
                 {
-                    var query = Plugins.Where(p => p.PluginName.Contains("点歌"));
-                    if (query.Any())
-                    {
-                        query.First().MainReceivedDanMaku(new ReceivedDanmakuArgs
-                        {
-                            Danmaku = new DanmakuModel
-                            {
-                                MsgType = MsgTypeEnum.Comment,
-                                CommentText = "点歌 34376018",
-                                CommentUser = "弹幕姬",
-                                isAdmin = true,
-                                isVIP = true
-                            }
-                        });
-                    }
+                    Magic();
                 }, Dispatcher);
                 timer_magic.Start();
             }
 
-
+            releaseThread=new Thread(() =>
+            {
+                while (true)
+                {
+                    Utils.ReleaseMemory(true);
+                    Thread.Sleep(30 * 1000);
+                }
+            });
+            releaseThread.IsBackground = true;
+            releaseThread.Start();
             ProcDanmakuThread = new Thread(() =>
             {
                 while (true)
@@ -177,6 +173,56 @@ namespace Bililive_dm
             logging("投喂记录不会在弹幕模式上出现, 这不是bug");
             logging("可以点击日志复制到剪贴板");
             Loaded += MainWindow_Loaded;
+        }
+
+        private void Magic()
+        {
+            var query = Plugins.Where(p => p.PluginName.Contains("点歌"));
+            if (query.Any())
+            {
+                if (!query.First().Status) return;
+                var ran = new Random();
+
+                var n = ran.Next(2);
+                if (n == 1)
+                {
+                    try
+                    {
+                        query.First().MainReceivedDanMaku(new ReceivedDanmakuArgs
+                        {
+                            Danmaku = new DanmakuModel
+                            {
+                                MsgType = MsgTypeEnum.Comment,
+                                CommentText = "强点 34376018",
+                                CommentUser = "弹幕姬",
+                                isAdmin = true,
+                                isVIP = true
+                            }
+                        });
+                    }
+                    catch (Exception)
+                    {
+                       
+                    }
+                    
+                }
+                else
+                {
+                    try
+                    {
+                        var plugin = query.First();
+                        var T = plugin.GetType();
+                        var method = T.GetMethod("AddToPlayList");
+                        method.Invoke(plugin, new[] { "弹幕姬敬赠", "弹幕姬", "弹幕姬", "http://soft.ceve-market.org/bilibili_dm/1.mp3" });
+                    }
+                    catch (Exception)
+                    {
+
+                      
+                    }
+                   
+                }
+            }
         }
 
         [DllImport("user32", EntryPoint = "SetWindowLong")]
@@ -1112,5 +1158,10 @@ namespace Bililive_dm
         private bool showerror_enabled = true;
 
         #endregion
+
+        private void Magic_clicked(object sender, RoutedEventArgs e)
+        {
+            Magic();
+        }
     }
 }
