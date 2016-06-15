@@ -127,7 +127,7 @@ namespace Bililive_dm
                 }
             });
             releaseThread.IsBackground = true;
-            releaseThread.Start();
+//            releaseThread.Start();
             ProcDanmakuThread = new Thread(() =>
             {
                 while (true)

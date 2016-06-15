@@ -17,6 +17,7 @@ namespace BiliDMLib
 {
     public class DanmakuLoader
     {
+        private string[] defaulthosts = new string[] {"livecmt-2.bilibili.com", "livecmt-1.bilibili.com"};
         private string ChatHost = "chat.bilibili.com";
         private int ChatPort = 788;
         private TcpClient Client;
@@ -56,20 +57,29 @@ namespace BiliDMLib
 
                 if (channelId != lastroomid)
                 {
-                    var request2 = WebRequest.Create(CIDInfoUrl + channelId);
-                    request2.Timeout = 2000;
-                    var response2 = await request2.GetResponseAsync();
-                    using (var stream = response2.GetResponseStream())
+                    try
                     {
-                        using (var sr = new StreamReader(stream))
+                        var request2 = WebRequest.Create(CIDInfoUrl + channelId);
+                        request2.Timeout = 2000;
+                        var response2 = await request2.GetResponseAsync();
+                        using (var stream = response2.GetResponseStream())
                         {
-                            var text = await sr.ReadToEndAsync();
-                            var xml = "<root>" + text + "</root>";
-                            XmlDocument doc = new XmlDocument();
-                            doc.LoadXml(xml);
-                            ChatHost = doc["root"]["server"].InnerText;
+                            using (var sr = new StreamReader(stream))
+                            {
+                                var text = await sr.ReadToEndAsync();
+                                var xml = "<root>" + text + "</root>";
+                                XmlDocument doc = new XmlDocument();
+                                doc.LoadXml(xml);
+                                ChatHost = doc["root"]["server"].InnerText;
+                            }
                         }
                     }
+                    catch (Exception)
+                    {
+                        ChatHost = defaulthosts[new Random().Next(defaulthosts.Length)];
+
+                    }
+                  
 
                 }
                 else

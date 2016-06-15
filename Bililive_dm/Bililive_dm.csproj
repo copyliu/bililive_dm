@@ -36,7 +36,7 @@
     <MinimumRequiredVersion>1.0.1.111</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>113</ApplicationRevision>
+    <ApplicationRevision>114</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -62,7 +62,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign  /t http://timestamp.wosign.com/timestamp /n JianShen $(MSBuildProjectDirectory)\Win32\*.dll $(MSBuildProjectDirectory)\x64\*.dll</PreBuildEvent>
+    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign  /t http://timestamp.verisign.com/scripts/timstamp.dll /n JianShen $(MSBuildProjectDirectory)\Win32\*.dll $(MSBuildProjectDirectory)\x64\*.dll</PreBuildEvent>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
@@ -87,7 +87,7 @@
     <DelaySign>false</DelaySign>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestTimestampUrl>http://timestamp.wosign.com/timestamp</ManifestTimestampUrl>
+    <ManifestTimestampUrl>http://timestamp.verisign.com/scripts/timstamp.dll</ManifestTimestampUrl>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
