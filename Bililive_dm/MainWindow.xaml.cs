@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Deployment.Application;
+using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -80,7 +81,13 @@ namespace Bililive_dm
             }
             else
             {
+
                 Title += "   *傻逼版本*";
+#if !DEBUG
+                if (!Debugger.IsAttached)
+                {MessageBox.Show(Application.Current.MainWindow, "你的打开方式不正确");
+                this.Close();}
+#endif
             }
             Title += "   编译时间: " + dt;
 
@@ -1148,7 +1155,7 @@ namespace Bililive_dm
             //Do whatever you want here..
         }
 
-        #region Runtime settings
+#region Runtime settings
 
         private bool fulloverlay_enabled;
         private bool overlay_enabled = true;
@@ -1157,7 +1164,7 @@ namespace Bililive_dm
         private bool showvip_enabled = true;
         private bool showerror_enabled = true;
 
-        #endregion
+#endregion
 
         private void Magic_clicked(object sender, RoutedEventArgs e)
         {
