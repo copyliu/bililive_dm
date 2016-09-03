@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bililive_dm", "Bililive_dm\Bililive_dm.csproj", "{545A89C8-2276-498D-B892-6AA3AF0ED1F7}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -20,6 +20,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMPluginTest", "DMPluginTest\DMPluginTest.csproj", "{0A1A8C48-3C84-4030-89C7-7B27643BC789}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -27,8 +30,8 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|Any CPU.Build.0 = Debug|x86
+		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|x86.ActiveCfg = Debug|x86
 		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|x86.Build.0 = Debug|x86
 		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
