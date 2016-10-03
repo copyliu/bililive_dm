@@ -25,6 +25,7 @@ namespace Bililive_dm
     {
         private const int WS_EX_TRANSPARENT = 0x20;
         private const int GWL_EXSTYLE = (-20);
+        private const int WS_EX_TOOLWINDOW = 0x00000080;// 不在Alt-Tab中显示 && Win10下，在所有虚拟桌面显示
 
         [DllImport("user32", EntryPoint = "SetWindowLong")]
         private static extern uint SetWindowLong(IntPtr hwnd, int nIndex, uint dwNewLong);
@@ -43,7 +44,7 @@ namespace Bililive_dm
             {
                 IntPtr hwnd = new WindowInteropHelper(this).Handle;
                 uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-                SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
+                SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW);
             };
             this.ShowInTaskbar = false;
             this.Topmost = true;

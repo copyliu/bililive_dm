@@ -16,6 +16,7 @@ namespace Bililive_dm
         private const int WS_EX_LAYERED = 0x00080000;
         private const int WS_EX_TRANSPARENT = 0x20;
         private const int WS_EX_NOREDIRECTIONBITMAP = 0x00200000;
+        private const int WS_EX_TOOLWINDOW = 0x00000080;// 不在Alt-Tab中显示 && Win10下，在所有虚拟桌面显示
         private const int GWL_EXSTYLE = (-20);
 
         [DllImport("user32")]
@@ -106,7 +107,7 @@ namespace Bililive_dm
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             uint exStyle = GetWindowLong(this.Handle, GWL_EXSTYLE);
-            SetWindowLong(this.Handle, GWL_EXSTYLE, exStyle | WS_EX_LAYERED | WS_EX_TRANSPARENT);
+            SetWindowLong(this.Handle, GWL_EXSTYLE, exStyle | WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW);
 
             CreateWTF();
         }
