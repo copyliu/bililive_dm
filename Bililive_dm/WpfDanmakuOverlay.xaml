@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Bililive_dm"
     x:Class="Bililive_dm.WpfDanmakuOverlay"
-    x:Name="Window"
+    x:Name="Window" ShowInTaskbar="False" 
     Title="FullOverlay" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
     <Window.Resources>
         <Storyboard x:Key="Storyboard1" />
