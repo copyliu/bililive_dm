@@ -29,14 +29,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://soft.ceve-market.org/bilibili_dm/</InstallUrl>
+    <InstallUrl>https://soft.ceve-market.org/bilibili_dm/</InstallUrl>
     <ProductName>B站彈幕姬</ProductName>
     <PublisherName>CopyLiu</PublisherName>
     <SuiteName>BiliBili_DM</SuiteName>
-    <MinimumRequiredVersion>1.0.1.116</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.1.119</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>118</ApplicationRevision>
+    <ApplicationRevision>120</ApplicationRevision>
     <ApplicationVersion>1.0.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

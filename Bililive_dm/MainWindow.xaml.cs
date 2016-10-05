@@ -93,7 +93,7 @@ namespace Bililive_dm
 
             InitPlugins();
             Closed += MainWindow_Closed;
-            HelpWeb.Source = new Uri("http://soft.ceve-market.org/bilibili_dm/app.htm?" + DateTime.Now.Ticks);
+            HelpWeb.Source = new Uri("https://soft.ceve-market.org/bilibili_dm/app.htm?" + DateTime.Now.Ticks);
                 //fuck you IE cache
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
