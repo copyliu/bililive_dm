@@ -96,20 +96,23 @@ namespace Bililive_dm
                 }
 #endif
             }
-            if(debug_mode)
-            { Title += "   *Debug模式*"; }
-            if(rawoutput_mode)
-            { Title += "   *原始数据输出*"; }
+            if (debug_mode)
+            {
+                Title += "   *Debug模式*";
+            }
+            if (rawoutput_mode)
+            {
+                Title += "   *原始数据输出*";
+            }
             Title += "   编译时间: " + dt;
 
-            InitPlugins();
             Closed += MainWindow_Closed;
             HelpWeb.Source = new Uri("https://soft.ceve-market.org/bilibili_dm/app.htm?" + DateTime.Now.Ticks);
-                //fuck you IE cache
+            //fuck you IE cache
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
             b.ReceivedRoomCount += b_ReceivedRoomCount;
-            
+
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, FuckMicrosoft,
                 Dispatcher);
@@ -136,12 +139,12 @@ namespace Bililive_dm
                 timer_magic.Start();
             }
 
-            releaseThread=new Thread(() =>
+            releaseThread = new Thread(() =>
             {
                 while (true)
                 {
                     Utils.ReleaseMemory(true);
-                    Thread.Sleep(30 * 1000);
+                    Thread.Sleep(30*1000);
                 }
             });
             releaseThread.IsBackground = true;
@@ -183,16 +186,19 @@ namespace Bililive_dm
             ProcDanmakuThread.Start();
             StaticPanel.DataContext = Static;
 
-            if(!debug_mode)//刷屏看不到上面插件加载的输出
             for (var i = 0; i < 100; i++)
             {
                 _messageQueue.Add("");
             }
+
             logging("投喂记录不会在弹幕模式上出现, 这不是bug");
             logging("可以点击日志复制到剪贴板");
-            if(debug_mode)
-            { logging("当前为Debug模式"); }
+            if (debug_mode)
+            {
+                logging("当前为Debug模式");
+            }
 
+            InitPlugins();
             Loaded += MainWindow_Loaded;
         }
 
@@ -1084,32 +1090,38 @@ namespace Bililive_dm
                 return;
             }
             var files = Directory.GetFiles(path);
-            Stopwatch sw = new Stopwatch();//new OverWatch(); （雾
+            Stopwatch sw = new Stopwatch(); //new OverWatch(); （雾
             foreach (var file in files)
             {
-                if(debug_mode)
-                { logging("加载插件文件：" + file); }
+                if (debug_mode)
+                {
+                    logging("加载插件文件：" + file);
+                }
                 try
                 {
                     var dll = Assembly.LoadFrom(file);
 
-                    if(debug_mode)
+                    if (debug_mode)
                     {
                         logging("Assembly.FullName == " + dll.FullName);
-                        logging("Assembly.GetExportedTypes == " + string.Join(",",dll.GetExportedTypes().Select(x => x.FullName).ToArray()));
+                        logging("Assembly.GetExportedTypes == " +
+                                string.Join(",", dll.GetExportedTypes().Select(x => x.FullName).ToArray()));
                     }
 
                     foreach (var exportedType in dll.GetExportedTypes())
                     {
-                        if (exportedType.BaseType == typeof (DMPlugin))
+                        if (exportedType.BaseType == typeof(DMPlugin))
                         {
-                            if(debug_mode)
-                            { sw.Restart(); }
+                            if (debug_mode)
+                            {
+                                sw.Restart();
+                            }
                             var plugin = (DMPlugin) Activator.CreateInstance(exportedType);
-                            if(debug_mode)
+                            if (debug_mode)
                             {
                                 sw.Stop();
-                                logging($"插件{exportedType.FullName}({plugin.PluginName})加载完毕，用时{sw.ElapsedMilliseconds}ms");
+                                logging(
+                                    $"插件{exportedType.FullName}({plugin.PluginName})加载完毕，用时{sw.ElapsedMilliseconds}ms");
                             }
                             Plugins.Add(plugin);
                         }
@@ -1117,8 +1129,10 @@ namespace Bililive_dm
                 }
                 catch (Exception ex)
                 {
-                    if(debug_mode)
-                    { logging("加载出错：" + ex.ToString()); }
+                    if (debug_mode)
+                    {
+                        logging("加载出错：" + ex.ToString());
+                    }
                 }
             }
         }
