@@ -229,9 +229,9 @@ namespace Bililive_dm
                     }
                     catch (Exception)
                     {
-                       
+
                     }
-                    
+
                 }
                 else
                 {
@@ -240,14 +240,15 @@ namespace Bililive_dm
                         var plugin = query.First();
                         var T = plugin.GetType();
                         var method = T.GetMethod("AddToPlayList");
-                        method.Invoke(plugin, new[] { "弹幕姬敬赠", "弹幕姬", "弹幕姬", "http://soft.ceve-market.org/bilibili_dm/1.mp3" });
+                        method.Invoke(plugin,
+                            new[] {"弹幕姬敬赠", "弹幕姬", "弹幕姬", "http://soft.ceve-market.org/bilibili_dm/1.mp3"});
                     }
                     catch (Exception)
                     {
 
-                      
+
                     }
-                   
+
                 }
             }
         }
@@ -270,36 +271,36 @@ namespace Bililive_dm
             sc?.ScrollToEnd();
 
             var shit = new Thread(() =>
-            {
-                var bbb = 5;
-                while (true)
                 {
-                    var r = new Random();
-
-                    lock (_danmakuQueue)
+                    var bbb = 5;
+                    while (true)
                     {
-                        for (var i = 0; i < bbb; i++)
+                        var r = new Random();
+
+                        lock (_danmakuQueue)
                         {
-                            var a1 = r.NextDouble().ToString();
-                            var b1 = r.NextDouble().ToString();
-                            _danmakuQueue.Enqueue(new DanmakuModel
-
+                            for (var i = 0; i < bbb; i++)
                             {
-                                CommentUser = "asf",
-                                CommentText = b1,
-                                MsgType = MsgTypeEnum.Comment
-                            });
-                        }
-                    }
-                    lock (Static)
-                    {
-                        Static.DanmakuCountRaw += bbb;
-                    }
+                                var a1 = r.NextDouble().ToString();
+                                var b1 = r.NextDouble().ToString();
+                                _danmakuQueue.Enqueue(new DanmakuModel
 
-                    Thread.Sleep(1000);
+                                {
+                                    CommentUser = "asf",
+                                    CommentText = b1,
+                                    MsgType = MsgTypeEnum.Comment
+                                });
+                            }
+                        }
+                        lock (Static)
+                        {
+                            Static.DanmakuCountRaw += bbb;
+                        }
+
+                        Thread.Sleep(1000);
+                    }
                 }
-            }
-                );
+            );
             shit.IsBackground = true;
 
             //            shit.Start();
@@ -315,7 +316,7 @@ namespace Bililive_dm
                     new XmlSerializer(typeof(StoreModel));
                 var reader = new StreamReader(new IsolatedStorageFileStream(
                     "settings.xml", FileMode.Open, isoStore));
-                settings = (StoreModel)settingsreader.Deserialize(reader);
+                settings = (StoreModel) settingsreader.Deserialize(reader);
                 reader.Close();
             }
             catch (Exception)
@@ -439,13 +440,17 @@ namespace Bililive_dm
                 var connectresult = false;
                 logging("正在连接");
 
-                if(debug_mode)
-                { logging("连接房间号：" + roomId); }
+                if (debug_mode)
+                {
+                    logging("连接房间号：" + roomId);
+                }
 
                 connectresult = await b.ConnectAsync(roomId);
 
-                if(!connectresult && debug_mode)
-                { logging(b.Error?.ToString() ?? "b.Error == null"); }
+                if (!connectresult && debug_mode)
+                {
+                    logging(b.Error?.ToString() ?? "b.Error == null");
+                }
 
                 while (!connectresult && sender == null && AutoReconnect.IsChecked == true)
                 {
@@ -500,8 +505,10 @@ namespace Bililive_dm
             //AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
             if (CheckAccess())
             {
-                if(debug_mode)
-                { logging("直播间人数：" + e.UserCount); }
+                if (debug_mode)
+                {
+                    logging("直播间人数：" + e.UserCount);
+                }
                 OnlineBlock.Text = e.UserCount + "";
             }
             else
@@ -623,7 +630,7 @@ namespace Bililive_dm
                                             UserName = danmakuModel.GiftUser,
                                             num = Convert.ToDecimal(danmakuModel.GiftNum)
                                         }
-                                        );
+                                    );
 
                                 }
                             }));
@@ -657,8 +664,10 @@ namespace Bililive_dm
                     break;
                 }
             }
-            if(rawoutput_mode)
-            { logging(danmakuModel.RawData); }
+            if (rawoutput_mode)
+            {
+                logging(danmakuModel.RawData);
+            }
         }
 
         public void SendSSP(string msg)
@@ -744,13 +753,14 @@ namespace Bililive_dm
         {
             if (Log.Dispatcher.CheckAccess())
             {
-                lock (_messageQueue) { 
-                if (_messageQueue.Count >= _maxCapacity)
+                lock (_messageQueue)
                 {
-                    _messageQueue.RemoveAt(0);
-                }
+                    if (_messageQueue.Count >= _maxCapacity)
+                    {
+                        _messageQueue.RemoveAt(0);
+                    }
 
-                _messageQueue.Add(DateTime.Now.ToString("T") + " : " + text);
+                    _messageQueue.Add(DateTime.Now.ToString("T") + " : " + text);
                     //                this.log.Text = string.Join("\n", _messageQueue);
                     //                log.CaretIndex = this.log.Text.Length;
 
@@ -767,7 +777,7 @@ namespace Bililive_dm
                         using (
                             var outfile =
                                 new StreamWriter(Path.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)
-                            )
+                        )
                         {
                             outfile.WriteLine(DateTime.Now.ToString("T") + " : " + text);
                         }
@@ -1213,7 +1223,7 @@ namespace Bililive_dm
             //Do whatever you want here..
         }
 
-#region Runtime settings
+        #region Runtime settings
 
         private bool fulloverlay_enabled;
         private bool overlay_enabled = true;
@@ -1224,7 +1234,7 @@ namespace Bililive_dm
         private bool rawoutput_mode = false;
         public bool debug_mode { get; private set; }
 
-#endregion
+        #endregion
 
         private void Magic_clicked(object sender, RoutedEventArgs e)
         {
