@@ -254,6 +254,16 @@ namespace BilibiliDM_PluginFramework
             
         }
         /// <summary>
+        /// 弹幕姬是否是以Debug模式启动的
+        /// </summary>
+        public bool DebugMode
+        {
+            get
+            {
+                return (Application.Current.MainWindow as dynamic).debug_mode;
+            }
+        }
+        /// <summary>
         /// 打彈幕
         /// </summary>
         /// <param name="text"></param>

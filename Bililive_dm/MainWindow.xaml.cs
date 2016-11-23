@@ -63,7 +63,12 @@ namespace Bililive_dm
             {
                 this.RoomId.Text = "";
             }
-            
+
+            var cmd_args = Environment.GetCommandLineArgs();
+            debug_mode = cmd_args.Contains("-d") || cmd_args.Contains("--debug");
+            rawoutput_mode = cmd_args.Contains("-r") || cmd_args.Contains("--raw");
+            var offline_mode = cmd_args.Contains("-o") || cmd_args.Contains("--offline");
+
             var dt = new DateTime(2000, 1, 1);
             var assembly = Assembly.GetExecutingAssembly();
             var version = assembly.FullName.Split(',')[1];
@@ -84,11 +89,17 @@ namespace Bililive_dm
 
                 Title += "   *傻逼版本*";
 #if !DEBUG
-                if (!Debugger.IsAttached)
-                {MessageBox.Show(Application.Current.MainWindow, "你的打开方式不正确");
-                this.Close();}
+                if(!(Debugger.IsAttached || offline_mode))
+                {
+                    MessageBox.Show(Application.Current.MainWindow, "你的打开方式不正确");
+                    this.Close();
+                }
 #endif
             }
+            if(debug_mode)
+            { Title += "   *Debug模式*"; }
+            if(rawoutput_mode)
+            { Title += "   *原始数据输出*"; }
             Title += "   编译时间: " + dt;
 
             InitPlugins();
@@ -172,13 +183,16 @@ namespace Bililive_dm
             ProcDanmakuThread.Start();
             StaticPanel.DataContext = Static;
 
-
+            if(!debug_mode)//刷屏看不到上面插件加载的输出
             for (var i = 0; i < 100; i++)
             {
                 _messageQueue.Add("");
             }
             logging("投喂记录不会在弹幕模式上出现, 这不是bug");
             logging("可以点击日志复制到剪贴板");
+            if(debug_mode)
+            { logging("当前为Debug模式"); }
+
             Loaded += MainWindow_Loaded;
         }
 
@@ -418,7 +432,15 @@ namespace Bililive_dm
                 DisconnBtn.IsEnabled = false;
                 var connectresult = false;
                 logging("正在连接");
+
+                if(debug_mode)
+                { logging("连接房间号：" + roomId); }
+
                 connectresult = await b.ConnectAsync(roomId);
+
+                if(!connectresult && debug_mode)
+                { logging(b.Error?.ToString() ?? "b.Error == null"); }
+
                 while (!connectresult && sender == null && AutoReconnect.IsChecked == true)
                 {
                     logging("正在连接");
@@ -472,6 +494,8 @@ namespace Bililive_dm
             //AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
             if (CheckAccess())
             {
+                if(debug_mode)
+                { logging("直播间人数：" + e.UserCount); }
                 OnlineBlock.Text = e.UserCount + "";
             }
             else
@@ -627,6 +651,8 @@ namespace Bililive_dm
                     break;
                 }
             }
+            if(rawoutput_mode)
+            { logging(danmakuModel.RawData); }
         }
 
         public void SendSSP(string msg)
@@ -1058,23 +1084,41 @@ namespace Bililive_dm
                 return;
             }
             var files = Directory.GetFiles(path);
+            Stopwatch sw = new Stopwatch();//new OverWatch(); （雾
             foreach (var file in files)
             {
+                if(debug_mode)
+                { logging("加载插件文件：" + file); }
                 try
                 {
                     var dll = Assembly.LoadFrom(file);
+
+                    if(debug_mode)
+                    {
+                        logging("Assembly.FullName == " + dll.FullName);
+                        logging("Assembly.GetExportedTypes == " + string.Join(",",dll.GetExportedTypes().Select(x => x.FullName).ToArray()));
+                    }
+
                     foreach (var exportedType in dll.GetExportedTypes())
                     {
                         if (exportedType.BaseType == typeof (DMPlugin))
                         {
+                            if(debug_mode)
+                            { sw.Restart(); }
                             var plugin = (DMPlugin) Activator.CreateInstance(exportedType);
-
+                            if(debug_mode)
+                            {
+                                sw.Stop();
+                                logging($"插件{exportedType.FullName}({plugin.PluginName})加载完毕，用时{sw.ElapsedMilliseconds}ms");
+                            }
                             Plugins.Add(plugin);
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    if(debug_mode)
+                    { logging("加载出错：" + ex.ToString()); }
                 }
             }
         }
@@ -1163,6 +1207,8 @@ namespace Bililive_dm
         private bool sendssp_enabled = true;
         private bool showvip_enabled = true;
         private bool showerror_enabled = true;
+        private bool rawoutput_mode = false;
+        public bool debug_mode { get; private set; }
 
 #endregion
 
