@@ -55,6 +55,25 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
+
+            //初始化日志
+           
+
+            try
+            {
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                path = Path.Combine(path, "弹幕姬");
+                Directory.CreateDirectory(path);
+                File.Create(Path.Combine(path, "lastrun.txt")).Close();
+
+            }
+            catch (Exception e)
+            {
+                
+            }
+          
+            
+
             try
             {
                 this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
@@ -777,6 +796,13 @@ namespace Bililive_dm
                         using (
                             var outfile =
                                 new StreamWriter(Path.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".txt"), true)
+                        )
+                        {
+                            outfile.WriteLine(DateTime.Now.ToString("T") + " : " + text);
+                        }
+                        using (
+                            var outfile =
+                                new StreamWriter(Path.Combine(path, "lastrun.txt"), true)
                         )
                         {
                             outfile.WriteLine(DateTime.Now.ToString("T") + " : " + text);
