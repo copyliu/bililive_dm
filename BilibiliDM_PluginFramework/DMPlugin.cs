@@ -233,6 +233,13 @@ namespace BilibiliDM_PluginFramework
             
         }
         /// <summary>
+        /// 初始化，此方法在所有插件加载完毕后调用，插件也可以在构造函数执行初始化代码
+        /// </summary>
+        public virtual void Init()
+        {
+
+        }
+        /// <summary>
         /// 反初始化方法, 在弹幕姬主程序退出时调用, 若有需要请重写,
         /// </summary>
         public virtual void DeInit()
