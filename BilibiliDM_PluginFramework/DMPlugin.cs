@@ -235,7 +235,7 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 此方法在所有插件加载完毕后调用
         /// </summary>
-        public virtual void PluginsLoaded()
+        public virtual void Inited()
         {
 
         }

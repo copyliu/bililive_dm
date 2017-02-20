@@ -1178,7 +1178,7 @@ namespace Bililive_dm
             {
                 try
                 {
-                    plugin.PluginsLoaded();
+                    plugin.Inited();
                 }
                 catch(Exception ex)
                 {
