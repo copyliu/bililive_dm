@@ -160,3 +160,4 @@ packages/
 *.DotSettings
 *.opendb
 Bililive_dm.VC.db
+.vs/

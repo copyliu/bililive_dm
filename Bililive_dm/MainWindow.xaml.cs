@@ -58,7 +58,7 @@ namespace Bililive_dm
 
             //初始化日志
            
-
+            
             try
             {
                 var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -167,7 +167,7 @@ namespace Bililive_dm
                 }
             });
             releaseThread.IsBackground = true;
-//            releaseThread.Start();
+            //            releaseThread.Start();
             ProcDanmakuThread = new Thread(() =>
             {
                 while (true)
@@ -177,7 +177,7 @@ namespace Bililive_dm
                         var count = 0;
                         if (_danmakuQueue.Any())
                         {
-                            count = (int) Math.Ceiling(_danmakuQueue.Count/30.0);
+                            count = (int)Math.Ceiling(_danmakuQueue.Count / 30.0);
                         }
 
                         for (var i = 0; i < count; i++)
@@ -200,8 +200,10 @@ namespace Bililive_dm
 
                     Thread.Sleep(30);
                 }
-            });
-            ProcDanmakuThread.IsBackground = true;
+            })
+            {
+                IsBackground = true
+            };
             ProcDanmakuThread.Start();
             StaticPanel.DataContext = Static;
 
