@@ -1173,6 +1173,36 @@ namespace Bililive_dm
                     }
                 }
             }
+
+            foreach(var plugin in Plugins)
+            {
+                try
+                {
+                    plugin.PluginsLoaded();
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(
+                        "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
+                        plugin.PluginCont);
+                    try
+                    {
+                        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                        using(var outfile = new StreamWriter(desktop + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                        {
+                            outfile.WriteLine(DateTime.Now + " " + "請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                            outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
+                            outfile.Write(ex.ToString());
+                        }
+                    }
+                    catch(Exception)
+                    {
+                    }
+                }
+
+            }
+
         }
 
         private void WindowTop_OnChecked(object sender, RoutedEventArgs e)
