@@ -150,16 +150,6 @@ namespace Bililive_dm
             //            }
             PluginGrid.ItemsSource = Plugins;
 
-            if (DateTime.Today.Month == 4 && DateTime.Today.Day == 1)
-            {
-                //MAGIC!
-                timer_magic = new DispatcherTimer(new TimeSpan(0, 30, 0), DispatcherPriority.Normal, (sender, args) =>
-                {
-                    Magic();
-                }, Dispatcher);
-                timer_magic.Start();
-            }
-
             releaseThread = new Thread(() =>
             {
                 while (true)
@@ -228,57 +218,6 @@ namespace Bililive_dm
         private void b_LogMessage(object sender, LogMessageArgs e)
         {
             logging(e.message);
-        }
-
-        private void Magic()
-        {
-            var query = Plugins.Where(p => p.PluginName.Contains("点歌"));
-            if (query.Any())
-            {
-                if (!query.First().Status) return;
-                var ran = new Random();
-
-                var n = ran.Next(2);
-                if (n == 1)
-                {
-                    try
-                    {
-                        query.First().MainReceivedDanMaku(new ReceivedDanmakuArgs
-                        {
-                            Danmaku = new DanmakuModel
-                            {
-                                MsgType = MsgTypeEnum.Comment,
-                                CommentText = "强点 34376018",
-                                UserName = "弹幕姬",
-                                isAdmin = true,
-                                isVIP = true
-                            }
-                        });
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }
-                else
-                {
-                    try
-                    {
-                        var plugin = query.First();
-                        var T = plugin.GetType();
-                        var method = T.GetMethod("AddToPlayList");
-                        method.Invoke(plugin,
-                            new[] {"弹幕姬敬赠", "弹幕姬", "弹幕姬", "http://soft.ceve-market.org/bilibili_dm/1.mp3"});
-                    }
-                    catch (Exception)
-                    {
-
-
-                    }
-
-                }
-            }
         }
 
         [DllImport("user32", EntryPoint = "SetWindowLong")]
@@ -1308,9 +1247,5 @@ namespace Bililive_dm
 
         #endregion
 
-        private void Magic_clicked(object sender, RoutedEventArgs e)
-        {
-            Magic();
-        }
     }
 }
