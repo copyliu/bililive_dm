@@ -20,6 +20,7 @@ using System.Windows.Threading;
 using System.Xml.Serialization;
 using BilibiliDM_PluginFramework;
 using BiliDMLib;
+using System.Threading.Tasks;
 
 namespace Bililive_dm
 {
@@ -465,6 +466,7 @@ namespace Bililive_dm
                 ConnBtn.IsEnabled = false;
                 DisconnBtn.IsEnabled = false;
                 var connectresult = false;
+                var trytime = 0;
                 logging("正在连接");
 
                 if (debug_mode)
@@ -481,6 +483,12 @@ namespace Bililive_dm
 
                 while (!connectresult && sender == null && AutoReconnect.IsChecked == true)
                 {
+                    if(trytime > 5)
+                        break;
+                    else
+                        trytime++;
+
+                    await TaskEx.Delay(1000); // 稍等一下
                     logging("正在连接");
                     connectresult = await b.ConnectAsync(roomId);
                 }
