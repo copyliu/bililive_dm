@@ -131,6 +131,7 @@ namespace Bililive_dm
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
             b.ReceivedRoomCount += b_ReceivedRoomCount;
+            b.LogMessage += b_LogMessage;
 
 
             timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, FuckMicrosoft,
@@ -221,6 +222,11 @@ namespace Bililive_dm
 
             InitPlugins();
             Loaded += MainWindow_Loaded;
+        }
+
+        private void b_LogMessage(object sender, LogMessageArgs e)
+        {
+            logging(e.message);
         }
 
         private void Magic()

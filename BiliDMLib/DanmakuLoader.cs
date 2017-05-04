@@ -29,6 +29,7 @@ namespace BiliDMLib
         public event ReceivedDanmakuEvt ReceivedDanmaku;
         public event DisconnectEvt Disconnected;
         public event ReceivedRoomCountEvt ReceivedRoomCount;
+        public event LogMessageEvt LogMessage;
         private bool debuglog = true;
         private short protocolversion = 1;
         private static int lastroomid ;
@@ -74,10 +75,27 @@ namespace BiliDMLib
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (WebException ex)
                     {
                         ChatHost = defaulthosts[new Random().Next(defaulthosts.Length)];
 
+                        HttpWebResponse errorResponse = ex.Response as HttpWebResponse;
+                        if(errorResponse.StatusCode == HttpStatusCode.NotFound)
+                        { // 直播间不存在（HTTP 404）
+                            string msg = "该直播间疑似不存在，弹幕姬只支持使用原房间号连接";
+                            LogMessage?.Invoke(this, new LogMessageArgs() { message = msg });
+                        }
+                        else
+                        { // B站服务器响应错误
+                            string msg = "B站服务器响应弹幕服务器地址出错，尝试使用常见地址连接";
+                            LogMessage?.Invoke(this, new LogMessageArgs() { message = msg });
+                        }
+                    }
+                    catch(Exception)
+                    { // 其他错误（XML解析错误？）
+                        ChatHost = defaulthosts[new Random().Next(defaulthosts.Length)];
+                        string msg = "获取弹幕服务器地址时出现未知错误，尝试使用常见地址连接";
+                        LogMessage?.Invoke(this, new LogMessageArgs() { message = msg });
                     }
                   
 
@@ -347,4 +365,10 @@ namespace BiliDMLib
 
 
     }
+
+    public delegate void LogMessageEvt(object sender, LogMessageArgs e);
+    public class LogMessageArgs
+    {
+        public string message = string.Empty;
+    }                         
 }
