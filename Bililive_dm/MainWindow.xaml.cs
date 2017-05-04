@@ -476,9 +476,9 @@ namespace Bililive_dm
 
                 connectresult = await b.ConnectAsync(roomId);
 
-                if (!connectresult && debug_mode)
+                if (!connectresult && b.Error != null)// 如果连接不成功并且出错了
                 {
-                    logging(b.Error?.ToString() ?? "b.Error == null");
+                    logging("出错信息：" + b.Error.ToString());
                 }
 
                 while (!connectresult && sender == null && AutoReconnect.IsChecked == true)
