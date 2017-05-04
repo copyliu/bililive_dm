@@ -192,7 +192,7 @@ namespace Bililive_dm
                                     lock (Static)
                                     {
                                         Static.DanmakuCountShow += 1;
-                                        Static.AddUser(danmaku.CommentUser);
+                                        Static.AddUser(danmaku.UserName);
                                     }
                                 }
                             }
@@ -248,7 +248,7 @@ namespace Bililive_dm
                             {
                                 MsgType = MsgTypeEnum.Comment,
                                 CommentText = "强点 34376018",
-                                CommentUser = "弹幕姬",
+                                UserName = "弹幕姬",
                                 isAdmin = true,
                                 isVIP = true
                             }
@@ -313,7 +313,7 @@ namespace Bililive_dm
                                 _danmakuQueue.Enqueue(new DanmakuModel
 
                                 {
-                                    CommentUser = "asf",
+                                    UserName = "asf",
                                     CommentText = b1,
                                     MsgType = MsgTypeEnum.Comment
                                 });
@@ -600,15 +600,15 @@ namespace Bililive_dm
             {
                 case MsgTypeEnum.Comment:
                     logging("收到彈幕:" + (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
-                            danmakuModel.CommentUser + " 說: " + danmakuModel.CommentText);
+                            danmakuModel.UserName + " 說: " + danmakuModel.CommentText);
 
                     AddDMText(
                         (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
-                        danmakuModel.CommentUser,
+                        danmakuModel.UserName,
                         danmakuModel.CommentText);
                     SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
                         (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
-                        danmakuModel.CommentUser,
+                        danmakuModel.UserName,
                         danmakuModel.CommentText));
 
                     break;
@@ -638,7 +638,7 @@ namespace Bililive_dm
                     {
                         var query =
                             SessionItems.Where(
-                                p => p.UserName == danmakuModel.GiftUser && p.Item == danmakuModel.GiftName).ToArray();
+                                p => p.UserName == danmakuModel.UserName && p.Item == danmakuModel.GiftName).ToArray();
                         if (query.Any())
                         {
                             Dispatcher.BeginInvoke(
@@ -654,7 +654,7 @@ namespace Bililive_dm
                                         new SessionItem
                                         {
                                             Item = danmakuModel.GiftName,
-                                            UserName = danmakuModel.GiftUser,
+                                            UserName = danmakuModel.UserName,
                                             num = Convert.ToDecimal(danmakuModel.GiftNum)
                                         }
                                     );
@@ -662,14 +662,14 @@ namespace Bililive_dm
                                 }
                             }));
                         }
-                        logging("收到道具:" + danmakuModel.GiftUser + " 赠送的: " + danmakuModel.GiftName + " x " +
+                        logging("收到道具:" + danmakuModel.UserName + " 赠送的: " + danmakuModel.GiftName + " x " +
                                 danmakuModel.GiftNum);
                         Dispatcher.BeginInvoke(new Action(() =>
                         {
                             if (ShowItem.IsChecked == true)
                             {
                                 AddDMText("收到道具",
-                                    danmakuModel.GiftUser + " 赠送的: " + danmakuModel.GiftName + " x " +
+                                    danmakuModel.UserName + " 赠送的: " + danmakuModel.GiftName + " x " +
                                     danmakuModel.GiftNum, true);
                             }
                         }));
@@ -678,13 +678,13 @@ namespace Bililive_dm
                 }
                 case MsgTypeEnum.Welcome:
                 {
-                    logging("欢迎老爷" + (danmakuModel.isAdmin ? "和管理" : "") + ": " + danmakuModel.CommentUser + " 进入直播间");
+                    logging("欢迎老爷" + (danmakuModel.isAdmin ? "和管理" : "") + ": " + danmakuModel.UserName + " 进入直播间");
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowItem.IsChecked == true)
                         {
                             AddDMText("欢迎老爷" + (danmakuModel.isAdmin ? "和管理" : ""),
-                                danmakuModel.CommentUser + " 进入直播间", true);
+                                danmakuModel.UserName + " 进入直播间", true);
                         }
                     }));
 
@@ -902,7 +902,7 @@ namespace Bililive_dm
                                 new DanmakuModel
                                 {
                                     CommentText = "插件彈幕測試",
-                                    CommentUser = "彈幕姬",
+                                    UserName = "彈幕姬",
                                     MsgType = MsgTypeEnum.Comment
                                 }
                         };
