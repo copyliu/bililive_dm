@@ -235,6 +235,8 @@ namespace BilibiliDM_PluginFramework
                                     UserID = obj["data"]["uid"].ToObject<int>();
                                     UserName = obj["data"]["username"].ToString();
                                     UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
+                                    GiftName = UserGuardLevel == 3 ? "舰长" : UserGuardLevel == 2 ? "提督" : UserGuardLevel == 1 ? "总督" : "";
+                                    GiftNum = obj["data"]["num"].ToString();
                                     break;
                                 }
                             default:
