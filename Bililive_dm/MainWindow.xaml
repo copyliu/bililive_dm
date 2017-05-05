@@ -128,7 +128,10 @@
             </TabItem>
             <TabItem Header="插件">
                 <DockPanel>
-                    <TextBlock DockPanel.Dock="Top" Text="插件目录: 我的文档\弹幕姬\Plugins"></TextBlock>
+                    <StackPanel DockPanel.Dock="Top" Margin="0 2" Orientation="Horizontal">
+                        <TextBlock Text="插件目录: 我的文档\弹幕姬\Plugins"></TextBlock>
+                        <Button Margin="5 0" Click="OpenPluginFolder_OnClick">打开插件目录</Button>
+                    </StackPanel>
                     <DataGrid CanUserAddRows="False" x:Name="PluginGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Top" SelectionMode="Single" SelectionUnit="FullRow"
                   d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">
                         <DataGrid.Columns>

@@ -1197,6 +1197,28 @@ namespace Bililive_dm
 
         }
 
+        private void OpenPluginFolder_OnClick(object sender, RoutedEventArgs e)
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path = Path.Combine(path, "弹幕姬", "Plugins");
+            if(Directory.Exists(path))
+            {
+                Process.Start(path);
+            }
+            else
+            {
+                try
+                {
+                    Directory.CreateDirectory(path);
+                    Process.Start(path);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show("打开插件文件夹出错\n信息"+ex.Message, "打开插件文件夹出错", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
         private void WindowTop_OnChecked(object sender, RoutedEventArgs e)
         {
             Topmost = WindowTop.IsChecked == true;
