@@ -80,6 +80,11 @@ namespace BilibiliDM_PluginFramework
         public string UserName { get; set; }
 
         /// <summary>
+        /// 消息触发者用户ID
+        /// </summary>
+        public int UserID { get; set; }
+
+        /// <summary>
         /// 用户舰队等级
         /// <para>0 为非船员 1 为总督 2 为提督 3 为舰长</para>
         /// </summary>
@@ -175,6 +180,7 @@ namespace BilibiliDM_PluginFramework
                             case "DANMU_MSG":
                                 MsgType = MsgTypeEnum.Comment;
                                 CommentText = obj["info"][1].ToString();
+                                UserID = obj["info"][2][0].ToObject<int>();
                                 UserName = obj["info"][2][1].ToString();
                                 isAdmin = obj["info"][2][2].ToString() == "1";
                                 isVIP = obj["info"][2][3].ToString() == "1";
@@ -184,6 +190,7 @@ namespace BilibiliDM_PluginFramework
                                 MsgType = MsgTypeEnum.GiftSend;
                                 GiftName = obj["data"]["giftName"].ToString();
                                 UserName = obj["data"]["uname"].ToString();
+                                UserID = obj["data"]["uid"].ToObject<int>();
                                 // Giftrcost = obj["data"]["rcost"].ToString();
                                 GiftNum = obj["data"]["num"].ToString();
                                 break;
@@ -208,6 +215,7 @@ namespace BilibiliDM_PluginFramework
                                 {
                                     MsgType = MsgTypeEnum.Welcome;
                                     UserName = obj["data"]["uname"].ToString();
+                                    UserID = obj["data"]["uid"].ToObject<int>();
                                     isVIP = true;
                                     isAdmin = obj["data"]["isadmin"].ToString() == "1";
                                     break;
@@ -217,6 +225,7 @@ namespace BilibiliDM_PluginFramework
                                 {
                                     MsgType = MsgTypeEnum.WelcomeGuard;
                                     UserName = obj["data"]["username"].ToString();
+                                    UserID = obj["data"]["uid"].ToObject<int>();
                                     UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
                                     break;
                                 }
@@ -224,6 +233,7 @@ namespace BilibiliDM_PluginFramework
                                 {
                                     MsgType = MsgTypeEnum.GuardBuy;
                                     UserID = obj["data"]["uid"].ToObject<int>();
+                                    UserName = obj["data"]["username"].ToString();
                                     UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
                                     break;
                                 }
