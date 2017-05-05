@@ -623,6 +623,20 @@ namespace Bililive_dm
                         break;
                     }
                 }
+                case MsgTypeEnum.GuardBuy:
+                {
+                    logging("上船:" + danmakuModel.UserName + " 购买了 " + danmakuModel.GiftName + " x " + danmakuModel.GiftNum);
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if(ShowItem.IsChecked == true)
+                        {
+                            AddDMText("上船",
+                                danmakuModel.UserName + " 购买了 " + danmakuModel.GiftName + " x " +
+                                danmakuModel.GiftNum, true);
+                        }
+                    }));
+                    break;
+                }
                 case MsgTypeEnum.Welcome:
                 {
                     logging("欢迎老爷" + (danmakuModel.isAdmin ? "和管理" : "") + ": " + danmakuModel.UserName + " 进入直播间");
@@ -637,6 +651,31 @@ namespace Bililive_dm
 
                     break;
                 }
+                case MsgTypeEnum.WelcomeGuard:
+                    {
+                        string guard_text = string.Empty;
+                        switch(danmakuModel.UserGuardLevel)
+                        {
+                            case 1:
+                                guard_text = "总督";
+                                break;
+                            case 2:
+                                guard_text = "提督";
+                                break;
+                            case 3:
+                                guard_text = "舰长";
+                                break;
+                        }
+                        logging("欢迎" + guard_text + ": " + danmakuModel.UserName + " 进入直播间");
+                        Dispatcher.BeginInvoke(new Action(() =>
+                        {
+                            if(ShowItem.IsChecked == true)
+                            {
+                                AddDMText("欢迎" + guard_text, danmakuModel.UserName + " 进入直播间", true);
+                            }
+                        }));
+                        break;
+                    }
             }
             if (rawoutput_mode)
             {
