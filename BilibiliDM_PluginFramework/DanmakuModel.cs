@@ -61,6 +61,9 @@ namespace BilibiliDM_PluginFramework
 
         /// <summary>
         /// 彈幕內容
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.Comment"/></item>
+        /// </list></para>
         /// </summary>
         public string CommentText { get; set; }
 
@@ -76,17 +79,36 @@ namespace BilibiliDM_PluginFramework
 
         /// <summary>
         /// 消息触发者用户名
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.Comment"/></item>
+        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
+        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
+        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
+        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
+        /// </list></para>
         /// </summary>
         public string UserName { get; set; }
 
         /// <summary>
         /// 消息触发者用户ID
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.Comment"/></item>
+        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
+        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
+        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
+        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
+        /// </list></para>
         /// </summary>
         public int UserID { get; set; }
 
         /// <summary>
         /// 用户舰队等级
         /// <para>0 为非船员 1 为总督 2 为提督 3 为舰长</para>
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.Comment"/></item>
+        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
+        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
+        /// </list></para>
         /// </summary>
         public int UserGuardLevel { get; set; }
 
@@ -113,6 +135,11 @@ namespace BilibiliDM_PluginFramework
 
         /// <summary>
         /// 礼物数量
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
+        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
+        /// </list></para>
+        /// <para>此字段也用于标识上船 <see cref="MsgTypeEnum.GuardBuy"/> 的数量（月数）</para>
         /// </summary>
         public int GiftCount { get; set; }
 
@@ -125,30 +152,45 @@ namespace BilibiliDM_PluginFramework
 
         /// <summary>
         /// 禮物排行
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.GiftTop"/></item>
+        /// </list></para>
         /// </summary>
         public List<GiftRank> GiftRanking { get; set; }
 
         /// <summary>
-        /// 該用戶是否為管理員
+        /// 该用户是否为房管（包括主播）
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.Comment"/></item>
+        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
+        /// </list></para>
         /// </summary>
         public bool isAdmin { get; set; }
 
         /// <summary>
         /// 是否VIP用戶(老爺)
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.Comment"/></item>
+        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
+        /// </list></para>
         /// </summary>
         public bool isVIP { get; set; }
+
         /// <summary>
-        /// LiveStart,LiveEnd 事件对应的房间号
+        /// <see cref="MsgTypeEnum.LiveStart"/>,<see cref="MsgTypeEnum.LiveEnd"/> 事件对应的房间号
         /// </summary>
         public string roomID { get; set; }
+
         /// <summary>
         /// 原始数据, 高级开发用
         /// </summary>
         public string RawData { get; set; }
+
         /// <summary>
         /// 内部用, JSON数据版本号 通常应该是2
         /// </summary>
         public int JSON_Version { get; set; }
+
         public DanmakuModel()
         {
         }
