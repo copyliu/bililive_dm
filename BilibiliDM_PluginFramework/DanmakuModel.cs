@@ -108,7 +108,13 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 禮物數量
         /// </summary>
-        public string GiftNum { get; set; }
+        [Obsolete("请使用 GiftCount")]
+        public string GiftNum { get { return GiftCount.ToString(); } }
+
+        /// <summary>
+        /// 礼物数量
+        /// </summary>
+        public int GiftCount { get; set; }
 
         /// <summary>
         /// 当前房间的礼物积分（Room Cost）
@@ -192,7 +198,7 @@ namespace BilibiliDM_PluginFramework
                                 UserName = obj["data"]["uname"].ToString();
                                 UserID = obj["data"]["uid"].ToObject<int>();
                                 // Giftrcost = obj["data"]["rcost"].ToString();
-                                GiftNum = obj["data"]["num"].ToString();
+                                GiftCount = obj["data"]["num"].ToObject<int>();
                                 break;
                             case "GIFT_TOP":
                                 {
@@ -236,7 +242,7 @@ namespace BilibiliDM_PluginFramework
                                     UserName = obj["data"]["username"].ToString();
                                     UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
                                     GiftName = UserGuardLevel == 3 ? "舰长" : UserGuardLevel == 2 ? "提督" : UserGuardLevel == 1 ? "总督" : "";
-                                    GiftNum = obj["data"]["num"].ToString();
+                                    GiftCount = obj["data"]["num"].ToObject<int>();
                                     break;
                                 }
                             default:

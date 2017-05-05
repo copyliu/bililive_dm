@@ -589,7 +589,7 @@ namespace Bililive_dm
                         if (query.Any())
                         {
                             Dispatcher.BeginInvoke(
-                                new Action(() => query.First().num += Convert.ToDecimal(danmakuModel.GiftNum)));
+                                new Action(() => query.First().num += Convert.ToDecimal(danmakuModel.GiftCount)));
                         }
                         else
                         {
@@ -602,7 +602,7 @@ namespace Bililive_dm
                                         {
                                             Item = danmakuModel.GiftName,
                                             UserName = danmakuModel.UserName,
-                                            num = Convert.ToDecimal(danmakuModel.GiftNum)
+                                            num = Convert.ToDecimal(danmakuModel.GiftCount)
                                         }
                                     );
 
@@ -610,14 +610,14 @@ namespace Bililive_dm
                             }));
                         }
                         logging("收到道具:" + danmakuModel.UserName + " 赠送的: " + danmakuModel.GiftName + " x " +
-                                danmakuModel.GiftNum);
+                                danmakuModel.GiftCount);
                         Dispatcher.BeginInvoke(new Action(() =>
                         {
                             if (ShowItem.IsChecked == true)
                             {
                                 AddDMText("收到道具",
                                     danmakuModel.UserName + " 赠送的: " + danmakuModel.GiftName + " x " +
-                                    danmakuModel.GiftNum, true);
+                                    danmakuModel.GiftCount, true);
                             }
                         }));
                         break;
@@ -625,14 +625,14 @@ namespace Bililive_dm
                 }
                 case MsgTypeEnum.GuardBuy:
                 {
-                    logging("上船:" + danmakuModel.UserName + " 购买了 " + danmakuModel.GiftName + " x " + danmakuModel.GiftNum);
+                    logging("上船:" + danmakuModel.UserName + " 购买了 " + danmakuModel.GiftName + " x " + danmakuModel.GiftCount);
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if(ShowItem.IsChecked == true)
                         {
                             AddDMText("上船",
                                 danmakuModel.UserName + " 购买了 " + danmakuModel.GiftName + " x " +
-                                danmakuModel.GiftNum, true);
+                                danmakuModel.GiftCount, true);
                         }
                     }));
                     break;
