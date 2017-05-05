@@ -78,14 +78,45 @@
             </TabItem>
 
             <TabItem Header="投喂榜">
-                <DataGrid CanUserAddRows="False" x:Name="DataGrid2"  IsReadOnly="True" AutoGenerateColumns="False"
-                  d:DataContext="{d:DesignInstance bililiveDm:SessionItem}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
-                        <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="數量" SortDirection="Descending"/>
-                        <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="物品" SortDirection="Descending"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid CanUserAddRows="False" x:Name="DataGrid2"  IsReadOnly="True" AutoGenerateColumns="False"
+                        d:DataContext="{d:DesignInstance bililiveDm:SessionItem}" Grid.Row="0">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
+                            <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="數量" SortDirection="Descending"/>
+                            <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="物品" SortDirection="Descending"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel x:Name="StaticPanel" HorizontalAlignment="Center" Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="总共收到弹幕(原始数据)" Width="150"></TextBlock>
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountRaw}" Width="100" TextAlignment="Right"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Text="总共收到弹幕(已显示)" Width="150"></TextBlock>
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountShow}" Width="100" TextAlignment="Right"></TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Text="参与评论的用户" Width="150"></TextBlock>
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding UserCount}" Width="100" TextAlignment="Right"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center" Grid.Row="2" >
+                        <Button x:Name="ClearMe" Content="清空投喂统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                     Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe2" Content="清空弹幕统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Click="ClearMe2_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe4" Content="清空弹幕统计(总)" HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Click="ClearMe4_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe3" Content="清空用户统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                      Click="ClearMe3_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                    </StackPanel>
+                </Grid>
             </TabItem>
             <TabItem Header="设置">
                 <Grid>
@@ -118,40 +149,6 @@
                     </DataGrid>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="统计" >
-                <DockPanel>
-                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" >
-                        <Button x:Name="ClearMe" Content="清空投喂统计" HorizontalAlignment="Right" VerticalAlignment="Center"
-                     Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe2" Content="清空弹幕统计" HorizontalAlignment="Right" VerticalAlignment="Center"
-                    Click="ClearMe2_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe4" Content="清空弹幕统计(总)" HorizontalAlignment="Right" VerticalAlignment="Center"
-                    Click="ClearMe4_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe3" Content="清空用户统计" HorizontalAlignment="Right" VerticalAlignment="Center"
-                      Click="ClearMe3_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-
-
-                    </StackPanel>
-
-                    <StackPanel x:Name="StaticPanel">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="总共收到弹幕(原始数据)" Width="150"></TextBlock>
-                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountRaw}" Width="100" TextAlignment="Right"></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="总共收到弹幕(已显示)" Width="150"></TextBlock>
-                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountShow}" Width="100" TextAlignment="Right"></TextBlock>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="参与评论的用户" Width="150"></TextBlock>
-                            <TextBlock HorizontalAlignment="Right" Text="{Binding UserCount}" Width="100" TextAlignment="Right"></TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-
-                </DockPanel>
-
-            </TabItem>
-
             <TabItem Header="说明">
                 <WebBrowser x:Name="HelpWeb" Source="http://soft.ceve-market.org/bilibili_dm/app.htm" />
 
