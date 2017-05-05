@@ -24,7 +24,7 @@ namespace BilibiliDM_PluginFramework
         GiftTop,
 
         /// <summary>
-        /// 歡迎
+        /// 歡迎老爷
         /// </summary>
         Welcome,
 
@@ -40,7 +40,16 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 其他
         /// </summary>
-        Unknown
+        Unknown,
+        /// <summary>
+        /// 欢迎船员
+        /// </summary>
+        WelcomeGuard,
+        /// <summary>
+        /// 购买船票（上船）
+        /// </summary>
+        GuardBuy
+
     }
 
     public class DanmakuModel
@@ -69,6 +78,12 @@ namespace BilibiliDM_PluginFramework
         /// 消息触发者用户名
         /// </summary>
         public string UserName { get; set; }
+
+        /// <summary>
+        /// 用户舰队等级
+        /// <para>0 为非船员 1 为总督 2 为提督 3 为舰长</para>
+        /// </summary>
+        public int UserGuardLevel { get; set; }
 
         /// <summary>
         /// 禮物用戶
@@ -158,11 +173,12 @@ namespace BilibiliDM_PluginFramework
                                 roomID = obj["roomid"].ToString();
                                 break;
                             case "DANMU_MSG":
+                                MsgType = MsgTypeEnum.Comment;
                                 CommentText = obj["info"][1].ToString();
                                 UserName = obj["info"][2][1].ToString();
                                 isAdmin = obj["info"][2][2].ToString() == "1";
                                 isVIP = obj["info"][2][3].ToString() == "1";
-                                MsgType = MsgTypeEnum.Comment;
+                                UserGuardLevel = obj["info"][7].ToObject<int>();
                                 break;
                             case "SEND_GIFT":
                                 MsgType = MsgTypeEnum.GiftSend;
@@ -196,6 +212,20 @@ namespace BilibiliDM_PluginFramework
                                     isAdmin = obj["data"]["isadmin"].ToString() == "1";
                                     break;
 
+                                }
+                            case "WELCOME_GUARD":
+                                {
+                                    MsgType = MsgTypeEnum.WelcomeGuard;
+                                    UserName = obj["data"]["username"].ToString();
+                                    UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
+                                    break;
+                                }
+                            case "GUARD_BUY":
+                                {
+                                    MsgType = MsgTypeEnum.GuardBuy;
+                                    UserID = obj["data"]["uid"].ToObject<int>();
+                                    UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
+                                    break;
                                 }
                             default:
                                 {
