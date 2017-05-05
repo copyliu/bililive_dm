@@ -510,22 +510,6 @@ namespace Bililive_dm
 
         private void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
         {
-            foreach (var dmPlugin in Plugins)
-            {
-                if (dmPlugin.Status)
-                    new Thread(() =>
-                    {
-                        try
-                        {
-                            dmPlugin.MainReceivedDanMaku(e);
-                        }
-                        catch (Exception ex)
-                        {
-                            Utils.PluginExceptionHandler(ex, dmPlugin);
-                        }
-                    }).Start();
-            }
-
             if (e.Danmaku.MsgType == MsgTypeEnum.Comment)
             {
                 lock (Static)
@@ -538,6 +522,22 @@ namespace Bililive_dm
             {
                 var danmakuModel = e.Danmaku;
                 _danmakuQueue.Enqueue(danmakuModel);
+            }
+
+            foreach(var dmPlugin in Plugins)
+            {
+                if(dmPlugin.Status)
+                    new Thread(() =>
+                    {
+                        try
+                        {
+                            dmPlugin.MainReceivedDanMaku(e);
+                        }
+                        catch(Exception ex)
+                        {
+                            Utils.PluginExceptionHandler(ex, dmPlugin);
+                        }
+                    }).Start();
             }
         }
 
