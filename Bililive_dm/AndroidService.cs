@@ -38,7 +38,7 @@ namespace Bililive_dm
                     UdpClient client = new UdpClient();
                     IPEndPoint ip = new IPEndPoint(ua.Address.GetBroadcastAddress(ua.IPv4Mask), 45695);
                     var obj =
-                        JObject.FromObject(new {User = e.Danmaku.CommentUser + "", Comment = e.Danmaku.CommentText + ""});
+                        JObject.FromObject(new {User = e.Danmaku.UserName + "", Comment = e.Danmaku.CommentText + ""});
                     byte[] sendbuf = Encoding.UTF8.GetBytes(obj.ToString());
                     client.Send(sendbuf, sendbuf.Length, ip);
                     client.Close();
