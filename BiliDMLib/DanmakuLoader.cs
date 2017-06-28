@@ -19,7 +19,8 @@ namespace BiliDMLib
     {
         private string[] defaulthosts = new string[] {"livecmt-2.bilibili.com", "livecmt-1.bilibili.com"};
         private string ChatHost = "chat.bilibili.com";
-        private int ChatPort = 788;
+        // private int ChatPort = 788;
+        private int ChatPort = 2243; // TCP协议默认端口疑似修改到 2243
         private TcpClient Client;
         private NetworkStream NetStream;
 //        private string RoomInfoUrl = "http://live.bilibili.com/sch_list/";
@@ -71,7 +72,13 @@ namespace BiliDMLib
                                 var xml = "<root>" + text + "</root>";
                                 XmlDocument doc = new XmlDocument();
                                 doc.LoadXml(xml);
-                                ChatHost = doc["root"]["server"].InnerText;
+                                ChatHost = doc["root"]["dm_server"].InnerText;
+                                /*
+                                 * 注：目前xml里存在 server 和 dm_server ，分别是不同的域名
+                                 * 两个域名指向的服务器应该是相同的，测试 788 2243 均开放
+                                 * 猜测应该是为了一些兼容。所有弹幕相关参数都有带上“dm_”前缀的趋势
+                                 * */
+                                ChatPort = int.Parse(doc["root"]["dm_port"].InnerText);
                             }
                         }
                     }
