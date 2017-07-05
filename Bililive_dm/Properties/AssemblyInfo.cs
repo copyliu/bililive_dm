@@ -9,11 +9,11 @@ using System.Windows;
 // 資訊。
 
 [assembly: AssemblyTitle("Bililive_dm")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("B 站弹幕姬")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("CopyLiu")]
 [assembly: AssemblyProduct("Bililive_dm")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright ©  2014 - 2017 CopyLiu")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
