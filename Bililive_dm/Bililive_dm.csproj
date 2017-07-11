@@ -33,7 +33,7 @@
     <ProductName>B站彈幕姬</ProductName>
     <PublisherName>CopyLiu</PublisherName>
     <SuiteName>BiliBili_DM</SuiteName>
-    <MinimumRequiredVersion>1.0.1.125</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.0.1.126</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>126</ApplicationRevision>

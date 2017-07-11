@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Threading;
 using BilibiliDM_PluginFramework;
 
 namespace Bililive_dm
@@ -35,7 +37,7 @@ namespace Bililive_dm
         }
 
         private void App_DispatcherUnhandledException(object sender,
-            System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+            DispatcherUnhandledExceptionEventArgs e)
         {
             MessageBox.Show(
                 "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
@@ -49,11 +51,20 @@ namespace Bililive_dm
                     outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
                     outfile.WriteLine(DateTime.Now +"");
                     outfile.Write(e.Exception.ToString());
+                    outfile.WriteLine("-------插件列表--------");
+                    foreach (var dmPlugin in Plugins)
+                    {
+                        outfile.WriteLine($"{dmPlugin.PluginName}\t{dmPlugin.PluginVer}\t{dmPlugin.PluginAuth}\t{dmPlugin.PluginCont}\t启用:{dmPlugin.Status}");
+                    }
+
+
                 }
             }
             catch (Exception)
             {
             }
         }
+
+        public static  readonly ObservableCollection<DMPlugin> Plugins = new ObservableCollection<DMPlugin>();
     }
 }

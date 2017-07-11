@@ -39,7 +39,6 @@ namespace Bililive_dm
         private readonly DanmakuLoader b = new DanmakuLoader();
         private IDanmakuWindow fulloverlay;
         public MainOverlay overlay;
-        private readonly ObservableCollection<DMPlugin> Plugins = new ObservableCollection<DMPlugin>();
 
         private readonly Thread ProcDanmakuThread;
 
@@ -148,7 +147,7 @@ namespace Bililive_dm
             //            {
             //                logging("投喂记录不会在弹幕模式上出现, 这不是bug");
             //            }
-            PluginGrid.ItemsSource = Plugins;
+            PluginGrid.ItemsSource = App.Plugins;
 
             if (DateTime.Today.Month == 4 && DateTime.Today.Day == 1)
             {
@@ -358,7 +357,7 @@ namespace Bililive_dm
 
         private void MainWindow_Closed(object sender, EventArgs e)
         {
-            foreach (var dmPlugin in Plugins)
+            foreach (var dmPlugin in App.Plugins)
             {
                 try
                 {
@@ -502,7 +501,7 @@ namespace Bililive_dm
                     Ranking.Clear();
                     SaveRoomId(roomId);
 
-                    foreach (var dmPlugin in Plugins)
+                    foreach (var dmPlugin in App.Plugins)
                     {
                         new Thread(() =>
                         {
@@ -550,7 +549,7 @@ namespace Bililive_dm
             {
                 Dispatcher.BeginInvoke(new Action(() => { OnlineBlock.Text = e.UserCount + ""; }));
             }
-            foreach (var dmPlugin in Plugins)
+            foreach (var dmPlugin in App.Plugins)
             {
                 if (dmPlugin.Status)
                     new Thread(() =>
@@ -585,7 +584,7 @@ namespace Bililive_dm
                 _danmakuQueue.Enqueue(danmakuModel);
             }
 
-            foreach(var dmPlugin in Plugins)
+            foreach(var dmPlugin in App.Plugins)
             {
                 if(dmPlugin.Status)
                     new Thread(() =>
@@ -761,7 +760,7 @@ namespace Bililive_dm
 
         private void b_Disconnected(object sender, DisconnectEvtArgs args)
         {
-            foreach (var dmPlugin in Plugins)
+            foreach (var dmPlugin in App.Plugins)
             {
                 new Thread(() =>
                 {
@@ -937,7 +936,7 @@ namespace Bililive_dm
                 AddDMText("彈幕姬報告", "這是一個測試", false);
             }
             SendSSP("彈幕姬測試");
-            foreach (var dmPlugin in Plugins.Where(dmPlugin => dmPlugin.Status))
+            foreach (var dmPlugin in App.Plugins.Where(dmPlugin => dmPlugin.Status))
             {
                 new Thread(() =>
                 {
@@ -997,7 +996,7 @@ namespace Bililive_dm
         {
             b.Disconnect();
             ConnBtn.IsEnabled = true;
-            foreach (var dmPlugin in Plugins)
+            foreach (var dmPlugin in App.Plugins)
             {
                 new Thread(() =>
                 {
@@ -1166,7 +1165,7 @@ namespace Bililive_dm
 
         private void InitPlugins()
         {
-            Plugins.Add(new MobileService());
+            App.Plugins.Add(new MobileService());
             var path = "";
             try
             {
@@ -1214,7 +1213,7 @@ namespace Bililive_dm
                                 logging(
                                     $"插件{exportedType.FullName}({plugin.PluginName})加载完毕，用时{sw.ElapsedMilliseconds}ms");
                             }
-                            Plugins.Add(plugin);
+                            App.Plugins.Add(plugin);
                         }
                     }
                 }
@@ -1227,7 +1226,7 @@ namespace Bililive_dm
                 }
             }
 
-            foreach(var plugin in Plugins)
+            foreach(var plugin in App.Plugins)
             {
                 try
                 {
