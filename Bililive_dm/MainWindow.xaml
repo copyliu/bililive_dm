@@ -37,7 +37,7 @@
 
         </StackPanel>
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="当前房间人数: " VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="当前人气值: " VerticalAlignment="Center" />
             <TextBlock x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
                        VerticalAlignment="Center" />
             <CheckBox x:Name="SideBar" Content="侧边栏"  Checked="SideBar_Checked"
