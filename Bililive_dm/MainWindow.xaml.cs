@@ -21,6 +21,7 @@ using System.Xml.Serialization;
 using BilibiliDM_PluginFramework;
 using BiliDMLib;
 using System.Threading.Tasks;
+using System.Windows.Navigation;
 
 namespace Bililive_dm
 {
@@ -55,10 +56,10 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
-
+            HelpWeb.Navigated+=HelpWebOnNavigated;
             //初始化日志
-           
-            
+
+
             try
             {
                 var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -126,8 +127,7 @@ namespace Bililive_dm
             Title += "   编译时间: " + dt;
 
             Closed += MainWindow_Closed;
-            HelpWeb.Source = new Uri("https://soft.ceve-market.org/bilibili_dm/app.htm?" + DateTime.Now.Ticks);
-            //fuck you IE cache
+            
             b.Disconnected += b_Disconnected;
             b.ReceivedDanmaku += b_ReceivedDanmaku;
             b.ReceivedRoomCount += b_ReceivedRoomCount;
@@ -224,6 +224,14 @@ namespace Bililive_dm
 
             InitPlugins();
             Loaded += MainWindow_Loaded;
+        }
+
+        private void HelpWebOnNavigated(object o, NavigationEventArgs navigationEventArgs)
+        {
+            HelpWeb.Navigated-=HelpWebOnNavigated;
+            HelpWeb.Source = new Uri("https://soft.ceve-market.org/bilibili_dm/app.htm?" + DateTime.Now.Ticks);
+            //fuck you IE cache
+
         }
 
         private void b_LogMessage(object sender, LogMessageArgs e)
@@ -355,6 +363,7 @@ namespace Bililive_dm
             settings.SaveConfig();
             settings.toStatic();
             OptionDialog.LayoutRoot.DataContext = settings;
+           
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
