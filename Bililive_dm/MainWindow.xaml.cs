@@ -9,6 +9,7 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -52,7 +53,7 @@ namespace Bililive_dm
         private readonly DispatcherTimer timer;
         private readonly DispatcherTimer timer_magic;
         private Thread releaseThread;
-
+        private Regex FilterRegex;
         public MainWindow()
         {
             InitializeComponent();
@@ -186,6 +187,11 @@ namespace Bililive_dm
                             if (_danmakuQueue.Any())
                             {
                                 var danmaku = _danmakuQueue.Dequeue();
+                                if (danmaku.MsgType == MsgTypeEnum.Comment && enable_regex)
+                                {
+                                    if (FilterRegex.IsMatch(danmaku.CommentText)) continue;
+                                 
+                                }
                                 ProcDanmaku(danmaku);
                                 if (danmaku.MsgType == MsgTypeEnum.Comment)
                                 {
@@ -302,8 +308,12 @@ namespace Bililive_dm
             SideBar.IsChecked = overlay_enabled;
             SaveLog.IsChecked = savelog_enabled;
             SSTP.IsChecked = sendssp_enabled;
+            EnableRegex.IsChecked = enable_regex;
+            
             ShowItem.IsChecked = showvip_enabled;
             ShowError.IsChecked = showerror_enabled;
+            regex = Regex.Text.Trim();
+            FilterRegex=new Regex(regex);
             var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
             sc?.ScrollToEnd();
 
@@ -1375,6 +1385,10 @@ namespace Bililive_dm
         private bool showvip_enabled = true;
         private bool showerror_enabled = true;
         private bool rawoutput_mode = false;
+        private bool enable_regex = false;
+        private string regex = "";
+
+
         public bool debug_mode { get; private set; }
 
         #endregion
@@ -1382,6 +1396,27 @@ namespace Bililive_dm
         private void Magic_clicked(object sender, RoutedEventArgs e)
         {
             Magic();
+        }
+        private void Enableregex_OnChecked(object sender, RoutedEventArgs e)
+        {
+            enable_regex = true;
+        }
+
+        private void Enableregex_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            enable_regex = false;
+        }
+
+        private void Regex_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                FilterRegex = new Regex(Regex.Text.Trim());
+            }
+            catch (Exception exception)
+            {
+                
+            }
         }
     }
 }
