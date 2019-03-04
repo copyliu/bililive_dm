@@ -8,7 +8,7 @@
         xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="370" Width="601">
+        Title="B站彈幕姬" Height="381.693" Width="631.068">
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
 
@@ -45,8 +45,9 @@
             <CheckBox x:Name="Full" Content="弹幕" Checked="Full_Checked" VerticalAlignment="Center"
                       Unchecked="Full_Unchecked" />
             <CheckBox Content="自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
-            <CheckBox Content="保存到我的文档" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True" Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
-            <CheckBox Content="道具和老爷" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True" Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
+            <CheckBox Content="保存日志" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True" Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
+            <CheckBox Content="道具老爷" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True" Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
+            <CheckBox Content="屏蔽刷屏(α)" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="IgnoreSpam" IsChecked="False" Checked="IgnoreSpam_OnChecked" Unchecked="IgnoreSpam_OnUnchecked"/>
             <CheckBox Content="窗口置顶" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
         </StackPanel>
 

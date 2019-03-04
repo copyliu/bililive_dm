@@ -70,7 +70,7 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 彈幕用戶
         /// </summary>
-        [Obsolete("请使用 UserName")]
+        [Obsolete("请使用 UserName",true)]
         public string CommentUser
         {
             get { return UserName; }
@@ -115,7 +115,7 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 禮物用戶
         /// </summary>
-        [Obsolete("请使用 UserName")]
+        [Obsolete("请使用 UserName", true)]
         public string GiftUser
         {
             get { return UserName; }
@@ -130,7 +130,7 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 禮物數量
         /// </summary>
-        [Obsolete("请使用 GiftCount")]
+        [Obsolete("请使用 GiftCount", true)]
         public string GiftNum { get { return GiftCount.ToString(); } }
 
         /// <summary>
@@ -184,12 +184,18 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 原始数据, 高级开发用
         /// </summary>
+        [Obsolete("除非确实有需要, 请使用 RawDataJToken 避免多次解析JSON导致性能问题")]
         public string RawData { get; set; }
 
         /// <summary>
         /// 内部用, JSON数据版本号 通常应该是2
         /// </summary>
         public int JSON_Version { get; set; }
+
+        /// <summary>
+        /// 原始数据, 高级开发用, 如果需要用原始的JSON数据, 建议使用这个而不是用RawData
+        /// </summary>
+        public JToken RawDataJToken { get; set; }
 
         public DanmakuModel()
         {
@@ -208,12 +214,13 @@ namespace BilibiliDM_PluginFramework
                         CommentText = obj[1].ToString();
                         UserName = obj[2][1].ToString();
                         MsgType = MsgTypeEnum.Comment;
+                        RawDataJToken = obj;
                         break;
                     }
                 case 2:
                     {
                         var obj = JObject.Parse(JSON);
-
+                        RawDataJToken = obj;
                         string cmd = obj["cmd"].ToString();
                         switch(cmd)
                         {

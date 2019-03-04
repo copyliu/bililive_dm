@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
@@ -23,6 +24,7 @@ using BilibiliDM_PluginFramework;
 using BiliDMLib;
 using System.Threading.Tasks;
 using System.Windows.Navigation;
+using Newtonsoft.Json.Linq;
 
 namespace Bililive_dm
 {
@@ -73,8 +75,18 @@ namespace Bililive_dm
             {
                 
             }
-          
-            
+
+            try
+            {
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            }
+            catch (ConfigurationErrorsException ex)
+            {//重置修复错误的配置文件
+                string filename = ex.Filename;
+                File.Delete(filename);
+                Properties.Settings.Default.Reload();
+
+            }
 
             try
             {
@@ -191,6 +203,23 @@ namespace Bililive_dm
                                 {
                                     if (FilterRegex.IsMatch(danmaku.CommentText)) continue;
                                  
+                                }
+
+                                if (danmaku.MsgType == MsgTypeEnum.Comment && ignorespam_enabled)
+                                {
+                                    try
+                                    {
+                                        var jobj = (JObject) danmaku.RawDataJToken;
+                                        if (jobj["info"][0][9].Value<int>() != 0)
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+                                      
+                                    }
+                                  
                                 }
                                 ProcDanmaku(danmaku);
                                 if (danmaku.MsgType == MsgTypeEnum.Comment)
@@ -310,7 +339,7 @@ namespace Bililive_dm
             SaveLog.IsChecked = savelog_enabled;
             SSTP.IsChecked = sendssp_enabled;
             EnableRegex.IsChecked = enable_regex;
-            
+            IgnoreSpam.IsChecked = ignorespam_enabled;
             ShowItem.IsChecked = showvip_enabled;
             ShowError.IsChecked = showerror_enabled;
             regex = Regex.Text.Trim();
@@ -1388,7 +1417,7 @@ namespace Bililive_dm
         private bool rawoutput_mode = false;
         private bool enable_regex = false;
         private string regex = "";
-
+        private bool ignorespam_enabled = false;
 
         public bool debug_mode { get; private set; }
 
@@ -1418,6 +1447,18 @@ namespace Bililive_dm
             {
                 
             }
+        }
+
+        private void IgnoreSpam_OnChecked(object sender, RoutedEventArgs e)
+        {
+            ignorespam_enabled = true;
+            //TODO 保存配置
+        }
+
+        private void IgnoreSpam_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            ignorespam_enabled = false;
+            //TODO 保存配置
         }
     }
 }
