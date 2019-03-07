@@ -9,6 +9,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -23,8 +24,16 @@ using System.Xml.Serialization;
 using BilibiliDM_PluginFramework;
 using BiliDMLib;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Navigation;
+using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
+using Application = System.Windows.Application;
+using Clipboard = System.Windows.Clipboard;
+using ContextMenu = System.Windows.Controls.ContextMenu;
+using DataGrid = System.Windows.Controls.DataGrid;
+using MenuItem = System.Windows.Controls.MenuItem;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Bililive_dm
 {
@@ -56,9 +65,35 @@ namespace Bililive_dm
         private readonly DispatcherTimer timer_magic;
         private Thread releaseThread;
         private Regex FilterRegex;
+
+        private bool net461 = false;
+
+        private  void Get45or451FromRegistry()
+        {
+            using (RegistryKey ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey("SOFTWARE\\Micro1soft\\NET Framework Setup\\NDP\\v4\\Full\\"))
+            {
+                int releaseKey = Convert.ToInt32(ndpKey?.GetValue("Release"));
+                if (releaseKey >= 394254)
+                {
+                    net461 = true;
+                }
+                else
+                {
+                    net461 = false;
+                }
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
+            Get45or451FromRegistry();
+            if (!net461)
+            {
+                MessageBox.Show(this,
+                    @"弹幕姬决定下版本开始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1, 
+为保证你能在今后使用弹幕姬, 请安装最新的 .net framework .");
+            }
             HelpWeb.Navigated+=HelpWebOnNavigated;
             //初始化日志
 
@@ -246,6 +281,12 @@ namespace Bililive_dm
             for (var i = 0; i < 100; i++)
             {
                 _messageQueue.Add("");
+            }
+            if (!net461)
+            {
+                logging(
+                    @"弹幕姬决定下版本开始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1, 
+为保证你能在今后使用弹幕姬, 请安装最新的 .net framework .");
             }
             logging("公告1: 由于廉价的证书供应商被某虎公司搞死了于是没钱买证书了, 所以使用本软件时可能会跳安全提示请无需理会. ");
             logging("公告2: 最近出现了一些所谓弹幕姬后续版, 声称本软件已经不再更新, 并自称后续版是原作者开发是新版云云. ");
