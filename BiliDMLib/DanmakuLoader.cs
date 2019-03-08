@@ -265,7 +265,7 @@ namespace BiliDMLib
                 while (this.Connected)
                 {
                     this.SendHeartbeatAsync();
-                    await TaskEx.Delay(30000);
+                    await Task.Delay(30000);
                 }
             }
             catch (Exception ex)

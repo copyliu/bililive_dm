@@ -203,7 +203,9 @@ namespace BilibiliDM_PluginFramework
 
         public DanmakuModel(string JSON, int version = 1)
         {
+#pragma warning disable CS0618 // 类型或成员已过时
             RawData = JSON;
+#pragma warning restore CS0618 // 类型或成员已过时
             JSON_Version = version;
             switch(version)
             {

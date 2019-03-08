@@ -70,7 +70,7 @@ namespace Bililive_dm
 
         private  void Get45or451FromRegistry()
         {
-            using (RegistryKey ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey("SOFTWARE\\Micro1soft\\NET Framework Setup\\NDP\\v4\\Full\\"))
+            using (RegistryKey ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey("SOFTWARE\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full\\"))
             {
                 int releaseKey = Convert.ToInt32(ndpKey?.GetValue("Release"));
                 if (releaseKey >= 394254)
@@ -579,7 +579,7 @@ namespace Bililive_dm
                     else
                         trytime++;
 
-                    await TaskEx.Delay(1000); // 稍等一下
+                    await Task.Delay(1000); // 稍等一下
                     logging("正在连接");
                     connectresult = await b.ConnectAsync(roomId);
                 }
@@ -831,7 +831,7 @@ namespace Bililive_dm
             }
             if (rawoutput_mode)
             {
-                logging(danmakuModel.RawData);
+                logging(danmakuModel.RawDataJToken.ToString());
             }
         }
 
