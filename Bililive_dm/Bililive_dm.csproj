@@ -63,7 +63,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PreBuildEvent>"C:\Program Files (x86)\Windows Kits\8.1\bin\x64\signtool.exe" sign  /t http://timestamp.verisign.com/scripts/timstamp.dll /n JianShen $(MSBuildProjectDirectory)\Win32\*.dll $(MSBuildProjectDirectory)\x64\*.dll</PreBuildEvent>
     <SignManifests>true</SignManifests>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -112,7 +111,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
