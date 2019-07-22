@@ -19,10 +19,10 @@ namespace Bililive_dm.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Bililive_dm.Properties {
         ///   返回此类使用的缓存的 ResourceManager 实例。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Bililive_dm.Properties.Resources", typeof(Resources).Assembly);
@@ -51,12 +51,1058 @@ namespace Bililive_dm.Properties {
         ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 非B站出品 ©2014-2019 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com 的本地化字符串。
+        /// </summary>
+        public static string ABout_Text {
+            get {
+                return ResourceManager.GetString("ABout.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 自动重连 的本地化字符串。
+        /// </summary>
+        public static string AutoReconnect_Content {
+            get {
+                return ResourceManager.GetString("AutoReconnect.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 還原默認 的本地化字符串。
+        /// </summary>
+        public static string Button_Content_Default {
+            get {
+                return ResourceManager.GetString("Button.Content.Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 测试效果 的本地化字符串。
+        /// </summary>
+        public static string Button_Content_Text {
+            get {
+                return ResourceManager.GetString("Button.Content.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 清空投喂统计 的本地化字符串。
+        /// </summary>
+        public static string ClearMe_Content {
+            get {
+                return ResourceManager.GetString("ClearMe.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 清空弹幕统计 的本地化字符串。
+        /// </summary>
+        public static string ClearMe2_Content {
+            get {
+                return ResourceManager.GetString("ClearMe2.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 清空用户统计 的本地化字符串。
+        /// </summary>
+        public static string ClearMe3_Content {
+            get {
+                return ResourceManager.GetString("ClearMe3.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 清空弹幕统计(总) 的本地化字符串。
+        /// </summary>
+        public static string ClearMe4_Content {
+            get {
+                return ResourceManager.GetString("ClearMe4.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 连接 的本地化字符串。
+        /// </summary>
+        public static string ConnBtn_Content {
+            get {
+                return ResourceManager.GetString("ConnBtn.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件名称 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header_1 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header.1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件名称 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header_Plugin1 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header.Plugin1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件描述 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header_Plugin2 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header.Plugin2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件作者 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header_Plugin3 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header.Plugin3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件狀態 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header_Plugin4 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header.Plugin4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件版本 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header_Plugin5 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header.Plugin5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 用户名 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header1 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件描述 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header2 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 物品 的本地化字符串。
+        /// </summary>
+        public static string DataGridTextColumn_Header3 {
+            get {
+                return ResourceManager.GetString("DataGridTextColumn.Header3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 斷開 的本地化字符串。
+        /// </summary>
+        public static string DisconnBtn_Content {
+            get {
+                return ResourceManager.GetString("DisconnBtn.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正则表达式过滤 符合正则表达式的弹幕将不会出现在任何地方直接无视 的本地化字符串。
+        /// </summary>
+        public static string EnableRegex_Content {
+            get {
+                return ResourceManager.GetString("EnableRegex.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不可为空 的本地化字符串。
+        /// </summary>
+        public static string FontSizeValidationRule_Validate_不可为空 {
+            get {
+                return ResourceManager.GetString("FontSizeValidationRule_Validate_不可为空", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 不是数字 的本地化字符串。
+        /// </summary>
+        public static string FontSizeValidationRule_Validate_不是数字 {
+            get {
+                return ResourceManager.GetString("FontSizeValidationRule_Validate_不是数字", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 必须是正数 的本地化字符串。
+        /// </summary>
+        public static string FontSizeValidationRule_Validate_必须是正数 {
+            get {
+                return ResourceManager.GetString("FontSizeValidationRule_Validate_必须是正数", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 弹幕 的本地化字符串。
+        /// </summary>
+        public static string Full_Content {
+            get {
+                return ResourceManager.GetString("Full.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 屏蔽刷屏(α) 的本地化字符串。
+        /// </summary>
+        public static string IgnoreSpam_Content {
+            get {
+                return ResourceManager.GetString("IgnoreSpam.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 直播间地址: http://live.bilibili.com/ 的本地化字符串。
+        /// </summary>
+        public static string LiveRoomAddr {
+            get {
+                return ResourceManager.GetString("LiveRoomAddr", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在自动重连... 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_b_Disconnected_正在自动重连___ {
+            get {
+                return ResourceManager.GetString("MainWindow_b_Disconnected_正在自动重连___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 連接被斷開 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_b_Disconnected_連接被斷開 {
+            get {
+                return ResourceManager.GetString("MainWindow_b_Disconnected_連接被斷開", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 連接被斷開: 开发者信息{0} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_b_Disconnected_連接被斷開__开发者信息_0_ {
+            get {
+                return ResourceManager.GetString("MainWindow_b_Disconnected_連接被斷開__开发者信息_0_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 直播间人数：{0} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_b_ReceivedRoomCount_ {
+            get {
+                return ResourceManager.GetString("MainWindow_b_ReceivedRoomCount_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前房间人数:{0} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_b_ReceivedRoomCount_当前房间人数__0_ {
+            get {
+                return ResourceManager.GetString("MainWindow_b_ReceivedRoomCount_当前房间人数__0_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 连接房间号：{0} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_connbtn_Click_ {
+            get {
+                return ResourceManager.GetString("MainWindow_connbtn_Click_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ID非法 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_connbtn_Click_ID非法 {
+            get {
+                return ResourceManager.GetString("MainWindow_connbtn_Click_ID非法", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 出错信息：{0} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_connbtn_Click_出錯 {
+            get {
+                return ResourceManager.GetString("MainWindow_connbtn_Click_出錯", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 彈幕姬報告 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_connbtn_Click_彈幕姬本身 {
+            get {
+                return ResourceManager.GetString("MainWindow_connbtn_Click_彈幕姬本身", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 正在连接 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_connbtn_Click_正在连接 {
+            get {
+                return ResourceManager.GetString("MainWindow_connbtn_Click_正在连接", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 请输入房间号,房间号是!数!字! 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_ {
+            get {
+                return ResourceManager.GetString("MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 連接失敗 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_connbtn_Click_連接失敗 {
+            get {
+                return ResourceManager.GetString("MainWindow_connbtn_Click_連接失敗", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 連接成功 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_connbtn_Click_連接成功 {
+            get {
+                return ResourceManager.GetString("MainWindow_connbtn_Click_連接成功", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    *Debug模式* 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_____Debug模式_ {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_____Debug模式_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    *傻逼版本* 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_____傻逼版本_ {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_____傻逼版本_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    *原始数据输出* 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_____原始数据输出_ {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_____原始数据输出_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    版本号:  的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow____版本号__ {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow____版本号__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似    编译时间:  的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow____编译时间__ {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow____编译时间__", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 請有空發給聯繫方式 {0} 謝謝 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_Closed_报错 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_Closed_报错", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 {1}, 聯繫方式 {2} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_Closed_插件錯誤 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_Closed_插件錯誤", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 弹幕姬决定下版本开始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1, 
+        ///为保证你能在今后使用弹幕姬, 请安装最新的 .net framework . 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_NetError {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_NetError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 你的打开方式不正确 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_你的打开方式不正确 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_你的打开方式不正确", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 公告1: 由于廉价的证书供应商被某虎公司搞死了于是没钱买证书了, 所以使用本软件时可能会跳安全提示请无需理会.  的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_公告1 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_公告1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 公告2: 最近出现了一些所谓弹幕姬后续版, 声称本软件已经不再更新, 并自称后续版是原作者开发是新版云云.  的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_公告2 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_公告2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 对此进行澄清, 弹幕姬从来也不会有任何的所谓后续版, 原作者直播间ID是5051, 任何非本人所开发的软件的一切问题均不能解答.  的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_公告2_2 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_公告2_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 也请用户在咨询时, 确认清楚你所使用的软件类型, 向正确的关系者咨询. 谢谢.  的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_公告2_3 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_公告2_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 公告3: 投喂记录不会在弹幕模式上出现, 这不是bug 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_公告3 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_公告3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 可以点击日志复制到剪贴板 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_可以点击日志复制到剪贴板 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_可以点击日志复制到剪贴板", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前为Debug模式 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_MainWindow_当前为Debug模式 {
+            get {
+                return ResourceManager.GetString("MainWindow_MainWindow_当前为Debug模式", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 打开插件文件夹出错
+        ///信息 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_OpenPluginFolder_OnClick_ {
+            get {
+                return ResourceManager.GetString("MainWindow_OpenPluginFolder_OnClick_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 打开插件文件夹出错 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_OpenPluginFolder_OnClick_打开插件文件夹出错 {
+            get {
+                return ResourceManager.GetString("MainWindow_OpenPluginFolder_OnClick_打开插件文件夹出错", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 {1}, 聯繫方式 {2} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_Disable_插件報錯2 {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_Disable_插件報錯2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 {1}, 聯繫方式 {2} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_Enable_插件報錯 {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_Enable_插件報錯", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 請有空發給聯繫方式 {0} 謝謝 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝 {
+            get {
+                return ResourceManager.GetString("MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} 购买了 {1} x {2} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku__0__购买了__1__x__2_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku__0__购买了__1__x__2_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} 赠送的: {1} x {2} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku__0__赠送的___1__x__2_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku__0__赠送的___1__x__2_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 [爷] 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku__VIP前綴 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku__VIP前綴", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 [管] 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku__管理員前綴_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku__管理員前綴_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  进入直播间 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku__进入直播间 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku__进入直播间", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 上船 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_上船 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_上船", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 上船:{0} 购买了 {1} x {2} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 和管理 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_和管理 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_和管理", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 总督 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_总督 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_总督", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 提督 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_提督 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_提督", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到彈幕:{0}{1}{2} 說: {3} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_收到彈幕__0__1__2__說___3_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_收到彈幕__0__1__2__說___3_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到道具 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_收到道具 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_收到道具", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 收到道具:{0} 赠送的: {1} x {2} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 欢迎{0} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_欢迎_0_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_欢迎_0_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 欢迎{0}: {1}{2} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_欢迎_0____1__2_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_欢迎_0____1__2_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 欢迎老爷{0} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_欢迎老爷_0_ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_欢迎老爷_0_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 欢迎老爷{0}: {1} 进入直播间 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 舰长 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_舰长 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_舰长", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 彈幕姬測試 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Test_OnClick_彈幕姬測試 {
+            get {
+                return ResourceManager.GetString("MainWindow_Test_OnClick_彈幕姬測試", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件彈幕測試 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Test_OnClick_插件彈幕測試 {
+            get {
+                return ResourceManager.GetString("MainWindow_Test_OnClick_插件彈幕測試", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 這不是個測試 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Test_OnClick_這不是個測試 {
+            get {
+                return ResourceManager.GetString("MainWindow_Test_OnClick_這不是個測試", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 這是一個測試 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_Test_OnClick_這是一個測試 {
+            get {
+                return ResourceManager.GetString("MainWindow_Test_OnClick_這是一個測試", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 本行记录已复制到剪贴板 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_UIElement_OnMouseLeftButtonUp_本行记录已复制到剪贴板 {
+            get {
+                return ResourceManager.GetString("MainWindow_UIElement_OnMouseLeftButtonUp_本行记录已复制到剪贴板", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 管理 的本地化字符串。
+        /// </summary>
+        public static string MenuItem_Header_PluginAdmin {
+            get {
+                return ResourceManager.GetString("MenuItem.Header.PluginAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 啟用插件 的本地化字符串。
+        /// </summary>
+        public static string MenuItem_Header_PluginEnabvle {
+            get {
+                return ResourceManager.GetString("MenuItem.Header.PluginEnabvle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 停用插件 的本地化字符串。
+        /// </summary>
+        public static string MenuItem_Header_PluginStop {
+            get {
+                return ResourceManager.GetString("MenuItem.Header.PluginStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 投喂榜 的本地化字符串。
+        /// </summary>
+        public static string RankTabItem_Header {
+            get {
+                return ResourceManager.GetString("RankTabItem.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 保存日志 的本地化字符串。
+        /// </summary>
+        public static string SaveLog_Content {
+            get {
+                return ResourceManager.GetString("SaveLog.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 顯示出錯信息 的本地化字符串。
+        /// </summary>
+        public static string ShowError_Content {
+            get {
+                return ResourceManager.GetString("ShowError.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 道具老爷 的本地化字符串。
+        /// </summary>
+        public static string ShowItem_Content {
+            get {
+                return ResourceManager.GetString("ShowItem.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧边栏 的本地化字符串。
+        /// </summary>
+        public static string SideBar_Content {
+            get {
+                return ResourceManager.GetString("SideBar.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 伪春菜联动 的本地化字符串。
+        /// </summary>
+        public static string SSTP_Content {
+            get {
+                return ResourceManager.GetString("SSTP.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置 的本地化字符串。
+        /// </summary>
+        public static string TabItem_Header {
+            get {
+                return ResourceManager.GetString("TabItem.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件 的本地化字符串。
+        /// </summary>
+        public static string TabItem_Header_Plugin {
+            get {
+                return ResourceManager.GetString("TabItem.Header.Plugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 设置 的本地化字符串。
+        /// </summary>
+        public static string TabItem_Header_Setting {
+            get {
+                return ResourceManager.GetString("TabItem.Header.Setting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 说明 的本地化字符串。
+        /// </summary>
+        public static string TabItem_Header_Web {
+            get {
+                return ResourceManager.GetString("TabItem.Header.Web", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 测试效果 的本地化字符串。
+        /// </summary>
+        public static string Test_Content {
+            get {
+                return ResourceManager.GetString("Test.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 当前人气值:  的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text {
+            get {
+                return ResourceManager.GetString("TextBlock.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 注意: 新弹幕引擎下文字速度选项无效 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_EnableNewEngineWarn {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.EnableNewEngineWarn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 弹幕模式文字速度 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_FSpeed {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.FSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 弹幕模式文字大小 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_FTextSize {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.FTextSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 插件目录: 我的文档\弹幕姬\Plugins 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_PluginDir {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.PluginDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 总共收到弹幕(原始数据) 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_R1 {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.R1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 总共收到弹幕(已显示) 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_R2 {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.R2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 参与评论的用户 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_R3 {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.R3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧提示文字出现时长 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_SEff2Time {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.SEff2Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧提示文字消失时长 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_SEff3Time {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.SEff3Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧提示出现时拉伸时长 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_SEffTime {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.SEffTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧提示文字停留时长 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_SKeepTime {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.SKeepTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧提示出现时拉伸时长 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_SShowTime {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.SShowTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧提示文字字体大小 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_STextSize {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.STextSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧窗口宽度 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_SWidth {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.SWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧窗口X偏移 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_SXOffset {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.SXOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 侧窗口Y偏移 的本地化字符串。
+        /// </summary>
+        public static string TextBlock_Text_SYOffset {
+            get {
+                return ResourceManager.GetString("TextBlock.Text.SYOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 窗口置顶 的本地化字符串。
+        /// </summary>
+        public static string WindowTop_Content {
+            get {
+                return ResourceManager.GetString("WindowTop.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 弹幕模式使用新弹幕引擎(Windows 8 以上) 的本地化字符串。
+        /// </summary>
+        public static string WTFEngineEnable_Content {
+            get {
+                return ResourceManager.GetString("WTFEngineEnable.Content", resourceCulture);
             }
         }
     }

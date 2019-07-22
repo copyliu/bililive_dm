@@ -91,8 +91,7 @@ namespace Bililive_dm
             if (!net461)
             {
                 MessageBox.Show(this,
-                    @"弹幕姬决定下版本开始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1, 
-为保证你能在今后使用弹幕姬, 请安装最新的 .net framework .");
+                    Properties.Resources.MainWindow_MainWindow_NetError);
             }
             HelpWeb.Navigated+=HelpWebOnNavigated;
             //初始化日志
@@ -155,24 +154,24 @@ namespace Bililive_dm
             else
             {
 
-                Title += "   *傻逼版本*";
+                Title += Properties.Resources.MainWindow_MainWindow_____傻逼版本_;
 #if !DEBUG
                 if(!(Debugger.IsAttached || offline_mode))
                 {
-                    MessageBox.Show(Application.Current.MainWindow, "你的打开方式不正确");
+                    MessageBox.Show(Application.Current.MainWindow, Properties.Resources.MainWindow_MainWindow_你的打开方式不正确);
                     this.Close();
                 }
 #endif
             }
             if (debug_mode)
             {
-                Title += "   *Debug模式*";
+                Title += Properties.Resources.MainWindow_MainWindow_____Debug模式_;
             }
             if (rawoutput_mode)
             {
-                Title += "   *原始数据输出*";
+                Title += Properties.Resources.MainWindow_MainWindow_____原始数据输出_;
             }
-            Title += "   编译时间: " + dt;
+            Title += Properties.Resources.MainWindow_MainWindow____编译时间__ + dt;
 
             Closed += MainWindow_Closed;
             
@@ -285,18 +284,17 @@ namespace Bililive_dm
             if (!net461)
             {
                 logging(
-                    @"弹幕姬决定下版本开始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1, 
-为保证你能在今后使用弹幕姬, 请安装最新的 .net framework .");
+                    Properties.Resources.MainWindow_MainWindow_NetError);
             }
-            logging("公告1: 由于廉价的证书供应商被某虎公司搞死了于是没钱买证书了, 所以使用本软件时可能会跳安全提示请无需理会. ");
-            logging("公告2: 最近出现了一些所谓弹幕姬后续版, 声称本软件已经不再更新, 并自称后续版是原作者开发是新版云云. ");
-            logging("对此进行澄清, 弹幕姬从来也不会有任何的所谓后续版, 原作者直播间ID是5051, 任何非本人所开发的软件的一切问题均不能解答. ");
-            logging("也请用户在咨询时, 确认清楚你所使用的软件类型, 向正确的关系者咨询. 谢谢. ");
-            logging("公告3: 投喂记录不会在弹幕模式上出现, 这不是bug");
-            logging("可以点击日志复制到剪贴板");
+            logging(Properties.Resources.MainWindow_MainWindow_公告1);
+            logging(Properties.Resources.MainWindow_MainWindow_公告2);
+            logging(Properties.Resources.MainWindow_MainWindow_公告2_2);
+            logging(Properties.Resources.MainWindow_MainWindow_公告2_3);
+            logging(Properties.Resources.MainWindow_MainWindow_公告3);
+            logging(Properties.Resources.MainWindow_MainWindow_可以点击日志复制到剪贴板);
             if (debug_mode)
             {
-                logging("当前为Debug模式");
+                logging(Properties.Resources.MainWindow_MainWindow_当前为Debug模式);
             }
 
             InitPlugins();
@@ -458,8 +456,7 @@ namespace Bililive_dm
                 catch (Exception ex)
                 {
                     MessageBox.Show(
-                        "插件" + dmPlugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + dmPlugin.PluginAuth + ", 聯繫方式 " +
-                        dmPlugin.PluginCont);
+                        string.Format(Properties.Resources.MainWindow_MainWindow_Closed_插件錯誤, dmPlugin.PluginName, dmPlugin.PluginAuth, dmPlugin.PluginCont));
                     try
                     {
                         var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -467,7 +464,7 @@ namespace Bililive_dm
 
                         using (var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + dmPlugin.PluginName + "錯誤報告.txt"))
                         {
-                            outfile.WriteLine("請有空發給聯繫方式 " + dmPlugin.PluginCont + " 謝謝");
+                            outfile.WriteLine(Properties.Resources.MainWindow_MainWindow_Closed_报错, dmPlugin.PluginCont);
                             outfile.Write(ex.ToString());
                         }
                     }
@@ -549,7 +546,7 @@ namespace Bililive_dm
             }
             catch (Exception)
             {
-                MessageBox.Show("请输入房间号,房间号是!数!字!");
+                MessageBox.Show(Properties.Resources.MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_);
                 return;
             }
             if (roomId > 0)
@@ -558,18 +555,18 @@ namespace Bililive_dm
                 DisconnBtn.IsEnabled = false;
                 var connectresult = false;
                 var trytime = 0;
-                logging("正在连接");
+                logging(Properties.Resources.MainWindow_connbtn_Click_正在连接);
 
                 if (debug_mode)
                 {
-                    logging("连接房间号：" + roomId);
+                    logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_, roomId));
                 }
 
                 connectresult = await b.ConnectAsync(roomId);
 
                 if (!connectresult && b.Error != null)// 如果连接不成功并且出错了
                 {
-                    logging("出错信息：" + b.Error.ToString());
+                    logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_出錯, b.Error));
                 }
 
                 while (!connectresult && sender == null && AutoReconnect.IsChecked == true)
@@ -580,16 +577,16 @@ namespace Bililive_dm
                         trytime++;
 
                     await Task.Delay(1000); // 稍等一下
-                    logging("正在连接");
+                    logging(Properties.Resources.MainWindow_connbtn_Click_正在连接);
                     connectresult = await b.ConnectAsync(roomId);
                 }
 
 
                 if (connectresult)
                 {
-                    errorlogging("連接成功");
-                    AddDMText("彈幕姬報告", "連接成功", true);
-                    SendSSP("連接成功");
+                    errorlogging(Properties.Resources.MainWindow_connbtn_Click_連接成功);
+                    AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_connbtn_Click_連接成功, true);
+                    SendSSP(Properties.Resources.MainWindow_connbtn_Click_連接成功);
                     Ranking.Clear();
                     SaveRoomId(roomId);
 
@@ -610,9 +607,9 @@ namespace Bililive_dm
                 }
                 else
                 {
-                    logging("連接失敗");
-                    SendSSP("連接失敗");
-                    AddDMText("彈幕姬報告", "連接失敗", true);
+                    logging(Properties.Resources.MainWindow_connbtn_Click_連接失敗);
+                    SendSSP(Properties.Resources.MainWindow_connbtn_Click_連接失敗);
+                    AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_connbtn_Click_連接失敗, true);
 
                     ConnBtn.IsEnabled = true;
                 }
@@ -620,7 +617,7 @@ namespace Bililive_dm
             }
             else
             {
-                MessageBox.Show("ID非法");
+                MessageBox.Show(Properties.Resources.MainWindow_connbtn_Click_ID非法);
             }
         }
 
@@ -633,7 +630,7 @@ namespace Bililive_dm
             {
                 if (debug_mode)
                 {
-                    logging("直播间人数：" + e.UserCount);
+                    logging(string.Format(Properties.Resources.MainWindow_b_ReceivedRoomCount_, e.UserCount));
                 }
                 OnlineBlock.Text = e.UserCount + "";
             }
@@ -657,7 +654,7 @@ namespace Bililive_dm
                     }).Start();
             }
 
-            SendSSP("当前房间人数:" + e.UserCount);
+            SendSSP(string.Format(Properties.Resources.MainWindow_b_ReceivedRoomCount_当前房间人数__0_, e.UserCount));
         }
 
         private void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
@@ -698,15 +695,15 @@ namespace Bililive_dm
             switch (danmakuModel.MsgType)
             {
                 case MsgTypeEnum.Comment:
-                    logging("收到彈幕:" + (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
-                            danmakuModel.UserName + " 說: " + danmakuModel.CommentText);
+                    logging(
+                        string.Format(Properties.Resources.MainWindow_ProcDanmaku_收到彈幕__0__1__2__說___3_, (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : ""), (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : ""), danmakuModel.UserName, danmakuModel.CommentText));
 
                     AddDMText(
-                        (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
+                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") + (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName,
                         danmakuModel.CommentText);
                     SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
-                        (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
+                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") + (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName,
                         danmakuModel.CommentText));
 
@@ -761,15 +758,13 @@ namespace Bililive_dm
                                 }
                             }));
                         }
-                        logging("收到道具:" + danmakuModel.UserName + " 赠送的: " + danmakuModel.GiftName + " x " +
-                                danmakuModel.GiftCount);
+                        logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_, danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount));
                         Dispatcher.BeginInvoke(new Action(() =>
                         {
                             if (ShowItem.IsChecked == true)
                             {
-                                AddDMText("收到道具",
-                                    danmakuModel.UserName + " 赠送的: " + danmakuModel.GiftName + " x " +
-                                    danmakuModel.GiftCount, true);
+                                AddDMText(Properties.Resources.MainWindow_ProcDanmaku_收到道具,
+                                    string.Format(Properties.Resources.MainWindow_ProcDanmaku__0__赠送的___1__x__2_, danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount), true);
                             }
                         }));
                         break;
@@ -777,27 +772,27 @@ namespace Bililive_dm
                 }
                 case MsgTypeEnum.GuardBuy:
                 {
-                    logging("上船:" + danmakuModel.UserName + " 购买了 " + danmakuModel.GiftName + " x " + danmakuModel.GiftCount);
+                    logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_, danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount));
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if(ShowItem.IsChecked == true)
                         {
-                            AddDMText("上船",
-                                danmakuModel.UserName + " 购买了 " + danmakuModel.GiftName + " x " +
-                                danmakuModel.GiftCount, true);
+                            AddDMText(Properties.Resources.MainWindow_ProcDanmaku_上船,
+                                string.Format(Properties.Resources.MainWindow_ProcDanmaku__0__购买了__1__x__2_, danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount), true);
                         }
                     }));
                     break;
                 }
                 case MsgTypeEnum.Welcome:
                 {
-                    logging("欢迎老爷" + (danmakuModel.isAdmin ? "和管理" : "") + ": " + danmakuModel.UserName + " 进入直播间");
+                    logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间, (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku_和管理 : ""), danmakuModel.UserName));
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowItem.IsChecked == true)
                         {
-                            AddDMText("欢迎老爷" + (danmakuModel.isAdmin ? "和管理" : ""),
-                                danmakuModel.UserName + " 进入直播间", true);
+                            AddDMText(
+                                string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎老爷_0_, (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku_和管理 : "")),
+                                danmakuModel.UserName + Properties.Resources.MainWindow_ProcDanmaku__进入直播间, true);
                         }
                     }));
 
@@ -809,21 +804,22 @@ namespace Bililive_dm
                         switch(danmakuModel.UserGuardLevel)
                         {
                             case 1:
-                                guard_text = "总督";
+                                guard_text = Properties.Resources.MainWindow_ProcDanmaku_总督;
                                 break;
                             case 2:
-                                guard_text = "提督";
+                                guard_text = Properties.Resources.MainWindow_ProcDanmaku_提督;
                                 break;
                             case 3:
-                                guard_text = "舰长";
+                                guard_text = Properties.Resources.MainWindow_ProcDanmaku_舰长;
                                 break;
                         }
-                        logging("欢迎" + guard_text + ": " + danmakuModel.UserName + " 进入直播间");
+                        logging(
+                            string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0____1__2_, guard_text, danmakuModel.UserName, Properties.Resources.MainWindow_ProcDanmaku__进入直播间));
                         Dispatcher.BeginInvoke(new Action(() =>
                         {
                             if(ShowItem.IsChecked == true)
                             {
-                                AddDMText("欢迎" + guard_text, danmakuModel.UserName + " 进入直播间", true);
+                                AddDMText(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0_, guard_text), danmakuModel.UserName + Properties.Resources.MainWindow_ProcDanmaku__进入直播间, true);
                             }
                         }));
                         break;
@@ -867,15 +863,15 @@ namespace Bililive_dm
                 }).Start();
             }
 
-            errorlogging("連接被斷開: 开发者信息" + args.Error);
-            AddDMText("彈幕姬報告", "連接被斷開", true);
-            SendSSP("連接被斷開");
+            errorlogging(string.Format(Properties.Resources.MainWindow_b_Disconnected_連接被斷開__开发者信息_0_, args.Error));
+            AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_b_Disconnected_連接被斷開, true);
+            SendSSP(Properties.Resources.MainWindow_b_Disconnected_連接被斷開);
             if (CheckAccess())
             {
                 if (AutoReconnect.IsChecked == true && args.Error != null)
                 {
-                    errorlogging("正在自动重连...");
-                    AddDMText("彈幕姬報告", "正在自动重连", true);
+                    errorlogging(Properties.Resources.MainWindow_b_Disconnected_正在自动重连___);
+                    AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_b_Disconnected_正在自动重连___, true);
                     connbtn_Click(null, null);
                 }
                 else
@@ -889,8 +885,8 @@ namespace Bililive_dm
                 {
                     if (AutoReconnect.IsChecked == true && args.Error != null)
                     {
-                        errorlogging("正在自动重连...");
-                        AddDMText("彈幕姬報告", "正在自动重连", true);
+                        errorlogging(Properties.Resources.MainWindow_b_Disconnected_正在自动重连___);
+                        AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_b_Disconnected_正在自动重连___, true);
                         connbtn_Click(null, null);
                     }
                     else
@@ -1021,13 +1017,13 @@ namespace Bililive_dm
             var n = ran.Next(100);
             if (n > 98)
             {
-                AddDMText("彈幕姬報告", "這不是個測試", false);
+                AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_Test_OnClick_這不是個測試, false);
             }
             else
             {
-                AddDMText("彈幕姬報告", "這是一個測試", false);
+                AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_Test_OnClick_這是一個測試, false);
             }
-            SendSSP("彈幕姬測試");
+            SendSSP(Properties.Resources.MainWindow_Test_OnClick_彈幕姬測試);
             foreach (var dmPlugin in App.Plugins.Where(dmPlugin => dmPlugin.Status))
             {
                 new Thread(() =>
@@ -1039,7 +1035,7 @@ namespace Bililive_dm
                             Danmaku =
                                 new DanmakuModel
                                 {
-                                    CommentText = "插件彈幕測試",
+                                    CommentText = Properties.Resources.MainWindow_Test_OnClick_插件彈幕測試,
                                     UserName = "彈幕姬",
                                     MsgType = MsgTypeEnum.Comment
                                 }
@@ -1159,8 +1155,7 @@ namespace Bililive_dm
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
-                    plugin.PluginCont);
+                    string.Format(Properties.Resources.MainWindow_Plugin_Enable_插件報錯, plugin.PluginName, plugin.PluginAuth, plugin.PluginCont));
                 try
                 {
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -1168,7 +1163,7 @@ namespace Bililive_dm
 
                     using (var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(Properties.Resources.MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝, plugin.PluginCont);
                         outfile.WriteLine(DateTime.Now + " " + plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -1197,8 +1192,7 @@ namespace Bililive_dm
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
-                    plugin.PluginCont);
+                    string.Format(Properties.Resources.MainWindow_Plugin_Disable_插件報錯2, plugin.PluginName, plugin.PluginAuth, plugin.PluginCont));
                 try
                 {
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -1206,7 +1200,7 @@ namespace Bililive_dm
 
                     using (var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(Properties.Resources.MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝, plugin.PluginCont);
                         outfile.WriteLine(DateTime.Now + " " + plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -1235,8 +1229,7 @@ namespace Bililive_dm
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
-                    plugin.PluginCont);
+                    string.Format(Properties.Resources.MainWindow_Plugin_Disable_插件報錯2, plugin.PluginName, plugin.PluginAuth, plugin.PluginCont));
                 try
                 {
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
@@ -1244,7 +1237,7 @@ namespace Bililive_dm
 
                     using (var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                     {
-                        outfile.WriteLine(DateTime.Now + " " + "請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(DateTime.Now+ " "+ string.Format(Properties.Resources.MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝, plugin.PluginCont));
                         outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -1327,15 +1320,14 @@ namespace Bililive_dm
                 catch(Exception ex)
                 {
                     MessageBox.Show(
-                        "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
-                        plugin.PluginCont);
+                        string.Format(Properties.Resources.MainWindow_Plugin_Disable_插件報錯2, plugin.PluginName, plugin.PluginAuth, plugin.PluginCont));
                     try
                     {
                         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
                         using(var outfile = new StreamWriter(desktop + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
                         {
-                            outfile.WriteLine(DateTime.Now + " " + "請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                            outfile.WriteLine(DateTime.Now + " " + string.Format(Properties.Resources.MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝, plugin.PluginCont));
                             outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
                             outfile.Write(ex.ToString());
                         }
@@ -1366,7 +1358,7 @@ namespace Bililive_dm
                 }
                 catch(Exception ex)
                 {
-                    MessageBox.Show("打开插件文件夹出错\n信息"+ex.Message, "打开插件文件夹出错", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show(Properties.Resources.MainWindow_OpenPluginFolder_OnClick_+ex.Message, Properties.Resources.MainWindow_OpenPluginFolder_OnClick_打开插件文件夹出错, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -1425,7 +1417,7 @@ namespace Bililive_dm
                 {
                     Clipboard.SetText(textBlock.Text);
                     Dispatcher.BeginInvoke(DispatcherPriority.Normal,
-                        new Action(() => { MessageBox.Show("本行记录已复制到剪贴板"); }));
+                        new Action(() => { MessageBox.Show(Properties.Resources.MainWindow_UIElement_OnMouseLeftButtonUp_本行记录已复制到剪贴板); }));
                 }
             }
             catch (Exception)
@@ -1500,6 +1492,11 @@ namespace Bililive_dm
         {
             ignorespam_enabled = false;
             //TODO 保存配置
+        }
+
+        private void SelectLanguage(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

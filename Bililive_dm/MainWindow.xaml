@@ -7,6 +7,7 @@
         xmlns:bililiveDm="clr-namespace:Bililive_dm"
         xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
         Title="B站彈幕姬" Height="381.693" Width="631.068">
     <Window.Resources>
@@ -24,37 +25,39 @@
     </Window.Resources>
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Height="25" DockPanel.Dock="Top">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="直播间地址: http://live.bilibili.com/"
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
                        VerticalAlignment="Center" />
             <TextBox x:Name="RoomId" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"
                      Width="80" />
-            <Button x:Name="ConnBtn" Content="连接" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Click="connbtn_Click" Margin="28,0,0,0" Width="70" />
 
-            <Button Content="斷開" Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" x:Name="DisconnBtn" Click="Disconnbtn_OnClick"/>
-            <Button x:Name="Test" Content="测试效果" HorizontalAlignment="Left" VerticalAlignment="Center"
+            <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" x:Name="DisconnBtn" Click="Disconnbtn_OnClick"/>
+            <Button x:Name="Test" Content="{x:Static properties:Resources.Test_Content}" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Click="Test_OnClick" Margin="28,0,0,0" Width="70" />
 
         </StackPanel>
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="当前人气值: " VerticalAlignment="Center" />
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text}" VerticalAlignment="Center" />
             <TextBlock x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
                        VerticalAlignment="Center" />
-            <CheckBox x:Name="SideBar" Content="侧边栏"  Checked="SideBar_Checked"
+            <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"  Checked="SideBar_Checked"
                       VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
-            <CheckBox x:Name="Full" Content="弹幕" Checked="Full_Checked" VerticalAlignment="Center"
+            <CheckBox x:Name="Full" Content="{x:Static properties:Resources.Full_Content}" Checked="Full_Checked" VerticalAlignment="Center"
                       Unchecked="Full_Unchecked" />
-            <CheckBox Content="自动重连" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
-            <CheckBox Content="保存日志" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True" Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
-            <CheckBox Content="道具老爷" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True" Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
-            <CheckBox Content="屏蔽刷屏(α)" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="IgnoreSpam" IsChecked="False" Checked="IgnoreSpam_OnChecked" Unchecked="IgnoreSpam_OnUnchecked"/>
-            <CheckBox Content="窗口置顶" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
+            <CheckBox Content="{x:Static properties:Resources.AutoReconnect_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
+            <CheckBox Content="{x:Static properties:Resources.SaveLog_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True" Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
+            <CheckBox Content="{x:Static properties:Resources.ShowItem_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True" Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
+            <CheckBox Content="{x:Static properties:Resources.IgnoreSpam_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="IgnoreSpam" IsChecked="False" Checked="IgnoreSpam_OnChecked" Unchecked="IgnoreSpam_OnUnchecked"/>
+            <CheckBox Content="{x:Static properties:Resources.WindowTop_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
         </StackPanel>
-
-        <TextBlock Text="非B站出品 ©2014-2019 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com" DockPanel.Dock="Bottom" VerticalAlignment="Bottom"/>
-
+        <DockPanel DockPanel.Dock="Bottom">
+            <Button DockPanel.Dock="Right" Content="🌐" Click="SelectLanguage"></Button>
+            <TextBlock Text="{x:Static properties:Resources.ABout_Text}" DockPanel.Dock="Left" VerticalAlignment="Bottom"/>
+           
+        </DockPanel>
         <TabControl x:Name="TabControl">
-            <TabItem Header="日志">
+            <TabItem Header="{x:Static properties:Resources.TabItem_Header}">
                 <!--<TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />-->
 
@@ -78,7 +81,7 @@
 
             </TabItem>
 
-            <TabItem Header="投喂榜">
+            <TabItem Header="{x:Static properties:Resources.RankTabItem_Header}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
@@ -88,74 +91,74 @@
                     <DataGrid CanUserAddRows="False" x:Name="DataGrid2"  IsReadOnly="True" AutoGenerateColumns="False"
                         d:DataContext="{d:DesignInstance bililiveDm:SessionItem}" Grid.Row="0">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
-                            <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="數量" SortDirection="Descending"/>
-                            <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="物品" SortDirection="Descending"/>
+                            <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="{x:Static properties:Resources.DataGridTextColumn_Header1}"/>
+                            <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="{x:Static properties:Resources.DataGridTextColumn_Header2}" SortDirection="Descending"/>
+                            <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="{x:Static properties:Resources.DataGridTextColumn_Header3}" SortDirection="Descending"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel x:Name="StaticPanel" HorizontalAlignment="Center" Grid.Row="1">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="总共收到弹幕(原始数据)" Width="150"></TextBlock>
+                            <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_R1}" Width="150"></TextBlock>
                             <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountRaw}" Width="100" TextAlignment="Right"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="总共收到弹幕(已显示)" Width="150"></TextBlock>
+                            <TextBlock  Text="{x:Static properties:Resources.TextBlock_Text_R2}" Width="150"></TextBlock>
                             <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountShow}" Width="100" TextAlignment="Right"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="参与评论的用户" Width="150"></TextBlock>
+                            <TextBlock  Text="{x:Static properties:Resources.TextBlock_Text_R3}" Width="150"></TextBlock>
                             <TextBlock HorizontalAlignment="Right" Text="{Binding UserCount}" Width="100" TextAlignment="Right"></TextBlock>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center" Grid.Row="2" >
-                        <Button x:Name="ClearMe" Content="清空投喂统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        <Button x:Name="ClearMe" Content="{x:Static properties:Resources.ClearMe_Content}" HorizontalAlignment="Right" VerticalAlignment="Center"
                      Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe2" Content="清空弹幕统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        <Button x:Name="ClearMe2" Content="{x:Static properties:Resources.ClearMe2_Content}" HorizontalAlignment="Right" VerticalAlignment="Center"
                     Click="ClearMe2_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe4" Content="清空弹幕统计(总)" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        <Button x:Name="ClearMe4" Content="{x:Static properties:Resources.ClearMe4_Content}" HorizontalAlignment="Right" VerticalAlignment="Center"
                     Click="ClearMe4_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe3" Content="清空用户统计" HorizontalAlignment="Right" VerticalAlignment="Center"
+                        <Button x:Name="ClearMe3" Content="{x:Static properties:Resources.ClearMe3_Content}" HorizontalAlignment="Right" VerticalAlignment="Center"
                       Click="ClearMe3_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="设置">
+            <TabItem Header="{x:Static properties:Resources.TabItem_Header_Setting}">
                 <Grid>
                     <bililiveDm:OptionDialog x:Name="OptionDialog"/>
-                    <CheckBox Content="伪春菜联动" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="-1" Margin="0,500,0,0" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
-                    <CheckBox Content="顯示出錯信息" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="-1" Margin="0,514,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
-                    <CheckBox Content="正则表达式过滤 符合正则表达式的弹幕将不会出现在任何地方直接无视" x:Name="EnableRegex"  HorizontalAlignment="Left" Margin="5,420,0,0" VerticalAlignment="Top" Checked="Enableregex_OnChecked" Unchecked="Enableregex_OnUnchecked"/>
+                    <CheckBox Content="{x:Static properties:Resources.SSTP_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="-1" Margin="0,500,0,0" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
+                    <CheckBox Content="{x:Static properties:Resources.ShowError_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="-1" Margin="0,514,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
+                    <CheckBox Content="{x:Static properties:Resources.EnableRegex_Content}" x:Name="EnableRegex"  HorizontalAlignment="Left" Margin="5,420,0,0" VerticalAlignment="Top" Checked="Enableregex_OnChecked" Unchecked="Enableregex_OnUnchecked"/>
                     <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5,440,0,0" TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395" TextChanged="Regex_OnTextChanged" />
                     <!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
                 </Grid>
             </TabItem>
-            <TabItem Header="插件">
+            <TabItem Header="{x:Static properties:Resources.TabItem_Header_Plugin}">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Margin="0 2" Orientation="Horizontal">
-                        <TextBlock Text="插件目录: 我的文档\弹幕姬\Plugins"></TextBlock>
+                        <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_PluginDir}"></TextBlock>
                         <Button Margin="5 0" Click="OpenPluginFolder_OnClick">打开插件目录</Button>
                     </StackPanel>
                     <DataGrid CanUserAddRows="False" x:Name="PluginGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Top" SelectionMode="Single" SelectionUnit="FullRow"
                   d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="插件名称"/>
-                            <DataGridTextColumn Binding="{Binding PluginDesc}" ClipboardContentBinding="{Binding PluginDesc}" Header="插件描述"/>
-                            <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="插件作者"/>
-                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource Converter}}" Header="插件狀態"/>
-                            <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
+                            <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin1}"/>
+                            <DataGridTextColumn Binding="{Binding PluginDesc}" ClipboardContentBinding="{Binding PluginDesc}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin2}"/>
+                            <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin3}"/>
+                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource Converter}}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin4}"/>
+                            <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin5}"/>
                         </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="啟用插件" Click="Plugin_Enable"/>
-                                <MenuItem Header="停用插件" Click="Plugin_Disable"/>
-                                <MenuItem Header="管理" Click="Plugin_admin"/>
+                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginEnabvle}" Click="Plugin_Enable"/>
+                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginStop}" Click="Plugin_Disable"/>
+                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginAdmin}" Click="Plugin_admin"/>
 
                             </ContextMenu>
                         </DataGrid.ContextMenu>
                     </DataGrid>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="说明">
+            <TabItem Header="{x:Static properties:Resources.TabItem_Header_Web}">
                 <WebBrowser x:Name="HelpWeb" Source="about:blank" />
 
             </TabItem>

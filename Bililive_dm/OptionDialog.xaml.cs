@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Bililive_dm.Properties;
 
 namespace Bililive_dm
 {
@@ -23,16 +24,16 @@ namespace Bililive_dm
             var str = value as string;
             if (str == null)
             {
-                return new ValidationResult(false, "不可为空");
+                return new ValidationResult(false, Resources.FontSizeValidationRule_Validate_不可为空);
             }
             float ftvalue;
             if (!float.TryParse(str,out ftvalue))
             {
-                return new ValidationResult(false, "不是数字");
+                return new ValidationResult(false, Resources.FontSizeValidationRule_Validate_不是数字);
             }
             if (ftvalue < 0)
             {
-                return new ValidationResult(false, "必须是正数");
+                return new ValidationResult(false, Resources.FontSizeValidationRule_Validate_必须是正数);
             }
             return new ValidationResult(true, null);
 
