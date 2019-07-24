@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -26,7 +27,19 @@ namespace Bililive_dm
         {
             AddArchSpecificDirectory();
             Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
-            
+            try
+            {
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            }
+            catch (ConfigurationErrorsException ex)
+            {//重置修复错误的配置文件
+                string filename = ex.Filename;
+                File.Delete(filename);
+                Bililive_dm.Properties.Settings.Default.Reload();
+
+            }
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Bililive_dm.Properties.Settings.Default.lang);
+
         }
 
         private void AddArchSpecificDirectory()

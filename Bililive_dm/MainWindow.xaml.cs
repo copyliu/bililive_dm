@@ -110,18 +110,7 @@ namespace Bililive_dm
                 
             }
 
-            try
-            {
-                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-            }
-            catch (ConfigurationErrorsException ex)
-            {//重置修复错误的配置文件
-                string filename = ex.Filename;
-                File.Delete(filename);
-                Properties.Settings.Default.Reload();
-
-            }
-
+          
             try
             {
                 this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
@@ -1496,7 +1485,10 @@ namespace Bililive_dm
 
         private void SelectLanguage(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+           LanguageSelector lg=new LanguageSelector();
+           lg.Owner = this;
+           lg.ShowDialog();
+
         }
     }
 }

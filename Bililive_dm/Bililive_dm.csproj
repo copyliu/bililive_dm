@@ -147,6 +147,9 @@
     <Compile Include="AndroidService.cs" />
     <Compile Include="FuckMePlugin.cs" />
     <Compile Include="IDanmakuWindow.cs" />
+    <Compile Include="LanguageSelector.xaml.cs">
+      <DependentUpon>LanguageSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
     <Page Include="DanmakuTextControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="LanguageSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WpfDanmakuOverlay.xaml">
       <Generator>MSBuild:Compile</Generator>

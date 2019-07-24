@@ -8,5 +8,8 @@
     <Setting Name="ignorespam" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="lang" Type="System.String" Scope="User">
+      <Value Profile="(Default)">zh</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
