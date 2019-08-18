@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -19,12 +20,10 @@ namespace BiliDMLib
     {
         private string[] defaulthosts = new string[] {"livecmt-2.bilibili.com", "livecmt-1.bilibili.com"};
         private string ChatHost = "chat.bilibili.com";
-        // private int ChatPort = 788;
         private int ChatPort = 2243; // TCP协议默认端口疑似修改到 2243
         private TcpClient Client;
         private NetworkStream NetStream;
-//        private string RoomInfoUrl = "http://live.bilibili.com/sch_list/";
-        private string CIDInfoUrl = "http://live.bilibili.com/api/player?id=cid:";
+        private string CIDInfoUrl = "https://api.live.bilibili.com/room/v1/Danmu/getConf?room_id=";
         private bool Connected = false;
         public Exception Error;
         public event ReceivedDanmakuEvt ReceivedDanmaku;
@@ -35,6 +34,7 @@ namespace BiliDMLib
         private short protocolversion = 1;
         private static int lastroomid ;
         private static string lastserver;
+        private static HttpClient httpClient=new HttpClient(){Timeout = TimeSpan.FromSeconds(5)};
 //        private object shit_lock=new object();//ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
 
         public async Task<bool> ConnectAsync(int roomId)
@@ -61,50 +61,44 @@ namespace BiliDMLib
                 {
                     try
                     {
-                        var request2 = WebRequest.Create(CIDInfoUrl + channelId);
-                        request2.Timeout = 2000;
-                        var response2 = await request2.GetResponseAsync();
-                        using (var stream = response2.GetResponseStream())
+                        var req = await httpClient.GetStringAsync(CIDInfoUrl + channelId);
+                        var roomobj = JObject.Parse(req);
+
+                        ChatHost = roomobj["data"]["host"]+"";
+
+                        ChatPort = roomobj["data"]["port"].Value<int>();
+                        if (string.IsNullOrEmpty(ChatHost))
                         {
-                            using (var sr = new StreamReader(stream))
-                            {
-                                var text = await sr.ReadToEndAsync();
-                                var xml = "<root>" + text + "</root>";
-                                XmlDocument doc = new XmlDocument();
-                                doc.LoadXml(xml);
-                                ChatHost = doc["root"]["dm_server"].InnerText;
-                                /*
-                                 * 注：目前xml里存在 server 和 dm_server ，分别是不同的域名
-                                 * 两个域名指向的服务器应该是相同的，测试 788 2243 均开放
-                                 * 猜测应该是为了一些兼容。所有弹幕相关参数都有带上“dm_”前缀的趋势
-                                 * */
-                                ChatPort = int.Parse(doc["root"]["dm_port"].InnerText);
-                            }
+                            throw new Exception();
                         }
+                  
                     }
                     catch (WebException ex)
                     {
                         ChatHost = defaulthosts[new Random().Next(defaulthosts.Length)];
 
                         HttpWebResponse errorResponse = ex.Response as HttpWebResponse;
-                        if(errorResponse.StatusCode == HttpStatusCode.NotFound)
-                        { // 直播间不存在（HTTP 404）
+                        if (errorResponse.StatusCode == HttpStatusCode.NotFound)
+                        {
+                            // 直播间不存在（HTTP 404）
                             string msg = "该直播间疑似不存在，弹幕姬只支持使用原房间号连接";
-                            LogMessage?.Invoke(this, new LogMessageArgs() { message = msg });
+                            LogMessage?.Invoke(this, new LogMessageArgs() {message = msg});
                         }
                         else
-                        { // B站服务器响应错误
+                        {
+                            // B站服务器响应错误
                             string msg = "B站服务器响应弹幕服务器地址出错，尝试使用常见地址连接";
-                            LogMessage?.Invoke(this, new LogMessageArgs() { message = msg });
+                            LogMessage?.Invoke(this, new LogMessageArgs() {message = msg});
                         }
                     }
-                    catch(Exception)
-                    { // 其他错误（XML解析错误？）
+                    catch (Exception)
+                    {
+                        // 其他错误（XML解析错误？）
                         ChatHost = defaulthosts[new Random().Next(defaulthosts.Length)];
                         string msg = "获取弹幕服务器地址时出现未知错误，尝试使用常见地址连接";
-                        LogMessage?.Invoke(this, new LogMessageArgs() { message = msg });
+                        LogMessage?.Invoke(this, new LogMessageArgs() {message = msg});
                     }
-                  
+
 
                 }
                 else
