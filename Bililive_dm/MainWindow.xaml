@@ -158,7 +158,7 @@
                     </DataGrid>
                 </DockPanel>
             </TabItem>
-            <TabItem Header="{x:Static properties:Resources.TabItem_Header_Web}">
+            <TabItem IsSelected="True" Header="{x:Static properties:Resources.TabItem_Header_Web}">
                 <WebBrowser x:Name="HelpWeb" Source="about:blank" />
 
             </TabItem>

@@ -890,7 +890,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 設置 的本地化字符串。
+        ///   查找类似 首頁 的本地化字符串。
         /// </summary>
         public static string TabItem_Header {
             get {

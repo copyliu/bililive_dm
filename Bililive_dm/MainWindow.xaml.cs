@@ -137,7 +137,7 @@ namespace Bililive_dm
             dt = dt.AddSeconds(seconds*2);
             if (ApplicationDeployment.IsNetworkDeployed)
             {
-                Title += "   版本号: " +
+                Title += Properties.Resources.MainWindow_MainWindow____版本号__ +
                          ApplicationDeployment.CurrentDeployment.CurrentVersion;
             }
             else
@@ -288,6 +288,12 @@ namespace Bililive_dm
 
             InitPlugins();
             Loaded += MainWindow_Loaded;
+            Log.Loaded += (sender, args) =>
+            {
+                var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
+                sc?.ScrollToEnd();
+            };
+
         }
 
         private void HelpWebOnNavigated(object o, NavigationEventArgs navigationEventArgs)
@@ -372,8 +378,7 @@ namespace Bililive_dm
             ShowError.IsChecked = showerror_enabled;
             regex = Regex.Text.Trim();
             FilterRegex=new Regex(regex);
-            var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
-            sc?.ScrollToEnd();
+          
 
             var shit = new Thread(() =>
                 {
