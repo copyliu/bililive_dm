@@ -25,6 +25,7 @@ namespace Bililive_dm
 
         public App()
         {
+            
             AddArchSpecificDirectory();
             Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
             try

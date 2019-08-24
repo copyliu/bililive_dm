@@ -61,7 +61,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 非B站出品 ©2014-2019 CopyLiu 房间号5051 问题反馈 copyliu@gmail.com 的本地化字符串。
+        ///   查找类似 非B站出品 ©2014-2019 CopyLiu 房間編號5051 問題反饋 copyliu@gmail.com 的本地化字符串。
         /// </summary>
         public static string ABout_Text {
             get {
@@ -70,7 +70,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 自动重连 的本地化字符串。
+        ///   查找类似 自動重連 的本地化字符串。
         /// </summary>
         public static string AutoReconnect_Content {
             get {
@@ -88,7 +88,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 测试效果 的本地化字符串。
+        ///   查找类似 測試效果 的本地化字符串。
         /// </summary>
         public static string Button_Content_Text {
             get {
@@ -97,7 +97,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 清空投喂统计 的本地化字符串。
+        ///   查找类似 清空投喂統計 的本地化字符串。
         /// </summary>
         public static string ClearMe_Content {
             get {
@@ -106,7 +106,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 清空弹幕统计 的本地化字符串。
+        ///   查找类似 清空彈幕統計 的本地化字符串。
         /// </summary>
         public static string ClearMe2_Content {
             get {
@@ -115,7 +115,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 清空用户统计 的本地化字符串。
+        ///   查找类似 清空用戶統計 的本地化字符串。
         /// </summary>
         public static string ClearMe3_Content {
             get {
@@ -124,7 +124,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 清空弹幕统计(总) 的本地化字符串。
+        ///   查找类似 清空彈幕統計(總) 的本地化字符串。
         /// </summary>
         public static string ClearMe4_Content {
             get {
@@ -133,7 +133,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 连接 的本地化字符串。
+        ///   查找类似 連線 的本地化字符串。
         /// </summary>
         public static string ConnBtn_Content {
             get {
@@ -142,7 +142,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件名称 的本地化字符串。
+        ///   查找类似 外掛程式名稱 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header_1 {
             get {
@@ -151,7 +151,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件名称 的本地化字符串。
+        ///   查找类似 外掛程式名稱 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header_Plugin1 {
             get {
@@ -160,7 +160,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件描述 的本地化字符串。
+        ///   查找类似 外掛程式描述 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header_Plugin2 {
             get {
@@ -169,7 +169,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件作者 的本地化字符串。
+        ///   查找类似 外掛程式作者 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header_Plugin3 {
             get {
@@ -178,7 +178,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件狀態 的本地化字符串。
+        ///   查找类似 外掛程式狀態 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header_Plugin4 {
             get {
@@ -187,7 +187,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件版本 的本地化字符串。
+        ///   查找类似 外掛程式版本 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header_Plugin5 {
             get {
@@ -196,7 +196,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 用户名 的本地化字符串。
+        ///   查找类似 用戶名 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header1 {
             get {
@@ -205,7 +205,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件描述 的本地化字符串。
+        ///   查找类似 外掛程式描述 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header2 {
             get {
@@ -232,7 +232,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 正则表达式过滤 符合正则表达式的弹幕将不会出现在任何地方直接无视 的本地化字符串。
+        ///   查找类似 規則運算式過濾 符合規則運算式的彈幕將不會出現在任何地方直接丟棄 的本地化字符串。
         /// </summary>
         public static string EnableRegex_Content {
             get {
@@ -241,7 +241,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 不可为空 的本地化字符串。
+        ///   查找类似 不可為空 的本地化字符串。
         /// </summary>
         public static string FontSizeValidationRule_Validate_不可为空 {
             get {
@@ -250,7 +250,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 不是数字 的本地化字符串。
+        ///   查找类似 不是數字 的本地化字符串。
         /// </summary>
         public static string FontSizeValidationRule_Validate_不是数字 {
             get {
@@ -259,7 +259,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 必须是正数 的本地化字符串。
+        ///   查找类似 必須是正數 的本地化字符串。
         /// </summary>
         public static string FontSizeValidationRule_Validate_必须是正数 {
             get {
@@ -268,7 +268,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 弹幕 的本地化字符串。
+        ///   查找类似 彈幕 的本地化字符串。
         /// </summary>
         public static string Full_Content {
             get {
@@ -277,7 +277,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 屏蔽刷屏(α) 的本地化字符串。
+        ///   查找类似 遮蔽刷屏(α) 的本地化字符串。
         /// </summary>
         public static string IgnoreSpam_Content {
             get {
@@ -286,7 +286,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 直播间地址: http://live.bilibili.com/ 的本地化字符串。
+        ///   查找类似 直播間地址: http://live.bilibili.com/ 的本地化字符串。
         /// </summary>
         public static string LiveRoomAddr {
             get {
@@ -295,7 +295,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 正在自动重连... 的本地化字符串。
+        ///   查找类似 正在自動重連... 的本地化字符串。
         /// </summary>
         public static string MainWindow_b_Disconnected_正在自动重连___ {
             get {
@@ -304,7 +304,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連接被斷開 的本地化字符串。
+        ///   查找类似 連線被斷開 的本地化字符串。
         /// </summary>
         public static string MainWindow_b_Disconnected_連接被斷開 {
             get {
@@ -313,7 +313,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連接被斷開: 开发者信息{0} 的本地化字符串。
+        ///   查找类似 連線被斷開: 開發者資訊{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_b_Disconnected_連接被斷開__开发者信息_0_ {
             get {
@@ -322,7 +322,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 直播间人数：{0} 的本地化字符串。
+        ///   查找类似 直播間人數：{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_b_ReceivedRoomCount_ {
             get {
@@ -331,7 +331,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 当前房间人数:{0} 的本地化字符串。
+        ///   查找类似 當前房間人數:{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_b_ReceivedRoomCount_当前房间人数__0_ {
             get {
@@ -340,7 +340,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 连接房间号：{0} 的本地化字符串。
+        ///   查找类似 連接房間號：{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_ {
             get {
@@ -349,7 +349,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 ID非法 的本地化字符串。
+        ///   查找类似 ID不合法 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_ID非法 {
             get {
@@ -358,7 +358,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 出错信息：{0} 的本地化字符串。
+        ///   查找类似 出錯資訊：{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_出錯 {
             get {
@@ -376,7 +376,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 正在连接 的本地化字符串。
+        ///   查找类似 正在連線 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_正在连接 {
             get {
@@ -385,7 +385,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 请输入房间号,房间号是!数!字! 的本地化字符串。
+        ///   查找类似 請輸入房間編碼,房間編碼是!數!字! 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_ {
             get {
@@ -394,7 +394,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連接失敗 的本地化字符串。
+        ///   查找类似 連線失敗 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_連接失敗 {
             get {
@@ -403,7 +403,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 連接成功 的本地化字符串。
+        ///   查找类似 連線成功 的本地化字符串。
         /// </summary>
         public static string MainWindow_connbtn_Click_連接成功 {
             get {
@@ -412,7 +412,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似    *Debug模式* 的本地化字符串。
+        ///   查找类似   *Debug模式* 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_____Debug模式_ {
             get {
@@ -421,7 +421,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似    *傻逼版本* 的本地化字符串。
+        ///   查找类似   *弱智版本* 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_____傻逼版本_ {
             get {
@@ -430,7 +430,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似    *原始数据输出* 的本地化字符串。
+        ///   查找类似   *原始資料輸出* 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_____原始数据输出_ {
             get {
@@ -439,7 +439,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似    版本号:  的本地化字符串。
+        ///   查找类似   版本號: 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow____版本号__ {
             get {
@@ -448,7 +448,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似    编译时间:  的本地化字符串。
+        ///   查找类似   編譯時間: 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow____编译时间__ {
             get {
@@ -466,7 +466,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 {1}, 聯繫方式 {2} 的本地化字符串。
+        ///   查找类似 外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_Closed_插件錯誤 {
             get {
@@ -475,8 +475,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 弹幕姬决定下版本开始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1, 
-        ///为保证你能在今后使用弹幕姬, 请安装最新的 .net framework . 的本地化字符串。
+        ///   查找类似 彈幕姬決定下版本開始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1,為保證你能在今後使用彈幕姬, 請安裝最新的 .net framework . 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_NetError {
             get {
@@ -485,7 +484,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 你的打开方式不正确 的本地化字符串。
+        ///   查找类似 你的打開方式不正確 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_你的打开方式不正确 {
             get {
@@ -494,7 +493,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 公告1: 由于廉价的证书供应商被某虎公司搞死了于是没钱买证书了, 所以使用本软件时可能会跳安全提示请无需理会.  的本地化字符串。
+        ///   查找类似 公告1: 由於廉價的證書供應商被某虎公司搞死了於是沒錢買證書了, 所以使用本軟體時可能會跳安全提示請無需理會. 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_公告1 {
             get {
@@ -503,7 +502,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 公告2: 最近出现了一些所谓弹幕姬后续版, 声称本软件已经不再更新, 并自称后续版是原作者开发是新版云云.  的本地化字符串。
+        ///   查找类似 公告2: 最近出現了一些所謂彈幕姬後續版, 聲稱本軟體已經不再更新, 並自稱後續版是原作者開發是新版云云. 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_公告2 {
             get {
@@ -512,7 +511,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 对此进行澄清, 弹幕姬从来也不会有任何的所谓后续版, 原作者直播间ID是5051, 任何非本人所开发的软件的一切问题均不能解答.  的本地化字符串。
+        ///   查找类似 對此進行澄清, 彈幕姬從來也不會有任何的所謂後續版, 原作者直播間ID是5051, 任何非本人所開發的軟體的一切問題均不能解答. 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_公告2_2 {
             get {
@@ -521,7 +520,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 也请用户在咨询时, 确认清楚你所使用的软件类型, 向正确的关系者咨询. 谢谢.  的本地化字符串。
+        ///   查找类似 也請用戶在諮詢時, 確認清楚你所使用的軟體類型, 向正確的關係者諮詢. 謝謝. 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_公告2_3 {
             get {
@@ -530,7 +529,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 公告3: 投喂记录不会在弹幕模式上出现, 这不是bug 的本地化字符串。
+        ///   查找类似 公告3: 投喂記錄不會在彈幕模式上出現, 這不是bug 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_公告3 {
             get {
@@ -539,7 +538,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 可以点击日志复制到剪贴板 的本地化字符串。
+        ///   查找类似 可以點擊日誌複製到剪貼簿 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_可以点击日志复制到剪贴板 {
             get {
@@ -548,7 +547,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 当前为Debug模式 的本地化字符串。
+        ///   查找类似 當前為Debug模式 的本地化字符串。
         /// </summary>
         public static string MainWindow_MainWindow_当前为Debug模式 {
             get {
@@ -557,7 +556,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 打开插件文件夹出错
+        ///   查找类似 打開外掛程式資料夾出錯
         ///信息 的本地化字符串。
         /// </summary>
         public static string MainWindow_OpenPluginFolder_OnClick_ {
@@ -567,7 +566,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 打开插件文件夹出错 的本地化字符串。
+        ///   查找类似 打開外掛程式資料夾出錯 的本地化字符串。
         /// </summary>
         public static string MainWindow_OpenPluginFolder_OnClick_打开插件文件夹出错 {
             get {
@@ -576,7 +575,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 {1}, 聯繫方式 {2} 的本地化字符串。
+        ///   查找类似 外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_Plugin_Disable_插件報錯2 {
             get {
@@ -585,7 +584,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 {1}, 聯繫方式 {2} 的本地化字符串。
+        ///   查找类似 外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_Plugin_Enable_插件報錯 {
             get {
@@ -603,7 +602,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {0} 购买了 {1} x {2} 的本地化字符串。
+        ///   查找类似 {0} 購買了 {1} x {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku__0__购买了__1__x__2_ {
             get {
@@ -612,7 +611,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 {0} 赠送的: {1} x {2} 的本地化字符串。
+        ///   查找类似 {0} 贈送的: {1} x {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku__0__赠送的___1__x__2_ {
             get {
@@ -621,7 +620,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 [爷] 的本地化字符串。
+        ///   查找类似 [爺] 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku__VIP前綴 {
             get {
@@ -639,7 +638,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似  进入直播间 的本地化字符串。
+        ///   查找类似 進入直播間 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku__进入直播间 {
             get {
@@ -657,7 +656,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 上船:{0} 购买了 {1} x {2} 的本地化字符串。
+        ///   查找类似 上船:{0} 購買了 {1} x {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_ {
             get {
@@ -675,7 +674,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 总督 的本地化字符串。
+        ///   查找类似 總督 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_总督 {
             get {
@@ -711,7 +710,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 收到道具:{0} 赠送的: {1} x {2} 的本地化字符串。
+        ///   查找类似 收到道具:{0} 贈送的: {1} x {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_ {
             get {
@@ -720,7 +719,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 欢迎{0} 的本地化字符串。
+        ///   查找类似 歡迎{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_欢迎_0_ {
             get {
@@ -729,7 +728,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 欢迎{0}: {1}{2} 的本地化字符串。
+        ///   查找类似 歡迎{0}: {1}{2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_欢迎_0____1__2_ {
             get {
@@ -738,7 +737,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 欢迎老爷{0} 的本地化字符串。
+        ///   查找类似 歡迎老爺{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_欢迎老爷_0_ {
             get {
@@ -747,7 +746,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 欢迎老爷{0}: {1} 进入直播间 的本地化字符串。
+        ///   查找类似 歡迎老爺{0}: {1} 進入直播間 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间 {
             get {
@@ -756,7 +755,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 舰长 的本地化字符串。
+        ///   查找类似 艦長 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_舰长 {
             get {
@@ -774,7 +773,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件彈幕測試 的本地化字符串。
+        ///   查找类似 外掛程式彈幕測試 的本地化字符串。
         /// </summary>
         public static string MainWindow_Test_OnClick_插件彈幕測試 {
             get {
@@ -801,7 +800,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 本行记录已复制到剪贴板 的本地化字符串。
+        ///   查找类似 本行記錄已複製到剪貼簿 的本地化字符串。
         /// </summary>
         public static string MainWindow_UIElement_OnMouseLeftButtonUp_本行记录已复制到剪贴板 {
             get {
@@ -819,7 +818,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 啟用插件 的本地化字符串。
+        ///   查找类似 啟用外掛程式 的本地化字符串。
         /// </summary>
         public static string MenuItem_Header_PluginEnabvle {
             get {
@@ -828,7 +827,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 停用插件 的本地化字符串。
+        ///   查找类似 停用外掛程式 的本地化字符串。
         /// </summary>
         public static string MenuItem_Header_PluginStop {
             get {
@@ -846,7 +845,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 保存日志 的本地化字符串。
+        ///   查找类似 保存日誌 的本地化字符串。
         /// </summary>
         public static string SaveLog_Content {
             get {
@@ -864,7 +863,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 道具老爷 的本地化字符串。
+        ///   查找类似 道具老爺 的本地化字符串。
         /// </summary>
         public static string ShowItem_Content {
             get {
@@ -873,7 +872,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧边栏 的本地化字符串。
+        ///   查找类似 側邊欄 的本地化字符串。
         /// </summary>
         public static string SideBar_Content {
             get {
@@ -882,7 +881,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 伪春菜联动 的本地化字符串。
+        ///   查找类似 偽春菜聯動 的本地化字符串。
         /// </summary>
         public static string SSTP_Content {
             get {
@@ -891,7 +890,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 设置 的本地化字符串。
+        ///   查找类似 設置 的本地化字符串。
         /// </summary>
         public static string TabItem_Header {
             get {
@@ -900,7 +899,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件 的本地化字符串。
+        ///   查找类似 外掛程式 的本地化字符串。
         /// </summary>
         public static string TabItem_Header_Plugin {
             get {
@@ -909,7 +908,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 设置 的本地化字符串。
+        ///   查找类似 設置 的本地化字符串。
         /// </summary>
         public static string TabItem_Header_Setting {
             get {
@@ -918,7 +917,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 说明 的本地化字符串。
+        ///   查找类似 說明 的本地化字符串。
         /// </summary>
         public static string TabItem_Header_Web {
             get {
@@ -927,7 +926,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 测试效果 的本地化字符串。
+        ///   查找类似 測試效果 的本地化字符串。
         /// </summary>
         public static string Test_Content {
             get {
@@ -936,7 +935,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 当前人气值:  的本地化字符串。
+        ///   查找类似 當前人氣值: 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text {
             get {
@@ -945,7 +944,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 注意: 新弹幕引擎下文字速度选项无效 的本地化字符串。
+        ///   查找类似 注意: 新彈幕引擎下文字速度選項無效 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_EnableNewEngineWarn {
             get {
@@ -954,7 +953,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 弹幕模式文字速度 的本地化字符串。
+        ///   查找类似 彈幕模式文字速度 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_FSpeed {
             get {
@@ -963,7 +962,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 弹幕模式文字大小 的本地化字符串。
+        ///   查找类似 彈幕模式文字大小 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_FTextSize {
             get {
@@ -972,7 +971,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 插件目录: 我的文档\弹幕姬\Plugins 的本地化字符串。
+        ///   查找类似 外掛程式目錄: 我的文件\彈幕姬\Plugins 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_PluginDir {
             get {
@@ -981,7 +980,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 总共收到弹幕(原始数据) 的本地化字符串。
+        ///   查找类似 總共收到彈幕(原始資料) 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_R1 {
             get {
@@ -990,7 +989,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 总共收到弹幕(已显示) 的本地化字符串。
+        ///   查找类似 總共收到彈幕(已顯示) 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_R2 {
             get {
@@ -999,7 +998,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 参与评论的用户 的本地化字符串。
+        ///   查找类似 參與評論的用戶 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_R3 {
             get {
@@ -1008,7 +1007,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧提示文字出现时长 的本地化字符串。
+        ///   查找类似 側提示文字出現時長 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_SEff2Time {
             get {
@@ -1017,7 +1016,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧提示文字消失时长 的本地化字符串。
+        ///   查找类似 側提示文字消失時長 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_SEff3Time {
             get {
@@ -1026,7 +1025,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧提示出现时拉伸时长 的本地化字符串。
+        ///   查找类似 側提示出現時拉伸時長 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_SEffTime {
             get {
@@ -1035,7 +1034,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧提示文字停留时长 的本地化字符串。
+        ///   查找类似 側提示文字停留時長 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_SKeepTime {
             get {
@@ -1044,7 +1043,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧提示出现时拉伸时长 的本地化字符串。
+        ///   查找类似 側提示出現時拉伸時長 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_SShowTime {
             get {
@@ -1053,7 +1052,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧提示文字字体大小 的本地化字符串。
+        ///   查找类似 側提示文字字體大小 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_STextSize {
             get {
@@ -1062,7 +1061,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧窗口宽度 的本地化字符串。
+        ///   查找类似 側窗口寬度 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_SWidth {
             get {
@@ -1071,7 +1070,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧窗口X偏移 的本地化字符串。
+        ///   查找类似 側窗口X偏移 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_SXOffset {
             get {
@@ -1080,7 +1079,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 侧窗口Y偏移 的本地化字符串。
+        ///   查找类似 側窗口Y偏移 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_SYOffset {
             get {
@@ -1089,7 +1088,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 窗口置顶 的本地化字符串。
+        ///   查找类似 窗口置頂 的本地化字符串。
         /// </summary>
         public static string WindowTop_Content {
             get {
@@ -1098,7 +1097,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 弹幕模式使用新弹幕引擎(Windows 8 以上) 的本地化字符串。
+        ///   查找类似 彈幕模式使用新彈幕引擎(Windows 8 以上) 的本地化字符串。
         /// </summary>
         public static string WTFEngineEnable_Content {
             get {

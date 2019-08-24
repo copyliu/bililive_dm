@@ -12,7 +12,7 @@
             <RowDefinition Height="22"/>
         </Grid.RowDefinitions>
         <WrapPanel Margin="5" Grid.Row="0">
-            <RadioButton Content="简繁中文" x:Name="cn"></RadioButton>
+            <RadioButton Content="中文" x:Name="cn"></RadioButton>
             <RadioButton Content="喵喵喵" x:Name="jp"></RadioButton>
 
         </WrapPanel>
