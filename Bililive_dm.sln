@@ -3,16 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bililive_dm", "Bililive_dm\Bililive_dm.csproj", "{545A89C8-2276-498D-B892-6AA3AF0ED1F7}"
-	ProjectSection(ProjectDependencies) = postProject
-		{36EE8076-FD50-4A1F-8853-D70C0D921711} = {36EE8076-FD50-4A1F-8853-D70C0D921711}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiliDMLib", "BiliDMLib\BiliDMLib.csproj", "{76778870-A6F5-43F4-9BAA-DEC0473F217E}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libwtfdanmaku", "libwtfdanmaku\libwtfdanmaku.vcxproj", "{817EBE08-2BE4-4251-92D0-117822D8F16A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "wtf_lib_builder", "wtf_lib_builder\wtf_lib_builder.vcxproj", "{36EE8076-FD50-4A1F-8853-D70C0D921711}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BilibiliDM_PluginFramework", "BilibiliDM_PluginFramework\BilibiliDM_PluginFramework.csproj", "{62FE6607-FE23-4DF0-BF23-9FB7D70C829A}"
 EndProject
@@ -26,14 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|x86.ActiveCfg = Debug|x86
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Debug|x86.Build.0 = Debug|x86
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Release|x86.ActiveCfg = Release|x86
-		{545A89C8-2276-498D-B892-6AA3AF0ED1F7}.Release|x86.Build.0 = Release|x86
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Debug|x86.ActiveCfg = Debug|x86
@@ -42,19 +25,6 @@ Global
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Release|x86.ActiveCfg = Release|x86
 		{76778870-A6F5-43F4-9BAA-DEC0473F217E}.Release|x86.Build.0 = Release|x86
-		{817EBE08-2BE4-4251-92D0-117822D8F16A}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{817EBE08-2BE4-4251-92D0-117822D8F16A}.Debug|x86.ActiveCfg = Debug|Win32
-		{817EBE08-2BE4-4251-92D0-117822D8F16A}.Release|Any CPU.ActiveCfg = Release|Win32
-		{817EBE08-2BE4-4251-92D0-117822D8F16A}.Release|x86.ActiveCfg = Release|Win32
-		{817EBE08-2BE4-4251-92D0-117822D8F16A}.Release|x86.Build.0 = Release|Win32
-		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Debug|Any CPU.Build.0 = Debug|Win32
-		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Debug|x86.ActiveCfg = Debug|Win32
-		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Debug|x86.Build.0 = Debug|Win32
-		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Release|Any CPU.ActiveCfg = Release|Win32
-		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Release|Any CPU.Build.0 = Release|Win32
-		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Release|x86.ActiveCfg = Release|Win32
-		{36EE8076-FD50-4A1F-8853-D70C0D921711}.Release|x86.Build.0 = Release|Win32
 		{62FE6607-FE23-4DF0-BF23-9FB7D70C829A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{62FE6607-FE23-4DF0-BF23-9FB7D70C829A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62FE6607-FE23-4DF0-BF23-9FB7D70C829A}.Debug|x86.ActiveCfg = Debug|x86
@@ -74,6 +44,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CDC4E02-0D61-4393-B589-DD21FBCE8A39}
 	EndGlobalSection
 	GlobalSection(Performance) = preSolution
 		HasPerformanceSessions = true
