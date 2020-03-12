@@ -1555,5 +1555,17 @@ namespace Bililive_dm
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void SyncJumpList()
+        {
+            JumpList jumpList = JumpList.GetJumpList(App.Current);
+            if (jumpList == null) return;
+            string path = Assembly.GetExecutingAssembly().Location;
+            foreach (JumpTask task in jumpList.JumpItems)
+            {
+                task.ApplicationPath = path;
+            }
+            jumpList.Apply();
+        }
     }
 }
