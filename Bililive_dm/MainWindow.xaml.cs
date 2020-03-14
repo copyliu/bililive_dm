@@ -114,6 +114,7 @@ namespace Bililive_dm
           
             try
             {
+                SyncJumpList();
                 string arg = Environment.CommandLine;
                 if (arg.Contains("RoomID="))
                 {
@@ -147,7 +148,7 @@ namespace Bililive_dm
             var seconds = int.Parse(fullversion.Split('.')[3]);
             dt = dt.AddDays(dates);
             dt = dt.AddSeconds(seconds*2);
-            if (ApplicationDeployment.IsNetworkDeployed)
+            if (ApplicationDeployment.IsNetworkDeployed || Environment.CommandLine.Contains("RoomID="))
             {
                 Title += Properties.Resources.MainWindow_MainWindow____版本号__ +
                          ApplicationDeployment.CurrentDeployment.CurrentVersion;
@@ -157,7 +158,7 @@ namespace Bililive_dm
 
                 Title += Properties.Resources.MainWindow_MainWindow_____傻逼版本_;
 #if !DEBUG
-                if(!(Debugger.IsAttached || offline_mode || Environment.CommandLine.Contains("RoomID=")))
+                if(!(Debugger.IsAttached || offline_mode))
                 {
                     MessageBox.Show(Application.Current.MainWindow, Properties.Resources.MainWindow_MainWindow_你的打开方式不正确);
                     this.Close();
