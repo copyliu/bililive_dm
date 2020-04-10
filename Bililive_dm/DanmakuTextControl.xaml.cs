@@ -25,6 +25,30 @@ namespace Bililive_dm
         {
             _addtime = addtime;
             this.InitializeComponent();
+            var sb = (Storyboard)this.Resources["Storyboard1"];
+            Storyboard.SetTarget(sb.Children[2], this);
+
+            (sb.Children[0] as DoubleAnimationUsingKeyFrames).KeyFrames[1].KeyTime =
+                KeyTime.FromTimeSpan(new TimeSpan(Convert.ToInt64(Store.MainOverlayEffect1 * TimeSpan.TicksPerSecond)));
+
+            (sb.Children[1] as DoubleAnimationUsingKeyFrames).KeyFrames[1].KeyTime =
+                KeyTime.FromTimeSpan(new TimeSpan(Convert.ToInt64(Store.MainOverlayEffect1 * TimeSpan.TicksPerSecond)));
+
+            (sb.Children[1] as DoubleAnimationUsingKeyFrames).KeyFrames[2].KeyTime =
+                KeyTime.FromTimeSpan(
+                    new TimeSpan(
+                        Convert.ToInt64((Store.MainOverlayEffect2 + Store.MainOverlayEffect1) * TimeSpan.TicksPerSecond)));
+
+            (sb.Children[2] as DoubleAnimationUsingKeyFrames).KeyFrames[0].KeyTime =
+                KeyTime.FromTimeSpan(
+                    new TimeSpan(
+                        Convert.ToInt64((Store.MainOverlayEffect3 + Store.MainOverlayEffect2 + Store.MainOverlayEffect1 + _addtime) *
+                                        TimeSpan.TicksPerSecond)));
+            (sb.Children[2] as DoubleAnimationUsingKeyFrames).KeyFrames[1].KeyTime =
+                KeyTime.FromTimeSpan(
+                    new TimeSpan(
+                        Convert.ToInt64((Store.MainOverlayEffect4 + Store.MainOverlayEffect3 + Store.MainOverlayEffect2 +
+                                         Store.MainOverlayEffect1 + _addtime) * TimeSpan.TicksPerSecond)));
             this.Loaded += DanmakuTextControl_Loaded;
 
 
