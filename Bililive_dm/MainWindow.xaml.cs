@@ -702,6 +702,23 @@ namespace Bililive_dm
                         danmakuModel.CommentText));
 
                     break;
+                case MsgTypeEnum.SuperChat:
+                {
+                    logging(
+                        string.Format(Properties.Resources.SuperChatLogName, (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : ""), (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : ""), danmakuModel.UserName, danmakuModel.CommentText));
+
+                    AddDMText(
+                        Properties.Resources.MainWindow_ProcDanmaku____SuperChat___+(danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") + (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
+                        danmakuModel.UserName +" ￥:"+danmakuModel.Price.ToString("N2"),
+                        danmakuModel.CommentText,keeptime:danmakuModel.SCKeepTime,warn:true);
+                    SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
+                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") + (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
+                        danmakuModel.UserName,
+                        danmakuModel.CommentText));
+
+                    break;
+                }
+
                 case MsgTypeEnum.GiftTop:
                     foreach (var giftRank in danmakuModel.GiftRanking)
                     {
@@ -956,7 +973,7 @@ namespace Bililive_dm
             }
         }
 
-        public void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false)
+        public void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false, int? keeptime=null)
         {
             if (!showerror_enabled && warn)
             {
@@ -967,7 +984,7 @@ namespace Bililive_dm
             {
                 if (SideBar.IsChecked == true)
                 {
-                    var c = new DanmakuTextControl();
+                    var c = new DanmakuTextControl(keeptime??0);
 
                     c.UserName.Text = user;
                     if (warn)
@@ -1008,6 +1025,7 @@ namespace Bililive_dm
 //            logging("投喂记录不会在弹幕模式上出现, 这不是bug");
             var ran = new Random();
 
+            
             var n = ran.Next(100);
             if (n > 98)
             {

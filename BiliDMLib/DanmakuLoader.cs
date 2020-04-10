@@ -156,10 +156,9 @@ namespace BiliDMLib
                     {
                         continue; // 没有内容了
                     }
-                    if (buffer.Length < payloadlength) // 不够长再申请
-                    {
-                        buffer = new byte[payloadlength];
-                    }
+                    
+                    buffer = new byte[payloadlength];
+                    
                     await NetStream.ReadBAsync(buffer, 0, payloadlength);
                     if (protocol.Version == 2 && protocol.Action == 5) // 处理deflate消息
                     {
@@ -216,7 +215,7 @@ namespace BiliDMLib
                 case 3: // (OpHeartbeatReply)
                     {
                         var viewer = EndianBitConverter.BigEndian.ToUInt32(buffer, 0); //观众人数
-                        Console.WriteLine(viewer);
+                        // Console.WriteLine(viewer);
                         ReceivedRoomCount?.Invoke(this, new ReceivedRoomCountArgs() { UserCount = viewer });
                         break;
                     }

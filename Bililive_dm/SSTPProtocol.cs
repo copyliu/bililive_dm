@@ -93,7 +93,7 @@ namespace Bililive_dm
                 }
                return data.Where(d => d.Value.ContainsKey("hwnd")).Select(d => int.Parse(d.Value["hwnd"])).ToArray();
             }
-            catch (Exception)
+            catch 
             {
                 return new int[0];
             }

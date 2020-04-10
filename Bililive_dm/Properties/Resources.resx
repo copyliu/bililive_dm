@@ -394,6 +394,9 @@
   <data name="SSTP.Content" xml:space="preserve">
     <value>偽春菜聯動</value>
   </data>
+  <data name="SuperChatLogName" xml:space="preserve">
+    <value>醒目留言:{0}{1}{2} 說: {3}</value>
+  </data>
   <data name="TabItem.Header" xml:space="preserve">
     <value>首頁</value>
   </data>
@@ -465,5 +468,8 @@
   </data>
   <data name="WTFEngineEnable.Content" xml:space="preserve">
     <value>彈幕模式使用新彈幕引擎(Windows 8 以上)</value>
+  </data>
+  <data name="MainWindow_ProcDanmaku____SuperChat___" xml:space="preserve">
+    <value>!!!SuperChat!!!</value>
   </data>
 </root>

@@ -37,18 +37,26 @@ namespace BilibiliDM_PluginFramework
         /// 直播結束
         /// </summary>
         LiveEnd,
+
         /// <summary>
         /// 其他
         /// </summary>
         Unknown,
+
         /// <summary>
         /// 欢迎船员
         /// </summary>
         WelcomeGuard,
+
         /// <summary>
         /// 购买船票（上船）
         /// </summary>
-        GuardBuy
+        GuardBuy,
+
+        /// <summary>
+        /// SC
+        /// </summary>
+        SuperChat
 
     }
 
@@ -70,7 +78,7 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 彈幕用戶
         /// </summary>
-        [Obsolete("请使用 UserName",true)]
+        [Obsolete("请使用 UserName", true)]
         public string CommentUser
         {
             get { return UserName; }
@@ -131,7 +139,10 @@ namespace BilibiliDM_PluginFramework
         /// 禮物數量
         /// </summary>
         [Obsolete("请使用 GiftCount", true)]
-        public string GiftNum { get { return GiftCount.ToString(); } }
+        public string GiftNum
+        {
+            get { return GiftCount.ToString(); }
+        }
 
         /// <summary>
         /// 礼物数量
@@ -147,8 +158,12 @@ namespace BilibiliDM_PluginFramework
         /// 当前房间的礼物积分（Room Cost）
         /// 因以前出现过不传递rcost的礼物，并且用处不大，所以弃用
         /// </summary>
-        [Obsolete("如有需要请自行解析RawData",true)]
-        public string Giftrcost { get { return "0"; } set { } }
+        [Obsolete("如有需要请自行解析RawData", true)]
+        public string Giftrcost
+        {
+            get { return "0"; }
+            set { }
+        }
 
         /// <summary>
         /// 禮物排行
@@ -193,6 +208,16 @@ namespace BilibiliDM_PluginFramework
         public int JSON_Version { get; set; }
 
         /// <summary>
+        /// SC的金额, 如果以后有礼物金额也可以放进去
+        /// </summary>
+        public decimal Price { get; set; }
+
+        /// <summary>
+        /// SC保留时间
+        /// </summary>
+        public int SCKeepTime { get; set; }
+
+        /// <summary>
         /// 原始数据, 高级开发用, 如果需要用原始的JSON数据, 建议使用这个而不是用RawData
         /// </summary>
         public JToken RawDataJToken { get; set; }
@@ -207,104 +232,44 @@ namespace BilibiliDM_PluginFramework
             RawData = JSON;
 #pragma warning restore CS0618 // 类型或成员已过时
             JSON_Version = version;
-            switch(version)
+            switch (version)
             {
                 case 1:
-                    {
-                        var obj = JArray.Parse(JSON);
+                {
+                    var obj = JArray.Parse(JSON);
 
-                        CommentText = obj[1].ToString();
-                        UserName = obj[2][1].ToString();
-                        MsgType = MsgTypeEnum.Comment;
-                        RawDataJToken = obj;
-                        break;
-                    }
+                    CommentText = obj[1].ToString();
+                    UserName = obj[2][1].ToString();
+                    MsgType = MsgTypeEnum.Comment;
+                    RawDataJToken = obj;
+                    break;
+                }
                 case 2:
+                {
+                    JObject obj;
+                    try
                     {
-                        var obj = JObject.Parse(JSON);
-                        RawDataJToken = obj;
-                        string cmd = obj["cmd"].ToString();
-                        switch(cmd)
-                        {
-                            case "LIVE":
-                                MsgType = MsgTypeEnum.LiveStart;
-                                roomID = obj["roomid"].ToString();
-                                break;
-                            case "PREPARING":
-                                MsgType = MsgTypeEnum.LiveEnd;
-                                roomID = obj["roomid"].ToString();
-                                break;
-                            case "DANMU_MSG":
-                                MsgType = MsgTypeEnum.Comment;
-                                CommentText = obj["info"][1].ToString();
-                                UserID = obj["info"][2][0].ToObject<int>();
-                                UserName = obj["info"][2][1].ToString();
-                                isAdmin = obj["info"][2][2].ToString() == "1";
-                                isVIP = obj["info"][2][3].ToString() == "1";
-                                UserGuardLevel = obj["info"][7].ToObject<int>();
-                                break;
-                            case "SEND_GIFT":
-                                MsgType = MsgTypeEnum.GiftSend;
-                                GiftName = obj["data"]["giftName"].ToString();
-                                UserName = obj["data"]["uname"].ToString();
-                                UserID = obj["data"]["uid"].ToObject<int>();
-                                // Giftrcost = obj["data"]["rcost"].ToString();
-                                GiftCount = obj["data"]["num"].ToObject<int>();
-                                break;
-                            case "GIFT_TOP":
-                                {
-                                    MsgType = MsgTypeEnum.GiftTop;
-                                    var alltop = obj["data"].ToList();
-                                    GiftRanking = new List<GiftRank>();
-                                    foreach(var v in alltop)
-                                    {
-                                        GiftRanking.Add(new GiftRank()
-                                        {
-                                            uid = v.Value<int>("uid"),
-                                            UserName = v.Value<string>("uname"),
-                                            coin = v.Value<decimal>("coin")
+                        obj = JObject.Parse(JSON);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        throw;
+                    }
 
-                                        });
-                                    }
-                                    break;
-                                }
-                            case "WELCOME":
-                                {
-                                    MsgType = MsgTypeEnum.Welcome;
-                                    UserName = obj["data"]["uname"].ToString();
-                                    UserID = obj["data"]["uid"].ToObject<int>();
-                                    isVIP = true;
-                                    isAdmin = obj["data"]["isadmin"].ToString() == "1";
-                                    break;
-
-                                }
-                            case "WELCOME_GUARD":
-                                {
-                                    MsgType = MsgTypeEnum.WelcomeGuard;
-                                    UserName = obj["data"]["username"].ToString();
-                                    UserID = obj["data"]["uid"].ToObject<int>();
-                                    UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
-                                    break;
-                                }
-                            case "GUARD_BUY":
-                                {
-                                    MsgType = MsgTypeEnum.GuardBuy;
-                                    UserID = obj["data"]["uid"].ToObject<int>();
-                                    UserName = obj["data"]["username"].ToString();
-                                    UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
-                                    GiftName = UserGuardLevel == 3 ? "舰长" : UserGuardLevel == 2 ? "提督" : UserGuardLevel == 1 ? "总督" : "";
-                                    GiftCount = obj["data"]["num"].ToObject<int>();
-                                    break;
-                                }
-                            default:
-                                {
-                                    MsgType = MsgTypeEnum.Unknown;
-                                    break;
-                                }
-                        }
-
-                        if (cmd.StartsWith("DANMU_MSG")) // "高考"fix
-                        {
+                    RawDataJToken = obj;
+                    string cmd = obj["cmd"].ToString();
+                    switch (cmd)
+                    {
+                        case "LIVE":
+                            MsgType = MsgTypeEnum.LiveStart;
+                            roomID = obj["roomid"].ToString();
+                            break;
+                        case "PREPARING":
+                            MsgType = MsgTypeEnum.LiveEnd;
+                            roomID = obj["roomid"].ToString();
+                            break;
+                        case "DANMU_MSG":
                             MsgType = MsgTypeEnum.Comment;
                             CommentText = obj["info"][1].ToString();
                             UserID = obj["info"][2][0].ToObject<int>();
@@ -313,10 +278,99 @@ namespace BilibiliDM_PluginFramework
                             isVIP = obj["info"][2][3].ToString() == "1";
                             UserGuardLevel = obj["info"][7].ToObject<int>();
                             break;
+                        case "SEND_GIFT":
+                            MsgType = MsgTypeEnum.GiftSend;
+                            GiftName = obj["data"]["giftName"].ToString();
+                            UserName = obj["data"]["uname"].ToString();
+                            UserID = obj["data"]["uid"].ToObject<int>();
+                            // Giftrcost = obj["data"]["rcost"].ToString();
+                            GiftCount = obj["data"]["num"].ToObject<int>();
+                            break;
+                        case "GIFT_TOP":
+                        {
+                            MsgType = MsgTypeEnum.GiftTop;
+                            var alltop = obj["data"].ToList();
+                            GiftRanking = new List<GiftRank>();
+                            foreach (var v in alltop)
+                            {
+                                GiftRanking.Add(new GiftRank()
+                                {
+                                    uid = v.Value<int>("uid"),
+                                    UserName = v.Value<string>("uname"),
+                                    coin = v.Value<decimal>("coin")
+
+                                });
+                            }
+
+                            break;
+                        }
+                        case "WELCOME":
+                        {
+                            MsgType = MsgTypeEnum.Welcome;
+                            UserName = obj["data"]["uname"].ToString();
+                            UserID = obj["data"]["uid"].ToObject<int>();
+                            isVIP = true;
+                            isAdmin = obj["data"]["isadmin"]?.ToString() == "1";
+                            break;
+
+                        }
+                        case "WELCOME_GUARD":
+                        {
+                            MsgType = MsgTypeEnum.WelcomeGuard;
+                            UserName = obj["data"]["username"].ToString();
+                            UserID = obj["data"]["uid"].ToObject<int>();
+                            UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
+                            break;
+                        }
+                        case "GUARD_BUY":
+                        {
+                            MsgType = MsgTypeEnum.GuardBuy;
+                            UserID = obj["data"]["uid"].ToObject<int>();
+                            UserName = obj["data"]["username"].ToString();
+                            UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
+                            GiftName = UserGuardLevel == 3 ? "舰长" :
+                                UserGuardLevel == 2 ? "提督" :
+                                UserGuardLevel == 1 ? "总督" : "";
+                            GiftCount = obj["data"]["num"].ToObject<int>();
+                            break;
+                        }
+                        case "SUPER_CHAT_MESSAGE":
+                        {
+                            MsgType = MsgTypeEnum.SuperChat;
+                            CommentText = obj["data"]["message"]?.ToString();
+                            UserID = obj["data"]["uid"].ToObject<int>();
+                            UserName = obj["data"]["user_info"]["uname"].ToString();
+                            Price = obj["data"]["price"].ToObject<decimal>();
+                            SCKeepTime = obj["data"]["time"].ToObject<int>();
+                            break;
                         }
 
-                        break;
+                        default:
+                        {
+                            if (cmd.StartsWith("DANMU_MSG")) // "高考"fix
+                            {
+                                MsgType = MsgTypeEnum.Comment;
+                                CommentText = obj["info"][1].ToString();
+                                UserID = obj["info"][2][0].ToObject<int>();
+                                UserName = obj["info"][2][1].ToString();
+                                isAdmin = obj["info"][2][2].ToString() == "1";
+                                isVIP = obj["info"][2][3].ToString() == "1";
+                                UserGuardLevel = obj["info"][7].ToObject<int>();
+                                break;
+                            }
+                            else
+                            {
+                                MsgType = MsgTypeEnum.Unknown;
+                            }
+
+                            break;
+                        }
                     }
+
+
+
+                    break;
+                }
 
                 default:
                     throw new Exception();

@@ -602,6 +602,15 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
+        ///   查找类似 !!!SuperChat!!! 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku____SuperChat___ {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku____SuperChat___", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} 購買了 {1} x {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku__0__购买了__1__x__2_ {
@@ -886,6 +895,15 @@ namespace Bililive_dm.Properties {
         public static string SSTP_Content {
             get {
                 return ResourceManager.GetString("SSTP.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 醒目留言:{0}{1}{2} 說: {3} 的本地化字符串。
+        /// </summary>
+        public static string SuperChatLogName {
+            get {
+                return ResourceManager.GetString("SuperChatLogName", resourceCulture);
             }
         }
         

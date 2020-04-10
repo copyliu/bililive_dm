@@ -19,7 +19,7 @@ namespace Bililive_dm
     /// </summary>
     public partial class DanmakuTextControl : UserControl
     {
-        public DanmakuTextControl()
+        public DanmakuTextControl(int addtime=0)
         {
             this.InitializeComponent();
             this.Loaded += DanmakuTextControl_Loaded;
@@ -42,13 +42,13 @@ namespace Bililive_dm
             (sb.Children[2] as DoubleAnimationUsingKeyFrames).KeyFrames[0].KeyTime =
                 KeyTime.FromTimeSpan(
                     new TimeSpan(
-                        Convert.ToInt64((Store.MainOverlayEffect3 + Store.MainOverlayEffect2 + Store.MainOverlayEffect1)*
+                        Convert.ToInt64((Store.MainOverlayEffect3 + Store.MainOverlayEffect2 + Store.MainOverlayEffect1+addtime) *
                                         TimeSpan.TicksPerSecond)));
             (sb.Children[2] as DoubleAnimationUsingKeyFrames).KeyFrames[1].KeyTime =
                 KeyTime.FromTimeSpan(
                     new TimeSpan(
                         Convert.ToInt64((Store.MainOverlayEffect4 + Store.MainOverlayEffect3 + Store.MainOverlayEffect2 +
-                                         Store.MainOverlayEffect1)*TimeSpan.TicksPerSecond)));
+                                         Store.MainOverlayEffect1+addtime) *TimeSpan.TicksPerSecond)));
         }
 
         public void ChangeHeight()
