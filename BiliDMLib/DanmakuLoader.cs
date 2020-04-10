@@ -145,10 +145,9 @@ namespace BiliDMLib
             try
             {
                 var stableBuffer = new byte[16];
-
+                var buffer = new byte[4096];
                 while (this.Connected)
                 {
-
                     NetStream.ReadB(stableBuffer, 0, 16);
                     Parse2Protocol(stableBuffer, out DanmakuProtocol protocol);
                     if (protocol.PacketLength < 16)
@@ -158,78 +157,38 @@ namespace BiliDMLib
                     var payloadlength = protocol.PacketLength - 16;
                     if (payloadlength == 0)
                     {
-                        continue;//没有内容了
+                        continue; // 没有内容了
                     }
-                    var buffer = new byte[payloadlength];
+                    if (buffer.Length < payloadlength) // 不够长再申请
+                    {
+                        buffer = new byte[payloadlength];
+                    }
                     NetStream.ReadB(buffer, 0, payloadlength);
                     if (protocol.Version == 2 && protocol.Action == 5) // 处理deflate消息
                     {
                         using (MemoryStream ms = new MemoryStream(buffer, 2, payloadlength - 2)) // Skip 0x78 0xDA
                         using (DeflateStream deflate = new DeflateStream(ms, CompressionMode.Decompress))
-                        using (MemoryStream output = new MemoryStream())
                         {
-                            deflate.CopyTo(output);
-                            byte[] innerBuffer = output.GetBuffer(); // 避免重新申请byte[]
-                            Parse2Protocol(innerBuffer, out protocol);
-                            payloadlength = protocol.PacketLength - 16;
-                            if (protocol.PacketLength < 16)
+                            while (deflate.Read(stableBuffer, 0, 16) > 0)
                             {
-                                throw new NotSupportedException("协议失败: (L:" + protocol.PacketLength + ")");
+                                Parse2Protocol(stableBuffer, out protocol);
+                                payloadlength = protocol.PacketLength - 16;
+                                if (payloadlength == 0)
+                                {
+                                    continue; // 没有内容了
+                                }
+                                if (buffer.Length < payloadlength) // 不够长再申请
+                                {
+                                    buffer = new byte[payloadlength];
+                                }
+                                deflate.Read(buffer, 0, payloadlength);
+                                ProcessDanmaku(protocol.Action, buffer, payloadlength);
                             }
-                            if (payloadlength > buffer.Length) // 不够长再申请
-                            {
-                                buffer = new byte[payloadlength];
-                            }
-                            Buffer.BlockCopy(innerBuffer, 16, buffer, 0, payloadlength);
                         }
                     }
-                    switch (protocol.Action)
+                    else
                     {
-                        case 3: // (OpHeartbeatReply)
-                            {
-
-
-                                var viewer = BitConverter.ToUInt32(buffer.Take(4).Reverse().ToArray(), 0); //观众人数
-                                Console.WriteLine(viewer);
-                                if (ReceivedRoomCount != null)
-                                {
-                                    ReceivedRoomCount(this, new ReceivedRoomCountArgs() { UserCount = viewer });
-                                }
-                                break;
-                            }
-                        case 5://playerCommand (OpSendMsgReply)
-                            {
-
-                                var json = Encoding.UTF8.GetString(buffer, 0, payloadlength);
-                                if (debuglog)
-                                {
-                                    Console.WriteLine(json);
-
-                                }
-                                try
-                                {
-                                    DanmakuModel dama = new DanmakuModel(json, 2);
-                                    if (ReceivedDanmaku != null)
-                                    {
-                                        ReceivedDanmaku(this, new ReceivedDanmakuArgs() { Danmaku = dama });
-                                    }
-
-                                }
-                                catch (Exception)
-                                {
-                                    // ignored
-                                }
-
-                                break;
-                            }
-                        case 8: // (OpAuthReply)
-                            {
-                                break;
-                            }
-                        default:
-                            {
-                                break;
-                            }
+                        ProcessDanmaku(protocol.Action, buffer, payloadlength);
                     }
                 }
             }
@@ -246,6 +205,50 @@ namespace BiliDMLib
             }
 //            }
             
+        }
+
+        private  void ProcessDanmaku(int action, byte[] buffer, int length)
+        {
+            switch (action)
+            {
+                case 3: // (OpHeartbeatReply)
+                    {
+                        var viewer = BitConverter.ToUInt32(buffer.Take(4).Reverse().ToArray(), 0); //观众人数
+                        Console.WriteLine(viewer);
+                        if (ReceivedRoomCount != null)
+                        {
+                            ReceivedRoomCount(this, new ReceivedRoomCountArgs() { UserCount = viewer });
+                        }
+                        break;
+                    }
+                case 5://playerCommand (OpSendMsgReply)
+                    {
+
+                        var json = Encoding.UTF8.GetString(buffer, 0, length);
+                        if (debuglog)
+                        {
+                            Console.WriteLine(json);
+                        }
+                        try
+                        {
+                            DanmakuModel dama = new DanmakuModel(json, 2);
+                            ReceivedDanmaku?.Invoke(this, new ReceivedDanmakuArgs() { Danmaku = dama });
+                        }
+                        catch (Exception)
+                        {
+                            // ignored
+                        }
+                        break;
+                    }
+                case 8: // (OpAuthReply)
+                    {
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
         }
 
         private async void HeartbeatLoop()
