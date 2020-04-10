@@ -1005,7 +1005,7 @@ namespace Bililive_dm
             }
             else
             {
-                Log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => AddDMText(user, text)));
+                Log.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => AddDMText(user, text,warn,foreceenablefullscreen,keeptime)));
             }
         }
 
