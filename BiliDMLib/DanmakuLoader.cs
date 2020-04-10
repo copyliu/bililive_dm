@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -31,7 +32,7 @@ namespace BiliDMLib
         public event ReceivedRoomCountEvt ReceivedRoomCount;
         public event LogMessageEvt LogMessage;
         private bool debuglog = true;
-        private short protocolversion = 1;
+        private short protocolversion = 2;
         private static int lastroomid ;
         private static string lastserver;
         private static HttpClient httpClient=new HttpClient(){Timeout = TimeSpan.FromSeconds(5)};
@@ -137,119 +138,112 @@ namespace BiliDMLib
 
         private void ReceiveMessageLoop()
         {
-//            lock (shit_lock)
-//            //ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
-//            {
-                try
+            //            lock (shit_lock)
+            //            //ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
+            //            {
+
+            try
+            {
+                var stableBuffer = new byte[16];
+
+                while (this.Connected)
                 {
-                    var stableBuffer = new byte[Client.ReceiveBufferSize];
 
-                    while (this.Connected)
+                    NetStream.ReadB(stableBuffer, 0, 16);
+                    Parse2Protocol(stableBuffer, out DanmakuProtocol protocol);
+                    if (protocol.PacketLength < 16)
                     {
-
-                        NetStream.ReadB(stableBuffer, 0, 4);
-                        var packetlength = BitConverter.ToInt32(stableBuffer, 0);
-                        packetlength = IPAddress.NetworkToHostOrder(packetlength);
-
-                        if (packetlength < 16)
+                        throw new NotSupportedException("协议失败: (L:" + protocol.PacketLength + ")");
+                    }
+                    var payloadlength = protocol.PacketLength - 16;
+                    if (payloadlength == 0)
+                    {
+                        continue;//没有内容了
+                    }
+                    var buffer = new byte[payloadlength];
+                    NetStream.ReadB(buffer, 0, payloadlength);
+                    if (protocol.Version == 2 && protocol.Action == 5) // 处理deflate消息
+                    {
+                        using (MemoryStream ms = new MemoryStream(buffer, 2, payloadlength - 2)) // Skip 0x78 0xDA
+                        using (DeflateStream deflate = new DeflateStream(ms, CompressionMode.Decompress))
+                        using (MemoryStream output = new MemoryStream())
                         {
-                            throw new NotSupportedException("协议失败: (L:" + packetlength + ")");
-                        }
-
-                        NetStream.ReadB(stableBuffer, 0, 2);//magic
-                        NetStream.ReadB(stableBuffer, 0, 2);//protocol_version 
-
-                        NetStream.ReadB(stableBuffer, 0, 4);
-                        var typeId = BitConverter.ToInt32(stableBuffer, 0);
-                        typeId = IPAddress.NetworkToHostOrder(typeId);
-
-                        Console.WriteLine(typeId);
-                        NetStream.ReadB(stableBuffer, 0, 4);//magic, params?
-                        var playloadlength = packetlength - 16;
-                        if (playloadlength == 0)
-                        {
-                            continue;//没有内容了
-
-                        }
-                        typeId = typeId - 1;//和反编译的代码对应 
-                        var buffer = new byte[playloadlength];
-                        NetStream.ReadB(buffer, 0, playloadlength);
-                        switch (typeId)
-                        {
-                            case 0:
-                            case 1:
-                            case 2:
-                                {
-                                    
-
-                                    var viewer = BitConverter.ToUInt32(buffer.Take(4).Reverse().ToArray(), 0); //观众人数
-                                    Console.WriteLine(viewer);
-                                    if (ReceivedRoomCount != null)
-                                    {
-                                        ReceivedRoomCount(this, new ReceivedRoomCountArgs() { UserCount = viewer });
-                                    }
-                                    break;
-                                }
-                            case 3:
-                            case 4://playerCommand
-                                {
-                                   
-                                    var json = Encoding.UTF8.GetString(buffer, 0, playloadlength);
-                                    if (debuglog)
-                                    {
-                                        Console.WriteLine(json);
-
-                                    }
-                                    try
-                                    {
-                                        DanmakuModel dama = new DanmakuModel(json, 2);
-                                        if (ReceivedDanmaku != null)
-                                        {
-                                            ReceivedDanmaku(this, new ReceivedDanmakuArgs() { Danmaku = dama });
-                                        }
-
-                                    }
-                                    catch (Exception)
-                                    {
-                                        // ignored
-                                    }
-
-                                    break;
-                                }
-                            case 5://newScrollMessage
-                                {
-                                    
-                                    break;
-                                }
-                            case 7:
-                                {
-                                   
-                                    break;
-                                }
-                            case 16:
-                                {
-                                    break;
-                                }
-                            default:
-                                {
-                                   
-                                    break;
-                                }
-                                //                     
+                            deflate.CopyTo(output);
+                            byte[] innerBuffer = output.GetBuffer(); // 避免重新申请byte[]
+                            Parse2Protocol(innerBuffer, out protocol);
+                            payloadlength = protocol.PacketLength - 16;
+                            if (protocol.PacketLength < 16)
+                            {
+                                throw new NotSupportedException("协议失败: (L:" + protocol.PacketLength + ")");
+                            }
+                            if (payloadlength > buffer.Length) // 不够长再申请
+                            {
+                                buffer = new byte[payloadlength];
+                            }
+                            Buffer.BlockCopy(innerBuffer, 16, buffer, 0, payloadlength);
                         }
                     }
-                }
-                catch (NotSupportedException ex)
-                {
-                    this.Error = ex;
-                    _disconnect();
-                }
-                catch (Exception ex)
-                {
-                    this.Error = ex;
-                    _disconnect();
+                    switch (protocol.Action)
+                    {
+                        case 3: // (OpHeartbeatReply)
+                            {
 
+
+                                var viewer = BitConverter.ToUInt32(buffer.Take(4).Reverse().ToArray(), 0); //观众人数
+                                Console.WriteLine(viewer);
+                                if (ReceivedRoomCount != null)
+                                {
+                                    ReceivedRoomCount(this, new ReceivedRoomCountArgs() { UserCount = viewer });
+                                }
+                                break;
+                            }
+                        case 5://playerCommand (OpSendMsgReply)
+                            {
+
+                                var json = Encoding.UTF8.GetString(buffer, 0, payloadlength);
+                                if (debuglog)
+                                {
+                                    Console.WriteLine(json);
+
+                                }
+                                try
+                                {
+                                    DanmakuModel dama = new DanmakuModel(json, 2);
+                                    if (ReceivedDanmaku != null)
+                                    {
+                                        ReceivedDanmaku(this, new ReceivedDanmakuArgs() { Danmaku = dama });
+                                    }
+
+                                }
+                                catch (Exception)
+                                {
+                                    // ignored
+                                }
+
+                                break;
+                            }
+                        case 8: // (OpAuthReply)
+                            {
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
                 }
+            }
+            //catch (NotSupportedException ex)
+            //{
+            //    this.Error = ex;
+            //    _disconnect();
+            //}
+            catch (Exception ex)
+            {
+                this.Error = ex;
+                _disconnect();
+
+            }
 //            }
             
         }
@@ -356,12 +350,20 @@ namespace BiliDMLib
             
             Random r=new Random();
             var tmpuid = (long)(1e14 + 2e14*r.NextDouble());
-            var packetModel = new {roomid = channelId, uid = tmpuid};
+            var packetModel = new {roomid = channelId, uid = tmpuid, protover = 2};
             var playload = JsonConvert.SerializeObject(packetModel);
             SendSocketData(7, playload);
             return true;
         }
 
+        private static unsafe void Parse2Protocol(byte[] buffer, out DanmakuProtocol protocol)
+        {
+            fixed (byte* ptr = buffer)
+            {
+                protocol = *(DanmakuProtocol*)ptr;
+            }
+            protocol.ChangeEndian();
+        }
 
         public DanmakuLoader()
         {
@@ -374,5 +376,42 @@ namespace BiliDMLib
     public class LogMessageArgs
     {
         public string message = string.Empty;
-    }                         
+    }
+
+
+    public struct DanmakuProtocol
+    {
+        /// <summary>
+        /// 消息总长度 (协议头 + 数据长度)
+        /// </summary>
+        public int PacketLength;
+        /// <summary>
+        /// 消息头长度 (固定为16[sizeof(DanmakuProtocol)])
+        /// </summary>
+        public short HeaderLength;
+        /// <summary>
+        /// 消息版本号
+        /// </summary>
+        public short Version;
+        /// <summary>
+        /// 消息类型
+        /// </summary>
+        public int Action;
+        /// <summary>
+        /// 参数, 固定为1
+        /// </summary>
+        public int Parameter;
+        /// <summary>
+        /// 转为本机字节序
+        /// </summary>
+        public void ChangeEndian()
+        {
+            PacketLength = IPAddress.HostToNetworkOrder(PacketLength);
+            HeaderLength = IPAddress.HostToNetworkOrder(HeaderLength);
+            Version = IPAddress.HostToNetworkOrder(Version);
+            Action = IPAddress.HostToNetworkOrder(Action);
+            Parameter = IPAddress.HostToNetworkOrder(Parameter);
+        }
+    }
+
 }
