@@ -172,7 +172,7 @@ namespace Bililive_dm
             set
             {
                 if (value == _displayAffinity) return;
-                _displayAffinity = value;
+                Store.DisplayAffinity= _displayAffinity = value;
                 OnPropertyChanged();
             }
         }
