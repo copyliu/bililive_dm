@@ -18,6 +18,10 @@ namespace Bililive_dm
         private const int WS_EX_NOREDIRECTIONBITMAP = 0x00200000;
         private const int WS_EX_TOOLWINDOW = 0x00000080;// 不在Alt-Tab中显示 && Win10下，在所有虚拟桌面显示
         private const int GWL_EXSTYLE = (-20);
+        private const uint WDA_NONE = 0;
+        private const uint WDA_MONITOR = 1;
+        [DllImport("user32.dll")]
+        public static extern uint SetWindowDisplayAffinity(IntPtr hwnd, uint dwAffinity);
 
         [DllImport("user32")]
         private static extern uint SetWindowLong(IntPtr hwnd, int nIndex, uint dwNewLong);
@@ -131,6 +135,7 @@ namespace Bililive_dm
             WTF_SetFontName(_wtf, "SimHei");
             WTF_SetFontScaleFactor(_wtf, (float)(Store.FullOverlayFontsize / 25.0f));
             WTF_SetCompositionOpacity(_wtf, 0.85f);
+            SetWindowDisplayAffinity(_wtf, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
         }
 
         private void DestroyWTF()
@@ -180,6 +185,7 @@ namespace Bililive_dm
             if (_wtf != IntPtr.Zero)
             {
                 WTF_SetFontScaleFactor(_wtf, (float)(Store.FullOverlayFontsize / 25.0f));
+                SetWindowDisplayAffinity(_wtf, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
             }
         }
     }

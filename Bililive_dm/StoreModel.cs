@@ -166,6 +166,17 @@ namespace Bililive_dm
             }
         }
 
+        public bool DisplayAffinity
+        {
+            get => _displayAffinity;
+            set
+            {
+                if (value == _displayAffinity) return;
+                _displayAffinity = value;
+                OnPropertyChanged();
+            }
+        }
+
         private double _mainOverlayYoffset;
         private double _mainOverlayWidth;
         private double _mainOverlayEffect1; //拉伸
@@ -179,6 +190,7 @@ namespace Bililive_dm
         private double _fullOverlayFontsize;
         private double _mainOverlayXoffset;
         private bool _wtfEngineEnabled;
+        private bool _displayAffinity;
 
         public StoreModel()
         {
@@ -193,7 +205,7 @@ namespace Bililive_dm
             _mainOverlayXoffset = Store.MainOverlayXoffset;
             _mainOverlayYoffset = Store.MainOverlayYoffset;
             _wtfEngineEnabled = Store.WtfEngineEnabled;
-
+            _displayAffinity = Store.DisplayAffinity;
         }
 
         public void toStatic()
@@ -209,6 +221,7 @@ namespace Bililive_dm
             Store.MainOverlayXoffset = MainOverlayXoffset;
             Store.MainOverlayYoffset = MainOverlayYoffset;
             Store.WtfEngineEnabled = WtfEngineEnabled;
+            Store.DisplayAffinity = DisplayAffinity;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -45,7 +45,10 @@ namespace Bililive_dm
         private const int WS_EX_TRANSPARENT = 0x20;
         private const int GWL_EXSTYLE = -20;
         private const int _maxCapacity = 100;
-
+        private const uint WDA_NONE = 0;
+        private const uint WDA_MONITOR = 1;
+        [DllImport("user32.dll")]
+        public static extern uint SetWindowDisplayAffinity(IntPtr hwnd, uint dwAffinity);
         private readonly Queue<DanmakuModel> _danmakuQueue = new Queue<DanmakuModel>();
 
         private readonly ObservableCollection<string> _messageQueue = new ObservableCollection<string>();
@@ -287,6 +290,27 @@ namespace Bililive_dm
             }
 
             InitPlugins();
+
+
+            try
+            {
+                var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
+                                                            IsolatedStorageScope.Domain |
+                                                            IsolatedStorageScope.Assembly, null, null);
+                var settingsreader =
+                    new XmlSerializer(typeof(StoreModel));
+                var reader = new StreamReader(new IsolatedStorageFileStream(
+                    "settings.xml", FileMode.Open, isoStore));
+                settings = (StoreModel)settingsreader.Deserialize(reader);
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                settings = new StoreModel();
+            }
+            settings.SaveConfig();
+            settings.toStatic();
+
             Loaded += MainWindow_Loaded;
             Log.Loaded += (sender, args) =>
             {
@@ -416,27 +440,15 @@ namespace Bililive_dm
             //            shit.Start();
 
 
-
-            try
-            {
-                var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
-                                                            IsolatedStorageScope.Domain |
-                                                            IsolatedStorageScope.Assembly, null, null);
-                var settingsreader =
-                    new XmlSerializer(typeof(StoreModel));
-                var reader = new StreamReader(new IsolatedStorageFileStream(
-                    "settings.xml", FileMode.Open, isoStore));
-                settings = (StoreModel) settingsreader.Deserialize(reader);
-                reader.Close();
-            }
-            catch (Exception)
-            {
-                settings = new StoreModel();
-            }
-            settings.SaveConfig();
-            settings.toStatic();
             OptionDialog.LayoutRoot.DataContext = settings;
-           
+            settings.PropertyChanged += (o, args) => { SetWindowAffinity(); };
+            SetWindowAffinity();
+        }
+
+        private void SetWindowAffinity()
+        {
+            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
+            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
@@ -513,6 +525,7 @@ namespace Bililive_dm
                 var hwnd = new WindowInteropHelper(overlay).Handle;
                 var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
                 SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
+               
             };
             overlay.Background = Brushes.Transparent;
             overlay.ShowInTaskbar = false;
@@ -521,6 +534,7 @@ namespace Bililive_dm
             overlay.Left = SystemParameters.WorkArea.Right - Store.MainOverlayWidth + Store.MainOverlayYoffset;
             overlay.Height = SystemParameters.WorkArea.Height;
             overlay.Width = Store.MainOverlayWidth;
+            settings.PropertyChanged += overlay.OnPropertyChanged;
         }
 
         private void overlay_Deactivated(object sender, EventArgs e)

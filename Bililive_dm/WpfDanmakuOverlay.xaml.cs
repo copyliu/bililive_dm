@@ -26,7 +26,10 @@ namespace Bililive_dm
         private const int WS_EX_TRANSPARENT = 0x20;
         private const int GWL_EXSTYLE = (-20);
         private const int WS_EX_TOOLWINDOW = 0x00000080;// 不在Alt-Tab中显示 && Win10下，在所有虚拟桌面显示
-
+        private const uint WDA_NONE = 0;
+        private const uint WDA_MONITOR = 1;
+        [DllImport("user32.dll")]
+        public static extern uint SetWindowDisplayAffinity(IntPtr hwnd, uint dwAffinity);
         [DllImport("user32", EntryPoint = "SetWindowLong")]
         private static extern uint SetWindowLong(IntPtr hwnd, int nIndex, uint dwNewLong);
 
@@ -166,6 +169,8 @@ namespace Bililive_dm
 
         void IDanmakuWindow.OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
+            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
             // ignore
         }
     }

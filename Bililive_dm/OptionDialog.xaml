@@ -90,6 +90,7 @@
                     Value="{Binding FullOverlayEffect1,Mode=TwoWay}" />
         </DockPanel>
         <CheckBox x:Name="WTFEngineEnable" IsChecked="{Binding WtfEngineEnabled,Mode=TwoWay}" Content="{x:Static properties:Resources.WTFEngineEnable_Content}" />
+        <CheckBox x:Name="DisplayAffinity" IsChecked="{Binding DisplayAffinity,Mode=TwoWay}" Content="彈幕姬視窗資料保護" />
         <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_EnableNewEngineWarn}" VerticalAlignment="Center" TextAlignment="Right"
                        Margin="0,0,20,0" HorizontalAlignment="Left" />
         <Button Content="{x:Static properties:Resources.Button_Content_Text}" Click="ButtonBase_OnClick" />

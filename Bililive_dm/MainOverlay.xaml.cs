@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -32,6 +33,10 @@ namespace Bililive_dm
             GWL_EXSTYLE = (-20),
             // ...
         }
+        private const uint WDA_NONE = 0;
+        private const uint WDA_MONITOR = 1;
+        [DllImport("user32.dll")]
+        public static extern uint SetWindowDisplayAffinity(IntPtr hwnd, uint dwAffinity);
         [DllImport("user32.dll")]
         public static extern IntPtr GetWindowLong(IntPtr hWnd, int nIndex);
 
@@ -83,6 +88,17 @@ namespace Bililive_dm
             int exStyle = (int)GetWindowLong(wndHelper.Handle, (int)GetWindowLongFields.GWL_EXSTYLE);
             exStyle |= (int)ExtendedWindowStyles.WS_EX_TOOLWINDOW;
             SetWindowLong(wndHelper.Handle, (int)GetWindowLongFields.GWL_EXSTYLE, (IntPtr)exStyle);
+            SetWindowAffinity();
+        }
+
+        public void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            SetWindowAffinity();
+        }
+        private void SetWindowAffinity()
+        {
+            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
+            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
         }
     }
 }
