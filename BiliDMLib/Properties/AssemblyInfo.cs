@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -19,6 +20,7 @@ using System.Runtime.InteropServices;
 // 對 COM 元件而言為不可見。如果您需要從 COM 存取這個組件中
 // 的型別，請在該型別上將 ComVisible 屬性設定為 true。
 
+[assembly: CLSCompliant(false)]
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
