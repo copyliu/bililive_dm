@@ -6,7 +6,7 @@ static partial class WINAPI
     const string KERNEL32 = nameof(KERNEL32);
 
     [DllImport(KERNEL32)]
-    internal static extern void SetLastError(int dwErrorCode);
+    internal static extern void SetLastError(int code);
 
     [DllImport(KERNEL32)]
     public static extern bool SetProcessWorkingSetSize(IntPtr hProcess, IntPtr min, IntPtr max);
