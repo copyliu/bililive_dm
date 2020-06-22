@@ -431,6 +431,7 @@ namespace Bililive_dm
 
 
             OptionDialog.LayoutRoot.DataContext = settings;
+            DisplayAffinity.DataContext = settings;
             settings.PropertyChanged += (o, args) => { SetWindowAffinity(); };
             SetWindowAffinity();
         }

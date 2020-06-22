@@ -232,6 +232,15 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
+        ///   查找类似 彈幕姬視窗資料保護 的本地化字符串。
+        /// </summary>
+        public static string DisplayAffinity_Content {
+            get {
+                return ResourceManager.GetString("DisplayAffinity.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 規則運算式過濾 符合規則運算式的彈幕將不會出現在任何地方直接丟棄 的本地化字符串。
         /// </summary>
         public static string EnableRegex_Content {

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>非B站出品 ©2014-2019 CopyLiu 房間編號5051 問題反饋 copyliu@gmail.com</value>
+    <value>非B站出品 ©2014-2020 CopyLiu 房間編號5051 問題反饋 copyliu@gmail.com</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>自動重連</value>
@@ -471,5 +471,8 @@
   </data>
   <data name="MainWindow_ProcDanmaku____SuperChat___" xml:space="preserve">
     <value>!!!SuperChat!!!</value>
+  </data>
+  <data name="DisplayAffinity.Content" xml:space="preserve">
+    <value>彈幕姬視窗資料保護</value>
   </data>
 </root>

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>喵喵喵喵喵 喵2014喵2019 喵喵喵喵喵喵喵 喵喵喵5051 喵喵喵喵 喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵</value>
+    <value>喵喵喵喵喵 喵2014喵2020 喵喵喵喵喵喵喵 喵喵喵5051 喵喵喵喵 喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>喵喵喵喵</value>
@@ -467,5 +467,8 @@
   </data>
   <data name="WTFEngineEnable.Content" xml:space="preserve">
     <value>喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵喵 8 喵喵喵</value>
+  </data>
+  <data name="DisplayAffinity.Content" xml:space="preserve">
+    <value>喵喵</value>
   </data>
 </root>
