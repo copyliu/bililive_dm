@@ -28,19 +28,47 @@ partial class WINAPI
             // ...
         }
 
+        [Obsolete]
+        public const int GWL_EXSTYLE = -20;
+        [Obsolete]
+        public const int GWL_HINSTANCE = GWLP_HINSTANCE;
+        const int GWLP_HINSTANCE = -6;
+        [Obsolete]
+        public const int GWL_ID = GWLP_ID;
+        const int GWLP_ID = -12;
+        [Obsolete]
+        public const int GWL_STYLE = -16;
+        [Obsolete]
+        public const int GWL_USERDATA = GWLP_USERDATA;
+        const int GWLP_USERDATA = -21;
+        [Obsolete]
+        public const int GWL_WNDPROC = GWLP_WNDPROC;
+        const int GWLP_WNDPROC = -4;
+        [Obsolete]
+        public const int DWL_MSGRESULT = DWLP_MSGRESULT;
+        const int DWLP_MSGRESULT = 0;
+
         public enum WindowStylesKind
         {
-            Styles = -16,
-            ExStyles = -20,
+#pragma warning disable CS0612 // 类型或成员已过时
+            Styles = GWL_STYLE,
+            ExStyles = GWL_EXSTYLE,
+#pragma warning restore CS0612 // 类型或成员已过时
         }
 
-        [DllImport(MODULENAME, EntryPoint = "GetWindowLong", SetLastError = true)]
-        public static extern int GetWindowStyles(IntPtr hWnd, WindowStylesKind kind);
+        [Obsolete, DllImport(MODULENAME, SetLastError = true)]
+        public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+#pragma warning disable CS0612 // 类型或成员已过时
+        public static int GetWindowStyles(IntPtr hWnd, WindowStylesKind kind) => GetWindowLong(hWnd, (int)kind);
+#pragma warning restore CS0612 // 类型或成员已过时
         public static ExtendedWindowStyles GetExtendedWindowStyles(IntPtr hWnd)
             => (ExtendedWindowStyles)GetWindowStyles(hWnd, WindowStylesKind.ExStyles);
 
-        [DllImport(MODULENAME, EntryPoint = "SetWindowLong", SetLastError = true)]
-        public static extern int SetWindowStyles(IntPtr hWnd, WindowStylesKind kind, int styles);
+        [Obsolete, DllImport(MODULENAME, SetLastError = true)]
+        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+#pragma warning disable CS0612 // 类型或成员已过时
+        public static int SetWindowStyles(IntPtr hWnd, WindowStylesKind kind, int styles) => SetWindowLong(hWnd, (int)kind, styles);
+#pragma warning restore CS0612 // 类型或成员已过时
         public static ExtendedWindowStyles SetExtendedWindowStyles(IntPtr hWnd, ExtendedWindowStyles styles)
             => (ExtendedWindowStyles)SetWindowStyles(hWnd, WindowStylesKind.ExStyles, (int)styles);
 
