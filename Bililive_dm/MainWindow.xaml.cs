@@ -37,18 +37,14 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace Bililive_dm
 {
+    using static WINAPI.USER32;
+
     /// <summary>
     ///     MainWindow.xaml 的互動邏輯
     /// </summary>
     public partial class MainWindow : Window
     {
-        private const int WS_EX_TRANSPARENT = 0x20;
-        private const int GWL_EXSTYLE = -20;
         private const int _maxCapacity = 100;
-        private const uint WDA_NONE = 0;
-        private const uint WDA_MONITOR = 1;
-        [DllImport("user32.dll")]
-        public static extern uint SetWindowDisplayAffinity(IntPtr hwnd, uint dwAffinity);
         private readonly Queue<DanmakuModel> _danmakuQueue = new Queue<DanmakuModel>();
 
         private readonly ObservableCollection<string> _messageQueue = new ObservableCollection<string>();
@@ -384,12 +380,6 @@ namespace Bililive_dm
 //            }
         }
 
-        [DllImport("user32", EntryPoint = "SetWindowLong")]
-        private static extern uint SetWindowLong(IntPtr hwnd, int nIndex, uint dwNewLong);
-
-        [DllImport("user32", EntryPoint = "GetWindowLong")]
-        private static extern uint GetWindowLong(IntPtr hwnd, int nIndex);
-
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Full.IsChecked = fulloverlay_enabled;
@@ -402,7 +392,7 @@ namespace Bililive_dm
             ShowError.IsChecked = showerror_enabled;
             regex = Regex.Text.Trim();
             FilterRegex=new Regex(regex);
-          
+
 
             var shit = new Thread(() =>
                 {
@@ -448,7 +438,7 @@ namespace Bililive_dm
         private void SetWindowAffinity()
         {
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
-            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
+            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WindowDisplayAffinity.ExcludeFromCapture : 0);
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
@@ -522,10 +512,10 @@ namespace Bililive_dm
             overlay.Deactivated += overlay_Deactivated;
             overlay.SourceInitialized += delegate
             {
-                var hwnd = new WindowInteropHelper(overlay).Handle;
-                var extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-                SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT);
-               
+                var hWnd = new WindowInteropHelper(overlay).Handle;
+                var exStyles = GetExtendedWindowStyles(hWnd);
+                SetExtendedWindowStyles(hWnd, exStyles | ExtendedWindowStyles.Transparent);
+
             };
             overlay.Background = Brushes.Transparent;
             overlay.ShowInTaskbar = false;

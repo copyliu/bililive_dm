@@ -9,26 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using static WINAPI.USER32;
+
 namespace Bililive_dm
 {
+    using static ExtendedWindowStyles;
+
     public partial class WtfDanmakuWindow : Form, IDanmakuWindow
     {
-        private const int WS_EX_LAYERED = 0x00080000;
-        private const int WS_EX_TRANSPARENT = 0x20;
-        private const int WS_EX_NOREDIRECTIONBITMAP = 0x00200000;
-        private const int WS_EX_TOOLWINDOW = 0x00000080;// 不在Alt-Tab中显示 && Win10下，在所有虚拟桌面显示
-        private const int GWL_EXSTYLE = (-20);
-        private const uint WDA_NONE = 0;
-        private const uint WDA_MONITOR = 1;
-        [DllImport("user32.dll")]
-        public static extern uint SetWindowDisplayAffinity(IntPtr hwnd, uint dwAffinity);
-
-        [DllImport("user32")]
-        private static extern uint SetWindowLong(IntPtr hwnd, int nIndex, uint dwNewLong);
-
-        [DllImport("user32")]
-        private static extern uint GetWindowLong(IntPtr hwnd, int nIndex);
-
         [DllImport("libwtfdanmaku")]
         private static extern IntPtr WTF_CreateInstance();
 
@@ -110,8 +98,8 @@ namespace Bililive_dm
             this.TopMost = true;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
-            uint exStyle = GetWindowLong(this.Handle, GWL_EXSTYLE);
-            SetWindowLong(this.Handle, GWL_EXSTYLE, exStyle | WS_EX_LAYERED | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW);
+            var exStyles = GetExtendedWindowStyles(Handle);
+            SetExtendedWindowStyles(Handle, exStyles | Layered | Transparent | ToolWindow);
 
             CreateWTF();
         }
@@ -135,7 +123,7 @@ namespace Bililive_dm
             WTF_SetFontName(_wtf, "SimHei");
             WTF_SetFontScaleFactor(_wtf, (float)(Store.FullOverlayFontsize / 25.0f));
             WTF_SetCompositionOpacity(_wtf, 0.85f);
-            SetWindowDisplayAffinity(_wtf, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
+            SetWindowDisplayAffinity(_wtf, Store.DisplayAffinity ? WindowDisplayAffinity.ExcludeFromCapture : 0);
         }
 
         private void DestroyWTF()
@@ -185,7 +173,7 @@ namespace Bililive_dm
             if (_wtf != IntPtr.Zero)
             {
                 WTF_SetFontScaleFactor(_wtf, (float)(Store.FullOverlayFontsize / 25.0f));
-                SetWindowDisplayAffinity(_wtf, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
+                SetWindowDisplayAffinity(_wtf, Store.DisplayAffinity ? WindowDisplayAffinity.ExcludeFromCapture : 0);
             }
         }
     }

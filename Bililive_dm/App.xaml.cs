@@ -19,10 +19,6 @@ namespace Bililive_dm
     /// </summary>
     public partial class App : Application
     {
-        [DllImport("kernel32", EntryPoint = "SetDllDirectoryW", CharSet = CharSet.Unicode, SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool SetDllDirectory(string lpPathName);
-
         public App()
         {
             
@@ -47,7 +43,7 @@ namespace Bililive_dm
         {
             string archPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                                            IntPtr.Size == 8 ? "x64" : "Win32");
-            SetDllDirectory(archPath);
+            WINAPI.SetDllDirectory(archPath);
         }
 
         private void App_DispatcherUnhandledException(object sender,

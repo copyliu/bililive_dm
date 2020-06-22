@@ -18,25 +18,13 @@ using System.ComponentModel;
 
 namespace Bililive_dm
 {
+    using static WINAPI.USER32;
+
     /// <summary>
     /// WpfDanmakuOverlay.xaml 的互動邏輯
     /// </summary>
     public partial class WpfDanmakuOverlay : Window, IDanmakuWindow
     {
-        private const int WS_EX_TRANSPARENT = 0x20;
-        private const int GWL_EXSTYLE = (-20);
-        private const int WS_EX_TOOLWINDOW = 0x00000080;// 不在Alt-Tab中显示 && Win10下，在所有虚拟桌面显示
-        private const uint WDA_NONE = 0;
-        private const uint WDA_MONITOR = 1;
-        [DllImport("user32.dll")]
-        public static extern uint SetWindowDisplayAffinity(IntPtr hwnd, uint dwAffinity);
-        [DllImport("user32", EntryPoint = "SetWindowLong")]
-        private static extern uint SetWindowLong(IntPtr hwnd, int nIndex, uint dwNewLong);
-
-        [DllImport("user32", EntryPoint = "GetWindowLong")]
-        private static extern uint GetWindowLong(IntPtr hwnd, int nIndex);
-
-
         public WpfDanmakuOverlay()
         {
             this.InitializeComponent();
@@ -45,9 +33,9 @@ namespace Bililive_dm
             this.Background = Brushes.Transparent;
             this.SourceInitialized += delegate
             {
-                IntPtr hwnd = new WindowInteropHelper(this).Handle;
-                uint extendedStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-                SetWindowLong(hwnd, GWL_EXSTYLE, extendedStyle | WS_EX_TRANSPARENT | WS_EX_TOOLWINDOW);
+                IntPtr hWnd = new WindowInteropHelper(this).Handle;
+                var exStyles = GetExtendedWindowStyles(hWnd);
+                SetExtendedWindowStyles(hWnd, exStyles | ExtendedWindowStyles.Transparent | ExtendedWindowStyles.ToolWindow);
             };
             this.ShowInTaskbar = false;
             this.Topmost = true;
@@ -170,7 +158,7 @@ namespace Bililive_dm
         void IDanmakuWindow.OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
-            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WDA_MONITOR : WDA_NONE);
+            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WindowDisplayAffinity.ExcludeFromCapture : 0);
             // ignore
         }
     }

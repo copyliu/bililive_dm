@@ -185,6 +185,8 @@
     <Compile Include="StaticModel.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="StoreModel.cs" />
+    <Compile Include="Properties\USER32.cs" />
+    <Compile Include="Properties\WINAPI.cs" />
     <Compile Include="WtfDanmakuWindow.cs">
       <SubType>Form</SubType>
     </Compile>

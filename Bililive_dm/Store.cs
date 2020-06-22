@@ -48,10 +48,6 @@ namespace Bililive_dm
 
     public static class Utils
     {
-        [DllImport("kernel32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool SetProcessWorkingSetSize(IntPtr process,
-        UIntPtr minimumWorkingSetSize, UIntPtr maximumWorkingSetSize);
         public static IPAddress GetBroadcastAddress(this IPAddress address, IPAddress subnetMask)
         {
             byte[] ipAdressBytes = address.GetAddressBytes();
@@ -147,8 +143,7 @@ namespace Bililive_dm
                 // we'll do as much as we can to help you
                 //
                 // just kidding
-                SetProcessWorkingSetSize(Process.GetCurrentProcess().Handle,
-                    (UIntPtr)0xFFFFFFFF, (UIntPtr)0xFFFFFFFF);
+                WINAPI.ReleasePages(Process.GetCurrentProcess().Handle);
             }
         }
     }
