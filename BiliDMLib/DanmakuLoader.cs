@@ -110,10 +110,10 @@ namespace BiliDMLib
                 }
                 Client = new TcpClient();
 
-                var ipaddrss = await System.Net.Dns.GetHostAddressesAsync(ChatHost);
+                var ipAddress = await System.Net.Dns.GetHostAddressesAsync(ChatHost);
                 var random = new Random();
-                var idx=random.Next(ipaddrss.Length);
-                await  Client.ConnectAsync(ipaddrss[idx], ChatPort);
+                var idx=random.Next(ipAddress.Length);
+                await  Client.ConnectAsync(ipAddress[idx], ChatPort);
 
                 NetStream = Stream.Synchronized(Client.GetStream());
 

@@ -199,7 +199,7 @@ namespace Bililive_dm
                 while (true)
                 {
                     Utils.ReleaseMemory(true);
-                    Thread.Sleep(30*1000);
+                    Thread.Sleep(TimeSpan.FromSeconds(30));
                 }
             });
             releaseThread.IsBackground = true;

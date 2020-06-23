@@ -29,7 +29,7 @@
            Windows 版本的列表。取消评论适当的元素，
            Windows 将自动选择最兼容的环境。 -->
       <!-- Windows Vista -->
-      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
       <!-- Windows 7 -->
       <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />
       <!-- Windows 8 -->
