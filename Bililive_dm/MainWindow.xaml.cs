@@ -287,7 +287,6 @@ namespace Bililive_dm
 
             InitPlugins();
 
-
             try
             {
                 var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
@@ -306,6 +305,7 @@ namespace Bililive_dm
             }
             settings.SaveConfig();
             settings.toStatic();
+
 
             Loaded += MainWindow_Loaded;
             Log.Loaded += (sender, args) =>
