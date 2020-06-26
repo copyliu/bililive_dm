@@ -10,7 +10,7 @@ namespace Bililive_dm
     using Annotations;
 
     [Serializable]
-    public class StoreModel: INotifyPropertyChanged
+    public class StoreModel : INotifyPropertyChanged
     {
         public void SaveConfig()
         {
@@ -38,7 +38,12 @@ namespace Bililive_dm
                 if (value.Equals(_mainOverlayXoffset)) return;
                 _mainOverlayXoffset = Store.MainOverlayXoffset = value;
 
-                ((MainWindow)(Application.Current.MainWindow)).overlay.Top = SystemParameters.WorkArea.Top + value;
+
+                var mainOverlay = ((MainWindow)(Application.Current.MainWindow))?.overlay;
+                if (mainOverlay != null)
+                        mainOverlay.Top =
+                            SystemParameters.WorkArea.Top + value;
+              
 
                 OnPropertyChanged();
             }
@@ -51,8 +56,13 @@ namespace Bililive_dm
             {
                 if (value.Equals(_mainOverlayYoffset)) return;
                 _mainOverlayYoffset = Store.MainOverlayYoffset = value;
-                ((MainWindow)(Application.Current.MainWindow)).overlay.Left = SystemParameters.WorkArea.Right -
-                                                                               Store.MainOverlayWidth + value;
+
+                var mainOverlay = ((MainWindow)(Application.Current.MainWindow))?.overlay;
+                if (mainOverlay != null)
+                        mainOverlay.Left = SystemParameters.WorkArea.Right -
+                            Store.MainOverlayWidth + value;
+                
+
                 OnPropertyChanged();
             }
         }
@@ -64,9 +74,14 @@ namespace Bililive_dm
             {
                 if (value.Equals(_mainOverlayWidth)) return;
                 _mainOverlayWidth = Store.MainOverlayWidth = value;
-                ((MainWindow)(Application.Current.MainWindow)).overlay.Width = value;
-                ((MainWindow)(Application.Current.MainWindow)).overlay.Left = SystemParameters.WorkArea.Right -
-                                                                               value + Store.MainOverlayYoffset;
+                var mainOverlay = ((MainWindow) (Application.Current.MainWindow))?.overlay;
+                if (mainOverlay != null)
+                {
+                    mainOverlay.Width = value;
+                    mainOverlay.Left = SystemParameters.WorkArea.Right -
+                        value + Store.MainOverlayYoffset;
+                }
+
                 OnPropertyChanged();
             }
         }
@@ -162,7 +177,7 @@ namespace Bililive_dm
             set
             {
                 if (value == _wtfEngineEnabled) return;
-                Store.WtfEngineEnabled = _wtfEngineEnabled = value;
+                Store.WtfEngineEnabled=_wtfEngineEnabled = value;
                 OnPropertyChanged();
             }
         }
@@ -173,7 +188,7 @@ namespace Bililive_dm
             set
             {
                 if (value == _displayAffinity) return;
-                Store.DisplayAffinity = _displayAffinity = value;
+                Store.DisplayAffinity= _displayAffinity = value;
                 OnPropertyChanged();
             }
         }
