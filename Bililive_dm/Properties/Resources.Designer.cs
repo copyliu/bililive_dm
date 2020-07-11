@@ -61,7 +61,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 非B站出品 ©2014-2019 CopyLiu 房間編號5051 問題反饋 copyliu@gmail.com 的本地化字符串。
+        ///   查找类似 非B站出品 ©2014-2020 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com 的本地化字符串。
         /// </summary>
         public static string ABout_Text {
             get {
