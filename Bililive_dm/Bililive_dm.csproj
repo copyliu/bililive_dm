@@ -30,7 +30,7 @@
     <MinimumRequiredVersion>1.1.1.34</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>36</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -170,6 +170,7 @@
     <Compile Include="LanguageSelector.xaml.cs">
       <DependentUpon>LanguageSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ObjectForScriptingHelper.cs" />
     <Compile Include="OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
     </Compile>

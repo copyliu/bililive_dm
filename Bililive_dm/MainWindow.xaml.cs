@@ -10,7 +10,6 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
@@ -324,7 +323,7 @@ namespace Bililive_dm
             HelpWeb.Navigated-=HelpWebOnNavigated;
             HelpWeb.Source = new Uri("https://soft.ceve-market.org/bilibili_dm/app.htm?" + DateTime.Now.Ticks);
             //fuck you IE cache
-
+            HelpWeb.ObjectForScripting=new ObjectForScriptingHelper(this); 
         }
 
         private void b_LogMessage(object sender, LogMessageArgs e)
@@ -442,7 +441,7 @@ namespace Bililive_dm
         private void SetWindowAffinity()
         {
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
-            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WindowDisplayAffinity.ExcludeFromCapture : 0);
+            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WINAPI.USER32.WindowDisplayAffinity.ExcludeFromCapture : 0);
         }
 
         private void MainWindow_Closed(object sender, EventArgs e)
@@ -518,7 +517,7 @@ namespace Bililive_dm
             {
                 var hWnd = new WindowInteropHelper(overlay).Handle;
                 var exStyles = GetExtendedWindowStyles(hWnd);
-                SetExtendedWindowStyles(hWnd, exStyles | ExtendedWindowStyles.Transparent);
+                SetExtendedWindowStyles(hWnd, exStyles | WINAPI.USER32.ExtendedWindowStyles.Transparent);
 
             };
             overlay.Background = Brushes.Transparent;
