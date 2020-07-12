@@ -94,10 +94,10 @@ namespace Bililive_dm
             }
             HelpWeb.Navigated+=HelpWebOnNavigated;
             //初始化日志
-            if (!(Debugger.IsAttached ))
-            {
-                this.IsEnabled = false;
-            }
+            // if (!(Debugger.IsAttached ))
+            // {
+            //     this.IsEnabled = false;
+            // }
 
             try
             {
