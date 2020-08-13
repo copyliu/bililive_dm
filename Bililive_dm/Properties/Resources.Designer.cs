@@ -295,6 +295,69 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
+        ///   查找类似 进入直播间 的本地化字符串。
+        /// </summary>
+        public static string InteractType_Text1 {
+            get {
+                return ResourceManager.GetString("InteractType_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 关注了直播间 的本地化字符串。
+        /// </summary>
+        public static string InteractType_Text2 {
+            get {
+                return ResourceManager.GetString("InteractType_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 分享了直播间 的本地化字符串。
+        /// </summary>
+        public static string InteractType_Text3 {
+            get {
+                return ResourceManager.GetString("InteractType_Text3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 特别关注了 的本地化字符串。
+        /// </summary>
+        public static string InteractType_Text4 {
+            get {
+                return ResourceManager.GetString("InteractType_Text4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 互相关注 的本地化字符串。
+        /// </summary>
+        public static string InteractType_Text5 {
+            get {
+                return ResourceManager.GetString("InteractType_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {0} {1} 的本地化字符串。
+        /// </summary>
+        public static string InteractType_TextFormat {
+            get {
+                return ResourceManager.GetString("InteractType_TextFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 发生了未知的互动事件 的本地化字符串。
+        /// </summary>
+        public static string InteractType_Unknown {
+            get {
+                return ResourceManager.GetString("InteractType_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 直播間地址: http://live.bilibili.com/ 的本地化字符串。
         /// </summary>
         public static string LiveRoomAddr {
@@ -881,7 +944,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 道具老爺 的本地化字符串。
+        ///   查找类似 观众交互 的本地化字符串。
         /// </summary>
         public static string ShowItem_Content {
             get {

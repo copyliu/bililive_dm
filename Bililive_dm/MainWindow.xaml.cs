@@ -842,6 +842,44 @@ namespace Bililive_dm
                         }));
                         break;
                     }
+                case MsgTypeEnum.Interact:
+                {
+
+                    string r = Properties.Resources.InteractType_TextFormat;
+                    string text;
+                    switch (danmakuModel.InteractType)
+                    {
+                            case InteractTypeEnum.Enter:
+                                text = Properties.Resources.InteractType_Text1;
+                                break;
+                            case InteractTypeEnum.Follow:
+                                text = Properties.Resources.InteractType_Text2;
+                                break;
+                            case InteractTypeEnum.Share:
+                                text = Properties.Resources.InteractType_Text3;
+                                break;
+                            case InteractTypeEnum.SpecialFollow:
+                                text = Properties.Resources.InteractType_Text4;
+                                break;
+                            case InteractTypeEnum.MutualFollow:
+                                text = Properties.Resources.InteractType_Text5;
+                                break;
+                            default:
+                                text = Properties.Resources.InteractType_Unknown;
+                                break;
+                    }
+
+                    var logtext = string.Format(r, danmakuModel.UserName, text);
+                    logging(logtext);
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        if (ShowItem.IsChecked == true)
+                        {
+                            AddDMText(danmakuModel.UserName, text, true);
+                        }
+                    }));
+                    break;
+                    }
             }
             if (rawoutput_mode)
             {

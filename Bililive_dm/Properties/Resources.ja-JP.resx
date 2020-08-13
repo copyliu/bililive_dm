@@ -471,4 +471,25 @@
   <data name="DisplayAffinity.Content" xml:space="preserve">
     <value>喵喵</value>
   </data>
+  <data name="InteractType_Text1" xml:space="preserve">
+    <value>喵喵</value>
+  </data>
+  <data name="InteractType_Text2" xml:space="preserve">
+    <value>喵喵</value>
+  </data>
+  <data name="InteractType_Text3" xml:space="preserve">
+    <value>喵喵</value>
+  </data>
+  <data name="InteractType_Text4" xml:space="preserve">
+    <value>喵喵</value>
+  </data>
+  <data name="InteractType_Text5" xml:space="preserve">
+    <value>喵喵</value>
+  </data>
+  <data name="InteractType_TextFormat" xml:space="preserve">
+    <value>{0} {1}</value>
+  </data>
+  <data name="InteractType_Unknown" xml:space="preserve">
+    <value>喵喵</value>
+  </data>
 </root>

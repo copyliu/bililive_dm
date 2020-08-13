@@ -6,6 +6,9 @@ using Newtonsoft.Json.Linq;
 
 namespace BilibiliDM_PluginFramework
 {
+    /// <summary>
+    /// 消息类型
+    /// </summary>
     public enum MsgTypeEnum
     {
         /// <summary>
@@ -56,16 +59,50 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// SC
         /// </summary>
-        SuperChat
+        SuperChat,
+        /// <summary>
+        /// 观众互动信息
+        /// </summary>
+        Interact
 
     }
-
+    /// <summary>
+    /// 观众互动内容
+    /// </summary>
+    public enum InteractTypeEnum
+    {
+        /// <summary>
+        /// 进入
+        /// </summary>
+        Enter=1,
+        /// <summary>
+        /// 关注
+        /// </summary>
+        Follow=2,
+        /// <summary>
+        /// 分享直播间
+        /// </summary>
+        Share=3,
+        /// <summary>
+        /// 特别关注
+        /// </summary>
+        SpecialFollow=4,
+        /// <summary>
+        /// 互相关注
+        /// </summary>
+        MutualFollow=5,
+        
+    }
+    
     public class DanmakuModel
     {
         /// <summary>
         /// 消息類型
         /// </summary>
         public MsgTypeEnum MsgType { get; set; }
+
+        public InteractTypeEnum InteractType { get; set; }
+
 
         /// <summary>
         /// 彈幕內容
@@ -93,6 +130,7 @@ namespace BilibiliDM_PluginFramework
         /// <item><see cref="MsgTypeEnum.Welcome"/></item>
         /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
         /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
+        /// <item><see cref="MsgTypeEnum.Interact"/></item>
         /// </list></para>
         /// </summary>
         public string UserName { get; set; }
@@ -105,6 +143,7 @@ namespace BilibiliDM_PluginFramework
         /// <item><see cref="MsgTypeEnum.Welcome"/></item>
         /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
         /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
+        /// <item><see cref="MsgTypeEnum.Interact"/></item>
         /// </list></para>
         /// </summary>
         public int UserID { get; set; }
@@ -344,7 +383,14 @@ namespace BilibiliDM_PluginFramework
                             SCKeepTime = obj["data"]["time"].ToObject<int>();
                             break;
                         }
-
+                        case "INTERACT_WORD":
+                        {
+                            MsgType = MsgTypeEnum.Interact;
+                            UserName = obj["data"]["uname"].ToString();
+                            UserID = obj["data"]["uid"].ToObject<int>();
+                            InteractType = (InteractTypeEnum) obj["data"]["msg_type"].ToObject<int>();
+                            break;
+                        }
                         default:
                         {
                             if (cmd.StartsWith("DANMU_MSG")) // "高考"fix
