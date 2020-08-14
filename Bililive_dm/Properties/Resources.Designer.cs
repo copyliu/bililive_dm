@@ -295,7 +295,16 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 进入直播间 的本地化字符串。
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Interact_Content {
+            get {
+                return ResourceManager.GetString("Interact_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 進入了直播間 的本地化字符串。
         /// </summary>
         public static string InteractType_Text1 {
             get {
@@ -304,7 +313,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 关注了直播间 的本地化字符串。
+        ///   查找类似 關注了直播間 的本地化字符串。
         /// </summary>
         public static string InteractType_Text2 {
             get {
@@ -313,7 +322,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 分享了直播间 的本地化字符串。
+        ///   查找类似 分享了直播間 的本地化字符串。
         /// </summary>
         public static string InteractType_Text3 {
             get {
@@ -322,7 +331,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 特别关注了 的本地化字符串。
+        ///   查找类似 特別關注 的本地化字符串。
         /// </summary>
         public static string InteractType_Text4 {
             get {
@@ -331,7 +340,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 互相关注 的本地化字符串。
+        ///   查找类似 相互關注 的本地化字符串。
         /// </summary>
         public static string InteractType_Text5 {
             get {
@@ -944,7 +953,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 观众交互 的本地化字符串。
+        ///   查找类似 道具老爺 的本地化字符串。
         /// </summary>
         public static string ShowItem_Content {
             get {

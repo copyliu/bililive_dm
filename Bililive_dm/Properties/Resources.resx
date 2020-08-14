@@ -386,7 +386,7 @@
     <value>顯示出錯信息</value>
   </data>
   <data name="ShowItem.Content" xml:space="preserve">
-    <value>觀客互動</value>
+    <value>道具老爺</value>
   </data>
   <data name="SideBar.Content" xml:space="preserve">
     <value>側邊欄</value>
@@ -495,5 +495,8 @@
   </data>
   <data name="InteractType_Unknown" xml:space="preserve">
     <value>发生了未知的互动事件</value>
+  </data>
+  <data name="Interact_Content" xml:space="preserve">
+    <value>觀客互動</value>
   </data>
 </root>

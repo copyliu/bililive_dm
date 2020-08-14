@@ -35,8 +35,13 @@ namespace Bililive_dm
                 Bililive_dm.Properties.Settings.Default.Reload();
 
             }
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Bililive_dm.Properties.Settings.Default.lang);
 
+            var culture = CultureInfo.GetCultureInfo(Bililive_dm.Properties.Settings.Default.lang);
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+            Thread.CurrentThread.CurrentUICulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
         }
 
         private void AddArchSpecificDirectory()

@@ -9,7 +9,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="381.693" Width="631.068">
+        Title="B站彈幕姬" Height="381.693" Width="654.661">
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
 
@@ -44,10 +44,11 @@
             <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"  Checked="SideBar_Checked"
                       VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
             <CheckBox x:Name="Full" Content="{x:Static properties:Resources.Full_Content}" Checked="Full_Checked" VerticalAlignment="Center"
-                      Unchecked="Full_Unchecked" />
+                      Unchecked="Full_Unchecked" /> 
             <CheckBox Content="{x:Static properties:Resources.AutoReconnect_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
             <CheckBox Content="{x:Static properties:Resources.SaveLog_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True" Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
             <CheckBox Content="{x:Static properties:Resources.ShowItem_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True" Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
+            <CheckBox Content="{x:Static properties:Resources.Interact_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowInteract" IsChecked="True" Checked="ShowInteract_OnChecked" Unchecked="ShowInteract_OnUnchecked"/>
             <CheckBox Content="{x:Static properties:Resources.IgnoreSpam_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="IgnoreSpam" IsChecked="False" Checked="IgnoreSpam_OnChecked" Unchecked="IgnoreSpam_OnUnchecked"/>
             <CheckBox Content="{x:Static properties:Resources.WindowTop_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
         </StackPanel>

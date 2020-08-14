@@ -391,6 +391,7 @@ namespace Bililive_dm
             EnableRegex.IsChecked = enable_regex;
             IgnoreSpam.IsChecked = ignorespam_enabled;
             ShowItem.IsChecked = showvip_enabled;
+            ShowInteract.IsChecked = showInteract_enabled;
             ShowError.IsChecked = showerror_enabled;
             regex = Regex.Text.Trim();
             FilterRegex=new Regex(regex);
@@ -873,7 +874,7 @@ namespace Bililive_dm
                     logging(logtext);
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        if (ShowItem.IsChecked == true)
+                        if (ShowInteract.IsChecked == true)
                         {
                             AddDMText(danmakuModel.UserName, text, true);
                         }
@@ -1445,6 +1446,16 @@ namespace Bililive_dm
             showvip_enabled = false;
         }
 
+        private void ShowInteract_OnChecked(object sender, RoutedEventArgs e)
+        {
+            showInteract_enabled = true;
+        }
+
+        private void ShowInteract_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            showInteract_enabled = false;
+        }
+
         private void SSTP_OnChecked(object sender, RoutedEventArgs e)
         {
             sendssp_enabled = true;
@@ -1503,6 +1514,7 @@ namespace Bililive_dm
         private bool savelog_enabled = true;
         private bool sendssp_enabled = true;
         private bool showvip_enabled = true;
+        private bool showInteract_enabled = true;
         private bool showerror_enabled = true;
         private bool rawoutput_mode = false;
         private bool enable_regex = false;

@@ -492,4 +492,7 @@
   <data name="InteractType_Unknown" xml:space="preserve">
     <value>喵喵</value>
   </data>
+  <data name="Interact_Content" xml:space="preserve">
+    <value>喵喵</value>
+  </data>
 </root>
