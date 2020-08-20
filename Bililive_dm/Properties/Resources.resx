@@ -500,6 +500,6 @@
     <value>觀客互動</value>
   </data>
   <data name="ScreenSelecter" xml:space="preserve">
-    <value>全屏彈幕使用熒幕</value>
+    <value>彈幕模式使用熒幕</value>
   </data>
 </root>
