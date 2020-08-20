@@ -143,7 +143,7 @@ namespace Bililive_dm
             System.Drawing.Rectangle r = s.WorkingArea;
             this.Top = r.Top;
             this.Left = r.Left;
-            
+            this.Width = r.Width;
         }
 
         private void s_Completed(object sender, EventArgs e)

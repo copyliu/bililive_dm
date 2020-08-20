@@ -175,6 +175,7 @@ namespace Bililive_dm
             System.Drawing.Rectangle r = s.WorkingArea;
             this.Top = r.Top;
             this.Left = r.Left;
+            this.Width = r.Width;
         }
 
         void IDanmakuWindow.OnPropertyChanged(object sender, PropertyChangedEventArgs e)
