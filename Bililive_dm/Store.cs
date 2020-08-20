@@ -25,6 +25,7 @@ namespace Bililive_dm
         public static double FullOverlayFontsize = 35;
         public static bool WtfEngineEnabled = true;
         public static bool DisplayAffinity = false;
+        public static string FullScreenMonitor = null;
     }
 
 
@@ -44,6 +45,7 @@ namespace Bililive_dm
         public static double FullOverlayFontsize = 35;
         public static bool WtfEngineEnabled = true;
         public static bool DisplayAffinity = false;
+        public static string FullScreenMonitor = null;
     }
 
     public static class Utils

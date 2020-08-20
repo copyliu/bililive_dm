@@ -21,5 +21,6 @@ namespace Bililive_dm
         void ForceTopmost();
         void OnPropertyChanged(object sender, PropertyChangedEventArgs e);
         void AddDanmaku(DanmakuType type, string comment, uint color);
+        void SetMonitor(string deviceName);
     }
 }

@@ -499,4 +499,7 @@
   <data name="Interact_Content" xml:space="preserve">
     <value>觀客互動</value>
   </data>
+  <data name="ScreenSelecter" xml:space="preserve">
+    <value>全屏彈幕使用熒幕</value>
+  </data>
 </root>

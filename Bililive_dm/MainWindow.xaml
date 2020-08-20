@@ -9,7 +9,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="381.693" Width="654.661">
+        Title="B站彈幕姬" Height="381.693" Width="663.068">
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
 
@@ -126,13 +126,14 @@
             <TabItem Header="{x:Static properties:Resources.TabItem_Header_Setting}">
                 <Grid>
                     <bililiveDm:OptionDialog x:Name="OptionDialog"/>
-                    <CheckBox x:Name="DisplayAffinity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,403,0,0" IsChecked="{Binding DisplayAffinity,Mode=TwoWay}" Panel.ZIndex="-1" Content="{x:Static properties:Resources.DisplayAffinity_Content}" />
+                    <CheckBox x:Name="DisplayAffinity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,403,0,0" IsChecked="{Binding DisplayAffinity,Mode=TwoWay}" Panel.ZIndex="1" Content="{x:Static properties:Resources.DisplayAffinity_Content}" />
 
-                    <CheckBox Content="{x:Static properties:Resources.SSTP_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="-1" Margin="0,500,0,0" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
-                    <CheckBox Content="{x:Static properties:Resources.ShowError_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="-1" Margin="0,514,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
-                    <CheckBox Content="{x:Static properties:Resources.EnableRegex_Content}" x:Name="EnableRegex"  HorizontalAlignment="Left" Margin="5,420,0,0" VerticalAlignment="Top" Panel.ZIndex="-1" Checked="Enableregex_OnChecked" Unchecked="Enableregex_OnUnchecked"/>
-                    <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5,440,0,0" TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395" Panel.ZIndex="-1" TextChanged="Regex_OnTextChanged" />
+                    <CheckBox Content="{x:Static properties:Resources.SSTP_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="1" Margin="5,500,0,0" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
+                    <CheckBox Content="{x:Static properties:Resources.ShowError_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="1" Margin="5,515,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
+                    <CheckBox Content="{x:Static properties:Resources.EnableRegex_Content}" x:Name="EnableRegex"  HorizontalAlignment="Left" Margin="5,420,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Checked="Enableregex_OnChecked" Unchecked="Enableregex_OnUnchecked"/>
+                    <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5,440,0,0" TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395" Panel.ZIndex="1" TextChanged="Regex_OnTextChanged" />
                     <!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
+                    
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static properties:Resources.TabItem_Header_Plugin}">

@@ -6,7 +6,7 @@
     xmlns:properties="clr-namespace:Bililive_dm.Properties"
     mc:Ignorable="d"
     x:Class="Bililive_dm.OptionDialog" 
-    x:Name="Window" >
+    x:Name="Window">
 
     <StackPanel x:Name="LayoutRoot" d:DataContext="{d:DesignInstance bililiveDm:StoreModel}">
         <DockPanel>
@@ -89,10 +89,17 @@
             <Slider Style="{DynamicResource SimpleSlider}" VerticalAlignment="Center" Maximum="1010" Minimum="1"
                     Value="{Binding FullOverlayEffect1,Mode=TwoWay}" />
         </DockPanel>
+        <DockPanel>
+
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.ScreenSelecter}" VerticalAlignment="Center" Width="120" TextAlignment="Right"
+                       Margin="0,0,20,0" />
+            <ComboBox  x:Name="ScreenSelect"  SelectedValue="{Binding FullScreenMonitor,Mode=TwoWay}"     />
+        </DockPanel>
         <CheckBox x:Name="WTFEngineEnable" IsChecked="{Binding WtfEngineEnabled,Mode=TwoWay}" Content="{x:Static properties:Resources.WTFEngineEnable_Content}" />
         <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_EnableNewEngineWarn}" VerticalAlignment="Center" TextAlignment="Right"
                        Margin="0,0,20,0" HorizontalAlignment="Left" />
         <Button Content="{x:Static properties:Resources.Button_Content_Text}" Click="ButtonBase_OnClick" />
         <Button Content="{x:Static properties:Resources.Button_Content_Default}" Click="ButtonBase_OnClick2" />
+       
     </StackPanel>
 </UserControl>

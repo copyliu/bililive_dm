@@ -15,6 +15,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Interop;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Bililive_dm
 {
@@ -134,6 +135,15 @@ namespace Bililive_dm
                     () => (this as IDanmakuWindow).AddDanmaku(type, comment, color))
                 );
             }
+        }
+
+        public void SetMonitor(string deviceName)
+        {
+            Screen s = Screen.AllScreens.FirstOrDefault(p => p.DeviceName == deviceName) ?? Screen.PrimaryScreen;
+            System.Drawing.Rectangle r = s.WorkingArea;
+            this.Top = r.Top;
+            this.Left = r.Left;
+            
         }
 
         private void s_Completed(object sender, EventArgs e)

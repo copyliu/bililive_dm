@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,7 +48,11 @@ namespace Bililive_dm
         public OptionDialog()
         {
             this.InitializeComponent();
-            // 在此點下方插入建立物件所需的程式碼。
+           
+            this.ScreenSelect.ItemsSource = System.Windows.Forms.Screen.AllScreens.Select(p => p.DeviceName).ToList();
+           
+
+
         }
 
 
@@ -74,7 +79,9 @@ namespace Bililive_dm
             a.MainOverlayYoffset = DefaultStore.MainOverlayYoffset;
             a.WtfEngineEnabled = DefaultStore.WtfEngineEnabled;
             a.DisplayAffinity = DefaultStore.DisplayAffinity;
+            a.FullScreenMonitor = DefaultStore.FullScreenMonitor;
             a.SaveConfig();
         }
+
     }
 }

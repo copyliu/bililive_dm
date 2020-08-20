@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.IO;
 using System.IO.IsolatedStorage;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 
@@ -193,6 +194,33 @@ namespace Bililive_dm
             }
         }
 
+        public string FullScreenMonitor
+        {
+            get
+            {
+                var screenlist = System.Windows.Forms.Screen.AllScreens.Select(p => p.DeviceName).ToList();
+                if (!screenlist.Contains(_fullScreenMonitor))
+                {
+                    _fullScreenMonitor = System.Windows.Forms.Screen.PrimaryScreen.DeviceName;
+                }
+                return _fullScreenMonitor;
+            }
+            set
+            {
+                var screenlist = System.Windows.Forms.Screen.AllScreens.Select(p => p.DeviceName).ToList();
+                if (!screenlist.Contains(value))
+                {
+                    _fullScreenMonitor = System.Windows.Forms.Screen.PrimaryScreen.DeviceName;
+                }
+                else
+                {
+                    if (value == _fullScreenMonitor) return;
+                    _fullScreenMonitor = value;
+                }
+                OnPropertyChanged();
+            }
+        }
+
         private double _mainOverlayYoffset;
         private double _mainOverlayWidth;
         private double _mainOverlayEffect1; //拉伸
@@ -207,6 +235,7 @@ namespace Bililive_dm
         private double _mainOverlayXoffset;
         private bool _wtfEngineEnabled;
         private bool _displayAffinity;
+        private string _fullScreenMonitor;
 
         public StoreModel()
         {
@@ -222,6 +251,7 @@ namespace Bililive_dm
             _mainOverlayYoffset = Store.MainOverlayYoffset;
             _wtfEngineEnabled = Store.WtfEngineEnabled;
             _displayAffinity = Store.DisplayAffinity;
+            _fullScreenMonitor = Store.FullScreenMonitor;
         }
 
         public void toStatic()
@@ -238,6 +268,7 @@ namespace Bililive_dm
             Store.MainOverlayYoffset = MainOverlayYoffset;
             Store.WtfEngineEnabled = WtfEngineEnabled;
             Store.DisplayAffinity = DisplayAffinity;
+            Store.FullScreenMonitor = FullScreenMonitor;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

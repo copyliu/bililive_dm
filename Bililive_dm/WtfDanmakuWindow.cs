@@ -83,6 +83,7 @@ namespace Bililive_dm
         public WtfDanmakuWindow()
         {
             InitializeComponent();
+            this.StartPosition=FormStartPosition.Manual;
             this.Resize += WtfDanmakuWindow_Resize;
             this.FormClosing += WtfDanmakuWindow_FormClosing;
         }
@@ -166,6 +167,14 @@ namespace Bililive_dm
         void IDanmakuWindow.AddDanmaku(DanmakuType type, string comment, uint color)
         {
             WTF_AddLiveDanmaku(_wtf, (int)type, 0, comment, 25, (int)color, 0, 0);
+        }
+
+        public void SetMonitor(string deviceName)
+        {
+            Screen s = Screen.AllScreens.FirstOrDefault(p => p.DeviceName == deviceName) ?? Screen.PrimaryScreen;
+            System.Drawing.Rectangle r = s.WorkingArea;
+            this.Top = r.Top;
+            this.Left = r.Left;
         }
 
         void IDanmakuWindow.OnPropertyChanged(object sender, PropertyChangedEventArgs e)

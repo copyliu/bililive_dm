@@ -295,7 +295,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 觀客互動 的本地化字符串。
         /// </summary>
         public static string Interact_Content {
             get {
@@ -940,6 +940,15 @@ namespace Bililive_dm.Properties {
         public static string SaveLog_Content {
             get {
                 return ResourceManager.GetString("SaveLog.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string ScreenSelecter {
+            get {
+                return ResourceManager.GetString("ScreenSelecter", resourceCulture);
             }
         }
         
