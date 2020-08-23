@@ -9,7 +9,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="391.693" Width="663.068">
+        Title="B站彈幕姬" Height="600" Width="800">
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
 
@@ -38,11 +38,17 @@
 
         </StackPanel>
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text}" VerticalAlignment="Center" />
+            <FrameworkElement.Resources>
+                <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+                    <Setter Property="Margin" Value="1,0"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </FrameworkElement.Resources>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text}" VerticalAlignment="Center" Margin="3" />
             <TextBlock x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
                        VerticalAlignment="Center" />
             <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"  Checked="SideBar_Checked"
-                      VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
+                      VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="9,0,0,0" />
             <CheckBox x:Name="Full" Content="{x:Static properties:Resources.Full_Content}" Checked="Full_Checked" VerticalAlignment="Center"
                       Unchecked="Full_Unchecked" />
             <CheckBox Content="{x:Static properties:Resources.AutoReconnect_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
@@ -124,16 +130,26 @@
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static properties:Resources.TabItem_Header_Setting}">
-                <Grid>
+                <Grid VerticalAlignment="Top">
                     <bililiveDm:OptionDialog x:Name="OptionDialog"/>
-                    <CheckBox x:Name="DisplayAffinity" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,403,0,0" IsChecked="{Binding DisplayAffinity,Mode=TwoWay}" Panel.ZIndex="1" Content="{x:Static properties:Resources.DisplayAffinity_Content}" />
+                    <Canvas Width="0" Height="0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                        <StackPanel Canvas.Top="115">
+                            <FrameworkElement.Resources>
+                                <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
+                                    <Setter Property="Margin" Value="5,0"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                </Style>
+                            </FrameworkElement.Resources>
 
-                    <CheckBox Content="{x:Static properties:Resources.SSTP_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="1" Margin="5,500,0,0" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
-                    <CheckBox Content="{x:Static properties:Resources.ShowError_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="1" Margin="5,515,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
-                    <CheckBox Content="{x:Static properties:Resources.EnableRegex_Content}" x:Name="EnableRegex"  HorizontalAlignment="Left" Margin="5,420,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Checked="Enableregex_OnChecked" Unchecked="Enableregex_OnUnchecked"/>
-                    <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5,440,0,0" TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395" Panel.ZIndex="1" TextChanged="Regex_OnTextChanged" />
-                    <!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
+                            <CheckBox x:Name="DisplayAffinity" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding DisplayAffinity,Mode=TwoWay}" Panel.ZIndex="1" Content="{x:Static properties:Resources.DisplayAffinity_Content}" />
 
+                            <CheckBox Content="{x:Static properties:Resources.SSTP_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="1" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
+                            <CheckBox Content="{x:Static properties:Resources.ShowError_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="1" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
+                            <CheckBox Content="{x:Static properties:Resources.EnableRegex_Content}" x:Name="EnableRegex"  HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1" Checked="Enableregex_OnChecked" Unchecked="Enableregex_OnUnchecked"/>
+                            <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5" TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395" Panel.ZIndex="1" TextChanged="Regex_OnTextChanged" />
+                            <!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
+                        </StackPanel>
+                    </Canvas>
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static properties:Resources.TabItem_Header_Plugin}">
