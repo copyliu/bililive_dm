@@ -6,9 +6,11 @@
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Simple Styles.xaml" />
+                <!-- Light Theme -->
+                <ResourceDictionary Source="Metro/Light/Metro.MSControls.Core.Implicit.xaml" />
+                <!--<ResourceDictionary Source="Metro/Light/Metro.MSControls.SDK.Implicit.xaml" />-->
+                <!--<ResourceDictionary Source="Metro/Light/Metro.MSControls.Toolkit.Implicit.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-
     </Application.Resources>
 </Application>

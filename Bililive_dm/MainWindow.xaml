@@ -44,7 +44,7 @@
             <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"  Checked="SideBar_Checked"
                       VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
             <CheckBox x:Name="Full" Content="{x:Static properties:Resources.Full_Content}" Checked="Full_Checked" VerticalAlignment="Center"
-                      Unchecked="Full_Unchecked" /> 
+                      Unchecked="Full_Unchecked" />
             <CheckBox Content="{x:Static properties:Resources.AutoReconnect_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="AutoReconnect" IsChecked="True"/>
             <CheckBox Content="{x:Static properties:Resources.SaveLog_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="SaveLog" IsChecked="True" Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
             <CheckBox Content="{x:Static properties:Resources.ShowItem_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="ShowItem" IsChecked="True" Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
@@ -55,7 +55,7 @@
         <DockPanel DockPanel.Dock="Bottom">
             <Button DockPanel.Dock="Right" Content="🌐" Click="SelectLanguage"></Button>
             <TextBlock Text="{x:Static properties:Resources.ABout_Text}" DockPanel.Dock="Left" VerticalAlignment="Bottom"/>
-           
+
         </DockPanel>
         <TabControl x:Name="TabControl">
             <TabItem Header="{x:Static properties:Resources.TabItem_Header}">
@@ -133,7 +133,7 @@
                     <CheckBox Content="{x:Static properties:Resources.EnableRegex_Content}" x:Name="EnableRegex"  HorizontalAlignment="Left" Margin="5,420,0,0" VerticalAlignment="Top" Panel.ZIndex="1" Checked="Enableregex_OnChecked" Unchecked="Enableregex_OnUnchecked"/>
                     <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5,440,0,0" TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395" Panel.ZIndex="1" TextChanged="Regex_OnTextChanged" />
                     <!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
-                    
+
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static properties:Resources.TabItem_Header_Plugin}">

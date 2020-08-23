@@ -17,11 +17,11 @@ namespace Bililive_dm
     /// <summary>
     /// App.xaml 的互動邏輯
     /// </summary>
-    public partial class App : Application
+    public partial class App: Application
     {
         public App()
         {
-            
+
             AddArchSpecificDirectory();
             Application.Current.DispatcherUnhandledException += App_DispatcherUnhandledException;
             try
@@ -44,6 +44,14 @@ namespace Bililive_dm
             Thread.CurrentThread.CurrentCulture = culture;
         }
 
+        //static Uri Aero = new Uri("/PresentationFramework.Aero,Version=3.0.0.0,PublicKeyToken=31bf3856ad364e35;component/themes/aero.normalcolor.xaml", UriKind.RelativeOrAbsolute);
+        //protected override void OnStartup(StartupEventArgs e)
+        //{
+        //    base.OnStartup(e);
+
+        //    Resources.MergedDictionaries.Add(new ResourceDictionary { Source = Aero });
+        //}
+
         private void AddArchSpecificDirectory()
         {
             string archPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
@@ -64,7 +72,7 @@ namespace Bililive_dm
                 using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬錯誤報告.txt"))
                 {
                     outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
-                    outfile.WriteLine(DateTime.Now +"");
+                    outfile.WriteLine(DateTime.Now + "");
                     outfile.Write(e.Exception.ToString());
                     outfile.WriteLine("-------插件列表--------");
                     foreach (var dmPlugin in Plugins)
@@ -80,6 +88,6 @@ namespace Bililive_dm
             }
         }
 
-        public static  readonly ObservableCollection<DMPlugin> Plugins = new ObservableCollection<DMPlugin>();
+        public static readonly ObservableCollection<DMPlugin> Plugins = new ObservableCollection<DMPlugin>();
     }
 }
