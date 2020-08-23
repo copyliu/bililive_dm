@@ -24,17 +24,17 @@
 
     </Window.Resources>
     <DockPanel>
-        <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Height="25" DockPanel.Dock="Top">
+        <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
-                       VerticalAlignment="Center" />
+                       VerticalAlignment="Center" Margin="4" />
             <TextBox x:Name="RoomId" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"
                      Width="80" />
             <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Click="connbtn_Click" Margin="28,0,0,0" Width="70" />
+                    Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
 
-            <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" x:Name="DisconnBtn" Click="Disconnbtn_OnClick"/>
+            <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70"/>
             <Button x:Name="Test" Content="{x:Static properties:Resources.Test_Content}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                    Click="Test_OnClick" Margin="28,0,0,0" Width="70" />
+                    Click="Test_OnClick" Margin="28,0,0,0" MinWidth="70" />
 
         </StackPanel>
         <StackPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
@@ -53,8 +53,8 @@
             <CheckBox Content="{x:Static properties:Resources.WindowTop_Content}" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="WindowTop" IsChecked="False" Click="WindowTop_OnChecked"/>
         </StackPanel>
         <DockPanel DockPanel.Dock="Bottom">
-            <Button DockPanel.Dock="Right" Content="🌐" Click="SelectLanguage"></Button>
-            <TextBlock Text="{x:Static properties:Resources.ABout_Text}" DockPanel.Dock="Left" VerticalAlignment="Bottom"/>
+            <Button DockPanel.Dock="Right" Content="🌐" Click="SelectLanguage" Padding="0"></Button>
+            <TextBlock Text="{x:Static properties:Resources.ABout_Text}" VerticalAlignment="Center"/>
 
         </DockPanel>
         <TabControl x:Name="TabControl">
