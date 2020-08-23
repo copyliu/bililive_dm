@@ -10,18 +10,30 @@
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
         Title="B站彈幕姬" Height="572" Width="842" FontSize="14.666" >
+ 
     <Window.Resources>
-        <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
+  
 
-        <DataTemplate x:Key="LogTemplate" >
+            <ResourceDictionary >
+                <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
+
+                <DataTemplate x:Key="LogTemplate" >
 
 
 
-            <TextBlock Text="{Binding }"
-                       TextWrapping="Wrap" Cursor="Hand" MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"/>
+                    <TextBlock Text="{Binding }"
+                               TextWrapping="Wrap" Cursor="Hand" MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"/>
 
-        </DataTemplate>
+                </DataTemplate>
 
+<ResourceDictionary.MergedDictionaries>
+                    <!-- Light Theme -->
+                    <ResourceDictionary Source="Metro/Light/Metro.MSControls.Core.Implicit.xaml" />
+                    <!--<ResourceDictionary Source="Metro/Light/Metro.MSControls.SDK.Implicit.xaml" />-->
+                    <!--<ResourceDictionary Source="Metro/Light/Metro.MSControls.Toolkit.Implicit.xaml" />-->
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+      
     </Window.Resources>
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
