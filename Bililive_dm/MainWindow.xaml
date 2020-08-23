@@ -27,8 +27,7 @@
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
                        VerticalAlignment="Center" Margin="4" />
-            <TextBox x:Name="RoomId" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="14.666"
-                     Width="80" />
+            <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666" MinWidth="80" />
             <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
 

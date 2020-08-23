@@ -193,7 +193,7 @@
     <value>遮蔽刷屏(α)</value>
   </data>
   <data name="LiveRoomAddr" xml:space="preserve">
-    <value>直播間地址: http://live.bilibili.com/</value>
+    <value>直播間地址: https://live.bilibili.com/</value>
   </data>
   <data name="MainWindow_b_Disconnected_正在自动重连___" xml:space="preserve">
     <value>正在自動重連...</value>
