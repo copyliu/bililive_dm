@@ -9,7 +9,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="600" Width="800">
+        Title="B站彈幕姬" Height="572" Width="842" FontSize="14.666" >
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
 
@@ -27,7 +27,7 @@
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
                        VerticalAlignment="Center" Margin="4" />
-            <TextBox x:Name="RoomId" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"
+            <TextBox x:Name="RoomId" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="14.666"
                      Width="80" />
             <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
@@ -45,7 +45,7 @@
                 </Style>
             </FrameworkElement.Resources>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text}" VerticalAlignment="Center" Margin="3" />
-            <TextBlock x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
+            <TextBlock  x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
                        VerticalAlignment="Center" />
             <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"  Checked="SideBar_Checked"
                       VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="9,0,0,0" />
@@ -63,7 +63,7 @@
             <TextBlock Text="{x:Static properties:Resources.ABout_Text}" VerticalAlignment="Center"/>
 
         </DockPanel>
-        <TabControl x:Name="TabControl">
+        <TabControl x:Name="TabControl" >
             <TabItem Header="{x:Static properties:Resources.TabItem_Header}">
                 <!--<TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />-->
@@ -88,7 +88,7 @@
 
             </TabItem>
 
-            <TabItem Header="{x:Static properties:Resources.RankTabItem_Header}">
+            <TabItem  Header="{x:Static properties:Resources.RankTabItem_Header}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
@@ -155,8 +155,8 @@
             <TabItem Header="{x:Static properties:Resources.TabItem_Header_Plugin}">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Margin="0 2" Orientation="Horizontal">
-                        <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_PluginDir}"></TextBlock>
-                        <Button Margin="5 0" Click="OpenPluginFolder_OnClick">打开插件目录</Button>
+                        <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_PluginDir}" VerticalAlignment="Center"></TextBlock>
+                        <Button Margin="5 0" Click="OpenPluginFolder_OnClick" Content="{x:Static properties:Resources.Btn_Text_OpenPluginDir}"></Button>
                     </StackPanel>
                     <DataGrid CanUserAddRows="False" x:Name="PluginGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Top" SelectionMode="Single" SelectionUnit="FullRow"
                   d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">

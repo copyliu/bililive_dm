@@ -495,4 +495,7 @@
   <data name="Interact_Content" xml:space="preserve">
     <value>喵喵</value>
   </data>
+  <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
+    <value>喵咪</value>
+  </data>
 </root>

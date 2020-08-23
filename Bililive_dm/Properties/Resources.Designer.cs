@@ -79,6 +79,15 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
+        ///   查找类似  的本地化字符串。
+        /// </summary>
+        public static string Btn_Text_OpenPluginDir {
+            get {
+                return ResourceManager.GetString("Btn_Text_OpenPluginDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 還原默認 的本地化字符串。
         /// </summary>
         public static string Button_Content_Default {
@@ -944,7 +953,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 彈幕模式使用熒幕 的本地化字符串。
         /// </summary>
         public static string ScreenSelecter {
             get {

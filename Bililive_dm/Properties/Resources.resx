@@ -502,4 +502,7 @@
   <data name="ScreenSelecter" xml:space="preserve">
     <value>彈幕模式使用熒幕</value>
   </data>
+  <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
+    <value>打開外掛程式資料夾</value>
+  </data>
 </root>
