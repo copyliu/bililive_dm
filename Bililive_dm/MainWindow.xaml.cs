@@ -25,6 +25,7 @@ using BiliDMLib;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Navigation;
+using System.Windows.Shell;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using Application = System.Windows.Application;
@@ -114,7 +115,19 @@ namespace Bililive_dm
           
             try
             {
-                this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
+                SyncJumpList();
+                string arg = Environment.CommandLine;
+                if (arg.Contains("RoomID="))
+                {
+                    int start = arg.LastIndexOf("RoomID=") + 7;
+                    int end = Math.Min(arg.IndexOf(' ', start), arg.IndexOf(',', start)) - 1;
+                    if (end == -2) end = arg.Length;
+                    this.RoomId.Text = arg.Substring(start, end - start);
+                }
+                else
+                {
+                    this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
+                }
             }
             catch
             {
@@ -136,7 +149,7 @@ namespace Bililive_dm
             var seconds = int.Parse(fullversion.Split('.')[3]);
             dt = dt.AddDays(dates);
             dt = dt.AddSeconds(seconds*2);
-            if (ApplicationDeployment.IsNetworkDeployed)
+            if (ApplicationDeployment.IsNetworkDeployed || Environment.CommandLine.Contains("RoomID="))
             {
                 Title += Properties.Resources.MainWindow_MainWindow____版本号__ +
                          ApplicationDeployment.CurrentDeployment.CurrentVersion;
@@ -601,6 +614,7 @@ namespace Bililive_dm
                     SendSSP(Properties.Resources.MainWindow_connbtn_Click_連接成功);
                     Ranking.Clear();
                     SaveRoomId(roomId);
+                    AddJumpListItem(roomId);
 
                     foreach (var dmPlugin in App.Plugins)
                     {
@@ -1579,6 +1593,65 @@ namespace Bililive_dm
            lg.Owner = this;
            lg.ShowDialog();
 
+        }
+
+        private void AddJumpListItem(int roomId)
+        {
+            try
+            {
+                JumpTask jumpTask = new JumpTask()
+                {
+                    ApplicationPath = Assembly.GetExecutingAssembly().Location,
+                    IconResourcePath = Assembly.GetExecutingAssembly().Location,
+                    IconResourceIndex = 1,
+                    Title = roomId.ToString(),
+                    Description = $"连接房间 {roomId}",
+                    CustomCategory = "最近房间",
+                    Arguments = $"RoomID={roomId}"
+                };
+
+                bool newJumpList = false;
+                JumpList jumpList = JumpList.GetJumpList(App.Current);
+                if (jumpList == null)
+                {
+                    // 设置新的 JumpList
+                    jumpList = new JumpList();
+                    newJumpList = true;
+                }
+                else
+                {
+                    // 搜索是否重复
+                    foreach (JumpTask task in jumpList.JumpItems)
+                    {
+                        if (task.Title == roomId.ToString()) return;
+                    }
+                }
+
+                while (jumpList.JumpItems.Count >= 10)
+                {
+                    jumpList.JumpItems.RemoveAt(0);
+                }
+
+                jumpList.JumpItems.Add(jumpTask);
+                if (newJumpList) JumpList.SetJumpList(App.Current, jumpList);
+                else jumpList.Apply();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void SyncJumpList()
+        {
+            JumpList jumpList = JumpList.GetJumpList(App.Current);
+            if (jumpList == null) return;
+            string path = Assembly.GetExecutingAssembly().Location;
+            foreach (JumpTask task in jumpList.JumpItems)
+            {
+                task.ApplicationPath = path;
+            }
+            jumpList.Apply();
         }
     }
 }
