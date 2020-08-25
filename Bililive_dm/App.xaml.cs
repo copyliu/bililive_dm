@@ -44,13 +44,13 @@ namespace Bililive_dm
             Thread.CurrentThread.CurrentCulture = culture;
         }
 
-        //static Uri Aero = new Uri("/PresentationFramework.Aero,Version=3.0.0.0,PublicKeyToken=31bf3856ad364e35;component/themes/aero.normalcolor.xaml", UriKind.RelativeOrAbsolute);
-        //protected override void OnStartup(StartupEventArgs e)
-        //{
-        //    base.OnStartup(e);
+        static readonly Uri SKIN = new Uri("/PresentationFramework.Luna,Version=4.0.0.0,PublicKeyToken=31bf3856ad364e35;component/Themes/Luna.NormalColor.xaml", UriKind.RelativeOrAbsolute);
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
 
-        //    Resources.MergedDictionaries.Add(new ResourceDictionary { Source = Aero });
-        //}
+            Resources.MergedDictionaries.Add(new ResourceDictionary { Source = SKIN });
+        }
 
         private void AddArchSpecificDirectory()
         {
