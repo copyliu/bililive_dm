@@ -44,12 +44,11 @@ namespace Bililive_dm
             Thread.CurrentThread.CurrentCulture = culture;
         }
 
-        static readonly Uri SKIN = new Uri("/PresentationFramework.Luna,Version=4.0.0.0,PublicKeyToken=31bf3856ad364e35;component/Themes/Luna.NormalColor.xaml", UriKind.RelativeOrAbsolute);
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            Resources.MergedDictionaries.Add(new ResourceDictionary { Source = SKIN });
+            Resources.MergedDictionaries.Add((ResourceDictionary)Resources["Default"]);
         }
 
         private void AddArchSpecificDirectory()

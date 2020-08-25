@@ -28,6 +28,5 @@
                  Margin="4" Grid.ColumnSpan="2" MouseDoubleClick="list_MouseDoubleClick"/>
         <Button Content="OK" Grid.ColumnSpan="1" Grid.Row="1" IsDefault="True" Click="Button_Click"/>
         <Button Content="Cancel" Grid.Column="1" Grid.Row="1" IsCancel="True"/>
-
     </Grid>
 </Window>
