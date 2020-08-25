@@ -1580,5 +1580,12 @@ namespace Bililive_dm
            lg.ShowDialog();
 
         }
+
+        private void Skin_Click(object sender, RoutedEventArgs e)
+        {
+            var result = new Selector().Select();
+            if (result == null) return;
+            Application.Current.Resources = result;
+        }
     }
 }

@@ -505,4 +505,10 @@
   <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
     <value>打開外掛程式資料夾</value>
   </data>
+  <data name="ChangeSkin" xml:space="preserve">
+    <value>更換主題</value>
+  </data>
+  <data name="SkinSelector" xml:space="preserve">
+    <value>主題選擇器</value>
+  </data>
 </root>
