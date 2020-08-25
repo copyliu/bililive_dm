@@ -79,7 +79,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似  的本地化字符串。
+        ///   查找类似 打開外掛程式資料夾 的本地化字符串。
         /// </summary>
         public static string Btn_Text_OpenPluginDir {
             get {
@@ -102,6 +102,15 @@ namespace Bililive_dm.Properties {
         public static string Button_Content_Text {
             get {
                 return ResourceManager.GetString("Button.Content.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 更換主題 的本地化字符串。
+        /// </summary>
+        public static string ChangeSkin {
+            get {
+                return ResourceManager.GetString("ChangeSkin", resourceCulture);
             }
         }
         
@@ -376,7 +385,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 直播間地址: http://live.bilibili.com/ 的本地化字符串。
+        ///   查找类似 直播間地址: https://live.bilibili.com/ 的本地化字符串。
         /// </summary>
         public static string LiveRoomAddr {
             get {
@@ -985,6 +994,15 @@ namespace Bililive_dm.Properties {
         public static string SideBar_Content {
             get {
                 return ResourceManager.GetString("SideBar.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 主題選擇器 的本地化字符串。
+        /// </summary>
+        public static string SkinSelector {
+            get {
+                return ResourceManager.GetString("SkinSelector", resourceCulture);
             }
         }
         

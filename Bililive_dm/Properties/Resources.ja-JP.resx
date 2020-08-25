@@ -498,4 +498,10 @@
   <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
     <value>喵咪</value>
   </data>
+  <data name="ChangeSkin" xml:space="preserve">
+    <value>喵喵喵喵</value>
+  </data>
+  <data name="SkinSelector" xml:space="preserve">
+    <value>喵喵喵喵喵</value>
+  </data>
 </root>

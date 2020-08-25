@@ -178,6 +178,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Selector.xaml.cs">
+      <DependentUpon>Selector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SessionItem.cs" />
     <Compile Include="SSTPProtocol.cs" />
     <Compile Include="StaticModel.cs" />
@@ -196,6 +199,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="LanguageSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Selector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
