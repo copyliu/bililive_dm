@@ -176,9 +176,6 @@
     <Compile Include="Selector.xaml.cs">
       <DependentUpon>Selector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Selector.xaml.cs">
-      <DependentUpon>Selector.xaml</DependentUpon>
-    </Compile>
     <Compile Include="SessionItem.cs" />
     <Compile Include="SSTPProtocol.cs" />
     <Compile Include="StaticModel.cs" />
