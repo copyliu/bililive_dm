@@ -1590,7 +1590,6 @@ namespace Bililive_dm
                 list.Add(new KeyValuePair<string, ResourceDictionary>("Classic", (ResourceDictionary)appRes["Classic"]));
             });
             if (result == null) return;
-            //Application.Current.Resources = result;
 
             appRes.MergedDictionaries[0] = result;
 

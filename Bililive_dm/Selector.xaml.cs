@@ -68,8 +68,6 @@ namespace Bililive_dm
 
         public static void UpdateProperty(DependencyObject o, Setter setter)
         {
-            //var dp = setter.Property;
-
             var data = setter.Value;
 
             if (data is MarkupExtension mx)
