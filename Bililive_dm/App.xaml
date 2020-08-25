@@ -10,7 +10,10 @@
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="/PresentationFramework.Classic,Version=0.0.0.0,PublicKeyToken=31bf3856ad364e35;component/Themes/Classic.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
-                <Style TargetType="Window">
+                <Style TargetType="local:MainWindow">
+                    <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
+                </Style>
+                <Style TargetType="local:Selector">
                     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
                 </Style>
             </ResourceDictionary>

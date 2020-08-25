@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,18 +35,22 @@ namespace Bililive_dm
             }));
         }
 
+        ResourceDictionary appRes { get; } = Application.Current.Resources;
+        Collection<ResourceDictionary> merged { get; }
         public Selector()
         {
+            merged = appRes.MergedDictionaries;
+
             AddTheme("Aero");
             AddTheme("Royale");
             AddTheme("Luna");
             AddTheme("Luna", "Homestead");
             AddTheme("Luna", "Metallic");
 
+            Themes.Add(new KeyValuePair<string, ResourceDictionary>("Classic", (ResourceDictionary)appRes["Classic"]));
+
             InitializeComponent();
         }
-
-        //public event Action<ResourceDictionary> PreviewTheme;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -53,29 +58,24 @@ namespace Bililive_dm
             Close();
         }
 
-        public ResourceDictionary Select(Action<List<KeyValuePair<string, ResourceDictionary>>> init = null)
+        public void Select()
         {
-            init?.Invoke(Themes);
-            if (!ShowDialog().GetValueOrDefault()) return null;
+            var last = merged[0];
 
-            return (ResourceDictionary)list.SelectedValue ?? new ResourceDictionary();
+            if (!ShowDialog().GetValueOrDefault())
+            {
+                merged[0] = last;
+            }
+        }
+
+        private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            merged[0] = (ResourceDictionary)list.SelectedValue ?? new ResourceDictionary();
         }
 
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Button_Click(sender, e);
-        }
-
-        public static void UpdateProperty(DependencyObject o, Setter setter)
-        {
-            var data = setter.Value;
-
-            if (data is MarkupExtension mx)
-            {
-                data = mx.ProvideValue(null);
-            }
-
-            o.SetValue(setter.Property, data);
         }
     }
 }

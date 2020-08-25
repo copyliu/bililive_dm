@@ -1576,19 +1576,7 @@ namespace Bililive_dm
 
         private void Skin_Click(object sender, RoutedEventArgs e)
         {
-            var appRes = Application.Current.Resources;
-            var result = new Selector().Select(list =>
-            {
-                list.Add(new KeyValuePair<string, ResourceDictionary>("Classic", (ResourceDictionary)appRes["Classic"]));
-            });
-            if (result == null) return;
-
-            appRes.MergedDictionaries[0] = result;
-
-            var ws = (Style)result[typeof(Window)];
-            var setter = ws?.Setters.OfType<Setter>().Where(item => item.Property == BackgroundProperty).SingleOrDefault();
-            if (setter == null) SetValue(BackgroundProperty, DependencyProperty.UnsetValue);
-            else Selector.UpdateProperty(this, setter);
+            new Selector().Select();
         }
     }
 }

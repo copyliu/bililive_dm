@@ -9,11 +9,6 @@
         mc:Ignorable="d"
         Title="{x:Static p:Resources.SkinSelector}" Height="240" Width="320">
     <Grid>
-        <Grid.Resources>
-            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                <Setter Property="Margin" Value="4"/>
-            </Style>
-        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
@@ -25,8 +20,8 @@
 
         <ListBox Name="list" ItemsSource="{Binding Themes}" 
                  DisplayMemberPath="Key" SelectedValuePath="Value"
-                 Margin="4" Grid.ColumnSpan="2" MouseDoubleClick="list_MouseDoubleClick"/>
-        <Button Content="OK" Grid.ColumnSpan="1" Grid.Row="1" IsDefault="True" Click="Button_Click"/>
-        <Button Content="Cancel" Grid.Column="1" Grid.Row="1" IsCancel="True"/>
+                 Margin="4" Grid.ColumnSpan="2" MouseDoubleClick="list_MouseDoubleClick" SelectionChanged="list_SelectionChanged"/>
+        <Button Margin="4" Grid.Row="1" Grid.ColumnSpan="1" Content="OK" IsDefault="True" Click="Button_Click"/>
+        <Button Margin="4" Grid.Row="1" Grid.Column="1" Content="Cancel" IsCancel="True"/>
     </Grid>
 </Window>
