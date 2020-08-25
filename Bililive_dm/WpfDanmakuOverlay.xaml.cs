@@ -37,6 +37,7 @@ namespace Bililive_dm
                 IntPtr hWnd = new WindowInteropHelper(this).Handle;
                 var exStyles = GetExtendedWindowStyles(hWnd);
                 SetExtendedWindowStyles(hWnd, exStyles | ExtendedWindowStyles.Transparent | ExtendedWindowStyles.ToolWindow);
+                SetMonitor(Store.FullScreenMonitor);
             };
             this.ShowInTaskbar = false;
             this.Topmost = true;
@@ -144,6 +145,7 @@ namespace Bililive_dm
             this.Top = r.Top;
             this.Left = r.Left;
             this.Width = r.Width;
+            
         }
 
         private void s_Completed(object sender, EventArgs e)
@@ -169,6 +171,12 @@ namespace Bililive_dm
         {
             WindowInteropHelper wndHelper = new WindowInteropHelper(this);
             SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WindowDisplayAffinity.ExcludeFromCapture : 0);
+
+
+            if (e.PropertyName == nameof(Store.FullScreenMonitor))
+            {
+                SetMonitor(Store.FullScreenMonitor);
+            }
             // ignore
         }
     }

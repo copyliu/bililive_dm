@@ -47,7 +47,6 @@
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\BilibiliDM_PluginFramework.XML</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
-
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -71,12 +70,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations">
-      <HintPath>..\packages\JetBrains.Annotations.9.1.1\lib\net20\JetBrains.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -111,8 +104,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-   
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PostBuildEvent>"$(SignToolPath)signtool.exe" sign  /tr  http://timestamp.comodoca.com /sha1 c5bd3c96c07a1cf62ec2a053e4e334685b727829  /as  /fd sha256 /td sha256  $(TargetDir)*.dll</PostBuildEvent>
   </PropertyGroup>
 </Project>

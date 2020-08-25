@@ -9,7 +9,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="572" Width="842" FontSize="14.666" >
+        Title="B站彈幕姬" Height="509" Width="842" FontSize="14.666" >
 
     <Window.Resources>
 

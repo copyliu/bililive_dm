@@ -217,6 +217,8 @@ namespace Bililive_dm
                     if (value == _fullScreenMonitor) return;
                     _fullScreenMonitor = value;
                 }
+
+                Store.FullScreenMonitor = _fullScreenMonitor;
                 OnPropertyChanged();
             }
         }

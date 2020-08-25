@@ -307,7 +307,6 @@ namespace Bililive_dm
             }
             settings.SaveConfig();
             settings.toStatic();
-            settings.PropertyChanged+=SettingsOnPropertyChanged;
 
             Loaded += MainWindow_Loaded;
             Log.Loaded += (sender, args) =>
@@ -318,14 +317,6 @@ namespace Bililive_dm
 
         }
 
-        private void SettingsOnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(settings.FullScreenMonitor))
-            {
-                fulloverlay?.SetMonitor(settings.FullScreenMonitor);
-                fulloverlay?.Show();
-            }
-        }
 
         private void HelpWebOnNavigated(object o, NavigationEventArgs navigationEventArgs)
         {
@@ -515,7 +506,7 @@ namespace Bililive_dm
                 fulloverlay = new WtfDanmakuWindow();
             else
                 fulloverlay = new WpfDanmakuOverlay();
-            fulloverlay.SetMonitor(settings.FullScreenMonitor);
+           
             settings.PropertyChanged += fulloverlay.OnPropertyChanged;
             fulloverlay.Show();
         }
@@ -881,11 +872,12 @@ namespace Bililive_dm
                     }
 
                     var logtext = string.Format(r, danmakuModel.UserName, text);
-                    logging(logtext);
+                    
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowInteract.IsChecked == true)
                         {
+                            logging(logtext);
                             AddDMText(danmakuModel.UserName, text, true);
                         }
                     }));
