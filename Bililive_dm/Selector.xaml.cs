@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -44,6 +45,8 @@ namespace Bililive_dm
             InitializeComponent();
         }
 
+        //public event Action<ResourceDictionary> PreviewTheme;
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
@@ -61,6 +64,20 @@ namespace Bililive_dm
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Button_Click(sender, e);
+        }
+
+        public static void UpdateProperty(DependencyObject o, Setter setter)
+        {
+            //var dp = setter.Property;
+
+            var data = setter.Value;
+
+            if (data is MarkupExtension mx)
+            {
+                data = mx.ProvideValue(null);
+            }
+
+            o.SetValue(setter.Property, data);
         }
     }
 }
