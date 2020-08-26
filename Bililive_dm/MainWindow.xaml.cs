@@ -83,9 +83,15 @@ namespace Bililive_dm
             }
         }
 
+        Collection<ResourceDictionary> merged { get; }
+
         public MainWindow()
         {
             InitializeComponent();
+
+            merged = Resources.MergedDictionaries;
+            merged.Add(new ResourceDictionary());
+
             Get45or451FromRegistry();
             if (!net461)
             {
@@ -1576,8 +1582,6 @@ namespace Bililive_dm
 
         private void Skin_Click(object sender, RoutedEventArgs e)
         {
-            var merged = Resources.MergedDictionaries;
-
             var selector = new Selector
             {
                 Owner = this,

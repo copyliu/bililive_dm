@@ -9,27 +9,17 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="509" Width="842" FontSize="14.666" >
+        Title="B站彈幕姬" Height="509" Width="842" FontSize="14.666">
     <Window.Resources>
-        <ResourceDictionary >
-            <ResourceDictionary.MergedDictionaries>
-                <!-- DON'T REMOVE -->
-                <ResourceDictionary/>
-            </ResourceDictionary.MergedDictionaries>
-            
-            <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
+        <ResourceDictionary>
+            <bililiveDm:PluginStatusConverter x:Key="Converter"/>
 
             <DataTemplate x:Key="LogTemplate" >
-
-
-
-                <TextBlock Text="{Binding }"
-                               TextWrapping="Wrap" Cursor="Hand" MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"/>
-
+                <TextBlock Text="{Binding}" TextWrapping="Wrap" Cursor="Hand" MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"/>
             </DataTemplate>
         </ResourceDictionary>
-
     </Window.Resources>
+
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
