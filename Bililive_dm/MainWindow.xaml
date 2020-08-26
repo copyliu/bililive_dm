@@ -10,11 +10,13 @@
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
         Title="B站彈幕姬" Height="509" Width="842" FontSize="14.666" >
-
     <Window.Resources>
-
-
         <ResourceDictionary >
+            <ResourceDictionary.MergedDictionaries>
+                <!-- DON'T REMOVE -->
+                <ResourceDictionary/>
+            </ResourceDictionary.MergedDictionaries>
+            
             <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
 
             <DataTemplate x:Key="LogTemplate" >

@@ -507,7 +507,7 @@ namespace Bililive_dm
                 fulloverlay = new WtfDanmakuWindow();
             else
                 fulloverlay = new WpfDanmakuOverlay();
-           
+
             settings.PropertyChanged += fulloverlay.OnPropertyChanged;
             fulloverlay.Show();
         }
@@ -873,7 +873,7 @@ namespace Bililive_dm
                     }
 
                     var logtext = string.Format(r, danmakuModel.UserName, text);
-                    
+
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowInteract.IsChecked == true)
@@ -1576,7 +1576,19 @@ namespace Bililive_dm
 
         private void Skin_Click(object sender, RoutedEventArgs e)
         {
-            new Selector().Select();
+            var merged = Resources.MergedDictionaries;
+
+            var selector = new Selector();
+            selector.PreviewTheme += skin =>
+            {
+                merged[0] = skin;
+            };
+
+            if(selector.Select() is ResourceDictionary result)
+            {
+                Application.Current.Resources.MergedDictionaries[0] = result;
+            }
+            merged[0] = new ResourceDictionary();
         }
     }
 }

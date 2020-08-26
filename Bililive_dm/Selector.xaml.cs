@@ -35,22 +35,21 @@ namespace Bililive_dm
             }));
         }
 
-        ResourceDictionary appRes { get; } = Application.Current.Resources;
-        Collection<ResourceDictionary> merged { get; }
         public Selector()
         {
-            merged = appRes.MergedDictionaries;
-
             AddTheme("Aero");
             AddTheme("Royale");
             AddTheme("Luna");
             AddTheme("Luna", "Homestead");
             AddTheme("Luna", "Metallic");
 
-            Themes.Add(new KeyValuePair<string, ResourceDictionary>("Classic", (ResourceDictionary)appRes["Classic"]));
+            Themes.Add(new KeyValuePair<string, ResourceDictionary>("Classic",
+                (ResourceDictionary)Application.Current.Resources["Classic"]));
 
             InitializeComponent();
         }
+        
+        public event Action<ResourceDictionary> PreviewTheme;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -58,19 +57,17 @@ namespace Bililive_dm
             Close();
         }
 
-        public void Select()
-        {
-            var last = merged[0];
+        ResourceDictionary selected => (ResourceDictionary)list.SelectedValue ?? new ResourceDictionary();
 
-            if (!ShowDialog().GetValueOrDefault())
-            {
-                merged[0] = last;
-            }
+        public ResourceDictionary Select()
+        {
+            if (!ShowDialog().GetValueOrDefault()) return null;
+            return selected;
         }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            merged[0] = (ResourceDictionary)list.SelectedValue ?? new ResourceDictionary();
+            PreviewTheme?.Invoke(selected);
         }
 
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
