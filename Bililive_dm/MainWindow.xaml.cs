@@ -87,10 +87,10 @@ namespace Bililive_dm
 
         public MainWindow()
         {
+            InitializeComponent();
+
             merged = Resources.MergedDictionaries;
             merged.Add(new ResourceDictionary());
-
-            InitializeComponent();
 
             Get45or451FromRegistry();
             if (!net461)
@@ -1602,7 +1602,8 @@ namespace Bililive_dm
 
             if (selector.Select() is ResourceDictionary result)
             {
-                App.Current.merged[0] = result;
+                Application.Current.Resources.MergedDictionaries[0] = result;
+                if (result == App.Current.AeroWin8) Skin.IsEnabled = false;
             }
             merged[0] = new ResourceDictionary();
         }

@@ -278,6 +278,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="Assets\PresentationTheme.Aero.dll.gz" />
+    <EmbeddedResource Include="Assets\PresentationTheme.Aero.Win8.dll.gz" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BilibiliDM_PluginFramework\BilibiliDM_PluginFramework.csproj">
@@ -318,9 +320,6 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.1</Version>
-    </PackageReference>
-    <PackageReference Include="PresentationTheme.Aero">
-      <Version>0.6.2</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

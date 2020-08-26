@@ -24,6 +24,7 @@ namespace Bililive_dm
     public partial class App: Application
     {
         internal Collection<ResourceDictionary> merged { get; private set; }
+        internal ResourceDictionary AeroWin8 { get; private set; }
 
         public App()
         {
@@ -92,6 +93,36 @@ namespace Bililive_dm
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            var ms = new MemoryStream();
+
+            AppDomain.CurrentDomain.AssemblyResolve += (_, args) =>
+            {
+                var name = new AssemblyName(args.Name);
+
+                switch (name.Name)
+                {
+                    case "PresentationTheme.Aero":
+                    case "PresentationTheme.Aero.Win8":
+                        break;
+                    default:
+                        return null;
+                }
+
+
+                ms.Position = 0;
+                using (var rs = Assembly.GetExecutingAssembly().GetManifestResourceStream($"Bililive_dm.Assets.{name.Name}.dll.gz"))
+                using (var zs = new GZipStream(rs, CompressionMode.Decompress))
+                    zs.CopyTo(ms);
+
+                var data = new byte[ms.Position];
+                ms.Position = 0;
+                ms.Read(data, 0, data.Length);
+                return Assembly.Load(data);
+            };
+
+            AeroWin8 = (ResourceDictionary)Resources["Win8"];
+
+
             merged = Resources.MergedDictionaries;
             merged.Add((ResourceDictionary)Resources["Default"]);
         }
