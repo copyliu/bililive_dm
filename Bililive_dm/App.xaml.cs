@@ -10,15 +10,21 @@ using System.Windows;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Threading;
-using BilibiliDM_PluginFramework;
+using System.Reflection;
+using System.Resources;
+using System.IO.Compression;
 
 namespace Bililive_dm
 {
+    using BilibiliDM_PluginFramework;
+
     /// <summary>
     /// App.xaml 的互動邏輯
     /// </summary>
     public partial class App: Application
     {
+        internal Collection<ResourceDictionary> merged { get; private set; }
+
         public App()
         {
 
@@ -44,12 +50,7 @@ namespace Bililive_dm
             Thread.CurrentThread.CurrentCulture = culture;
         }
 
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            Resources.MergedDictionaries.Add((ResourceDictionary)Resources["Default"]);
-        }
+        public static new App Current => (App)Application.Current;
 
         private void AddArchSpecificDirectory()
         {
@@ -88,5 +89,11 @@ namespace Bililive_dm
         }
 
         public static readonly ObservableCollection<DMPlugin> Plugins = new ObservableCollection<DMPlugin>();
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            merged = Resources.MergedDictionaries;
+            merged.Add((ResourceDictionary)Resources["Default"]);
+        }
     }
 }

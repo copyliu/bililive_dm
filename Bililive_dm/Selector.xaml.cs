@@ -19,15 +19,14 @@ namespace Bililive_dm
     /// <summary>
     /// Selector.xaml 的交互逻辑
     /// </summary>
-    public partial class Selector: Window
+    public partial class Selector: StyledWindow
     {
-        public List<KeyValuePair<string, ResourceDictionary>> Themes { get; } = new List<KeyValuePair<string, ResourceDictionary>>();
-
-        void AddTheme(string theme, string variant = "NormalColor")
+        static readonly List<KeyValuePair<string, ResourceDictionary>> STATIC = new List<KeyValuePair<string, ResourceDictionary>>();
+        static void addStaticTheme(string theme, string variant = "NormalColor", ResourceDictionary dict = null)
         {
-            variant = theme + "." + variant;
+            variant = string.IsNullOrWhiteSpace(variant) ? theme : theme + "." + variant;
 
-            Themes.Add(new KeyValuePair<string, ResourceDictionary>(variant, new ResourceDictionary
+            STATIC.Add(new KeyValuePair<string, ResourceDictionary>(variant, dict ?? new ResourceDictionary
             {
                 Source =
                 new Uri($"/PresentationFramework.{theme},Version=0.0.0.0,PublicKeyToken=31bf3856ad364e35;component/Themes/{variant}.xaml",
@@ -35,20 +34,23 @@ namespace Bililive_dm
             }));
         }
 
+        static Selector()
+        {
+            addStaticTheme("Aero");
+            addStaticTheme("Royale");
+            addStaticTheme("Luna", dict: (ResourceDictionary)Application.Current.Resources["Default"]);
+            addStaticTheme("Luna", "Homestead");
+            addStaticTheme("Luna", "Metallic");
+            addStaticTheme("Classic", null, (ResourceDictionary)Application.Current.Resources["Classic"]);
+        }
+
+        public List<KeyValuePair<string, ResourceDictionary>> Themes { get; }
         public Selector()
         {
-            AddTheme("Aero");
-            AddTheme("Royale");
-            AddTheme("Luna");
-            AddTheme("Luna", "Homestead");
-            AddTheme("Luna", "Metallic");
-
-            Themes.Add(new KeyValuePair<string, ResourceDictionary>("Classic",
-                (ResourceDictionary)Application.Current.Resources["Classic"]));
-
+            Themes = STATIC.ToList();
             InitializeComponent();
         }
-        
+
         public event Action<ResourceDictionary> PreviewTheme;
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -57,12 +59,12 @@ namespace Bililive_dm
             Close();
         }
 
-        ResourceDictionary selected => (ResourceDictionary)list.SelectedValue ?? new ResourceDictionary();
+        ResourceDictionary selected => (ResourceDictionary)list.SelectedValue;
 
         public ResourceDictionary Select()
         {
             if (!ShowDialog().GetValueOrDefault()) return null;
-            return selected;
+            return selected ?? new ResourceDictionary();
         }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,6 +75,12 @@ namespace Bililive_dm
         private void list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Button_Click(sender, e);
+        }
+
+        private void list_Loaded(object sender, RoutedEventArgs e)
+        {
+            var li = (UIElement)list.ItemContainerGenerator.ContainerFromItem(list.SelectedItem);
+            li?.Focus();
         }
     }
 }

@@ -42,7 +42,7 @@ namespace Bililive_dm
     /// <summary>
     ///     MainWindow.xaml 的互動邏輯
     /// </summary>
-    public partial class MainWindow: Window
+    public partial class MainWindow: StyledWindow
     {
         private const int _maxCapacity = 100;
         private readonly Queue<DanmakuModel> _danmakuQueue = new Queue<DanmakuModel>();
@@ -1586,15 +1586,23 @@ namespace Bililive_dm
             {
                 Owner = this,
                 WindowStyle = WindowStyle.ToolWindow,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner,
             };
+            var curr = App.Current.merged[0];
+            var themes = selector.Themes;
+            var candidates = themes.Where(item => item.Value == curr);
+            var selected = candidates.SingleOrDefault();
+            selector.list.SelectedItem = selected;
+
             selector.PreviewTheme += skin =>
             {
+                if (skin == null) return;
                 merged[0] = skin;
             };
 
             if (selector.Select() is ResourceDictionary result)
             {
-                Application.Current.Resources.MergedDictionaries[0] = result;
+                App.Current.merged[0] = result;
             }
             merged[0] = new ResourceDictionary();
         }

@@ -183,6 +183,7 @@
     <Compile Include="StoreModel.cs" />
     <Compile Include="Properties\USER32.cs" />
     <Compile Include="Properties\WINAPI.cs" />
+    <Compile Include="StyledWindow.cs" />
     <Compile Include="WtfDanmakuWindow.cs">
       <SubType>Form</SubType>
     </Compile>
