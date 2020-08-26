@@ -1578,13 +1578,17 @@ namespace Bililive_dm
         {
             var merged = Resources.MergedDictionaries;
 
-            var selector = new Selector();
+            var selector = new Selector
+            {
+                Owner = this,
+                WindowStyle = WindowStyle.ToolWindow,
+            };
             selector.PreviewTheme += skin =>
             {
                 merged[0] = skin;
             };
 
-            if(selector.Select() is ResourceDictionary result)
+            if (selector.Select() is ResourceDictionary result)
             {
                 Application.Current.Resources.MergedDictionaries[0] = result;
             }
