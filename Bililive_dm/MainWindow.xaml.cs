@@ -87,10 +87,10 @@ namespace Bililive_dm
 
         public MainWindow()
         {
-            InitializeComponent();
-
             merged = Resources.MergedDictionaries;
             merged.Add(new ResourceDictionary());
+
+            InitializeComponent();
 
             Get45or451FromRegistry();
             if (!net461)
