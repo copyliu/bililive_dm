@@ -11,8 +11,7 @@ namespace Bililive_dm
     {
         public StyledWindow()
         {
-            var drmx = new DynamicResourceExtension(typeof(Window));
-            SetValue(StyleProperty, drmx.ProvideValue(null));
+            SetResourceReference(StyleProperty, typeof(Window));
         }
     }
 }
