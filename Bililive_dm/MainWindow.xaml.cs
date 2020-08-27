@@ -1607,8 +1607,10 @@ namespace Bililive_dm
                 if (result != App.Current.AeroWin8) return;
 
                 Skin.Click -= Skin_Click;
+
                 Skin.ToolTip = "既然被你發現了，就不能輕易讓你離開了！";
-                Skin.ToolTipOpening += delegate { Skin.IsEnabled = false; };
+                ToolTipService.SetShowOnDisabled(Skin, true);
+                Skin.IsEnabled = false;
             }
             merged[0] = new ResourceDictionary();
         }

@@ -80,7 +80,7 @@ namespace Bililive_dm
         private void list_Loaded(object sender, RoutedEventArgs e)
         {
             var li = (UIElement)list.ItemContainerGenerator.ContainerFromItem(list.SelectedItem);
-            li?.Focus();
+            li.Focus();
         }
     }
 }
