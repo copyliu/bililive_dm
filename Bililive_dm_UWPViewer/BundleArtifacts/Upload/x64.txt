@@ -1,6 +1,0 @@
-MainPackage=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\bin\x64\Release\Upload\Bililive_dm_UWPViewer_1.0.9.0_x64.msix
-SymbolPackage=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\bin\x64\Release\Upload\Bililive_dm_UWPViewer_1.0.9.0\Bililive_dm_UWPViewer_1.0.9.0_x64.appxsym
-ResourcePack=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\bin\x64\Release\Upload\Bililive_dm_UWPViewer_1.0.9.0_scale-100.msix
-ResourcePack=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\bin\x64\Release\Upload\Bililive_dm_UWPViewer_1.0.9.0_scale-125.msix
-ResourcePack=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\bin\x64\Release\Upload\Bililive_dm_UWPViewer_1.0.9.0_scale-150.msix
-ResourcePack=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\bin\x64\Release\Upload\Bililive_dm_UWPViewer_1.0.9.0_scale-400.msix
