@@ -25,6 +25,11 @@ namespace Bililive_dm_UWPViewer
         public MainPage()
         {
             this.InitializeComponent();
+            this.Widget1.modellist.Add(new Model()
+            {
+                User = "提示",
+                Comment = "建议在XBbo游戏工具条 (快捷键 Win+G ) 的小工具菜单中启动"
+            });
         }
     }
 }

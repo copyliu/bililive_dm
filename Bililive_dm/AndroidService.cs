@@ -22,10 +22,10 @@ namespace Bililive_dm
         NamedPipeServerStream[] pipeServers=new NamedPipeServerStream[MAX_THREAD];
         public MobileService()
         {
-            this.PluginDesc = "这是流氓插件, 用来和题词版联动";
+            this.PluginDesc = "这是流氓插件, 用来和提词版联动";
             this.PluginAuth = "CopyLiu";
             this.PluginCont = "copyliu@gmail.com";
-            this.PluginName = "题词版服务端";
+            this.PluginName = "提词版服务端";
             this.PluginVer = "⑨";
             this.ReceivedDanmaku += B_ReceivedDanmaku;
             this.Connected+=OnConnected;
@@ -116,32 +116,35 @@ namespace Bililive_dm
                     PipeAccessRights.FullControl, AccessControlType.Allow));
                 ps.AddAccessRule(new PipeAccessRule(new SecurityIdentifier("S-1-15-2-4214749242-2175026965-4132357855-2536272452-2097044253-3453070321-328922716"),
                     PipeAccessRights.FullControl, AccessControlType.Allow));
-                var pipeServer =
+                using (var pipeServer =
                     new NamedPipeServerStream(@"BiliLive_DM_PIPE", PipeDirection.Out, MAX_THREAD,
-                        PipeTransmissionMode.Message, PipeOptions.None, 4096, 4096, ps);
-
-                lock (pipeServers)
+                        PipeTransmissionMode.Message, PipeOptions.None, 4096, 4096, ps))
                 {
-                    pipeServers[i] = pipeServer;
-                }
 
-                await pipeServer.WaitForConnectionAsync();
-                try
-                {
-                    while (pipeServer.IsConnected)
+                    lock (pipeServers)
                     {
-                        await Task.Delay(TimeSpan.FromSeconds(1));
+                        pipeServers[i] = pipeServer;
+                    }
+
+                    await pipeServer.WaitForConnectionAsync();
+                    try
+                    {
+                        while (pipeServer.IsConnected)
+                        {
+                            await Task.Delay(TimeSpan.FromSeconds(1));
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        if (pipeServer.IsConnected)
+                        {
+                            pipeServer.Close();
+
+                        }
                     }
                 }
-                catch (Exception e)
-                {
-                    if (pipeServer.IsConnected)
-                    {
-                        pipeServer.Close();
-
-                    }
-                }
-
+               
+                
 
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }

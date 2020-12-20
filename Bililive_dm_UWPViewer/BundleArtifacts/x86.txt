@@ -1,2 +1,2 @@
-MainPackage=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\bin\x86\Release\Bililive_dm_UWPViewer_1.0.5.0_x86.msix
-SymbolPackage=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\obj\x86\Release\Symbols\Bililive_dm_UWPViewer_1.0.5.0_x86.appxsym
+MainPackage=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\bin\x86\Release\Bililive_dm_UWPViewer_1.0.7.0_x86.msix
+SymbolPackage=L:\src\git\bililive_dm\Bililive_dm_UWPViewer\obj\x86\Release\Symbols\Bililive_dm_UWPViewer_1.0.7.0_x86.appxsym

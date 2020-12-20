@@ -36,7 +36,7 @@ namespace Bililive_dm_UWPViewer
     /// </summary>
     public sealed partial class Widget1 : Page
     {
-      public ObservableCollection<Model> modellist=new ObservableCollection<Model>();
+      public ObservableCollection<Model> modellist=new();
         public Widget1()
         {
             this.InitializeComponent();
@@ -52,12 +52,30 @@ namespace Bililive_dm_UWPViewer
              //    new NamedPipeServerStream(@"LOCAL\\BiliLive_DM_PIPE", PipeDirection.In, 10,
              //        PipeTransmissionMode.Message, PipeOptions.None, 4096, 4096);
              var _ = ConnectTask();
+             // var __ = TestTask();
         }
 
+        async Task TestTask()
+        {
+            while (true)
+            {
+                await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    AddLine(new Model() { User = "test", Comment = DateTime.Now + "" });
+                });
+               
+                await Task.Delay(TimeSpan.FromSeconds(0.01));
+            }
+        }
 
         void AddLine(Model m)
         {
             modellist.Add(m);
+            if (modellist.Count > 50)
+            {
+                modellist.RemoveAt(0);
+            }
+            this.ListView.ScrollIntoView(m);
         }
         
         async Task ConnectTask()

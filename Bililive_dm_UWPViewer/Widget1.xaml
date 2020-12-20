@@ -15,6 +15,11 @@
                     <local:Comment DataContext="{Binding}"></local:Comment>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel ItemsUpdatingScrollMode="KeepLastItemInView" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
         </ListView>
        
     </Grid>

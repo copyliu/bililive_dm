@@ -11,7 +11,7 @@
   <Identity
     Name="38862CopyLiu.B"
     Publisher="CN=B2B24A43-5C35-415F-9661-54323D87303A"
-    Version="1.0.5.0" />
+    Version="1.0.7.0" />
 
   <mp:PhoneIdentity PhoneProductId="84cc4a5d-7a4c-496f-9f90-ae377b45911a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
@@ -37,7 +37,7 @@
         DisplayName="B站弹幕姬提词板"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="B站彈幕姬題詞板, 需要配合B站彈幕姬本體使用"
+        Description="B站弹幕姬提词板, 需要配合B站弹幕姬本体使用"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
@@ -47,8 +47,8 @@
         <uap3:Extension Category="windows.appExtension">
           <uap3:AppExtension Name="microsoft.gameBarUIExtension"
                              Id="BiliLiveDMUWP"
-                             DisplayName="B站彈幕姬題詞板"
-                             Description="B站彈幕姬兇箱插件, 你需要啟動彈幕姬本體並連接直播間"
+                             DisplayName="B站弹幕姬提词板"
+                             Description="B站弹幕姬凶箱插件, 你需要启动弹幕姬并连接到直播间"
                              PublicFolder="GameBar">
             <uap3:Properties>
               <GameBarWidget Type="Standard">
