@@ -161,3 +161,4 @@ packages/
 *.opendb
 Bililive_dm.VC.db
 .vs/
+BundleArtifacts
