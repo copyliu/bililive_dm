@@ -16,6 +16,10 @@ namespace Bililive_dm
         {
             System.Diagnostics.Process.Start("https://github.com/copyliu/bililive_dm"); ;
         }
+        public void OpenUWPStore()
+        {
+            System.Diagnostics.Process.Start("https://www.microsoft.com/store/apps/9PBVHQH1P2BV"); ;
+        }
 
     }
 }
