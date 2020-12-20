@@ -137,6 +137,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BuildInfo.cs" />
     <Compile Include="Comment.xaml.cs">
       <DependentUpon>Comment.xaml</DependentUpon>
     </Compile>

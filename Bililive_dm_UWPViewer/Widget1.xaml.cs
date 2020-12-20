@@ -11,6 +11,7 @@ using System.Security.Principal;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -32,13 +33,15 @@ namespace Bililive_dm_UWPViewer
         public string User { get; set; }
         public string Comment { get; set; }
     }
-    public static class ControlExtensions
+
+    public enum Build
     {
-        public static void DoubleBuffered(this Control control, bool enable)
-        {
-            var doubleBufferPropertyInfo = control.GetType().GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-            doubleBufferPropertyInfo?.SetValue(control, enable, null);
-        }
+        Unknown = 0,
+        Threshold1 = 1507,   // 10240
+        Threshold2 = 1511,   // 10586
+        Anniversary = 1607,  // 14393 Redstone 1
+        Creators = 1703,     // 15063 Redstone 2
+        FallCreators = 1709  // 16299 Redstone 3
     }
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -93,13 +96,24 @@ namespace Bililive_dm_UWPViewer
                     SetColor();
                 });
         }
+        public static string GetAppVersion()
+        {
+            Package package = Package.Current;
+            PackageId packageId = package.Id;
+            PackageVersion version = packageId.Version;
 
+            return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+        }
         public Widget1()
         {
             this.InitializeComponent();
 
-            this.ListView.DoubleBuffered(true);
             this.ListView.ItemsSource = modellist;
+            modellist.Add(new Model()
+            {
+                Comment = $"提词板版本号 {GetAppVersion()}",
+                User = "提示"
+            });
             modellist.Add(new Model()
             {
                 Comment = "請打開彈幕姬本體並連接到直播間",
