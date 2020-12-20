@@ -24,7 +24,7 @@ namespace Bililive_dm_UWPViewer
     sealed partial class App : Application
     {
         private XboxGameBarWidget widget1 = null;
-
+        public static ThemeSetting ThemeSetting=new ThemeSetting();
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。
@@ -32,6 +32,9 @@ namespace Bililive_dm_UWPViewer
         public App()
         {
             this.InitializeComponent();
+            ThemeSetting.Theme = Application.Current.RequestedTheme == ApplicationTheme.Dark
+                ? ElementTheme.Dark
+                : ElementTheme.Light;
             this.Suspending += OnSuspending;
         }
 
@@ -150,7 +153,7 @@ namespace Bililive_dm_UWPViewer
                         widgetArgs,
                         Window.Current.CoreWindow,
                         rootFrame);
-                    rootFrame.Navigate(typeof(Widget1));
+                    rootFrame.Navigate(typeof(Widget1),widget1);
 
                     Window.Current.Closed += Widget1Window_Closed;
 

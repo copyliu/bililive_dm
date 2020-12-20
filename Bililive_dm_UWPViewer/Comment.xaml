@@ -17,8 +17,8 @@
                 <Paragraph>
                     
                     <Run Foreground="{ThemeResource SystemControlHighlightListAccentHighBrush}" x:Name="UserName" Text="{Binding User}"></Run>
-                <Run Foreground="{ThemeResource SystemControlHighlightBaseHighBrush}">:</Run>
-                <Run Foreground="{ThemeResource SystemControlHighlightBaseHighBrush}" x:Name="Text" Text="{Binding Comment}"></Run>
+                <Run x:Name="r1">:</Run>
+                <Run x:Name="Text" Text="{Binding Comment}"></Run>
                 </Paragraph>
           
         </RichTextBlock>

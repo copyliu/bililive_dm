@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -19,10 +20,26 @@ namespace Bililive_dm_UWPViewer
 {
     public sealed partial class Comment : UserControl
     {
-    
+    public Brush texBrush { get; set; }
         public Comment()
         {
             this.InitializeComponent();
+            App.ThemeSetting.PropertyChanged+=ThemeSettingOnPropertyChanged;
+            // SolidColorBrush brush = (SolidColorBrush)this.Resources["RunForeground1"];
+            this.r1.Foreground = App.ThemeSetting.TextBrush;
+            this.Text.Foreground = App.ThemeSetting.TextBrush;
+
+        }
+
+        private void ThemeSettingOnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ThemeSetting.Theme))
+            {
+                
+                this.r1.Foreground=App.ThemeSetting.TextBrush;
+                this.Text.Foreground = App.ThemeSetting.TextBrush;
+            }
         }
     }
 }
+
