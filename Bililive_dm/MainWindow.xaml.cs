@@ -706,14 +706,19 @@ namespace Bililive_dm
             {
                 case MsgTypeEnum.Comment:
                     logging(
-                        string.Format(Properties.Resources.MainWindow_ProcDanmaku_收到彈幕__0__1__2__說___3_, (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : ""), (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : ""), danmakuModel.UserName, danmakuModel.CommentText));
+                        string.Format(Properties.Resources.MainWindow_ProcDanmaku_收到彈幕__0__1__2__說___3_,
+                            (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : ""),
+                            (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : ""),
+                            danmakuModel.UserName, danmakuModel.CommentText));
 
                     AddDMText(
-                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") + (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
+                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") +
+                        (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName,
                         danmakuModel.CommentText);
                     SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
-                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") + (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
+                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") +
+                        (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName,
                         danmakuModel.CommentText));
 
@@ -721,14 +726,20 @@ namespace Bililive_dm
                 case MsgTypeEnum.SuperChat:
                 {
                     logging(
-                        string.Format(Properties.Resources.SuperChatLogName, (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : ""), (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : ""), danmakuModel.UserName, danmakuModel.CommentText));
+                        string.Format(Properties.Resources.SuperChatLogName,
+                            (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : ""),
+                            (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : ""),
+                            danmakuModel.UserName, danmakuModel.CommentText));
 
                     AddDMText(
-                        Properties.Resources.MainWindow_ProcDanmaku____SuperChat___ + (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") + (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
+                        Properties.Resources.MainWindow_ProcDanmaku____SuperChat___ +
+                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") +
+                        (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName + " ￥:" + danmakuModel.Price.ToString("N2"),
                         danmakuModel.CommentText, keeptime: danmakuModel.SCKeepTime, warn: true);
                     SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
-                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") + (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
+                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") +
+                        (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName,
                         danmakuModel.CommentText));
 
@@ -754,6 +765,7 @@ namespace Bililive_dm
                             })));
                         }
                     }
+
                     break;
                 case MsgTypeEnum.GiftSend:
                 {
@@ -785,13 +797,16 @@ namespace Bililive_dm
                                 }
                             }));
                         }
-                        logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_, danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount));
+
+                        logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_,
+                            danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount));
                         Dispatcher.BeginInvoke(new Action(() =>
                         {
                             if (ShowItem.IsChecked == true)
                             {
                                 AddDMText(Properties.Resources.MainWindow_ProcDanmaku_收到道具,
-                                    string.Format(Properties.Resources.MainWindow_ProcDanmaku__0__赠送的___1__x__2_, danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount), true);
+                                    string.Format(Properties.Resources.MainWindow_ProcDanmaku__0__赠送的___1__x__2_,
+                                        danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount), true);
                             }
                         }));
                         break;
@@ -799,26 +814,31 @@ namespace Bililive_dm
                 }
                 case MsgTypeEnum.GuardBuy:
                 {
-                    logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_, danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount));
+                    logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_,
+                        danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount));
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowItem.IsChecked == true)
                         {
                             AddDMText(Properties.Resources.MainWindow_ProcDanmaku_上船,
-                                string.Format(Properties.Resources.MainWindow_ProcDanmaku__0__购买了__1__x__2_, danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount), true);
+                                string.Format(Properties.Resources.MainWindow_ProcDanmaku__0__购买了__1__x__2_,
+                                    danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount), true);
                         }
                     }));
                     break;
                 }
                 case MsgTypeEnum.Welcome:
                 {
-                    logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间, (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku_和管理 : ""), danmakuModel.UserName));
+                    logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间,
+                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku_和管理 : ""),
+                        danmakuModel.UserName));
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowItem.IsChecked == true)
                         {
                             AddDMText(
-                                string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎老爷_0_, (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku_和管理 : "")),
+                                string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎老爷_0_,
+                                    (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku_和管理 : "")),
                                 danmakuModel.UserName + Properties.Resources.MainWindow_ProcDanmaku__进入直播间, true);
                         }
                     }));
@@ -840,13 +860,16 @@ namespace Bililive_dm
                             guard_text = Properties.Resources.MainWindow_ProcDanmaku_舰长;
                             break;
                     }
+
                     logging(
-                        string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0____1__2_, guard_text, danmakuModel.UserName, Properties.Resources.MainWindow_ProcDanmaku__进入直播间));
+                        string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0____1__2_, guard_text,
+                            danmakuModel.UserName, Properties.Resources.MainWindow_ProcDanmaku__进入直播间));
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowItem.IsChecked == true)
                         {
-                            AddDMText(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0_, guard_text), danmakuModel.UserName + Properties.Resources.MainWindow_ProcDanmaku__进入直播间, true);
+                            AddDMText(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0_, guard_text),
+                                danmakuModel.UserName + Properties.Resources.MainWindow_ProcDanmaku__进入直播间, true);
                         }
                     }));
                     break;
@@ -892,10 +915,17 @@ namespace Bililive_dm
                 }
                 case MsgTypeEnum.Warning:
                 {
-                    AddDMText("超管警告", danmakuModel.CommentText, false, false, null, true);
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        logging(Properties.Resources.MainWindow_ProcDanmaku_超管警告 + ":" + danmakuModel.CommentText);
+
+                        AddDMText(Properties.Resources.MainWindow_ProcDanmaku_超管警告, danmakuModel.CommentText, false,
+                            false, null, true);
+                    }));
                     break;
                 }
             }
+
             if (rawoutput_mode)
             {
                 logging(danmakuModel.RawDataJToken.ToString());

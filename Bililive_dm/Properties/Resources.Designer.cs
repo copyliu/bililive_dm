@@ -872,6 +872,15 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
+        ///   查找类似 超管警告 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku_超管警告 {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_超管警告", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 彈幕姬測試 的本地化字符串。
         /// </summary>
         public static string MainWindow_Test_OnClick_彈幕姬測試 {

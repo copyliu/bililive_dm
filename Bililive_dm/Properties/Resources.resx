@@ -511,4 +511,7 @@
   <data name="SkinSelector" xml:space="preserve">
     <value>主題選擇器</value>
   </data>
+  <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
+    <value>超管警告</value>
+  </data>
 </root>
