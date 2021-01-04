@@ -890,6 +890,11 @@ namespace Bililive_dm
                     }));
                     break;
                 }
+                case MsgTypeEnum.Warning:
+                {
+                    AddDMText("超管警告", danmakuModel.CommentText, false, false, null, true);
+                    break;
+                }
             }
             if (rawoutput_mode)
             {
@@ -1028,7 +1033,7 @@ namespace Bililive_dm
             }
         }
 
-        public void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false, int? keeptime = null)
+        public void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false, int? keeptime = null, bool red=false)
         {
             if (!showerror_enabled && warn)
             {
@@ -1039,8 +1044,8 @@ namespace Bililive_dm
             {
                 if (SideBar.IsChecked == true)
                 {
-                    var c = new DanmakuTextControl(keeptime ?? 0);
-
+                    var c = new DanmakuTextControl(keeptime ?? 0,red);
+                    
                     c.UserName.Text = user;
                     if (warn)
                     {
@@ -1068,8 +1073,7 @@ namespace Bililive_dm
         {
             var s = sender as ClockGroup;
             if (s == null) return;
-            var c = Storyboard.GetTarget(s.Children[2].Timeline) as DanmakuTextControl;
-            if (c != null)
+            if (Storyboard.GetTarget(s.Children[2].Timeline) is DanmakuTextControl c)
             {
                 overlay.LayoutRoot.Children.Remove(c);
             }

@@ -63,7 +63,11 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 观众互动信息
         /// </summary>
-        Interact
+        Interact,
+        /// <summary>
+        /// 超管警告
+        /// </summary>
+        Warning
 
     }
     /// <summary>
@@ -391,7 +395,20 @@ namespace BilibiliDM_PluginFramework
                             InteractType = (InteractTypeEnum) obj["data"]["msg_type"].ToObject<int>();
                             break;
                         }
-                        default:
+                        case "WARNING":
+                        {
+                            MsgType = MsgTypeEnum.Warning;
+                            CommentText = obj["msg"]?.ToString();
+
+                            break;
+                                }
+                        case "CUT_OFF":
+                        {
+                            MsgType = MsgTypeEnum.LiveEnd;
+                            CommentText = obj["msg"]?.ToString();
+                            break;
+                        }
+                            default:
                         {
                             if (cmd.StartsWith("DANMU_MSG")) // "高考"fix
                             {

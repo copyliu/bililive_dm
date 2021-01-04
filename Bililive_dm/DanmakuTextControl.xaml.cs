@@ -21,10 +21,15 @@ namespace Bililive_dm
     {
         private readonly int _addtime;
 
-        public DanmakuTextControl(int addtime=0)
+        public DanmakuTextControl(int addtime=0,bool warning=false)
         {
             _addtime = addtime;
             this.InitializeComponent();
+            if (warning)
+            {
+                this.LayoutRoot.Background=Brushes.Red;
+                
+            }
             var sb = (Storyboard)this.Resources["Storyboard1"];
             Storyboard.SetTarget(sb.Children[2], this);
 

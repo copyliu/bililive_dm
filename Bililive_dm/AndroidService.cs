@@ -46,7 +46,7 @@ namespace Bililive_dm
                 {
                     var obj =
                         JObject.FromObject(new
-                            { User = "提示", Comment = $"當前氣人值:{e.UserCount}" });
+                            { User = "提示", Comment = $"當前氣人值:{e.UserCount}", UserCount = e.UserCount });
                     SendMsg(pipeServer, obj);
 
                 }
