@@ -25,7 +25,7 @@
             <Setter Property="ItemContainerTransitions">
                 <Setter.Value>
                     <TransitionCollection>
-                        
+
                         <ContentThemeTransition/>
                         <ReorderThemeTransition/>
                     </TransitionCollection>
@@ -53,7 +53,11 @@
     </Page.Resources>
 
     <Grid   x:Name="rootGrid">
-        <ListView Style="{StaticResource ListViewStyle1}" x:Name="ListView"  d:DataContext="{d:DesignInstance local:Model}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListView Style="{StaticResource ListViewStyle1}" x:Name="ListView"  d:DataContext="{d:DesignInstance local:Model}" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <local:Comment DataContext="{Binding}"></local:Comment>
@@ -65,6 +69,7 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-       
+        <TextBlock Padding="10" HorizontalAlignment="Stretch"  FontSize="18.667" Text="當前氣人值 : N/A" TextWrapping="Wrap" VerticalAlignment="Center" x:Name="Tb" />
+
     </Grid>
 </Page>

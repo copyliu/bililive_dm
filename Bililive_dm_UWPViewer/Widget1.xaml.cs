@@ -32,6 +32,7 @@ namespace Bililive_dm_UWPViewer
     {
         public string User { get; set; }
         public string Comment { get; set; }
+        public uint? UserCount { get; set; }
     }
 
     public enum Build
@@ -81,7 +82,8 @@ namespace Bililive_dm_UWPViewer
             var color = new SolidColorBrush(App.ThemeSetting.widgetBackgroundBrush.Color);
             color.Opacity = this.requestedOpacity;
             rootGrid.Background = color;
-
+            Tb.Foreground= App.ThemeSetting.TextBrush;
+            
 
 
         }
@@ -175,7 +177,17 @@ namespace Bililive_dm_UWPViewer
                             });
                             await foreach (var m in GetList(pipeClient))
                             {
-                                await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { AddLine(m); });
+                                if (m.UserCount.HasValue)
+                                {
+                                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                                    {
+                                        this.Tb.Text = $"當前氣人值 : {m.UserCount}";
+                                    });
+                                }
+                                else
+                                {
+                                    await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => { AddLine(m); });
+                                }
                             }
                             await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                             {
