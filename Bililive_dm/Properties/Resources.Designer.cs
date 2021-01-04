@@ -47,8 +47,8 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性
-        ///   重写当前线程的 CurrentUICulture 属性。
+        ///   重写当前线程的 CurrentUICulture 属性，对
+        ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -61,7 +61,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 非B站出品 ©2014-2020 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com 的本地化字符串。
+        ///   查找类似 非B站出品 ©2014-2021 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com 的本地化字符串。
         /// </summary>
         public static string ABout_Text {
             get {
