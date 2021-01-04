@@ -14,12 +14,13 @@ using Newtonsoft.Json.Linq;
 
 namespace Bililive_dm
 {
-    public sealed class MobileService:DMPlugin
+    public sealed class MobileService : DMPlugin
     {
-     
+
         private static int MAX_THREAD = 4;
-        Task[] Tasks=new Task[MAX_THREAD];
-        NamedPipeServerStream[] pipeServers=new NamedPipeServerStream[MAX_THREAD];
+        Task[] Tasks = new Task[MAX_THREAD];
+        NamedPipeServerStream[] pipeServers = new NamedPipeServerStream[MAX_THREAD];
+
         public MobileService()
         {
             this.PluginDesc = "这是流氓插件, 用来和提词版联动";
@@ -28,9 +29,9 @@ namespace Bililive_dm
             this.PluginName = "提词版服务端";
             this.PluginVer = "⑨";
             this.ReceivedDanmaku += B_ReceivedDanmaku;
-            this.Connected+=OnConnected;
-            this.Disconnected+=OnDisconnected;
-            this.ReceivedRoomCount+=OnReceivedRoomCount;
+            this.Connected += OnConnected;
+            this.Disconnected += OnDisconnected;
+            this.ReceivedRoomCount += OnReceivedRoomCount;
             for (int i = 0; i < MAX_THREAD; i++)
             {
                 Tasks[i] = ServerTask(i);
@@ -46,7 +47,7 @@ namespace Bililive_dm
                 {
                     var obj =
                         JObject.FromObject(new
-                            { User = "提示", Comment = $"當前氣人值:{e.UserCount}", UserCount = e.UserCount });
+                            {User = "提示", Comment = $"當前氣人值:{e.UserCount}", UserCount = e.UserCount});
                     SendMsg(pipeServer, obj);
 
                 }
@@ -62,7 +63,7 @@ namespace Bililive_dm
                 {
                     var obj =
                         JObject.FromObject(new
-                            { User = "提示", Comment = $"連接已斷開" });
+                            {User = "提示", Comment = $"連接已斷開"});
                     SendMsg(pipeServer, obj);
 
                 }
@@ -78,9 +79,9 @@ namespace Bililive_dm
                 {
                     var obj =
                         JObject.FromObject(new
-                            { User = "提示", Comment = $"房間號 {e.roomid} 連接成功"});
-                    SendMsg(pipeServer,obj);
-                
+                            {User = "提示", Comment = $"房間號 {e.roomid} 連接成功"});
+                    SendMsg(pipeServer, obj);
+
                 }
             }
         }
@@ -89,7 +90,7 @@ namespace Bililive_dm
         {
             base.Start();
 
-            
+
         }
 
         public override void Stop()
@@ -114,7 +115,9 @@ namespace Bililive_dm
                 PipeSecurity ps = new PipeSecurity();
                 ps.AddAccessRule(new PipeAccessRule(new SecurityIdentifier(WellKnownSidType.WorldSid, null),
                     PipeAccessRights.FullControl, AccessControlType.Allow));
-                ps.AddAccessRule(new PipeAccessRule(new SecurityIdentifier("S-1-15-2-4214749242-2175026965-4132357855-2536272452-2097044253-3453070321-328922716"),
+                ps.AddAccessRule(new PipeAccessRule(
+                    new SecurityIdentifier(
+                        "S-1-15-2-4214749242-2175026965-4132357855-2536272452-2097044253-3453070321-328922716"),
                     PipeAccessRights.FullControl, AccessControlType.Allow));
                 using (var pipeServer =
                     new NamedPipeServerStream(@"BiliLive_DM_PIPE", PipeDirection.Out, MAX_THREAD,
@@ -143,8 +146,8 @@ namespace Bililive_dm
                         }
                     }
                 }
-               
-                
+
+
 
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }
@@ -159,50 +162,67 @@ namespace Bililive_dm
             if (!Status) return;
             foreach (var pipeServer in pipeServers)
             {
-                if (pipeServer?.IsConnected==true)
+                if (pipeServer?.IsConnected == true)
                 {
                     switch (e.Danmaku.MsgType)
                     {
                         case MsgTypeEnum.Comment:
-                            {
-                                var obj =
-                                    JObject.FromObject(new { User = e.Danmaku.UserName + "", Comment = e.Danmaku.CommentText + "" });
-                                SendMsg(pipeServer, obj);
+                        {
+                            var obj =
+                                JObject.FromObject(new
+                                    {User = e.Danmaku.UserName + "", Comment = e.Danmaku.CommentText + ""});
+                            SendMsg(pipeServer, obj);
 
-                                break;
-                            }
+                            break;
+                        }
                         case MsgTypeEnum.GiftSend:
-                            {
-                                var cmt = string.Format(Properties.Resources.MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_, e.Danmaku.UserName, e.Danmaku.GiftName, e.Danmaku.GiftCount);
+                        {
+                            var cmt = string.Format(Properties.Resources.MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_,
+                                e.Danmaku.UserName, e.Danmaku.GiftName, e.Danmaku.GiftCount);
 
-                                var obj =
-                                    JObject.FromObject(new { User = "", Comment = cmt });
-                                SendMsg(pipeServer, obj);
+                            var obj =
+                                JObject.FromObject(new {User = "", Comment = cmt});
+                            SendMsg(pipeServer, obj);
 
-                                break;
-                            }
+                            break;
+                        }
                         case MsgTypeEnum.GuardBuy:
-                            {
-                                var cmt = string.Format(Properties.Resources.MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_,
-                                    e.Danmaku.UserName, e.Danmaku.GiftName, e.Danmaku.GiftCount);
-                                var obj =
-                                    JObject.FromObject(new { User = "", Comment = cmt });
-                                SendMsg(pipeServer, obj);
+                        {
+                            var cmt = string.Format(Properties.Resources.MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_,
+                                e.Danmaku.UserName, e.Danmaku.GiftName, e.Danmaku.GiftCount);
+                            var obj =
+                                JObject.FromObject(new {User = "", Comment = cmt});
+                            SendMsg(pipeServer, obj);
 
-                                break;
-                            }
+                            break;
+                        }
                         case MsgTypeEnum.SuperChat:
+                        {
+                            var obj =
+                                JObject.FromObject(new
+                                {
+                                    User = e.Danmaku.UserName + " ￥:" + e.Danmaku.Price.ToString("N2"),
+                                    Comment = e.Danmaku.CommentText + ""
+                                });
+                            SendMsg(pipeServer, obj);
+
+                            break;
+                        }
+                        case MsgTypeEnum.Warning:
+                        {
                             {
                                 var obj =
-                                    JObject.FromObject(new { User = e.Danmaku.UserName + " ￥:" + e.Danmaku.Price.ToString("N2"), Comment = e.Danmaku.CommentText + "" });
+                                    JObject.FromObject(
+                                        new {User = "!!!!超管警告!!!!", Comment = e.Danmaku.CommentText + ""});
                                 SendMsg(pipeServer, obj);
 
                                 break;
                             }
+                        }
                     }
-             
-             
-             
+
+
+
                 }
 
             }
@@ -226,9 +246,9 @@ namespace Bililive_dm
 
                 }
             }
-           
-            
-        
+
+
+
         }
 
 
