@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 
 namespace BilibiliDM_PluginFramework
@@ -60,16 +61,19 @@ namespace BilibiliDM_PluginFramework
         /// SC
         /// </summary>
         SuperChat,
+
         /// <summary>
         /// 观众互动信息
         /// </summary>
         Interact,
+
         /// <summary>
         /// 超管警告
         /// </summary>
         Warning
 
     }
+
     /// <summary>
     /// 观众互动内容
     /// </summary>
@@ -78,28 +82,34 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 进入
         /// </summary>
-        Enter=1,
+        Enter = 1,
+
         /// <summary>
         /// 关注
         /// </summary>
-        Follow=2,
+        Follow = 2,
+
         /// <summary>
         /// 分享直播间
         /// </summary>
-        Share=3,
+        Share = 3,
+
         /// <summary>
         /// 特别关注
         /// </summary>
-        SpecialFollow=4,
+        SpecialFollow = 4,
+
         /// <summary>
         /// 互相关注
         /// </summary>
-        MutualFollow=5,
-        
+        MutualFollow = 5,
+
     }
-    
+
     public class DanmakuModel
     {
+        public static Regex EntryEffRegex = new Regex(@"\<%(.+?)%\>");
+
         /// <summary>
         /// 消息類型
         /// </summary>
@@ -329,6 +339,16 @@ namespace BilibiliDM_PluginFramework
                             // Giftrcost = obj["data"]["rcost"].ToString();
                             GiftCount = obj["data"]["num"].ToObject<int>();
                             break;
+                        case "COMBO_SEND":
+                        {
+                            MsgType = MsgTypeEnum.GiftSend;
+                            GiftName = obj["data"]["gift_name"].ToString();
+                            UserName = obj["data"]["uname"].ToString();
+                            UserID = obj["data"]["uid"].ToObject<int>();
+                            // Giftrcost = obj["data"]["rcost"].ToString();
+                            GiftCount = obj["data"]["total_num"].ToObject<int>();
+                            break;
+                        }
                         case "GIFT_TOP":
                         {
                             MsgType = MsgTypeEnum.GiftTop;
@@ -365,6 +385,24 @@ namespace BilibiliDM_PluginFramework
                             UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
                             break;
                         }
+                        case "ENTRY_EFFECT":
+                        {
+                            var msg = obj["data"]["copy_writing"] + "";
+                            var match = EntryEffRegex.Match(msg);
+                            if (match.Success)
+                            {
+                                MsgType = MsgTypeEnum.WelcomeGuard;
+                                UserName = match.Groups[1].Value;
+                                UserID = obj["data"]["uid"].ToObject<int>();
+                                UserGuardLevel = obj["data"]["privilege_type"].ToObject<int>();
+                            }
+                            else
+                            {
+                                MsgType = MsgTypeEnum.Unknown;
+                            }
+
+                            break;
+                        }
                         case "GUARD_BUY":
                         {
                             MsgType = MsgTypeEnum.GuardBuy;
@@ -378,6 +416,7 @@ namespace BilibiliDM_PluginFramework
                             break;
                         }
                         case "SUPER_CHAT_MESSAGE":
+                        case "SUPER_CHAT_MESSAGE_JP":
                         {
                             MsgType = MsgTypeEnum.SuperChat;
                             CommentText = obj["data"]["message"]?.ToString();
@@ -401,14 +440,15 @@ namespace BilibiliDM_PluginFramework
                             CommentText = obj["msg"]?.ToString();
 
                             break;
-                                }
+                        }
                         case "CUT_OFF":
                         {
                             MsgType = MsgTypeEnum.LiveEnd;
                             CommentText = obj["msg"]?.ToString();
                             break;
                         }
-                            default:
+
+                        default:
                         {
                             if (cmd.StartsWith("DANMU_MSG")) // "高考"fix
                             {

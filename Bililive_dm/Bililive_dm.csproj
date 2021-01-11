@@ -30,7 +30,7 @@
     <MinimumRequiredVersion>1.1.1.52</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>57</ApplicationRevision>
+    <ApplicationRevision>61</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -83,15 +83,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>C5BD3C96C07A1CF62EC2A053E4E334685B727829</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -328,8 +321,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <!--
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PreBuildEvent>"$(SignToolPath)signtool.exe" sign  /tr http://timestamp.comodoca.com /sha1 c5bd3c96c07a1cf62ec2a053e4e334685b727829 /as  /fd sha256 /td sha256   $(MSBuildProjectDirectory)\Win32\*.dll $(MSBuildProjectDirectory)\x64\*.dll</PreBuildEvent>
     <PostBuildEvent>"$(SignToolPath)signtool.exe" sign  /tr  http://timestamp.comodoca.com /sha1 c5bd3c96c07a1cf62ec2a053e4e334685b727829  /as  /fd sha256 /td sha256  $(TargetDir)*.exe $(TargetDir)*.dll $(TargetDir)ja-JP\*.dll</PostBuildEvent>
   </PropertyGroup>
+  -->
 </Project>
