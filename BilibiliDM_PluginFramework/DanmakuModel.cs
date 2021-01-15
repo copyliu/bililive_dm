@@ -341,13 +341,15 @@ namespace BilibiliDM_PluginFramework
                             break;
                         case "COMBO_SEND":
                         {
-                            MsgType = MsgTypeEnum.GiftSend;
-                            GiftName = obj["data"]["gift_name"].ToString();
-                            UserName = obj["data"]["uname"].ToString();
-                            UserID = obj["data"]["uid"].ToObject<int>();
-                            // Giftrcost = obj["data"]["rcost"].ToString();
-                            GiftCount = obj["data"]["total_num"].ToObject<int>();
+                            MsgType = MsgTypeEnum.Unknown;
                             break;
+                            // MsgType = MsgTypeEnum.GiftSend;
+                            // GiftName = obj["data"]["gift_name"].ToString();
+                            // UserName = obj["data"]["uname"].ToString();
+                            // UserID = obj["data"]["uid"].ToObject<int>();
+                            // // Giftrcost = obj["data"]["rcost"].ToString();
+                            // GiftCount = obj["data"]["total_num"].ToObject<int>();
+                            // break;
                         }
                         case "GIFT_TOP":
                         {
