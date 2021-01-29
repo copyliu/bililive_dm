@@ -1,0 +1,3 @@
+files:
+  - source: /Bililive_dm/Properties/Resources.resx
+    translation: /Bililive_dm/Properties/Resources.%locale%.resx
