@@ -121,61 +121,61 @@
     <value>©2014-2021 CopyLiu フィードバック: copyliu@gmail.com</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
-    <value>自動重連</value>
+    <value>自動再接続</value>
   </data>
   <data name="Button.Content.Default" xml:space="preserve">
-    <value>還原默認</value>
+    <value>ディフォルト</value>
   </data>
   <data name="Button.Content.Text" xml:space="preserve">
-    <value>測試效果</value>
+    <value>プレビュー</value>
   </data>
   <data name="ClearMe.Content" xml:space="preserve">
-    <value>清空投喂統計</value>
+    <value>プレゼントカウントをクリア</value>
   </data>
   <data name="ClearMe2.Content" xml:space="preserve">
-    <value>清空彈幕統計</value>
+    <value>弾幕カウントをクリア</value>
   </data>
   <data name="ClearMe3.Content" xml:space="preserve">
-    <value>清空用戶統計</value>
+    <value>ユーザーカウントをクリア</value>
   </data>
   <data name="ClearMe4.Content" xml:space="preserve">
     <value>清空彈幕統計(總)</value>
   </data>
   <data name="ConnBtn.Content" xml:space="preserve">
-    <value>連線</value>
+    <value>接続</value>
   </data>
   <data name="DataGridTextColumn.Header.1" xml:space="preserve">
-    <value>外掛程式名稱</value>
+    <value>プラグイン名称</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin1" xml:space="preserve">
-    <value>外掛程式名稱</value>
+    <value>プラグイン名称</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin2" xml:space="preserve">
-    <value>外掛程式描述</value>
+    <value>説明</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin3" xml:space="preserve">
-    <value>外掛程式作者</value>
+    <value>作者</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin4" xml:space="preserve">
-    <value>外掛程式狀態</value>
+    <value>状況</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin5" xml:space="preserve">
-    <value>外掛程式版本</value>
+    <value>バージョン</value>
   </data>
   <data name="DataGridTextColumn.Header1" xml:space="preserve">
-    <value>用戶名</value>
+    <value>ユーザーネーム</value>
   </data>
   <data name="DataGridTextColumn.Header2" xml:space="preserve">
-    <value>外掛程式描述</value>
+    <value>カウント</value>
   </data>
   <data name="DataGridTextColumn.Header3" xml:space="preserve">
-    <value>物品</value>
+    <value>アイテム</value>
   </data>
   <data name="DisconnBtn.Content" xml:space="preserve">
-    <value>斷開</value>
+    <value>接続解除</value>
   </data>
   <data name="EnableRegex.Content" xml:space="preserve">
-    <value>規則運算式過濾 符合規則運算式的彈幕將不會出現在任何地方直接丟棄</value>
+    <value>弾幕フィルター</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不可为空" xml:space="preserve">
     <value>不可為空</value>
@@ -187,16 +187,16 @@
     <value>必須是正數</value>
   </data>
   <data name="Full.Content" xml:space="preserve">
-    <value>彈幕</value>
+    <value>弾幕</value>
   </data>
   <data name="IgnoreSpam.Content" xml:space="preserve">
-    <value>遮蔽刷屏(α)</value>
+    <value>スパムを無視（β）</value>
   </data>
   <data name="LiveRoomAddr" xml:space="preserve">
-    <value>直播間地址: https://live.bilibili.com/</value>
+    <value>チャンネル：https://live.bilibili.com/</value>
   </data>
   <data name="MainWindow_b_Disconnected_正在自动重连___" xml:space="preserve">
-    <value>正在自動重連...</value>
+    <value>再接続中…</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開" xml:space="preserve">
     <value>連線被斷開</value>
@@ -223,16 +223,16 @@
     <value>彈幕姬報告</value>
   </data>
   <data name="MainWindow_connbtn_Click_正在连接" xml:space="preserve">
-    <value>正在連線</value>
+    <value>接続中</value>
   </data>
   <data name="MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_" xml:space="preserve">
     <value>請輸入房間編碼,房間編碼是!數!字!</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接失敗" xml:space="preserve">
-    <value>連線失敗</value>
+    <value>接続失敗</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接成功" xml:space="preserve">
-    <value>連線成功</value>
+    <value>接続成功</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
     <value>請有空發給聯繫方式 {0} 謝謝</value>
@@ -244,19 +244,19 @@
     <value>彈幕姬決定下版本開始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1,為保證你能在今後使用彈幕姬, 請安裝最新的 .net framework .</value>
   </data>
   <data name="MainWindow_MainWindow_____Debug模式_" xml:space="preserve">
-    <value>  *Debug模式*</value>
+    <value>  *デバッグ　モード*</value>
   </data>
   <data name="MainWindow_MainWindow_____傻逼版本_" xml:space="preserve">
-    <value>  *弱智版本*</value>
+    <value>  *⑨.バカ版*</value>
   </data>
   <data name="MainWindow_MainWindow_____原始数据输出_" xml:space="preserve">
     <value>  *原始資料輸出*</value>
   </data>
   <data name="MainWindow_MainWindow____版本号__" xml:space="preserve">
-    <value>  版本號:</value>
+    <value>バージョン：</value>
   </data>
   <data name="MainWindow_MainWindow____编译时间__" xml:space="preserve">
-    <value>  編譯時間:</value>
+    <value>コンパイル時間：</value>
   </data>
   <data name="MainWindow_MainWindow_你的打开方式不正确" xml:space="preserve">
     <value>你的打開方式不正確</value>
@@ -332,10 +332,10 @@
     <value>收到彈幕:{0}{1}{2} 說: {3}</value>
   </data>
   <data name="MainWindow_ProcDanmaku_收到道具" xml:space="preserve">
-    <value>收到道具</value>
+    <value>プレゼントを受け取た</value>
   </data>
   <data name="MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_" xml:space="preserve">
-    <value>收到道具:{0} 贈送的: {1} x {2}</value>
+    <value>プレゼント：{0} さんからの{1} × {2}</value>
   </data>
   <data name="MainWindow_ProcDanmaku_欢迎_0_" xml:space="preserve">
     <value>歡迎{0}</value>
@@ -353,43 +353,43 @@
     <value>艦長</value>
   </data>
   <data name="MainWindow_Test_OnClick_彈幕姬測試" xml:space="preserve">
-    <value>彈幕姬測試</value>
+    <value>弾幕姫テスト</value>
   </data>
   <data name="MainWindow_Test_OnClick_插件彈幕測試" xml:space="preserve">
-    <value>外掛程式彈幕測試</value>
+    <value>プラグイン弾幕テスト</value>
   </data>
   <data name="MainWindow_Test_OnClick_這不是個測試" xml:space="preserve">
-    <value>這不是個測試</value>
+    <value>これはテストです。</value>
   </data>
   <data name="MainWindow_Test_OnClick_這是一個測試" xml:space="preserve">
-    <value>這是一個測試</value>
+    <value>これはテストではありません。</value>
   </data>
   <data name="MainWindow_UIElement_OnMouseLeftButtonUp_本行记录已复制到剪贴板" xml:space="preserve">
-    <value>本行記錄已複製到剪貼簿</value>
+    <value>クリップボードにコピーしました</value>
   </data>
   <data name="MenuItem.Header.PluginAdmin" xml:space="preserve">
     <value>管理</value>
   </data>
   <data name="MenuItem.Header.PluginEnabvle" xml:space="preserve">
-    <value>啟用外掛程式</value>
+    <value>プラグインを有効にする</value>
   </data>
   <data name="MenuItem.Header.PluginStop" xml:space="preserve">
-    <value>停用外掛程式</value>
+    <value>プラグインを無効にする</value>
   </data>
   <data name="RankTabItem.Header" xml:space="preserve">
-    <value>投喂榜</value>
+    <value>ギフトランキング</value>
   </data>
   <data name="SaveLog.Content" xml:space="preserve">
-    <value>保存日誌</value>
+    <value>ログを保存する</value>
   </data>
   <data name="ShowError.Content" xml:space="preserve">
-    <value>顯示出錯信息</value>
+    <value>エラーメッセージを表示する</value>
   </data>
   <data name="ShowItem.Content" xml:space="preserve">
     <value>道具老爺</value>
   </data>
   <data name="SideBar.Content" xml:space="preserve">
-    <value>側邊欄</value>
+    <value>サイドバー</value>
   </data>
   <data name="SSTP.Content" xml:space="preserve">
     <value>偽春菜聯動</value>
@@ -398,19 +398,19 @@
     <value>醒目留言:{0}{1}{2} 說: {3}</value>
   </data>
   <data name="TabItem.Header" xml:space="preserve">
-    <value>首頁</value>
+    <value>ホームページ</value>
   </data>
   <data name="TabItem.Header.Plugin" xml:space="preserve">
-    <value>外掛程式</value>
+    <value>プラグイン</value>
   </data>
   <data name="TabItem.Header.Setting" xml:space="preserve">
-    <value>設置</value>
+    <value>設定</value>
   </data>
   <data name="TabItem.Header.Web" xml:space="preserve">
-    <value>說明</value>
+    <value>説明</value>
   </data>
   <data name="Test.Content" xml:space="preserve">
-    <value>測試效果</value>
+    <value>プレビュー</value>
   </data>
   <data name="TextBlock.Text" xml:space="preserve">
     <value>當前人氣值:</value>
@@ -425,7 +425,7 @@
     <value>彈幕模式文字大小</value>
   </data>
   <data name="TextBlock.Text.PluginDir" xml:space="preserve">
-    <value>外掛程式目錄: 我的文件\彈幕姬\Plugins</value>
+    <value>プラグイン　フォルダ：ドキュメント\彈幕姬\Plugins</value>
   </data>
   <data name="TextBlock.Text.R1" xml:space="preserve">
     <value>總共收到彈幕(原始資料)</value>
@@ -464,10 +464,10 @@
     <value>側窗口Y偏移</value>
   </data>
   <data name="WindowTop.Content" xml:space="preserve">
-    <value>窗口置頂</value>
+    <value>常にトップに</value>
   </data>
   <data name="WTFEngineEnable.Content" xml:space="preserve">
-    <value>彈幕模式使用新彈幕引擎(Windows 8 以上)</value>
+    <value>弾幕モードに新しいエンジンを使用する（Windows 8以降）</value>
   </data>
   <data name="MainWindow_ProcDanmaku____SuperChat___" xml:space="preserve">
     <value>!!!SuperChat!!!</value>
@@ -476,13 +476,13 @@
     <value>彈幕姬視窗資料保護</value>
   </data>
   <data name="InteractType_Text1" xml:space="preserve">
-    <value>進入了直播間</value>
+    <value>が入りました</value>
   </data>
   <data name="InteractType_Text2" xml:space="preserve">
-    <value>關注了直播間</value>
+    <value>がチャンネルを登録しました</value>
   </data>
   <data name="InteractType_Text3" xml:space="preserve">
-    <value>分享了直播間</value>
+    <value>がチャンネルを共有しました</value>
   </data>
   <data name="InteractType_Text4" xml:space="preserve">
     <value>特別關注</value>
@@ -491,22 +491,22 @@
     <value>相互關注</value>
   </data>
   <data name="InteractType_TextFormat" xml:space="preserve">
-    <value>{0} {1}</value>
+    <value>{0} さん{1}</value>
   </data>
   <data name="InteractType_Unknown" xml:space="preserve">
     <value>发生了未知的互动事件</value>
   </data>
   <data name="Interact_Content" xml:space="preserve">
-    <value>觀客互動</value>
+    <value>視聴者の行動</value>
   </data>
   <data name="ScreenSelecter" xml:space="preserve">
     <value>彈幕模式使用熒幕</value>
   </data>
   <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
-    <value>打開外掛程式資料夾</value>
+    <value>プラグインフォルダを開く</value>
   </data>
   <data name="ChangeSkin" xml:space="preserve">
-    <value>更換主題</value>
+    <value>テーマ</value>
   </data>
   <data name="SkinSelector" xml:space="preserve">
     <value>主題選擇器</value>
