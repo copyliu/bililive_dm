@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>©2014-2021 CopyLiu フィードバック: copyliu@gmail.com</value>
+    <value>©2014-2021 CopyLiu All Rights  NOT Reserved, フィードバック: copyliu@gmail.com</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>自動再接続</value>
@@ -359,10 +359,10 @@
     <value>プラグイン弾幕テスト</value>
   </data>
   <data name="MainWindow_Test_OnClick_這不是個測試" xml:space="preserve">
-    <value>これはテストです。</value>
+    <value>これはテストではありません。</value>
   </data>
   <data name="MainWindow_Test_OnClick_這是一個測試" xml:space="preserve">
-    <value>これはテストではありません。</value>
+    <value>これはテストです。</value>
   </data>
   <data name="MainWindow_UIElement_OnMouseLeftButtonUp_本行记录已复制到剪贴板" xml:space="preserve">
     <value>クリップボードにコピーしました</value>
@@ -386,7 +386,7 @@
     <value>エラーメッセージを表示する</value>
   </data>
   <data name="ShowItem.Content" xml:space="preserve">
-    <value>道具老爺</value>
+    <value>ギフト&amp;マスター</value>
   </data>
   <data name="SideBar.Content" xml:space="preserve">
     <value>サイドバー</value>
@@ -428,7 +428,7 @@
     <value>プラグイン　フォルダ：ドキュメント\彈幕姬\Plugins</value>
   </data>
   <data name="TextBlock.Text.R1" xml:space="preserve">
-    <value>弾幕カウント（すべて）</value>
+    <value>弾幕カウント（全て）</value>
   </data>
   <data name="TextBlock.Text.R2" xml:space="preserve">
     <value>弾幕カウント（表示）</value>
