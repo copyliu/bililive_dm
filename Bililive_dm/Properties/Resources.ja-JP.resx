@@ -133,13 +133,13 @@
     <value>プレゼントカウントをクリア</value>
   </data>
   <data name="ClearMe2.Content" xml:space="preserve">
-    <value>弾幕カウントをクリア</value>
+    <value>弾幕カウントをクリア（表示）</value>
   </data>
   <data name="ClearMe3.Content" xml:space="preserve">
     <value>ユーザーカウントをクリア</value>
   </data>
   <data name="ClearMe4.Content" xml:space="preserve">
-    <value>清空彈幕統計(總)</value>
+    <value>弾幕カウントをクリア（すべて）</value>
   </data>
   <data name="ConnBtn.Content" xml:space="preserve">
     <value>接続</value>
@@ -178,13 +178,13 @@
     <value>弾幕フィルター</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不可为空" xml:space="preserve">
-    <value>不可為空</value>
+    <value>空にすることはできません</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不是数字" xml:space="preserve">
-    <value>不是數字</value>
+    <value>数字ではありません</value>
   </data>
   <data name="FontSizeValidationRule_Validate_必须是正数" xml:space="preserve">
-    <value>必須是正數</value>
+    <value>正の数である必要があります</value>
   </data>
   <data name="Full.Content" xml:space="preserve">
     <value>弾幕</value>
@@ -199,34 +199,34 @@
     <value>再接続中…</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開" xml:space="preserve">
-    <value>連線被斷開</value>
+    <value>接続が解除されました</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開__开发者信息_0_" xml:space="preserve">
-    <value>連線被斷開: 開發者資訊{0}</value>
+    <value>接続が解除されました：メッセージ「{0}」</value>
   </data>
   <data name="MainWindow_b_ReceivedRoomCount_" xml:space="preserve">
-    <value>直播間人數：{0}</value>
+    <value>チャンネル視聴数：{0}</value>
   </data>
   <data name="MainWindow_b_ReceivedRoomCount_当前房间人数__0_" xml:space="preserve">
-    <value>當前房間人數:{0}</value>
+    <value>チャンネル視聴数：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_" xml:space="preserve">
-    <value>連接房間號：{0}</value>
+    <value>接続したチャンネル：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_ID非法" xml:space="preserve">
-    <value>ID不合法</value>
+    <value>不正のIDです</value>
   </data>
   <data name="MainWindow_connbtn_Click_出錯" xml:space="preserve">
-    <value>出錯資訊：{0}</value>
+    <value>エラー：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_彈幕姬本身" xml:space="preserve">
-    <value>彈幕姬報告</value>
+    <value>弾幕姫レポート</value>
   </data>
   <data name="MainWindow_connbtn_Click_正在连接" xml:space="preserve">
     <value>接続中</value>
   </data>
   <data name="MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_" xml:space="preserve">
-    <value>請輸入房間編碼,房間編碼是!數!字!</value>
+    <value>数字のチャンネルコードを入力してください</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接失敗" xml:space="preserve">
     <value>接続失敗</value>
@@ -235,10 +235,10 @@
     <value>接続成功</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
-    <value>請有空發給聯繫方式 {0} 謝謝</value>
+    <value>よろしければ[{0}]までお送りください、よろしくお願いします。</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_插件錯誤" xml:space="preserve">
-    <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
+    <value>プラグイン「{0}」はエラーが発生しています：ログはデスクトップに保存されていますので、プラグインの作者「{1}」、連絡方法「 {2}」に送信してください</value>
   </data>
   <data name="MainWindow_MainWindow_NetError" xml:space="preserve">
     <value>彈幕姬決定下版本開始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1,為保證你能在今後使用彈幕姬, 請安裝最新的 .net framework .</value>
@@ -250,7 +250,7 @@
     <value>  *⑨.バカ版*</value>
   </data>
   <data name="MainWindow_MainWindow_____原始数据输出_" xml:space="preserve">
-    <value>  *原始資料輸出*</value>
+    <value>  *原始データエクスポート*</value>
   </data>
   <data name="MainWindow_MainWindow____版本号__" xml:space="preserve">
     <value>バージョン：</value>
@@ -259,56 +259,56 @@
     <value>コンパイル時間：</value>
   </data>
   <data name="MainWindow_MainWindow_你的打开方式不正确" xml:space="preserve">
-    <value>你的打開方式不正確</value>
+    <value>アプリケーションの実行方法が間違っている</value>
   </data>
   <data name="MainWindow_MainWindow_公告1" xml:space="preserve">
-    <value>公告1: 由於廉價的證書供應商被某虎公司搞死了於是沒錢買證書了, 所以使用本軟體時可能會跳安全提示請無需理會.</value>
+    <value>お知らせ1：弾幕姫を使用してありがとうございます</value>
   </data>
   <data name="MainWindow_MainWindow_公告2" xml:space="preserve">
-    <value>公告2: 最近出現了一些所謂彈幕姬後續版, 聲稱本軟體已經不再更新, 並自稱後續版是原作者開發是新版云云.</value>
+    <value>お知らせ2：最近、いわゆる「弾幕姫 後続バージョン」と呼ばれるものがありますが、このソフトはもう更新されないと主張しており、これらの「後続バージョン」は原作者が作った最新バージョンです。</value>
   </data>
   <data name="MainWindow_MainWindow_公告2_2" xml:space="preserve">
-    <value>對此進行澄清, 彈幕姬從來也不會有任何的所謂後續版, 原作者直播間ID是5051, 任何非本人所開發的軟體的一切問題均不能解答.</value>
+    <value>はっきり言って、「弾幕姫」は決して「後続バージョン」ではありませんし、原著者のビリビリライブチャンネルは5051です。これらの「後続バージョン」に関する問題は、私には関係ありません。</value>
   </data>
   <data name="MainWindow_MainWindow_公告2_3" xml:space="preserve">
-    <value>也請用戶在諮詢時, 確認清楚你所使用的軟體類型, 向正確的關係者諮詢. 謝謝.</value>
+    <value>ソフトウェアのバージョンを確認し、関連する人に相談してください。宜しくお願いします。</value>
   </data>
   <data name="MainWindow_MainWindow_公告3" xml:space="preserve">
-    <value>公告3: 投喂記錄不會在彈幕模式上出現, 這不是bug</value>
+    <value>お知らせ3：弾幕モードでプレゼント記録が表示されない、これはバグではありません</value>
   </data>
   <data name="MainWindow_MainWindow_可以点击日志复制到剪贴板" xml:space="preserve">
-    <value>可以點擊日誌複製到剪貼簿</value>
+    <value>ログをクリックしてクリップボードにコピーする</value>
   </data>
   <data name="MainWindow_MainWindow_当前为Debug模式" xml:space="preserve">
-    <value>當前為Debug模式</value>
+    <value>デバッグモード中</value>
   </data>
   <data name="MainWindow_OpenPluginFolder_OnClick_" xml:space="preserve">
-    <value>打開外掛程式資料夾出錯
-信息</value>
+    <value>プラグインフォルダを開く際にエラーが発生した
+デバッグ　メッセージ：</value>
   </data>
   <data name="MainWindow_OpenPluginFolder_OnClick_打开插件文件夹出错" xml:space="preserve">
-    <value>打開外掛程式資料夾出錯</value>
+    <value>プラグインフォルダを開く際にエラーが発生した</value>
   </data>
   <data name="MainWindow_Plugin_Disable_插件報錯2" xml:space="preserve">
-    <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
+    <value>プラグイン「{0}」はエラーが発生しています：ログはデスクトップに保存されていますので、プラグインの作者「{1}」、連絡方法「 {2}」に送信してください</value>
   </data>
   <data name="MainWindow_Plugin_Enable_插件報錯" xml:space="preserve">
-    <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
+    <value>プラグイン「{0}」はエラーが発生しています：ログはデスクトップに保存されていますので、プラグインの作者「{1}」、連絡方法「 {2}」に送信してください</value>
   </data>
   <data name="MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝" xml:space="preserve">
-    <value>請有空發給聯繫方式 {0} 謝謝</value>
+    <value>よろしければ[{0}]までお送りください、よろしくお願いします。</value>
   </data>
   <data name="MainWindow_ProcDanmaku__0__购买了__1__x__2_" xml:space="preserve">
-    <value>{0} 購買了 {1} x {2}</value>
+    <value>{0}さんは {1} x {2}を購入した</value>
   </data>
   <data name="MainWindow_ProcDanmaku__0__赠送的___1__x__2_" xml:space="preserve">
-    <value>{0} 贈送的: {1} x {2}</value>
+    <value>{0}さんからもらった {1} x {2}</value>
   </data>
   <data name="MainWindow_ProcDanmaku__VIP前綴" xml:space="preserve">
-    <value>[爺]</value>
+    <value>[マスター]</value>
   </data>
   <data name="MainWindow_ProcDanmaku__管理員前綴_" xml:space="preserve">
-    <value>[管]</value>
+    <value>[管理者]</value>
   </data>
   <data name="MainWindow_ProcDanmaku__进入直播间" xml:space="preserve">
     <value>進入直播間</value>
@@ -323,7 +323,7 @@
     <value>和管理</value>
   </data>
   <data name="MainWindow_ProcDanmaku_总督" xml:space="preserve">
-    <value>總督</value>
+    <value>総督</value>
   </data>
   <data name="MainWindow_ProcDanmaku_提督" xml:space="preserve">
     <value>提督</value>
@@ -368,13 +368,13 @@
     <value>クリップボードにコピーしました</value>
   </data>
   <data name="MenuItem.Header.PluginAdmin" xml:space="preserve">
-    <value>管理</value>
+    <value>設定</value>
   </data>
   <data name="MenuItem.Header.PluginEnabvle" xml:space="preserve">
-    <value>プラグインを有効にする</value>
+    <value>有効にする</value>
   </data>
   <data name="MenuItem.Header.PluginStop" xml:space="preserve">
-    <value>プラグインを無効にする</value>
+    <value>無効にする</value>
   </data>
   <data name="RankTabItem.Header" xml:space="preserve">
     <value>ギフトランキング</value>
@@ -392,7 +392,7 @@
     <value>サイドバー</value>
   </data>
   <data name="SSTP.Content" xml:space="preserve">
-    <value>偽春菜聯動</value>
+    <value>「伺か」とリンク</value>
   </data>
   <data name="SuperChatLogName" xml:space="preserve">
     <value>醒目留言:{0}{1}{2} 說: {3}</value>
@@ -413,55 +413,55 @@
     <value>プレビュー</value>
   </data>
   <data name="TextBlock.Text" xml:space="preserve">
-    <value>當前人氣值:</value>
+    <value>人気：</value>
   </data>
   <data name="TextBlock.Text.EnableNewEngineWarn" xml:space="preserve">
-    <value>注意: 新彈幕引擎下文字速度選項無效</value>
+    <value>新しいエンジンには文字速さの調整が無効です</value>
   </data>
   <data name="TextBlock.Text.FSpeed" xml:space="preserve">
-    <value>彈幕模式文字速度</value>
+    <value>弾幕モードの文字速さ</value>
   </data>
   <data name="TextBlock.Text.FTextSize" xml:space="preserve">
-    <value>彈幕模式文字大小</value>
+    <value>弾幕モードの文字サイズ</value>
   </data>
   <data name="TextBlock.Text.PluginDir" xml:space="preserve">
     <value>プラグイン　フォルダ：ドキュメント\彈幕姬\Plugins</value>
   </data>
   <data name="TextBlock.Text.R1" xml:space="preserve">
-    <value>總共收到彈幕(原始資料)</value>
+    <value>弾幕カウント（すべて）</value>
   </data>
   <data name="TextBlock.Text.R2" xml:space="preserve">
-    <value>總共收到彈幕(已顯示)</value>
+    <value>弾幕カウント（表示）</value>
   </data>
   <data name="TextBlock.Text.R3" xml:space="preserve">
-    <value>參與評論的用戶</value>
+    <value>コメントした人数</value>
   </data>
   <data name="TextBlock.Text.SEff2Time" xml:space="preserve">
-    <value>側提示文字出現時長</value>
+    <value>サイドテキスト出現アニメーションの持続時間</value>
   </data>
   <data name="TextBlock.Text.SEff3Time" xml:space="preserve">
-    <value>側提示文字消失時長</value>
+    <value>サイドテキストが消えるアニメーションの持続時間</value>
   </data>
   <data name="TextBlock.Text.SEffTime" xml:space="preserve">
-    <value>側提示出現時拉伸時長</value>
+    <value>サイドバー出現アニメーションの持続時間</value>
   </data>
   <data name="TextBlock.Text.SKeepTime" xml:space="preserve">
-    <value>側提示文字停留時長</value>
+    <value>サイドテキスト表示時間</value>
   </data>
   <data name="TextBlock.Text.SShowTime" xml:space="preserve">
-    <value>側提示出現時拉伸時長</value>
+    <value>サイドバー出現アニメーションの持続時間</value>
   </data>
   <data name="TextBlock.Text.STextSize" xml:space="preserve">
-    <value>側提示文字字體大小</value>
+    <value>サイドバーの文字サイズ</value>
   </data>
   <data name="TextBlock.Text.SWidth" xml:space="preserve">
-    <value>側窗口寬度</value>
+    <value>サイドバーの幅</value>
   </data>
   <data name="TextBlock.Text.SXOffset" xml:space="preserve">
-    <value>側窗口X偏移</value>
+    <value>サイドバーのX　オフセット</value>
   </data>
   <data name="TextBlock.Text.SYOffset" xml:space="preserve">
-    <value>側窗口Y偏移</value>
+    <value>サイドバーのY　オフセット</value>
   </data>
   <data name="WindowTop.Content" xml:space="preserve">
     <value>常にトップに</value>
@@ -473,7 +473,7 @@
     <value>!!!SuperChat!!!</value>
   </data>
   <data name="DisplayAffinity.Content" xml:space="preserve">
-    <value>彈幕姬視窗資料保護</value>
+    <value>弾幕姫のスクリーンを取得することを防ぐ</value>
   </data>
   <data name="InteractType_Text1" xml:space="preserve">
     <value>が入りました</value>
@@ -494,13 +494,13 @@
     <value>{0} さん{1}</value>
   </data>
   <data name="InteractType_Unknown" xml:space="preserve">
-    <value>发生了未知的互动事件</value>
+    <value>不明な行動</value>
   </data>
   <data name="Interact_Content" xml:space="preserve">
     <value>視聴者の行動</value>
   </data>
   <data name="ScreenSelecter" xml:space="preserve">
-    <value>彈幕模式使用熒幕</value>
+    <value>弾幕モードが使用したスクリーン</value>
   </data>
   <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
     <value>プラグインフォルダを開く</value>
@@ -509,7 +509,7 @@
     <value>テーマ</value>
   </data>
   <data name="SkinSelector" xml:space="preserve">
-    <value>主題選擇器</value>
+    <value>テーマセレクター</value>
   </data>
   <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
     <value>超管警告</value>
