@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -123,17 +123,11 @@
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>自動再接続</value>
   </data>
-  <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
-    <value>プラグインフォルダを開く</value>
-  </data>
   <data name="Button.Content.Default" xml:space="preserve">
     <value>ディフォルト</value>
   </data>
   <data name="Button.Content.Text" xml:space="preserve">
     <value>プレビュー</value>
-  </data>
-  <data name="ChangeSkin" xml:space="preserve">
-    <value>テーマ</value>
   </data>
   <data name="ClearMe.Content" xml:space="preserve">
     <value>プレゼントカウントをクリア</value>
@@ -177,9 +171,6 @@
   <data name="DisconnBtn.Content" xml:space="preserve">
     <value>接続解除</value>
   </data>
-  <data name="DisplayAffinity.Content" xml:space="preserve">
-    <value>弾幕姫のスクリーンを取得することを防ぐ</value>
-  </data>
   <data name="EnableRegex.Content" xml:space="preserve">
     <value>弾幕フィルター</value>
   </data>
@@ -197,27 +188,6 @@
   </data>
   <data name="IgnoreSpam.Content" xml:space="preserve">
     <value>スパムを無視（β）</value>
-  </data>
-  <data name="InteractType_Text1" xml:space="preserve">
-    <value>{0} さんが入りました</value>
-  </data>
-  <data name="InteractType_Text2" xml:space="preserve">
-    <value>{0} さんがチャンネルを登録しました</value>
-  </data>
-  <data name="InteractType_Text3" xml:space="preserve">
-    <value>{0} さんがチャンネルを共有しました</value>
-  </data>
-  <data name="InteractType_Text4" xml:space="preserve">
-    <value>{0} さんがチャンネルをフォローしました</value>
-  </data>
-  <data name="InteractType_Text5" xml:space="preserve">
-    <value>あなたと {0} は相互フォローです</value>
-  </data>
-  <data name="InteractType_Unknown" xml:space="preserve">
-    <value>{0} さん不明な行動</value>
-  </data>
-  <data name="Interact_Content" xml:space="preserve">
-    <value>視聴者の行動</value>
   </data>
   <data name="LiveRoomAddr" xml:space="preserve">
     <value>チャンネル：https://live.bilibili.com/</value>
@@ -331,9 +301,6 @@
   <data name="MainWindow_ProcDanmaku__VIP前綴" xml:space="preserve">
     <value>[マスター]</value>
   </data>
-  <data name="MainWindow_ProcDanmaku____SuperChat___" xml:space="preserve">
-    <value>!!!SuperChat!!!</value>
-  </data>
   <data name="MainWindow_ProcDanmaku__管理員前綴_" xml:space="preserve">
     <value>[管理者]</value>
   </data>
@@ -360,9 +327,6 @@
   </data>
   <data name="MainWindow_ProcDanmaku_舰长" xml:space="preserve">
     <value>艦長</value>
-  </data>
-  <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
-    <value>運営からの警告</value>
   </data>
   <data name="MainWindow_Test_OnClick_彈幕姬測試" xml:space="preserve">
     <value>弾幕姫テスト</value>
@@ -394,9 +358,6 @@
   <data name="SaveLog.Content" xml:space="preserve">
     <value>ログを保存する</value>
   </data>
-  <data name="ScreenSelecter" xml:space="preserve">
-    <value>弾幕ﾓｰﾄﾞが使用したｽｸﾘｰﾝ</value>
-  </data>
   <data name="ShowError.Content" xml:space="preserve">
     <value>エラーメッセージを表示する</value>
   </data>
@@ -405,9 +366,6 @@
   </data>
   <data name="SideBar.Content" xml:space="preserve">
     <value>ｻｲﾄﾞﾊﾞｰ</value>
-  </data>
-  <data name="SkinSelector" xml:space="preserve">
-    <value>テーマセレクター</value>
   </data>
   <data name="SSTP.Content" xml:space="preserve">
     <value>「伺か」とリンク</value>
@@ -486,6 +444,48 @@
   </data>
   <data name="WTFEngineEnable.Content" xml:space="preserve">
     <value>弾幕モードに新しいエンジンを使用する（Windows 8以降）</value>
+  </data>
+  <data name="MainWindow_ProcDanmaku____SuperChat___" xml:space="preserve">
+    <value>!!!SuperChat!!!</value>
+  </data>
+  <data name="DisplayAffinity.Content" xml:space="preserve">
+    <value>弾幕姫のスクリーンを取得することを防ぐ</value>
+  </data>
+  <data name="InteractType_Text1" xml:space="preserve">
+    <value>{0} さんが入りました</value>
+  </data>
+  <data name="InteractType_Text2" xml:space="preserve">
+    <value>{0} さんがチャンネルを登録しました</value>
+  </data>
+  <data name="InteractType_Text3" xml:space="preserve">
+    <value>{0} さんがチャンネルを共有しました</value>
+  </data>
+  <data name="InteractType_Text4" xml:space="preserve">
+    <value>{0} さんがチャンネルをフォローしました</value>
+  </data>
+  <data name="InteractType_Text5" xml:space="preserve">
+    <value>あなたと {0} は相互フォローです</value>
+  </data>
+  <data name="InteractType_Unknown" xml:space="preserve">
+    <value>{0} さん不明な行動</value>
+  </data>
+  <data name="Interact_Content" xml:space="preserve">
+    <value>視聴者の行動</value>
+  </data>
+  <data name="ScreenSelecter" xml:space="preserve">
+    <value>弾幕ﾓｰﾄﾞが使用したｽｸﾘｰﾝ</value>
+  </data>
+  <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
+    <value>プラグインフォルダを開く</value>
+  </data>
+  <data name="ChangeSkin" xml:space="preserve">
+    <value>テーマ</value>
+  </data>
+  <data name="SkinSelector" xml:space="preserve">
+    <value>テーマセレクター</value>
+  </data>
+  <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
+    <value>運営からの警告</value>
   </data>
   <data name="MainWindow_ProcDanmaku___SSPCommentFormat" xml:space="preserve">
     <value>\_q{0}\n\_q\f[height,20]{1}</value>
