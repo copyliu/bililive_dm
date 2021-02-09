@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>©2014-2021 CopyLiu All Rights  NOT Reserved, フィードバック: copyliu@gmail.com</value>
+    <value>©2014-2021 CopyLiu All Rights  NOT Reserved, フィードバック: copyliu@gmail.com 日本語翻訳: @komoechan</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>自動再接続</value>
@@ -163,7 +163,7 @@
     <value>ユーザーネーム</value>
   </data>
   <data name="DataGridTextColumn.Header2" xml:space="preserve">
-    <value>數量</value>
+    <value>カウント</value>
   </data>
   <data name="DataGridTextColumn.Header3" xml:space="preserve">
     <value>アイテム</value>
@@ -202,7 +202,7 @@
     <value>接続が解除されました：メッセージ「{0}」</value>
   </data>
   <data name="MainWindow_b_ReceivedRoomCount_" xml:space="preserve">
-    <value>當前人氣值：{0}</value>
+    <value>チャンネル人気：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_" xml:space="preserve">
     <value>接続したチャンネル：{0}</value>
@@ -235,7 +235,7 @@
     <value>プラグイン「{0}」はエラーが発生しています：ログはデスクトップに保存されていますので、プラグインの作者「{1}」、連絡方法「 {2}」に送信してください</value>
   </data>
   <data name="MainWindow_MainWindow_NetError" xml:space="preserve">
-    <value>彈幕姬決定下版本開始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1,為保證你能在今後使用彈幕姬, 請安裝最新的 .net framework .</value>
+    <value>Never Used</value>
   </data>
   <data name="MainWindow_MainWindow_____Debug模式_" xml:space="preserve">
     <value>  *デバッグ　モード*</value>
@@ -305,7 +305,7 @@
     <value>[管理者]</value>
   </data>
   <data name="MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_" xml:space="preserve">
-    <value>上船:{0} 購買了 {1} x {2}</value>
+    <value>{0}さんは {1} x {2}を購入した</value>
   </data>
   <data name="MainWindow_ProcDanmaku_总督" xml:space="preserve">
     <value>総督</value>
@@ -314,7 +314,7 @@
     <value>提督</value>
   </data>
   <data name="MainWindow_ProcDanmaku_收到彈幕__0__1__2__說___3_" xml:space="preserve">
-    <value>收到彈幕:{0}{1}{2} 說: {3}</value>
+    <value>コメント：{0}{1}{2}さん：{3}</value>
   </data>
   <data name="MainWindow_ProcDanmaku_收到道具" xml:space="preserve">
     <value>プレゼントを受け取た</value>
@@ -323,7 +323,7 @@
     <value>プレゼント：{0} さんからの{1} × {2}</value>
   </data>
   <data name="MainWindow_ProcDanmaku_欢迎_0____1__2_" xml:space="preserve">
-    <value>歡迎{0}: {1} 進入直播間</value>
+    <value>{0} {1}さん 入室した</value>
   </data>
   <data name="MainWindow_ProcDanmaku_舰长" xml:space="preserve">
     <value>艦長</value>
@@ -365,13 +365,13 @@
     <value>ギフト&amp;マスター</value>
   </data>
   <data name="SideBar.Content" xml:space="preserve">
-    <value>サイドバー</value>
+    <value>ｻｲﾄﾞﾊﾞｰ</value>
   </data>
   <data name="SSTP.Content" xml:space="preserve">
     <value>「伺か」とリンク</value>
   </data>
   <data name="SuperChatLogName" xml:space="preserve">
-    <value>醒目留言:{0}{1}{2} 說: {3}</value>
+    <value>スパチャ：{0}{1}{2}さん：{3}</value>
   </data>
   <data name="TabItem.Header" xml:space="preserve">
     <value>ホームページ</value>
@@ -392,52 +392,52 @@
     <value>人気：</value>
   </data>
   <data name="TextBlock.Text.EnableNewEngineWarn" xml:space="preserve">
-    <value>新しいエンジンには文字速さの調整が無効です</value>
+    <value>新しいｴﾝｼﾞﾝには文字速さの調整が無効です</value>
   </data>
   <data name="TextBlock.Text.FSpeed" xml:space="preserve">
-    <value>弾幕モードの文字速さ</value>
+    <value>弾幕ﾓｰﾄﾞの文字速さ</value>
   </data>
   <data name="TextBlock.Text.FTextSize" xml:space="preserve">
-    <value>弾幕モードの文字サイズ</value>
+    <value>弾幕ﾓｰﾄﾞの文字ｻｲｽﾞ</value>
   </data>
   <data name="TextBlock.Text.PluginDir" xml:space="preserve">
-    <value>外掛程式目錄: 我的文件\弹幕姬\Plugins</value>
+    <value>プラグイン　フォルダ：ドキュメント\弹幕姬\Plugins</value>
   </data>
   <data name="TextBlock.Text.R1" xml:space="preserve">
-    <value>弾幕カウント（全て）</value>
+    <value>コメントカウント（全て）</value>
   </data>
   <data name="TextBlock.Text.R2" xml:space="preserve">
-    <value>弾幕カウント（表示）</value>
+    <value>コメントカウント（表示）</value>
   </data>
   <data name="TextBlock.Text.R3" xml:space="preserve">
     <value>コメントした人数</value>
   </data>
   <data name="TextBlock.Text.SEff2Time" xml:space="preserve">
-    <value>サイドテキスト出現アニメーションの持続時間</value>
+    <value>ｻｲﾄﾞﾃｷｽﾄ出現ｱﾆﾒｰｼｮﾝの持続時間</value>
   </data>
   <data name="TextBlock.Text.SEff3Time" xml:space="preserve">
-    <value>サイドテキストが消えるアニメーションの持続時間</value>
+    <value>ｻｲﾄﾞﾃｷｽﾄが消えるｱﾆﾒｰｼｮﾝの持続時間</value>
   </data>
   <data name="TextBlock.Text.SEffTime" xml:space="preserve">
-    <value>サイドバー出現アニメーションの持続時間</value>
+    <value>ｻｲﾄﾞﾊﾞｰ出現ｱﾆﾒｰｼｮﾝの持続時間</value>
   </data>
   <data name="TextBlock.Text.SKeepTime" xml:space="preserve">
-    <value>サイドテキスト表示時間</value>
+    <value>ｻｲﾄﾞﾃｷｽﾄ表示時間</value>
   </data>
   <data name="TextBlock.Text.SShowTime" xml:space="preserve">
-    <value>サイドバー出現アニメーションの持続時間</value>
+    <value>ｻｲﾄﾞﾊﾞｰ出現ｱﾆﾒｰｼｮﾝの持続時間</value>
   </data>
   <data name="TextBlock.Text.STextSize" xml:space="preserve">
-    <value>サイドバーの文字サイズ</value>
+    <value>ｻｲﾄﾞﾊﾞｰの文字ｻｲｽﾞ</value>
   </data>
   <data name="TextBlock.Text.SWidth" xml:space="preserve">
-    <value>サイドバーの幅</value>
+    <value>ｻｲﾄﾞﾊﾞｰの幅</value>
   </data>
   <data name="TextBlock.Text.SXOffset" xml:space="preserve">
-    <value>サイドバーのX　オフセット</value>
+    <value>ｻｲﾄﾞﾊﾞｰのXｵﾌｾｯﾄ</value>
   </data>
   <data name="TextBlock.Text.SYOffset" xml:space="preserve">
-    <value>サイドバーのY　オフセット</value>
+    <value>ｻｲﾄﾞﾊﾞｰのYｵﾌｾｯﾄ</value>
   </data>
   <data name="WindowTop.Content" xml:space="preserve">
     <value>常にトップに</value>
@@ -452,28 +452,28 @@
     <value>弾幕姫のスクリーンを取得することを防ぐ</value>
   </data>
   <data name="InteractType_Text1" xml:space="preserve">
-    <value>{0} 進入了直播間</value>
+    <value>{0} さんが入りました</value>
   </data>
   <data name="InteractType_Text2" xml:space="preserve">
-    <value>{0} 關注了直播間</value>
+    <value>{0} さんがチャンネルを登録しました</value>
   </data>
   <data name="InteractType_Text3" xml:space="preserve">
-    <value>{0} 分享了直播間</value>
+    <value>{0} さんがチャンネルを共有しました</value>
   </data>
   <data name="InteractType_Text4" xml:space="preserve">
-    <value>{0} 將直播間加入到了特別關注</value>
+    <value>{0} さんがチャンネルをフォローしました</value>
   </data>
   <data name="InteractType_Text5" xml:space="preserve">
-    <value>{0} 現在是相互關注</value>
+    <value>あなたと {0} は相互フォローです</value>
   </data>
   <data name="InteractType_Unknown" xml:space="preserve">
-    <value>{0} 发生了未知的互动事件</value>
+    <value>{0} さん不明な行動</value>
   </data>
   <data name="Interact_Content" xml:space="preserve">
     <value>視聴者の行動</value>
   </data>
   <data name="ScreenSelecter" xml:space="preserve">
-    <value>弾幕モードが使用したスクリーン</value>
+    <value>弾幕ﾓｰﾄﾞが使用したｽｸﾘｰﾝ</value>
   </data>
   <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
     <value>プラグインフォルダを開く</value>
@@ -485,15 +485,15 @@
     <value>テーマセレクター</value>
   </data>
   <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
-    <value>超管警告</value>
+    <value>運営からの警告</value>
   </data>
   <data name="MainWindow_ProcDanmaku___SSPCommentFormat" xml:space="preserve">
     <value>\_q{0}\n\_q\f[height,20]{1}</value>
   </data>
   <data name="MainWindow_ProcDanmaku_歡迎老爺__0__進入直播間" xml:space="preserve">
-    <value>歡迎老爺 {0} 進入直播間</value>
+    <value>[マスター] {1}さん 入室した</value>
   </data>
   <data name="MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間" xml:space="preserve">
-    <value>歡迎老爺和管理員 {0} 進入直播間</value>
+    <value>[マスター][管理者] {1}さん 入室した</value>
   </data>
 </root>
