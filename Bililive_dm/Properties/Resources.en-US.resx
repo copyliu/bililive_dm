@@ -144,9 +144,6 @@
   <data name="ConnBtn.Content" xml:space="preserve">
     <value>連線</value>
   </data>
-  <data name="DataGridTextColumn.Header.1" xml:space="preserve">
-    <value>外掛程式名稱</value>
-  </data>
   <data name="DataGridTextColumn.Header.Plugin1" xml:space="preserve">
     <value>外掛程式名稱</value>
   </data>
@@ -166,7 +163,7 @@
     <value>用戶名</value>
   </data>
   <data name="DataGridTextColumn.Header2" xml:space="preserve">
-    <value>外掛程式描述</value>
+    <value>數量</value>
   </data>
   <data name="DataGridTextColumn.Header3" xml:space="preserve">
     <value>物品</value>
@@ -205,10 +202,7 @@
     <value>連線被斷開: 開發者資訊{0}</value>
   </data>
   <data name="MainWindow_b_ReceivedRoomCount_" xml:space="preserve">
-    <value>直播間人數：{0}</value>
-  </data>
-  <data name="MainWindow_b_ReceivedRoomCount_当前房间人数__0_" xml:space="preserve">
-    <value>當前房間人數:{0}</value>
+    <value>當前人氣值：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_" xml:space="preserve">
     <value>連接房間號：{0}</value>
@@ -310,17 +304,8 @@
   <data name="MainWindow_ProcDanmaku__管理員前綴_" xml:space="preserve">
     <value>[管]</value>
   </data>
-  <data name="MainWindow_ProcDanmaku__进入直播间" xml:space="preserve">
-    <value>進入直播間</value>
-  </data>
-  <data name="MainWindow_ProcDanmaku_上船" xml:space="preserve">
-    <value>上船</value>
-  </data>
   <data name="MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_" xml:space="preserve">
     <value>上船:{0} 購買了 {1} x {2}</value>
-  </data>
-  <data name="MainWindow_ProcDanmaku_和管理" xml:space="preserve">
-    <value>和管理</value>
   </data>
   <data name="MainWindow_ProcDanmaku_总督" xml:space="preserve">
     <value>總督</value>
@@ -337,17 +322,8 @@
   <data name="MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_" xml:space="preserve">
     <value>收到道具:{0} 贈送的: {1} x {2}</value>
   </data>
-  <data name="MainWindow_ProcDanmaku_欢迎_0_" xml:space="preserve">
-    <value>歡迎{0}</value>
-  </data>
   <data name="MainWindow_ProcDanmaku_欢迎_0____1__2_" xml:space="preserve">
-    <value>歡迎{0}: {1}{2}</value>
-  </data>
-  <data name="MainWindow_ProcDanmaku_欢迎老爷_0_" xml:space="preserve">
-    <value>歡迎老爺{0}</value>
-  </data>
-  <data name="MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间" xml:space="preserve">
-    <value>歡迎老爺{0}: {1} 進入直播間</value>
+    <value>歡迎{0}: {1} 進入直播間</value>
   </data>
   <data name="MainWindow_ProcDanmaku_舰长" xml:space="preserve">
     <value>艦長</value>
@@ -425,7 +401,7 @@
     <value>彈幕模式文字大小</value>
   </data>
   <data name="TextBlock.Text.PluginDir" xml:space="preserve">
-    <value>外掛程式目錄: 我的文件\彈幕姬\Plugins</value>
+    <value>外掛程式目錄: 我的文件\弹幕姬\Plugins</value>
   </data>
   <data name="TextBlock.Text.R1" xml:space="preserve">
     <value>總共收到彈幕(原始資料)</value>
@@ -476,25 +452,22 @@
     <value>彈幕姬視窗資料保護</value>
   </data>
   <data name="InteractType_Text1" xml:space="preserve">
-    <value>進入了直播間</value>
+    <value>{0} 進入了直播間</value>
   </data>
   <data name="InteractType_Text2" xml:space="preserve">
-    <value>關注了直播間</value>
+    <value>{0} 關注了直播間</value>
   </data>
   <data name="InteractType_Text3" xml:space="preserve">
-    <value>分享了直播間</value>
+    <value>{0} 分享了直播間</value>
   </data>
   <data name="InteractType_Text4" xml:space="preserve">
-    <value>特別關注</value>
+    <value>{0} 將直播間加入到了特別關注</value>
   </data>
   <data name="InteractType_Text5" xml:space="preserve">
-    <value>相互關注</value>
-  </data>
-  <data name="InteractType_TextFormat" xml:space="preserve">
-    <value>{0} {1}</value>
+    <value>{0} 現在是相互關注</value>
   </data>
   <data name="InteractType_Unknown" xml:space="preserve">
-    <value>发生了未知的互动事件</value>
+    <value>{0} 发生了未知的互动事件</value>
   </data>
   <data name="Interact_Content" xml:space="preserve">
     <value>觀客互動</value>
@@ -513,5 +486,14 @@
   </data>
   <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
     <value>超管警告</value>
+  </data>
+  <data name="MainWindow_ProcDanmaku___SSPCommentFormat" xml:space="preserve">
+    <value>\_q{0}\n\_q\f[height,20]{1}</value>
+  </data>
+  <data name="MainWindow_ProcDanmaku_歡迎老爺__0__進入直播間" xml:space="preserve">
+    <value>歡迎老爺 {0} 進入直播間</value>
+  </data>
+  <data name="MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間" xml:space="preserve">
+    <value>歡迎老爺和管理員 {0} 進入直播間</value>
   </data>
 </root>
