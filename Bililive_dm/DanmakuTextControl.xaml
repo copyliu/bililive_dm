@@ -39,7 +39,7 @@
         <RichTextBox x:Name="TextBox" Background="{x:Null}" FontSize="18.667" BorderThickness="0" Foreground="White">
             <FlowDocument>
                 <Paragraph>
-                    <Run Foreground="Yellow" x:Name="UserName">U</Run><Run Foreground="White"> : </Run>
+                    <Run Foreground="Yellow" x:Name="UserName">U</Run><Run Foreground="White" x:Name="sp"> : </Run>
                     <Run Foreground="White" x:Name="Text">Text</Run>
                 </Paragraph>
             </FlowDocument>

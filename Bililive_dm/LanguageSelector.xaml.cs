@@ -50,7 +50,7 @@ namespace Bililive_dm
                 Properties.Settings.Default.lang = "ja-JP";
             }
             Properties.Settings.Default.Save();
-            MessageBox.Show(this,"语言设定将在重启弹幕姬后生效. (日語版放在這裡)");
+            MessageBox.Show(this, "语言设定将在重启弹幕姬后生效. 言語設定は再起動後に有効になります.");
             this.Close();
 
         }

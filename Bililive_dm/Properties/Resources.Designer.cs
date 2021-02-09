@@ -162,15 +162,6 @@ namespace Bililive_dm.Properties {
         /// <summary>
         ///   查找类似 外掛程式名稱 的本地化字符串。
         /// </summary>
-        public static string DataGridTextColumn_Header_1 {
-            get {
-                return ResourceManager.GetString("DataGridTextColumn.Header.1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 外掛程式名稱 的本地化字符串。
-        /// </summary>
         public static string DataGridTextColumn_Header_Plugin1 {
             get {
                 return ResourceManager.GetString("DataGridTextColumn.Header.Plugin1", resourceCulture);
@@ -223,7 +214,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 外掛程式描述 的本地化字符串。
+        ///   查找类似 數量 的本地化字符串。
         /// </summary>
         public static string DataGridTextColumn_Header2 {
             get {
@@ -322,7 +313,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 進入了直播間 的本地化字符串。
+        ///   查找类似 {0} 進入了直播間 的本地化字符串。
         /// </summary>
         public static string InteractType_Text1 {
             get {
@@ -331,7 +322,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 關注了直播間 的本地化字符串。
+        ///   查找类似 {0} 關注了直播間 的本地化字符串。
         /// </summary>
         public static string InteractType_Text2 {
             get {
@@ -340,7 +331,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 分享了直播間 的本地化字符串。
+        ///   查找类似 {0} 分享了直播間 的本地化字符串。
         /// </summary>
         public static string InteractType_Text3 {
             get {
@@ -349,7 +340,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 特別關注 的本地化字符串。
+        ///   查找类似 {0} 將直播間加入到了特別關注 的本地化字符串。
         /// </summary>
         public static string InteractType_Text4 {
             get {
@@ -358,20 +349,11 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 相互關注 的本地化字符串。
+        ///   查找类似 {0} 現在是相互關注 的本地化字符串。
         /// </summary>
         public static string InteractType_Text5 {
             get {
                 return ResourceManager.GetString("InteractType_Text5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 {0} {1} 的本地化字符串。
-        /// </summary>
-        public static string InteractType_TextFormat {
-            get {
-                return ResourceManager.GetString("InteractType_TextFormat", resourceCulture);
             }
         }
         
@@ -421,20 +403,11 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 直播間人數：{0} 的本地化字符串。
+        ///   查找类似 當前人氣值：{0} 的本地化字符串。
         /// </summary>
         public static string MainWindow_b_ReceivedRoomCount_ {
             get {
                 return ResourceManager.GetString("MainWindow_b_ReceivedRoomCount_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 當前房間人數:{0} 的本地化字符串。
-        /// </summary>
-        public static string MainWindow_b_ReceivedRoomCount_当前房间人数__0_ {
-            get {
-                return ResourceManager.GetString("MainWindow_b_ReceivedRoomCount_当前房间人数__0_", resourceCulture);
             }
         }
         
@@ -710,6 +683,15 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
+        ///   查找类似 \_q{0}\n\_q\f[height,20]{1} 的本地化字符串。
+        /// </summary>
+        public static string MainWindow_ProcDanmaku___SSPCommentFormat {
+            get {
+                return ResourceManager.GetString("MainWindow_ProcDanmaku___SSPCommentFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} 購買了 {1} x {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku__0__购买了__1__x__2_ {
@@ -746,38 +728,11 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 進入直播間 的本地化字符串。
-        /// </summary>
-        public static string MainWindow_ProcDanmaku__进入直播间 {
-            get {
-                return ResourceManager.GetString("MainWindow_ProcDanmaku__进入直播间", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 上船 的本地化字符串。
-        /// </summary>
-        public static string MainWindow_ProcDanmaku_上船 {
-            get {
-                return ResourceManager.GetString("MainWindow_ProcDanmaku_上船", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 上船:{0} 購買了 {1} x {2} 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_ {
             get {
                 return ResourceManager.GetString("MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 和管理 的本地化字符串。
-        /// </summary>
-        public static string MainWindow_ProcDanmaku_和管理 {
-            get {
-                return ResourceManager.GetString("MainWindow_ProcDanmaku_和管理", resourceCulture);
             }
         }
         
@@ -827,16 +782,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 歡迎{0} 的本地化字符串。
-        /// </summary>
-        public static string MainWindow_ProcDanmaku_欢迎_0_ {
-            get {
-                return ResourceManager.GetString("MainWindow_ProcDanmaku_欢迎_0_", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 歡迎{0}: {1}{2} 的本地化字符串。
+        ///   查找类似 歡迎{0}: {1} 進入直播間 的本地化字符串。
         /// </summary>
         public static string MainWindow_ProcDanmaku_欢迎_0____1__2_ {
             get {
@@ -845,20 +791,20 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 歡迎老爺{0} 的本地化字符串。
+        ///   查找类似 歡迎老爺 {0} 進入直播間 的本地化字符串。
         /// </summary>
-        public static string MainWindow_ProcDanmaku_欢迎老爷_0_ {
+        public static string MainWindow_ProcDanmaku_歡迎老爺__0__進入直播間 {
             get {
-                return ResourceManager.GetString("MainWindow_ProcDanmaku_欢迎老爷_0_", resourceCulture);
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_歡迎老爺__0__進入直播間", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   查找类似 歡迎老爺{0}: {1} 進入直播間 的本地化字符串。
+        ///   查找类似 歡迎老爺和管理員 {0} 進入直播間 的本地化字符串。
         /// </summary>
-        public static string MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间 {
+        public static string MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間 {
             get {
-                return ResourceManager.GetString("MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间", resourceCulture);
+                return ResourceManager.GetString("MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間", resourceCulture);
             }
         }
         
@@ -1115,7 +1061,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 外掛程式目錄: 我的文件\彈幕姬\Plugins 的本地化字符串。
+        ///   查找类似 外掛程式目錄: 我的文件\弹幕姬\Plugins 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text_PluginDir {
             get {

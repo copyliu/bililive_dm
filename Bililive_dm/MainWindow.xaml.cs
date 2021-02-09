@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Deployment.Application;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -88,7 +89,13 @@ namespace Bililive_dm
         public MainWindow()
         {
             InitializeComponent();
-
+            switch (CultureInfo.DefaultThreadCurrentUICulture.TwoLetterISOLanguageName)
+            {
+                case "ja":
+                    this.Width = 950;
+                    this.Height = 550;
+                    break;
+            }
             merged = Resources.MergedDictionaries;
             merged.Add(new ResourceDictionary());
 
@@ -664,7 +671,7 @@ namespace Bililive_dm
                     }).Start();
             }
 
-            SendSSP(string.Format(Properties.Resources.MainWindow_b_ReceivedRoomCount_当前房间人数__0_, e.UserCount));
+            SendSSP(string.Format(Properties.Resources.MainWindow_b_ReceivedRoomCount_, e.UserCount));
         }
 
         private void b_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
@@ -716,7 +723,7 @@ namespace Bililive_dm
                         (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName,
                         danmakuModel.CommentText);
-                    SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
+                    SendSSP(string.Format(Properties.Resources.MainWindow_ProcDanmaku___SSPCommentFormat,
                         (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") +
                         (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName,
@@ -737,7 +744,7 @@ namespace Bililive_dm
                         (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName + " ￥:" + danmakuModel.Price.ToString("N2"),
                         danmakuModel.CommentText, keeptime: danmakuModel.SCKeepTime, warn: true);
-                    SendSSP(string.Format(@"\_q{0}\n\_q\f[height,20]{1}",
+                    SendSSP(string.Format(Properties.Resources.MainWindow_ProcDanmaku___SSPCommentFormat,
                         (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku__管理員前綴_ : "") +
                         (danmakuModel.isVIP ? Properties.Resources.MainWindow_ProcDanmaku__VIP前綴 : "") +
                         danmakuModel.UserName,
@@ -820,26 +827,31 @@ namespace Bililive_dm
                     {
                         if (ShowItem.IsChecked == true)
                         {
-                            AddDMText(Properties.Resources.MainWindow_ProcDanmaku_上船,
-                                string.Format(Properties.Resources.MainWindow_ProcDanmaku__0__购买了__1__x__2_,
-                                    danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount), true);
+                            AddDMText(string.Format(Properties.Resources.MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_,
+                                danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount),null, true);
                         }
                     }));
                     break;
                 }
                 case MsgTypeEnum.Welcome:
                 {
-                    logging(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎老爷_0____1__进入直播间,
-                        (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku_和管理 : ""),
-                        danmakuModel.UserName));
+                    string format;
+                    if (danmakuModel.isAdmin)
+                    {
+                        format = Properties.Resources.MainWindow_ProcDanmaku_歡迎老爺__0__進入直播間;
+                    }
+                    else
+                    {
+                        format = Properties.Resources.MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間;
+                    }
+
+                    var text = string.Format(format, danmakuModel.UserName);
+                    logging(text);
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowItem.IsChecked == true)
                         {
-                            AddDMText(
-                                string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎老爷_0_,
-                                    (danmakuModel.isAdmin ? Properties.Resources.MainWindow_ProcDanmaku_和管理 : "")),
-                                danmakuModel.UserName + Properties.Resources.MainWindow_ProcDanmaku__进入直播间, true);
+                            AddDMText(text, null, true);
                         }
                     }));
 
@@ -860,16 +872,16 @@ namespace Bililive_dm
                             guard_text = Properties.Resources.MainWindow_ProcDanmaku_舰长;
                             break;
                     }
-
+                   
                     logging(
                         string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0____1__2_, guard_text,
-                            danmakuModel.UserName, Properties.Resources.MainWindow_ProcDanmaku__进入直播间));
+                            danmakuModel.UserName));
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowItem.IsChecked == true)
                         {
-                            AddDMText(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0_, guard_text),
-                                danmakuModel.UserName + Properties.Resources.MainWindow_ProcDanmaku__进入直播间, true);
+                            AddDMText(string.Format(Properties.Resources.MainWindow_ProcDanmaku_欢迎_0____1__2_, guard_text,
+                                danmakuModel.UserName),null, true);
                         }
                     }));
                     break;
@@ -877,7 +889,7 @@ namespace Bililive_dm
                 case MsgTypeEnum.Interact:
                 {
 
-                    string r = Properties.Resources.InteractType_TextFormat;
+                  
                     string text;
                     switch (danmakuModel.InteractType)
                     {
@@ -901,14 +913,14 @@ namespace Bililive_dm
                             break;
                     }
 
-                    var logtext = string.Format(r, danmakuModel.UserName, text);
+                    var logtext = string.Format(text, danmakuModel.UserName);
 
                     Dispatcher.BeginInvoke(new Action(() =>
                     {
                         if (ShowInteract.IsChecked == true)
                         {
                             logging(logtext);
-                            AddDMText(danmakuModel.UserName, text, true);
+                            AddDMText(logtext, null, true);
                         }
                     }));
                     break;
@@ -1081,7 +1093,16 @@ namespace Bililive_dm
                     {
                         c.UserName.Foreground = Brushes.Red;
                     }
-                    c.Text.Text = text;
+
+                    if (string.IsNullOrEmpty(text))
+                    {
+                        c.Text.Text = "";
+                        c.sp.Text = "";
+                    }
+                    else
+                    {
+                        c.Text.Text = text;
+                    }
                     c.ChangeHeight();
                     var sb = (Storyboard)c.Resources["Storyboard1"];
                     //Storyboard.SetTarget(sb,c);

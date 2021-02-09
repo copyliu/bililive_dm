@@ -98,15 +98,15 @@
                     </DataGrid>
                     <StackPanel x:Name="StaticPanel" HorizontalAlignment="Center" Grid.Row="1">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_R1}" Width="150"></TextBlock>
+                            <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_R1}" Width="250"></TextBlock>
                             <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountRaw}" Width="100" TextAlignment="Right"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="{x:Static properties:Resources.TextBlock_Text_R2}" Width="150"></TextBlock>
+                            <TextBlock  Text="{x:Static properties:Resources.TextBlock_Text_R2}" Width="250"></TextBlock>
                             <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountShow}" Width="100" TextAlignment="Right"></TextBlock>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="{x:Static properties:Resources.TextBlock_Text_R3}" Width="150"></TextBlock>
+                            <TextBlock  Text="{x:Static properties:Resources.TextBlock_Text_R3}" Width="250"></TextBlock>
                             <TextBlock HorizontalAlignment="Right" Text="{Binding UserCount}" Width="100" TextAlignment="Right"></TextBlock>
                         </StackPanel>
                     </StackPanel>
