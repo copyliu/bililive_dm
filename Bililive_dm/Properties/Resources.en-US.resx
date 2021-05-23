@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>This software is NOT developed by Bilibili. ©2014-2021 CopyLiu, all rights NOT reserved. Report issues: copyliu@gmail.com</value>
+    <value>©2014-2021 Developed by CopyLiu, all rights NOT reserved. Report issues: copyliu@gmail.com. EN translation by @TigerSHe</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>Auto Reconnect</value>
@@ -172,85 +172,85 @@
     <value>Disconnect</value>
   </data>
   <data name="EnableRegex.Content" xml:space="preserve">
-    <value>規則運算式過濾 符合規則運算式的彈幕將不會出現在任何地方直接丟棄</value>
+    <value>Chat filtering rules [Messages that match the rules below will NOT be displayed]</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不可为空" xml:space="preserve">
-    <value>不可為空</value>
+    <value>Must not be empty</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不是数字" xml:space="preserve">
-    <value>不是數字</value>
+    <value>Not a number</value>
   </data>
   <data name="FontSizeValidationRule_Validate_必须是正数" xml:space="preserve">
-    <value>必須是正數</value>
+    <value>Must be a positive number</value>
   </data>
   <data name="Full.Content" xml:space="preserve">
-    <value>彈幕</value>
+    <value>Slide Chat</value>
   </data>
   <data name="IgnoreSpam.Content" xml:space="preserve">
-    <value>遮蔽刷屏(α)</value>
+    <value>Spam Filtering (alpha)</value>
   </data>
   <data name="LiveRoomAddr" xml:space="preserve">
-    <value>直播間地址: https://live.bilibili.com/</value>
+    <value>Room ID: https://live.bilibili.com/</value>
   </data>
   <data name="MainWindow_b_Disconnected_正在自动重连___" xml:space="preserve">
-    <value>正在自動重連...</value>
+    <value>Auto Reconnecting...</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開" xml:space="preserve">
-    <value>連線被斷開</value>
+    <value>Disconnected</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開__开发者信息_0_" xml:space="preserve">
-    <value>連線被斷開: 開發者資訊{0}</value>
+    <value>Disconnected: Message [{0}]</value>
   </data>
   <data name="MainWindow_b_ReceivedRoomCount_" xml:space="preserve">
-    <value>當前人氣值：{0}</value>
+    <value>Popularity：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_" xml:space="preserve">
-    <value>連接房間號：{0}</value>
+    <value>Connected Room ID：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_ID非法" xml:space="preserve">
-    <value>ID不合法</value>
+    <value>Invalid ID</value>
   </data>
   <data name="MainWindow_connbtn_Click_出錯" xml:space="preserve">
-    <value>出錯資訊：{0}</value>
+    <value>Error Message：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_彈幕姬本身" xml:space="preserve">
-    <value>彈幕姬報告</value>
+    <value>Report</value>
   </data>
   <data name="MainWindow_connbtn_Click_正在连接" xml:space="preserve">
-    <value>正在連線</value>
+    <value>Connecting</value>
   </data>
   <data name="MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_" xml:space="preserve">
-    <value>請輸入房間編碼,房間編碼是!數!字!</value>
+    <value>Please enter a valid numeric Room ID</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接失敗" xml:space="preserve">
-    <value>連線失敗</value>
+    <value>Connection failed</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接成功" xml:space="preserve">
-    <value>連線成功</value>
+    <value>Connection established</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
-    <value>請有空發給聯繫方式 {0} 謝謝</value>
+    <value>Please contact {0} when you encouter this issue, thank you!</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_插件錯誤" xml:space="preserve">
-    <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
+    <value>The plugin {0} encountered an unknown error: Error log(s) have been saved to the desktop. Please contact plugin developer {1} using contact method {2}.</value>
   </data>
   <data name="MainWindow_MainWindow_NetError" xml:space="preserve">
-    <value>彈幕姬決定下版本開始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1,為保證你能在今後使用彈幕姬, 請安裝最新的 .net framework .</value>
+    <value>Danmuji has terminated support for Windows XP. The minimum requirement OS to run this program is Windows 7 with .NET 4.6.1. Please try installing the newest .NET framework if this issue appears again.</value>
   </data>
   <data name="MainWindow_MainWindow_____Debug模式_" xml:space="preserve">
-    <value>  *Debug模式*</value>
+    <value>  *Debug Mode*</value>
   </data>
   <data name="MainWindow_MainWindow_____傻逼版本_" xml:space="preserve">
-    <value>  *弱智版本*</value>
+    <value>  *dum version*</value>
   </data>
   <data name="MainWindow_MainWindow_____原始数据输出_" xml:space="preserve">
-    <value>  *原始資料輸出*</value>
+    <value>  *Raw Dataout*</value>
   </data>
   <data name="MainWindow_MainWindow____版本号__" xml:space="preserve">
-    <value>  版本號:</value>
+    <value>  Version:</value>
   </data>
   <data name="MainWindow_MainWindow____编译时间__" xml:space="preserve">
-    <value>  編譯時間:</value>
+    <value>  Compile Time:</value>
   </data>
   <data name="MainWindow_MainWindow_你的打开方式不正确" xml:space="preserve">
     <value>你的打開方式不正確</value>
