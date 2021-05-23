@@ -118,58 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>非B站出品 ©2014-2021 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com</value>
+    <value>This software is NOT developed by Bilibili. ©2014-2021 CopyLiu, all rights NOT reserved. Report issues: copyliu@gmail.com</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
-    <value>自動重連</value>
+    <value>Auto Reconnect</value>
   </data>
   <data name="Button.Content.Default" xml:space="preserve">
-    <value>還原默認</value>
+    <value>Reset to default</value>
   </data>
   <data name="Button.Content.Text" xml:space="preserve">
-    <value>測試效果</value>
+    <value>Test</value>
   </data>
   <data name="ClearMe.Content" xml:space="preserve">
-    <value>清空投喂統計</value>
+    <value>Clear gift history</value>
   </data>
   <data name="ClearMe2.Content" xml:space="preserve">
-    <value>清空彈幕統計</value>
+    <value>Reset chat statistics</value>
   </data>
   <data name="ClearMe3.Content" xml:space="preserve">
-    <value>清空用戶統計</value>
+    <value>Reset viewer statistics</value>
   </data>
   <data name="ClearMe4.Content" xml:space="preserve">
-    <value>清空彈幕統計(總)</value>
+    <value>Reset chat statistics (raw)</value>
   </data>
   <data name="ConnBtn.Content" xml:space="preserve">
-    <value>連線</value>
+    <value>Connect</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin1" xml:space="preserve">
-    <value>外掛程式名稱</value>
+    <value>Plugin Name</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin2" xml:space="preserve">
-    <value>外掛程式描述</value>
+    <value>Description</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin3" xml:space="preserve">
-    <value>外掛程式作者</value>
+    <value>Author</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin4" xml:space="preserve">
-    <value>外掛程式狀態</value>
+    <value>Status</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin5" xml:space="preserve">
-    <value>外掛程式版本</value>
+    <value>Version</value>
   </data>
   <data name="DataGridTextColumn.Header1" xml:space="preserve">
-    <value>用戶名</value>
+    <value>Username</value>
   </data>
   <data name="DataGridTextColumn.Header2" xml:space="preserve">
-    <value>數量</value>
+    <value>Quantity</value>
   </data>
   <data name="DataGridTextColumn.Header3" xml:space="preserve">
-    <value>物品</value>
+    <value>Item</value>
   </data>
   <data name="DisconnBtn.Content" xml:space="preserve">
-    <value>斷開</value>
+    <value>Disconnect</value>
   </data>
   <data name="EnableRegex.Content" xml:space="preserve">
     <value>規則運算式過濾 符合規則運算式的彈幕將不會出現在任何地方直接丟棄</value>
