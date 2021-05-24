@@ -172,7 +172,7 @@
     <value>Disconnect</value>
   </data>
   <data name="EnableRegex.Content" xml:space="preserve">
-    <value>Chat filtering rules (Messages that match the rules below will NOT be displayed)</value>
+    <value>Chat filtering expression (Messages that match the rules below will NOT be displayed)</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不可为空" xml:space="preserve">
     <value>Must not be empty</value>
@@ -184,7 +184,7 @@
     <value>Must be a positive number</value>
   </data>
   <data name="Full.Content" xml:space="preserve">
-    <value>Slide chat</value>
+    <value>Danmaku (Slide chat)</value>
   </data>
   <data name="IgnoreSpam.Content" xml:space="preserve">
     <value>Spam filtering (alpha)</value>
@@ -229,7 +229,7 @@
     <value>Connection established</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
-    <value>Please contact {0} when you encouter this issue, thank you!</value>
+    <value>Please contact {0} when you encouter this issue. Thank you!</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_插件錯誤" xml:space="preserve">
     <value>The plugin {0} encountered an unknown error: Error log(s) have been saved to the desktop. Please contact plugin developer {1} using contact method {2}.</value>
@@ -250,7 +250,7 @@
     <value>  Version:</value>
   </data>
   <data name="MainWindow_MainWindow____编译时间__" xml:space="preserve">
-    <value>  Compile Time:</value>
+    <value>  Compile time:</value>
   </data>
   <data name="MainWindow_MainWindow_你的打开方式不正确" xml:space="preserve">
     <value>Error while lauching the application</value>
@@ -271,7 +271,7 @@
     <value>Announcement 3: Gift information will not appear in Danmaku (Slide Chat) mode, this is not a bug.</value>
   </data>
   <data name="MainWindow_MainWindow_可以点击日志复制到剪贴板" xml:space="preserve">
-    <value>You can copy lines to the clipboard by clicking on it</value>
+    <value>You can copy log lines to the clipboard by clicking on it</value>
   </data>
   <data name="MainWindow_MainWindow_当前为Debug模式" xml:space="preserve">
     <value>Currently in debug mode</value>
@@ -290,7 +290,7 @@ Information:</value>
     <value>The plugin {0} encountered an unknown error: Error log(s) have been saved to the desktop. Please contact plugin developer {1} using contact method {2}.</value>
   </data>
   <data name="MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝" xml:space="preserve">
-    <value>Please contact {0} when you encouter this issue, thank you!</value>
+    <value>Please contact {0} when you encouter this issue. Thank you!</value>
   </data>
   <data name="MainWindow_ProcDanmaku__0__购买了__1__x__2_" xml:space="preserve">
     <value>Viewer {0} purchased {1} x {2}</value>
@@ -323,7 +323,7 @@ Information:</value>
     <value>Received gift: Viewer {0} gifted {1} x {2}</value>
   </data>
   <data name="MainWindow_ProcDanmaku_欢迎_0____1__2_" xml:space="preserve">
-    <value>{0} {1} entered your stream</value>
+    <value>Welcome {0}: {1} entered your stream</value>
   </data>
   <data name="MainWindow_ProcDanmaku_舰长" xml:space="preserve">
     <value>Captain</value>
@@ -443,7 +443,7 @@ Information:</value>
     <value>Always on top</value>
   </data>
   <data name="WTFEngineEnable.Content" xml:space="preserve">
-    <value>Use new slide chat engine (Windows 8 and above)</value>
+    <value>Use new slide chat render engine (Windows 8 and above)</value>
   </data>
   <data name="MainWindow_ProcDanmaku____SuperChat___" xml:space="preserve">
     <value>!!!SuperChat!!!</value>
@@ -470,10 +470,10 @@ Information:</value>
     <value>{0} unknown interaction</value>
   </data>
   <data name="Interact_Content" xml:space="preserve">
-    <value>Viewer interactions</value>
+    <value>Display interactions</value>
   </data>
   <data name="ScreenSelecter" xml:space="preserve">
-    <value>Slide chat display select</value>
+    <value>Slide chat monitor select</value>
   </data>
   <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
     <value>Open plugins folder</value>
@@ -485,7 +485,7 @@ Information:</value>
     <value>Theme selector</value>
   </data>
   <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
-    <value>Moderator warning</value>
+    <value>Platform moderator warning</value>
   </data>
   <data name="MainWindow_ProcDanmaku___SSPCommentFormat" xml:space="preserve">
     <value>\_q{0}\n\_q\f[height,20]{1}</value>
@@ -494,6 +494,6 @@ Information:</value>
     <value>Welcome VIP {0} entered your stream</value>
   </data>
   <data name="MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間" xml:space="preserve">
-    <value>歡迎老爺和管理員 {0} 進入直播間</value>
+    <value>Welcome VIP and Moderator {0} entered your stream</value>
   </data>
 </root>
