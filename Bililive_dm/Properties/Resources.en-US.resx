@@ -172,7 +172,7 @@
     <value>Disconnect</value>
   </data>
   <data name="EnableRegex.Content" xml:space="preserve">
-    <value>Chat filtering rules [Messages that match the rules below will NOT be displayed]</value>
+    <value>Chat filtering rules (Messages that match the rules below will NOT be displayed)</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不可为空" xml:space="preserve">
     <value>Must not be empty</value>
@@ -235,7 +235,7 @@
     <value>The plugin {0} encountered an unknown error: Error log(s) have been saved to the desktop. Please contact plugin developer {1} using contact method {2}.</value>
   </data>
   <data name="MainWindow_MainWindow_NetError" xml:space="preserve">
-    <value>Danmuji has terminated support for Windows XP. The minimum requirement OS to run this program is Windows 7 with .NET 4.6.1. Please try installing the newest .NET framework if this issue appears again.</value>
+    <value>Danmuji has terminated support for Windows XP. The minimum required OS to run this program is Windows 7 with .NET 4.6.1. Please try installing the newest .NET framework if this issue appears again.</value>
   </data>
   <data name="MainWindow_MainWindow_____Debug模式_" xml:space="preserve">
     <value>  *Debug Mode*</value>
@@ -253,13 +253,13 @@
     <value>  Compile Time:</value>
   </data>
   <data name="MainWindow_MainWindow_你的打开方式不正确" xml:space="preserve">
-    <value>你的打開方式不正確</value>
+    <value>Error while lauching the application</value>
   </data>
   <data name="MainWindow_MainWindow_公告1" xml:space="preserve">
-    <value>公告1: 由於廉價的證書供應商被某虎公司搞死了於是沒錢買證書了, 所以使用本軟體時可能會跳安全提示請無需理會.</value>
+    <value>Announcement 1: Due to the lacking of an application certificate, please ignore the possible safety alerts while using this application.</value>
   </data>
   <data name="MainWindow_MainWindow_公告2" xml:space="preserve">
-    <value>公告2: 最近出現了一些所謂彈幕姬後續版, 聲稱本軟體已經不再更新, 並自稱後續版是原作者開發是新版云云.</value>
+    <value>Announcement 2: There has been rumors about Danmuji no longer being supported, and a "follow up" version is being advertised.</value>
   </data>
   <data name="MainWindow_MainWindow_公告2_2" xml:space="preserve">
     <value>對此進行澄清, 彈幕姬從來也不會有任何的所謂後續版, 原作者直播間ID是5051, 任何非本人所開發的軟體的一切問題均不能解答.</value>
