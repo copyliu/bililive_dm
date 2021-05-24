@@ -118,148 +118,148 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>©2014-2021 Developed by CopyLiu, all rights NOT reserved. Report issues: copyliu@gmail.com. EN translation by @TigerSHe</value>
+    <value>非B站出品 ©2014-2021 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
-    <value>Auto Reconnect</value>
+    <value>自動重連</value>
   </data>
   <data name="Button.Content.Default" xml:space="preserve">
-    <value>Reset to default</value>
+    <value>還原默認</value>
   </data>
   <data name="Button.Content.Text" xml:space="preserve">
-    <value>Test</value>
+    <value>測試效果</value>
   </data>
   <data name="ClearMe.Content" xml:space="preserve">
-    <value>Clear gift history</value>
+    <value>清空投喂統計</value>
   </data>
   <data name="ClearMe2.Content" xml:space="preserve">
-    <value>Reset chat statistics</value>
+    <value>清空彈幕統計</value>
   </data>
   <data name="ClearMe3.Content" xml:space="preserve">
-    <value>Reset viewer statistics</value>
+    <value>清空用戶統計</value>
   </data>
   <data name="ClearMe4.Content" xml:space="preserve">
-    <value>Reset chat statistics (raw)</value>
+    <value>清空彈幕統計(總)</value>
   </data>
   <data name="ConnBtn.Content" xml:space="preserve">
-    <value>Connect</value>
+    <value>連線</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin1" xml:space="preserve">
-    <value>Plugin Name</value>
+    <value>外掛程式名稱</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin2" xml:space="preserve">
-    <value>Description</value>
+    <value>外掛程式描述</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin3" xml:space="preserve">
-    <value>Author</value>
+    <value>外掛程式作者</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin4" xml:space="preserve">
-    <value>Status</value>
+    <value>外掛程式狀態</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin5" xml:space="preserve">
-    <value>Version</value>
+    <value>外掛程式版本</value>
   </data>
   <data name="DataGridTextColumn.Header1" xml:space="preserve">
-    <value>Username</value>
+    <value>用戶名</value>
   </data>
   <data name="DataGridTextColumn.Header2" xml:space="preserve">
-    <value>Quantity</value>
+    <value>數量</value>
   </data>
   <data name="DataGridTextColumn.Header3" xml:space="preserve">
-    <value>Item</value>
+    <value>物品</value>
   </data>
   <data name="DisconnBtn.Content" xml:space="preserve">
-    <value>Disconnect</value>
+    <value>斷開</value>
   </data>
   <data name="EnableRegex.Content" xml:space="preserve">
-    <value>Chat filtering rules (Messages that match the rules below will NOT be displayed)</value>
+    <value>規則運算式過濾 符合規則運算式的彈幕將不會出現在任何地方直接丟棄</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不可为空" xml:space="preserve">
-    <value>Must not be empty</value>
+    <value>不可為空</value>
   </data>
   <data name="FontSizeValidationRule_Validate_不是数字" xml:space="preserve">
-    <value>Not a number</value>
+    <value>不是數字</value>
   </data>
   <data name="FontSizeValidationRule_Validate_必须是正数" xml:space="preserve">
-    <value>Must be a positive number</value>
+    <value>必須是正數</value>
   </data>
   <data name="Full.Content" xml:space="preserve">
-    <value>Slide Chat</value>
+    <value>彈幕</value>
   </data>
   <data name="IgnoreSpam.Content" xml:space="preserve">
-    <value>Spam Filtering (alpha)</value>
+    <value>遮蔽刷屏(α)</value>
   </data>
   <data name="LiveRoomAddr" xml:space="preserve">
-    <value>Room ID: https://live.bilibili.com/</value>
+    <value>直播間地址: https://live.bilibili.com/</value>
   </data>
   <data name="MainWindow_b_Disconnected_正在自动重连___" xml:space="preserve">
-    <value>Auto Reconnecting...</value>
+    <value>正在自動重連...</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開" xml:space="preserve">
-    <value>Disconnected</value>
+    <value>連線被斷開</value>
   </data>
   <data name="MainWindow_b_Disconnected_連接被斷開__开发者信息_0_" xml:space="preserve">
-    <value>Disconnected: Message [{0}]</value>
+    <value>連線被斷開: 開發者資訊{0}</value>
   </data>
   <data name="MainWindow_b_ReceivedRoomCount_" xml:space="preserve">
-    <value>Popularity：{0}</value>
+    <value>當前人氣值：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_" xml:space="preserve">
-    <value>Connected Room ID：{0}</value>
+    <value>連接房間號：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_ID非法" xml:space="preserve">
-    <value>Invalid ID</value>
+    <value>ID不合法</value>
   </data>
   <data name="MainWindow_connbtn_Click_出錯" xml:space="preserve">
-    <value>Error Message：{0}</value>
+    <value>出錯資訊：{0}</value>
   </data>
   <data name="MainWindow_connbtn_Click_彈幕姬本身" xml:space="preserve">
-    <value>Report</value>
+    <value>彈幕姬報告</value>
   </data>
   <data name="MainWindow_connbtn_Click_正在连接" xml:space="preserve">
-    <value>Connecting</value>
+    <value>正在連線</value>
   </data>
   <data name="MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_" xml:space="preserve">
-    <value>Please enter a valid numeric Room ID</value>
+    <value>請輸入房間編碼,房間編碼是!數!字!</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接失敗" xml:space="preserve">
-    <value>Connection failed</value>
+    <value>連線失敗</value>
   </data>
   <data name="MainWindow_connbtn_Click_連接成功" xml:space="preserve">
-    <value>Connection established</value>
+    <value>連線成功</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
-    <value>Please contact {0} when you encouter this issue, thank you!</value>
+    <value>請有空發給聯繫方式 {0} 謝謝</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_插件錯誤" xml:space="preserve">
-    <value>The plugin {0} encountered an unknown error: Error log(s) have been saved to the desktop. Please contact plugin developer {1} using contact method {2}.</value>
+    <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
   </data>
   <data name="MainWindow_MainWindow_NetError" xml:space="preserve">
-    <value>Danmuji has terminated support for Windows XP. The minimum required OS to run this program is Windows 7 with .NET 4.6.1. Please try installing the newest .NET framework if this issue appears again.</value>
+    <value>彈幕姬決定下版本開始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1,為保證你能在今後使用彈幕姬, 請安裝最新的 .net framework .</value>
   </data>
   <data name="MainWindow_MainWindow_____Debug模式_" xml:space="preserve">
-    <value>  *Debug Mode*</value>
+    <value>  *Debug模式*</value>
   </data>
   <data name="MainWindow_MainWindow_____傻逼版本_" xml:space="preserve">
-    <value>  *dum version*</value>
+    <value>  *弱智版本*</value>
   </data>
   <data name="MainWindow_MainWindow_____原始数据输出_" xml:space="preserve">
-    <value>  *Raw Dataout*</value>
+    <value>  *原始資料輸出*</value>
   </data>
   <data name="MainWindow_MainWindow____版本号__" xml:space="preserve">
-    <value>  Version:</value>
+    <value>  版本號:</value>
   </data>
   <data name="MainWindow_MainWindow____编译时间__" xml:space="preserve">
-    <value>  Compile Time:</value>
+    <value>  編譯時間:</value>
   </data>
   <data name="MainWindow_MainWindow_你的打开方式不正确" xml:space="preserve">
-    <value>Error while lauching the application</value>
+    <value>你的打開方式不正確</value>
   </data>
   <data name="MainWindow_MainWindow_公告1" xml:space="preserve">
-    <value>Announcement 1: Due to the lacking of an application certificate, please ignore the possible safety alerts while using this application.</value>
+    <value>公告1: 由於廉價的證書供應商被某虎公司搞死了於是沒錢買證書了, 所以使用本軟體時可能會跳安全提示請無需理會.</value>
   </data>
   <data name="MainWindow_MainWindow_公告2" xml:space="preserve">
-    <value>Announcement 2: There has been rumors about Danmuji no longer being supported, and a "follow up" version is being advertised.</value>
+    <value>公告2: 最近出現了一些所謂彈幕姬後續版, 聲稱本軟體已經不再更新, 並自稱後續版是原作者開發是新版云云.</value>
   </data>
   <data name="MainWindow_MainWindow_公告2_2" xml:space="preserve">
     <value>對此進行澄清, 彈幕姬從來也不會有任何的所謂後續版, 原作者直播間ID是5051, 任何非本人所開發的軟體的一切問題均不能解答.</value>
