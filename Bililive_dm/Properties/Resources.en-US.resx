@@ -229,7 +229,7 @@
     <value>Connection established</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
-    <value>Please contact {0} when you encouter this issue. Thank you!</value>
+    <value>Please contact {0} when you encounter this issue. Thank you!</value>
   </data>
   <data name="MainWindow_MainWindow_Closed_插件錯誤" xml:space="preserve">
     <value>The plugin {0} encountered an unknown error: Error log(s) have been saved to the desktop. Please contact plugin developer {1} using contact method {2}.</value>
@@ -368,7 +368,7 @@ Information:</value>
     <value>Sidebar</value>
   </data>
   <data name="SSTP.Content" xml:space="preserve">
-    <value>Link with 偽春菜</value>
+    <value>Link with Ukagaka(偽春菜)</value>
   </data>
   <data name="SuperChatLogName" xml:space="preserve">
     <value>Superchat:{0}{1}{2} said: {3}</value>
