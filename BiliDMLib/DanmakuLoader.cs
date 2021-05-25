@@ -187,6 +187,33 @@ namespace BiliDMLib
                          
                         }
                     }
+                    else if (protocol.Version == 3 && protocol.Action == 5) // brotli?
+                    {
+                        using (var ms = new MemoryStream(buffer)) // Skip 0x78 0xDA
+                        using (var deflate = new Brotli.BrotliStream(ms, CompressionMode.Decompress))
+                        {
+                            var headerbuffer = new byte[16];
+                            try
+                            {
+                                while (true)
+                                {
+                                    await deflate.ReadBAsync(headerbuffer, 0, 16);
+                                    var protocol_in = DanmakuProtocol.FromBuffer(headerbuffer);
+                                    payloadlength = protocol_in.PacketLength - 16;
+                                    var danmakubuffer = new byte[payloadlength];
+                                    await deflate.ReadBAsync(danmakubuffer, 0, payloadlength);
+                                    ProcessDanmaku(protocol.Action, danmakubuffer);
+                                }
+
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
+
+
+                        }
+                    }
                     else
                     {
                         ProcessDanmaku(protocol.Action, buffer);
@@ -349,6 +376,8 @@ namespace BiliDMLib
         {
             
             var packetModel = new {roomid = channelId, uid = 0, protover = 2, token=token, platform="danmuji"};
+            //有内鬼说已经有 protover = 3 了, 总之把protover 2用到死为止
+
             var playload = JsonConvert.SerializeObject(packetModel);
              await SendSocketDataAsync(7, playload);
             return true;
