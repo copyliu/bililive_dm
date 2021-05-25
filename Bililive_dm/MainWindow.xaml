@@ -37,12 +37,15 @@
                     VerticalAlignment="Center" Margin="28,0,0,0" MinWidth="70" Click="Skin_Click"/>
 
         </StackPanel>
-        <StackPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text}" VerticalAlignment="Center" Margin="3" />
-            <TextBlock  x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
-                       VerticalAlignment="Center" />
+        <WrapPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text}" VerticalAlignment="Center" Margin="3" />
+                <TextBlock  x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
+                            VerticalAlignment="Center" />
+            </StackPanel>
+           
             <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"  Checked="SideBar_Checked"
-                      VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
+                VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"                   x:Name="Full"          Content="{x:Static properties:Resources.Full_Content}"       Checked="Full_Checked" Unchecked="Full_Unchecked" />
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="AutoReconnect" Content="{x:Static properties:Resources.AutoReconnect_Content}"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="SaveLog"       Content="{x:Static properties:Resources.SaveLog_Content}"    Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
@@ -50,7 +53,7 @@
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="ShowInteract"  Content="{x:Static properties:Resources.Interact_Content}"   Checked="ShowInteract_OnChecked" Unchecked="ShowInteract_OnUnchecked"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="IgnoreSpam"    Content="{x:Static properties:Resources.IgnoreSpam_Content}" Checked="IgnoreSpam_OnChecked" Unchecked="IgnoreSpam_OnUnchecked"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="WindowTop"     Content="{x:Static properties:Resources.WindowTop_Content}"  Click="WindowTop_OnChecked"/>
-        </StackPanel>
+        </WrapPanel>
         <DockPanel DockPanel.Dock="Bottom">
             <Button DockPanel.Dock="Right" Content="🌐" Click="SelectLanguage" Padding="0"></Button>
             <TextBlock Text="{x:Static properties:Resources.ABout_Text}" VerticalAlignment="Center"/>
