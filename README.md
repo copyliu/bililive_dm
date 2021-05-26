@@ -13,3 +13,5 @@ bililive_dm
 翻譯
 =======
 日本語: 大場加奈子 [@komoechan](https://twitter.com/komoechan)
+
+English: [TigerSHe1998](https://github.com/TigerSHe1998) 大場加奈子([@komoechan](https://twitter.com/komoechan))
