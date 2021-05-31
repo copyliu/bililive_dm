@@ -497,9 +497,9 @@ Information:</value>
     <value>Welcome VIP and Moderator {0} entered your stream</value>
   </data>
   <data name="Plugin_DataGrid_Status_On" xml:space="preserve">
-    <value>ON</value>
+    <value>已啟用</value>
   </data>
   <data name="Plugin_DataGrid_Status_Off" xml:space="preserve">
-    <value>OFF</value>
+    <value>未啟用</value>
   </data>
 </root>
