@@ -497,9 +497,9 @@
     <value>[マスター][管理者] {1}さん 入室した</value>
   </data>
   <data name="Plugin_DataGrid_Status_On" xml:space="preserve">
-    <value>オン</value>
+    <value>已啟用</value>
   </data>
   <data name="Plugin_DataGrid_Status_Off" xml:space="preserve">
-    <value>オフ</value>
+    <value>未啟用</value>
   </data>
 </root>
