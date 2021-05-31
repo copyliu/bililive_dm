@@ -1194,5 +1194,23 @@ namespace Bililive_dm.Properties {
                 return ResourceManager.GetString("WTFEngineEnable.Content", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   查找类似 已啟用 的本地化字符串。
+        /// </summary>
+        public static string Plugin_DataGrid_Status_On {
+            get {
+                return ResourceManager.GetString("Plugin_DataGrid_Status_On", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   查找类似 未啟用 的本地化字符串。
+        /// </summary>
+        public static string Plugin_DataGrid_Status_Off {
+            get {
+                return ResourceManager.GetString("Plugin_DataGrid_Status_Off", resourceCulture);
+            }
+        }
     }
 }

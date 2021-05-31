@@ -496,4 +496,10 @@
   <data name="MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間" xml:space="preserve">
     <value>歡迎老爺和管理員 {0} 進入直播間</value>
   </data>
+  <data name="Plugin_DataGrid_Status_On" xml:space="preserve">
+    <value>已啟用</value>
+  </data>
+  <data name="Plugin_DataGrid_Status_Off" xml:space="preserve">
+    <value>未啟用</value>
+  </data>
 </root>

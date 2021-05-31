@@ -11,11 +11,11 @@ namespace Bililive_dm
 
             if ((bool) value == true)
             {
-                return "已啟用";
+                return Properties.Resources.Plugin_DataGrid_Status_On;
             }
             else
             {
-                return "未啟用";
+                return Properties.Resources.Plugin_DataGrid_Status_Off;
             }
         }
 
