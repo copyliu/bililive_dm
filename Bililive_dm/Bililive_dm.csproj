@@ -272,6 +272,8 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="Assets\PresentationTheme.Aero.dll.gz" />
+    <EmbeddedResource Include="Assets\PresentationTheme.Aero.Win8.dll.gz" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BilibiliDM_PluginFramework\BilibiliDM_PluginFramework.csproj">

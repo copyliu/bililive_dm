@@ -15,6 +15,7 @@
                 </Style>
             </ResourceDictionary>
             <ResourceDictionary x:Key="Default" Source="/PresentationFramework.Luna,Version=0.0.0.0,PublicKeyToken=31bf3856ad364e35;component/Themes/Luna.NormalColor.xaml"/>
+            <ResourceDictionary x:Key="Win8" Source="/PresentationTheme.Aero.Win8;component/Themes/Aero.Win8.NormalColor.xaml"/>
         </ResourceDictionary>
     </Application.Resources>
 
