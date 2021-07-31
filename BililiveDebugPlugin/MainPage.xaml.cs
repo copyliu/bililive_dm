@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows;
 using System.Windows.Controls;
+using BilibiliDM_PluginFramework;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,6 +27,11 @@ namespace BililiveDebugPlugin
         {
             this.context.Selected = (this.ListView.SelectedItem as DMItem)?.Model;
 
+        }
+
+        private void ClearClicked(object sender, RoutedEventArgs e)
+        {
+            this.context.DataList.Clear();
         }
     }
 }

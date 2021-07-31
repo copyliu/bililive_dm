@@ -21,7 +21,7 @@ namespace BililiveDebugPlugin
             this.PluginAuth = "CopyLiu";
             this.PluginName = "開發員小工具";
             this.PluginCont = "copyliu@gmail.com";
-            this.PluginVer = "v0.0.1";
+            this.PluginVer = "v0.0.2";
             this.PluginDesc = "它看着很像F12";
         }
 
@@ -33,7 +33,7 @@ namespace BililiveDebugPlugin
             {
                 this.mp.context.DataList.Add(new DMItem()
                 {
-                    ItemName = DateTime.Now.ToLongTimeString(),
+                    ItemName = DateTime.Now.ToString("hh:mm:ss")+" " + e.Danmaku.RawDataJToken["cmd"],
                     Model = e.Danmaku
                 });
             }));
@@ -45,6 +45,7 @@ namespace BililiveDebugPlugin
         {
             base.Admin();
             this.mp = new MainPage();
+            this.mp.context.Plugin = this;
             this.mp.Closed += (sender, args) => this.mp = null;
             this.mp.Show();
         }

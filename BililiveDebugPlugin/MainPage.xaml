@@ -36,28 +36,37 @@
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Path: "/>
                 <TextBox Text="{Binding Path=Path, Mode=OneWay}"></TextBox>
-              
+
                 <TextBlock Text="{Binding Type,Mode=OneWay}"></TextBlock>
                 <TextBlock Text=": "/>
-                <TextBox Text="{Binding Path=Value, Mode=TwoWay}"/>
+                <TextBox Text="{Binding Path=Value, Mode=OneWay}"/>
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
     <Grid d:DataContext="{d:DesignInstance bililiveDebugPlugin:PluginDataContext}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="195"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView Margin="10" x:Name="ListView" ItemsSource="{Binding DataList}" SelectionChanged="ListView_OnSelected">
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10,5,10,0">
+            <CheckBox Content="接收数据" VerticalAlignment="Center" Margin="0,0,10,0" IsChecked="{Binding Status}" />
+            <Button Content="清空内容" VerticalAlignment="Center" Click="ClearClicked"></Button>
+        </StackPanel>
+        <ListView Grid.Row="1" Grid.Column="0" Margin="10" x:Name="ListView" ItemsSource="{Binding DataList}" SelectionChanged="ListView_OnSelected" >
 
         </ListView>
-        <TreeView Grid.Column="1" Margin="10" x:Name="TreeView" ItemsSource="{Binding Selected.RawDataJToken}">
+        <TreeView Grid.Column="1" Grid.Row="1" Margin="10" x:Name="TreeView" ItemsSource="{Binding Selected.RawDataJToken}">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="IsExpanded" Value="True" />
                 </Style>
             </TreeView.ItemContainerStyle>
         </TreeView>
-
+        <TextBox Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" Margin="10,0,10,10" Text="{Binding Mode=OneWay, Converter={StaticResource MethodToValueConverter}, ConverterParameter='ToString', Path=Selected.RawDataJToken}"></TextBox>
     </Grid>
 </Window>

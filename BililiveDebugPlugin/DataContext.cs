@@ -41,6 +41,7 @@ namespace BililiveDebugPlugin
     {
         private DanmakuModel _selected;
         private ObservableCollection<DMItem> _dataList;
+        
 
         public PluginDataContext()
         {
@@ -53,7 +54,7 @@ namespace BililiveDebugPlugin
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        public DMPlugin Plugin { get; set; }
         public ObservableCollection<DMItem> DataList
         {
             get => _dataList;
@@ -72,6 +73,25 @@ namespace BililiveDebugPlugin
             {
                 if (Equals(value, _selected)) return;
                 _selected = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool Status
+        {
+            get => Plugin?.Status==true;
+            set
+            {
+                if(Plugin==null){return;}
+
+                if (value)
+                {
+                    this.Plugin.Start();
+                }
+                else
+                {
+                    this.Plugin.Stop();
+                }
                 OnPropertyChanged();
             }
         }
