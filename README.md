@@ -15,3 +15,7 @@ bililive_dm
 日本語: 大場加奈子 [@komoechan](https://twitter.com/komoechan)
 
 English: [TigerSHe1998](https://github.com/TigerSHe1998) 大場加奈子([@komoechan](https://twitter.com/komoechan))
+
+插件开发
+=======
+请见 [弹幕姬插件开发](https://github.com/copyliu/bililive_dm/wiki/%E5%BC%B9%E5%B9%95%E5%A7%AC%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
