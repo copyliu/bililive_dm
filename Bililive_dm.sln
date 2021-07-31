@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DMPluginTest", "DMPluginTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bililive_dm_UWPViewer", "Bililive_dm_UWPViewer\Bililive_dm_UWPViewer.csproj", "{708BE32F-3BB5-4D19-A925-B65B61B37C0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BililiveDebugPlugin", "BililiveDebugPlugin\BililiveDebugPlugin.csproj", "{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -167,6 +169,26 @@ Global
 		{708BE32F-3BB5-4D19-A925-B65B61B37C0F}.Release|x86.ActiveCfg = Release|x86
 		{708BE32F-3BB5-4D19-A925-B65B61B37C0F}.Release|x86.Build.0 = Release|x86
 		{708BE32F-3BB5-4D19-A925-B65B61B37C0F}.Release|x86.Deploy.0 = Release|x86
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|x64.Build.0 = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Debug|x86.Build.0 = Debug|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|ARM.Build.0 = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|ARM64.Build.0 = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|x64.ActiveCfg = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|x64.Build.0 = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
