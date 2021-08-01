@@ -33,7 +33,7 @@ namespace BililiveDebugPlugin
             {
                 this.mp.context.DataList.Add(new DMItem()
                 {
-                    ItemName = DateTime.Now.ToString("hh:mm:ss")+" " + e.Danmaku.RawDataJToken["cmd"],
+                    ItemName = DateTime.Now.ToString("HH:mm:ss")+" " + e.Danmaku.RawDataJToken["cmd"],
                     Model = e.Danmaku
                 });
             }));
