@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BilibiliDM_PluginFramework;
+using System;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -8,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Threading;
-using BilibiliDM_PluginFramework;
 
 namespace BililiveAudioCmtPlayer
 {
@@ -18,7 +18,7 @@ namespace BililiveAudioCmtPlayer
         private PluginDataContext context = new PluginDataContext();
 
         private HttpClient httpClient = new HttpClient(new HttpClientHandler()
-            {AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip})
+        { AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip })
         {
             Timeout = TimeSpan.FromSeconds(10)
         };
@@ -73,86 +73,80 @@ namespace BililiveAudioCmtPlayer
             while (!token.IsCancellationRequested)
             {
 
+                var model = context.DataList.FirstOrDefault();
+                if (model != null)
                 {
-                    var model = context.DataList.FirstOrDefault();
-                    if (model != null)
+                    try
                     {
-                        try
+                        var audioobj = model.Model.RawDataJToken["info"][0][14];
+                        if (audioobj != null && audioobj["voice_url"] != null)
                         {
-                            var audioobj = model.Model.RawDataJToken["info"][0][14];
-                            if (audioobj != null && audioobj["voice_url"] != null)
+                            var cts = new CancellationTokenSource();
+                            var urlstring = audioobj["voice_url"] + "";
+                            var url = new Uri(WebUtility.UrlDecode(urlstring));
+                            var streamtask = httpClient.GetStreamAsync(url);
+                            streamtask.Wait(CancellationToken.None);
+                            var stream = streamtask.Result;
+
+                            var filename = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() +
+                                           System.IO.Path.GetExtension(url.LocalPath);
+                            var mediaPlayer = new MediaPlayer();
+                            mediaPlayer.Volume = 1;
+                            mediaPlayer.MediaEnded += (sender, args) => cts.Cancel();
+                            mediaPlayer.MediaFailed += (sender, args) =>
                             {
-                               
+
+                                this.Log(args.ErrorException.ToString());
+                                cts.Cancel();
+                            };
+                            try
+                            {
+                                using (var fileStream = File.Create(filename))
                                 {
-                                    var cts = new CancellationTokenSource();
-                                    var urlstring = audioobj["voice_url"] + "";
-                                    var url = new Uri(WebUtility.UrlDecode(urlstring));
-                                    var streamtask = httpClient.GetStreamAsync(url);
-                                    streamtask.Wait(CancellationToken.None);
-                                    var stream = streamtask.Result;
+                                    await stream.CopyToAsync(fileStream);
+                                }
 
-                                    var filename = System.IO.Path.GetTempPath() + Guid.NewGuid().ToString() +
-                                                   System.IO.Path.GetExtension(url.LocalPath);
-                                    var mediaPlayer = new MediaPlayer();
-                                    mediaPlayer.Volume = 1;
-                                    mediaPlayer.MediaEnded += (sender, args) => cts.Cancel();
-                                    mediaPlayer.MediaFailed += (sender, args) =>
-                                    {
 
-                                        this.Log(args.ErrorException.ToString());
-                                        cts.Cancel();
-                                    };
-                                    try
-                                    {
-                                        using (var fileStream = File.Create(filename))
-                                        {
-                                            await stream.CopyToAsync(fileStream);
-                                        }
-                              
-                                       
-                                      
-                                        mediaPlayer.Open(new Uri(filename));
-                                        mediaPlayer.Play();
-                                        try
-                                        {
-                                            await Task.Delay(-1, cts.Token);
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            //ignore
-                                        }
 
-                                    }
-
-                                    finally
-                                    {
-                                      
-                                        mediaPlayer.Close();
-                                        File.Delete(filename);
-                                    }
-
+                                mediaPlayer.Open(new Uri(filename));
+                                mediaPlayer.Play();
+                                try
+                                {
+                                    await Task.Delay(-1, cts.Token);
+                                }
+                                catch (Exception e)
+                                {
+                                    //ignore
                                 }
 
                             }
 
-                        }
-                        catch (Exception e)
-                        {
-                            this.Log(e.ToString());
-                            // ignored
-                        }
-                        finally
-                        {
+                            finally
+                            {
 
-                            context.DataList.Remove(model);
+                                mediaPlayer.Close();
+                                File.Delete(filename);
+                            }
+
                         }
 
                     }
+                    catch (Exception e)
+                    {
+                        this.Log(e.ToString());
+                        // ignored
+                    }
+                    finally
+                    {
 
+                        context.DataList.Remove(model);
+                    }
 
-
-                    await Task.Delay(TimeSpan.FromSeconds(0.5), token);
                 }
+
+
+
+                await Task.Delay(TimeSpan.FromSeconds(0.5), token);
             }
         }
     }

@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BilibiliDM_PluginFramework.Annotations;
+using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Threading;
-using JetBrains.Annotations;
 
 namespace BilibiliDM_PluginFramework
 {
 
-   
-    public  class DMPlugin: DispatcherObject,INotifyPropertyChanged
+
+    public class DMPlugin : DispatcherObject, INotifyPropertyChanged
     {
         private bool _status = false;
         public event ReceivedDanmakuEvt ReceivedDanmaku;
@@ -21,9 +17,9 @@ namespace BilibiliDM_PluginFramework
         public event ReceivedRoomCountEvt ReceivedRoomCount;
         public event ConnectedEvt Connected;
 
-         public  void MainConnected(int roomid)
-         {
-             this.RoomID = roomid;
+        public void MainConnected(int roomid)
+        {
+            this.RoomID = roomid;
             try
             {
                 Connected?.Invoke(null, new ConnectedEvtArgs() { roomid = roomid });
@@ -50,8 +46,8 @@ namespace BilibiliDM_PluginFramework
 
                 }
             }
-            
-         }
+
+        }
 
         public void MainReceivedDanMaku(ReceivedDanmakuArgs e)
         {
@@ -82,7 +78,7 @@ namespace BilibiliDM_PluginFramework
 
                 }
             }
-            
+
         }
 
         public void MainReceivedRoomCount(ReceivedRoomCountArgs e)
@@ -114,7 +110,7 @@ namespace BilibiliDM_PluginFramework
 
                 }
             }
-           
+
         }
 
         public void MainDisconnected()
@@ -147,7 +143,7 @@ namespace BilibiliDM_PluginFramework
 
                 }
             }
-           
+
         }
 
         /// <summary>
@@ -206,7 +202,7 @@ namespace BilibiliDM_PluginFramework
 
         public DMPlugin()
         {
-                
+
         }
         /// <summary>
         /// 啟用插件方法 請重寫此方法
@@ -214,7 +210,7 @@ namespace BilibiliDM_PluginFramework
         public virtual void Start()
         {
             this.Status = true;
-            Console.WriteLine(this.PluginName+" Start!");
+            Console.WriteLine(this.PluginName + " Start!");
         }
         /// <summary>
         /// 禁用插件方法 請重寫此方法
@@ -230,7 +226,7 @@ namespace BilibiliDM_PluginFramework
         /// </summary>
         public virtual void Admin()
         {
-            
+
         }
         /// <summary>
         /// 此方法在所有插件加载完毕后调用
@@ -244,7 +240,7 @@ namespace BilibiliDM_PluginFramework
         /// </summary>
         public virtual void DeInit()
         {
-            
+
         }
         /// <summary>
         /// 打日志
@@ -258,7 +254,7 @@ namespace BilibiliDM_PluginFramework
                 mw.logging(this.PluginName + " " + text);
 
             }));
-            
+
         }
         /// <summary>
         /// 弹幕姬是否是以Debug模式启动的
@@ -284,7 +280,7 @@ namespace BilibiliDM_PluginFramework
                 mw.AddDMText(this.PluginName, text, true, fullscreen);
 
             }));
-           
+
         }
         /// <summary>
         /// 发送伪春菜脚本, 前提是用户有打开伪春菜并允许弹幕姬和伪春菜联动(默认允许)
@@ -298,7 +294,7 @@ namespace BilibiliDM_PluginFramework
                 mw.SendSSP(text);
 
             }));
-            
+
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -310,5 +306,5 @@ namespace BilibiliDM_PluginFramework
 
     }
 
-  
+
 }

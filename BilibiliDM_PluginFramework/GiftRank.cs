@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
+﻿using BilibiliDM_PluginFramework.Annotations;
+using System.ComponentModel;
 
 namespace BilibiliDM_PluginFramework
 {
-    public class GiftRank:INotifyPropertyChanged
+    public class GiftRank : INotifyPropertyChanged
     {
         private string _userName;
         private decimal _coin;
