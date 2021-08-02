@@ -1658,6 +1658,14 @@ namespace Bililive_dm
             if (selector.Select() is ResourceDictionary result)
             {
                 App.Current.merged[0] = result;
+
+                if (result != App.Current.AeroWin8) return;
+
+                Skin.Click -= Skin_Click;
+
+                Skin.ToolTip = "既然被你發現了，就不能輕易讓你離開了！";
+                ToolTipService.SetShowOnDisabled(Skin, true);
+                Skin.IsEnabled = false;
             }
             merged[0] = new ResourceDictionary();
         }

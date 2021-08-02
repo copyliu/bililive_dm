@@ -65,7 +65,7 @@ namespace Bililive_dm
         public ResourceDictionary Select()
         {
             if (!ShowDialog().GetValueOrDefault()) return null;
-            return selected ?? new ResourceDictionary();
+            return selected ?? App.Current.AeroWin8;
         }
 
         private void list_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,7 +81,7 @@ namespace Bililive_dm
         private void list_Loaded(object sender, RoutedEventArgs e)
         {
             var li = (UIElement)list.ItemContainerGenerator.ContainerFromItem(list.SelectedItem);
-            li?.Focus();
+            li.Focus();
         }
     }
 }
