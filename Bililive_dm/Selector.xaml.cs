@@ -36,10 +36,11 @@ namespace Bililive_dm
 
         static Selector()
         {
+            addStaticTheme("Simple", null, (ResourceDictionary)Application.Current.Resources["Default"]);
             addStaticTheme("Aero2");
             addStaticTheme("Aero");
             addStaticTheme("Royale");
-            addStaticTheme("Luna", dict: (ResourceDictionary)Application.Current.Resources["Default"]);
+            addStaticTheme("Luna");
             addStaticTheme("Luna", "Homestead");
             addStaticTheme("Luna", "Metallic");
             addStaticTheme("Classic", null, (ResourceDictionary)Application.Current.Resources["Classic"]);
