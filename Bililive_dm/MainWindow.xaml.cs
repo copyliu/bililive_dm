@@ -959,7 +959,7 @@ namespace Bililive_dm
             }
         }
 
-        private void b_Disconnected(object sender, DisconnectEvtArgs args)
+        private async void b_Disconnected(object sender, DisconnectEvtArgs args)
         {
             foreach (var dmPlugin in App.Plugins)
             {
@@ -985,6 +985,7 @@ namespace Bililive_dm
                 {
                     errorlogging(Properties.Resources.MainWindow_b_Disconnected_正在自动重连___);
                     AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_b_Disconnected_正在自动重连___, true);
+                    await Task.Delay(TimeSpan.FromSeconds(0.5));
                     connbtn_Click(null, null);
                 }
                 else
@@ -994,19 +995,19 @@ namespace Bililive_dm
             }
             else
             {
-                Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    if (AutoReconnect.IsChecked == true && args.Error != null)
-                    {
-                        errorlogging(Properties.Resources.MainWindow_b_Disconnected_正在自动重连___);
-                        AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_b_Disconnected_正在自动重连___, true);
-                        connbtn_Click(null, null);
-                    }
-                    else
-                    {
-                        ConnBtn.IsEnabled = true;
-                    }
-                }));
+                await Dispatcher.BeginInvoke(new Action(() =>
+                  {
+                      if (AutoReconnect.IsChecked == true && args.Error != null)
+                      {
+                          errorlogging(Properties.Resources.MainWindow_b_Disconnected_正在自动重连___);
+                          AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身, Properties.Resources.MainWindow_b_Disconnected_正在自动重连___, true);
+                          connbtn_Click(null, null);
+                      }
+                      else
+                      {
+                          ConnBtn.IsEnabled = true;
+                      }
+                  }));
             }
         }
 

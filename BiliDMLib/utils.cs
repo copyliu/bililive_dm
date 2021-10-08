@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BiliDMLib
@@ -9,14 +10,14 @@ namespace BiliDMLib
     public static class utils
     {
 
-        public static async Task ReadBAsync(this Stream stream, byte[] buffer, int offset, int count)
+        public static async Task ReadBAsync(this Stream stream, byte[] buffer, int offset, int count,CancellationToken ct)
         {
             if (offset + count > buffer.Length)
                 throw new ArgumentException();
             int read = 0;
             while (read < count)
             {
-                var available = await stream.ReadAsync(buffer, offset, count - read);
+                var available = await stream.ReadAsync(buffer, offset, count - read, ct);
                 if (available == 0)
                 {
                     throw new ObjectDisposedException(null);

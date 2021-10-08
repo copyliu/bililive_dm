@@ -14,7 +14,8 @@
                     <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" />
                 </Style>
             </ResourceDictionary>
-            <ResourceDictionary x:Key="Default" Source="Simple Styles.xaml"/>
+            <ResourceDictionary x:Key="Default" Source="/PresentationFramework.Luna,Version=0.0.0.0,PublicKeyToken=31bf3856ad364e35;component/Themes/Luna.NormalColor.xaml"/>
+            <!-- <ResourceDictionary x:Key="Default" Source="Simple Styles.xaml"/> -->
         </ResourceDictionary>
     </Application.Resources>
 

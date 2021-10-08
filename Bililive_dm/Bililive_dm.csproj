@@ -27,7 +27,7 @@
     <ProductName>B站彈幕姬</ProductName>
     <PublisherName>CopyLiu</PublisherName>
     <SuiteName>BiliBili_DM</SuiteName>
-    <MinimumRequiredVersion>1.1.1.69</MinimumRequiredVersion>
+    <MinimumRequiredVersion>1.1.1.71</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>71</ApplicationRevision>
