@@ -139,8 +139,6 @@ namespace BiliDMLib
                 if (await SendJoinChannel(channelId,token, cancellationTokenSource.Token))
                 {
                     Connected = true;
-                   
-                  
                     _=this.ReceiveMessageLoop(cancellationTokenSource.Token);
                     lastserver = ChatHost;
                     lastroomid = roomId;
@@ -213,6 +211,7 @@ namespace BiliDMLib
                     else if (protocol.Version == 3 && protocol.Action == 5) // brotli?
                     {
                         using (var ms = new MemoryStream(buffer)) // Skip 0x78 0xDA
+                        
                         using (var deflate = new Brotli.BrotliStream(ms, CompressionMode.Decompress))
                         {
                             var headerbuffer = new byte[16];
