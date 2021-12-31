@@ -43,7 +43,6 @@ namespace BiliDMLib
         private static HttpClient httpClient=new HttpClient(){Timeout = TimeSpan.FromSeconds(5)};
         private static List<Tuple<string, int>> ChatHostList = new List<Tuple<string, int>>();
         private CancellationTokenSource cancellationTokenSource;
-//        private object shit_lock=new object();//ReceiveMessageLoop 似乎好像大概會同時運行兩個的bug, 但是不修了, 鎖上算了
 
         public async Task<bool> ConnectAsync(int roomId)
         {
@@ -65,7 +64,7 @@ namespace BiliDMLib
 //                    channelId = (int) jo.list[0].cid;
 //                }
                
-                if (channelId != lastroomid)
+                if (channelId != lastroomid || ChatHostList.Count==0)
                 {
                     try
                     {
