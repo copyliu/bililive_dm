@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>©2014-2021 CopyLiu All Rights  NOT Reserved, フィードバック: copyliu@gmail.com 日本語翻訳: @komoechan</value>
+    <value>非B站出品 ©2014-2022 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>自動再接続</value>
