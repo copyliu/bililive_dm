@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30804.86
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bililive_dm", "Bililive_dm\Bililive_dm.csproj", "{545A89C8-2276-498D-B892-6AA3AF0ED1F7}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -23,6 +23,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BililiveDebugPlugin", "BililiveDebugPlugin\BililiveDebugPlugin.csproj", "{F4DF309F-BF39-4D01-8FFA-0B0AD93EE5A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BililiveAudioCmtPlayer", "BililiveAudioCmtPlayer\BililiveAudioCmtPlayer.csproj", "{ED73592B-9381-44CB-BA65-73A87509B17B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLiveSpotify_Plugin", "BLiveSpotify_Plugin\BLiveSpotify_Plugin.csproj", "{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -211,6 +213,26 @@ Global
 		{ED73592B-9381-44CB-BA65-73A87509B17B}.Release|x64.Build.0 = Release|Any CPU
 		{ED73592B-9381-44CB-BA65-73A87509B17B}.Release|x86.ActiveCfg = Release|Any CPU
 		{ED73592B-9381-44CB-BA65-73A87509B17B}.Release|x86.Build.0 = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|ARM.Build.0 = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|x64.Build.0 = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Debug|x86.Build.0 = Debug|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|ARM.ActiveCfg = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|ARM.Build.0 = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|ARM64.Build.0 = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|x64.ActiveCfg = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|x64.Build.0 = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|x86.ActiveCfg = Release|Any CPU
+		{DFBF5898-70CD-4D9B-909B-2E95FA3FBB91}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
