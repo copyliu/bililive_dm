@@ -104,7 +104,8 @@ namespace BLiveSpotify_Plugin
                 }
                 else
                 {
-                    throw new MyException("獲取歌單失敗");
+                    AddLog(await result.Content.ReadAsStringAsync());
+                    throw new MyException("獲取播放機失敗");
 
 
 
@@ -145,6 +146,7 @@ namespace BLiveSpotify_Plugin
                 }
                 else
                 {
+                    AddLog(await result.Content.ReadAsStringAsync());
                     return null;
                 }
             }
@@ -152,8 +154,7 @@ namespace BLiveSpotify_Plugin
             {
                 return null;
             }
-
-            return null;
+             return null;
 
         }
 
@@ -187,10 +188,11 @@ namespace BLiveSpotify_Plugin
                 
             }
             System.Diagnostics.Process.Start("https://accounts.spotify.com/authorize?"+queryString); ;
+            HttpListenerResponse response = null;
             try
             {
                 var context = await listener.GetContextAsync();
-                var response = context.Response;
+                response = context.Response;
                
                 var ret = HttpUtility.ParseQueryString(context.Request.Url.Query);
                 if (!string.IsNullOrEmpty(ret["code"]))
@@ -218,6 +220,7 @@ namespace BLiveSpotify_Plugin
                         response.ContentType = "text/html";
                         System.IO.Stream output = response.OutputStream;
                         await output.WriteAsync(buffer, 0, buffer.Length);
+                        await output.FlushAsync();
                         output.Close();
                         return true;
                     }
@@ -229,6 +232,7 @@ namespace BLiveSpotify_Plugin
                         response.ContentType = "text/html";
                         System.IO.Stream output = response.OutputStream;
                         await output.WriteAsync(buffer, 0, buffer.Length);
+                        await output.FlushAsync();
                         output.Close();
                         return false;
                     }
@@ -241,13 +245,26 @@ namespace BLiveSpotify_Plugin
                     response.ContentType = "text/html;charset=utf-8";
                     System.IO.Stream output = response.OutputStream;
                     await output.WriteAsync(buffer, 0, buffer.Length);
+                    await output.FlushAsync();
                     output.Close();
                 }
                 return false;
             }
             catch (Exception e)
             {
+                if (response != null)
+                {
+                    string responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權失敗, 請關閉本頁面</BODY></HTML>";
+                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                    response.ContentLength64 = buffer.Length;
+                    response.ContentType = "text/html;charset=utf-8";
+                    System.IO.Stream output = response.OutputStream;
+                    await output.WriteAsync(buffer, 0, buffer.Length);
+                    await output.FlushAsync();
+                    output.Close();
 
+                }
+               
                 return false;
             }
             finally
@@ -279,7 +296,7 @@ namespace BLiveSpotify_Plugin
         {
             if (!string.IsNullOrEmpty(this.playdevice)&&await update_token())
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, $"https://api.spotify.com/v1/me/player/queue?device_id={HttpUtility.UrlEncode(playdevice)}&uris={HttpUtility.UrlEncode(id)}");
+                var request = new HttpRequestMessage(HttpMethod.Post, $"https://api.spotify.com/v1/me/player/queue?device_id={HttpUtility.UrlEncode(playdevice)}&uri={HttpUtility.UrlEncode(id)}");
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", this.access_token);
                 var result = await client.SendAsync(request);
                 if (result.IsSuccessStatusCode)
@@ -289,6 +306,7 @@ namespace BLiveSpotify_Plugin
                 }
                 else
                 {
+                    AddLog(await result.Content.ReadAsStringAsync());
                     return false;
                 }
             }
@@ -314,6 +332,7 @@ namespace BLiveSpotify_Plugin
                 }
                 else
                 {
+                    AddLog(await result.Content.ReadAsStringAsync());
                     return false;
                 }
             }
@@ -342,8 +361,24 @@ namespace BLiveSpotify_Plugin
             }
 
         }
-    
-}
+
+        public void AddLog(string log)
+        {
+            var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            path = Path.Combine(path, "弹幕姬", "Plugins", "BLiveSpotify_Plugin.log");
+            try
+            {
+              File.AppendAllText(path,log+"\r\n");
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+
+    }
 
     public class BLiveSpotify_Plugin : DMPlugin
     {
