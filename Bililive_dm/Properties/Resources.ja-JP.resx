@@ -389,7 +389,7 @@
     <value>プレビュー</value>
   </data>
   <data name="TextBlock.Text" xml:space="preserve">
-    <value>人氣值:</value>
+    <value>人気：</value>
   </data>
   <data name="TextBlock.Text.EnableNewEngineWarn" xml:space="preserve">
     <value>新しいｴﾝｼﾞﾝには文字速さの調整が無効です</value>
@@ -503,6 +503,6 @@
     <value>無効</value>
   </data>
   <data name="WatchedCount" xml:space="preserve">
-    <value>觀看人次:</value>
+    <value>観客動員数:</value>
   </data>
 </root>
