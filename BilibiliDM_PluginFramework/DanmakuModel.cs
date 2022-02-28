@@ -458,7 +458,7 @@ namespace BilibiliDM_PluginFramework
                             CommentText = obj["msg"]?.ToString();
                             break;
                         }
-                        case "WACHED_CHANGE":
+                        case "WATCHED_CHANGE":
                         {
                             MsgType = MsgTypeEnum.WatchedChange;
                             WatchedCount = obj["data"]["num"].ToObject<int>();
