@@ -70,7 +70,11 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         /// 超管警告
         /// </summary>
-        Warning
+        Warning,
+        /// <summary>
+        /// 观看人数, 可能是人次? 
+        /// </summary>
+        WatchedChange
 
     }
 
@@ -271,6 +275,11 @@ namespace BilibiliDM_PluginFramework
         public int SCKeepTime { get; set; }
 
         /// <summary>
+        /// 观看人数 可能是人次?
+        /// </summary>
+        public long WatchedCount { get; set; }
+
+        /// <summary>
         /// 原始数据, 高级开发用, 如果需要用原始的JSON数据, 建议使用这个而不是用RawData
         /// </summary>
         public JToken RawDataJToken { get; set; }
@@ -449,7 +458,12 @@ namespace BilibiliDM_PluginFramework
                             CommentText = obj["msg"]?.ToString();
                             break;
                         }
-
+                        case "WACHED_CHANGE":
+                        {
+                            MsgType = MsgTypeEnum.WatchedChange;
+                            WatchedCount = obj["data"]["num"].ToObject<int>();
+                            break;
+                        }
                         default:
                         {
                             if (cmd.StartsWith("DANMU_MSG")) // "高考"fix

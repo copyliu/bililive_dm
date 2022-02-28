@@ -10,7 +10,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="509" Width="842" FontSize="14.666">
+        Title="B站彈幕姬" Height="509" Width="880" FontSize="14.666">
     <Window.Resources>
         <ResourceDictionary>
             <bililiveDm:PluginStatusConverter x:Key="Converter"/>
@@ -43,7 +43,12 @@
                 <TextBlock  x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
                             VerticalAlignment="Center" />
             </StackPanel>
-           
+            <StackPanel Orientation="Horizontal" Margin="18,0,0,0">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.WatchedCount}" VerticalAlignment="Center" Margin="3" />
+                <TextBlock  x:Name="WatchedBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
+                            VerticalAlignment="Center" />
+            </StackPanel>
+
             <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"  Checked="SideBar_Checked"
                 VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"                   x:Name="Full"          Content="{x:Static properties:Resources.Full_Content}"       Checked="Full_Checked" Unchecked="Full_Unchecked" />

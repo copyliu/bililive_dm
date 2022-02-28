@@ -684,6 +684,7 @@ namespace Bililive_dm
                 }
             }
 
+
             lock (_danmakuQueue)
             {
                 var danmakuModel = e.Danmaku;
@@ -936,6 +937,14 @@ namespace Bililive_dm
                     }));
                     break;
                 }
+                case MsgTypeEnum.WatchedChange:
+                {
+                    Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        this.WatchedBlock.Text = danmakuModel.WatchedCount + "";
+                    }));
+                    break;
+                    }
             }
 
             if (rawoutput_mode)

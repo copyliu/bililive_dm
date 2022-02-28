@@ -1043,7 +1043,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   查找类似 當前人氣值: 的本地化字符串。
+        ///   查找类似 人氣值: 的本地化字符串。
         /// </summary>
         public static string TextBlock_Text {
             get {
@@ -1192,6 +1192,15 @@ namespace Bililive_dm.Properties {
         public static string TextBlock_Text_SYOffset {
             get {
                 return ResourceManager.GetString("TextBlock.Text.SYOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 觀看人次: 的本地化字符串。
+        /// </summary>
+        public static string WatchedCount {
+            get {
+                return ResourceManager.GetString("WatchedCount", resourceCulture);
             }
         }
         

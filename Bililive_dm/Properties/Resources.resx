@@ -389,7 +389,7 @@
     <value>測試效果</value>
   </data>
   <data name="TextBlock.Text" xml:space="preserve">
-    <value>當前人氣值:</value>
+    <value>人氣值:</value>
   </data>
   <data name="TextBlock.Text.EnableNewEngineWarn" xml:space="preserve">
     <value>注意: 新彈幕引擎下文字速度選項無效</value>
@@ -501,5 +501,8 @@
   </data>
   <data name="Plugin_DataGrid_Status_Off" xml:space="preserve">
     <value>未啟用</value>
+  </data>
+  <data name="WatchedCount" xml:space="preserve">
+    <value>觀看人次:</value>
   </data>
 </root>
