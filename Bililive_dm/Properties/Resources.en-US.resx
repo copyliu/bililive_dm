@@ -389,7 +389,7 @@ Information:</value>
     <value>Test</value>
   </data>
   <data name="TextBlock.Text" xml:space="preserve">
-    <value>人氣值:</value>
+    <value>Popularity:</value>
   </data>
   <data name="TextBlock.Text.EnableNewEngineWarn" xml:space="preserve">
     <value>Note: Text speed option does not work with the new engine</value>
@@ -503,6 +503,6 @@ Information:</value>
     <value>Disabled</value>
   </data>
   <data name="WatchedCount" xml:space="preserve">
-    <value>觀看人次:</value>
+    <value>Watched:</value>
   </data>
 </root>
