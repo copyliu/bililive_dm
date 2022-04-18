@@ -109,8 +109,8 @@
     <Content Include="EndianBitConverter\LICENSE.EndianBitConverter.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Brotli.NET">
-      <Version>2.1.1</Version>
+    <PackageReference Include="BrotliSharpLib">
+      <Version>0.3.3</Version>
     </PackageReference>
     <PackageReference Include="JetBrains.Annotations">
       <Version>9.2.0</Version>
