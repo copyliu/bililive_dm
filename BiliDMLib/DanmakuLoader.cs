@@ -15,7 +15,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using BilibiliDM_PluginFramework;
 using BitConverter;
-using BrotliSharpLib;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -212,7 +211,7 @@ namespace BiliDMLib
                     {
                         using (var ms = new MemoryStream(buffer)) // Skip 0x78 0xDA
                         
-                        using (var deflate = new BrotliStream(ms, CompressionMode.Decompress))
+                        using (var deflate = new Brotli.BrotliStream(ms, CompressionMode.Decompress))
                         {
                             var headerbuffer = new byte[16];
                             try
