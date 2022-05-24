@@ -25,7 +25,6 @@ namespace Bililive_dm
         {
             _addtime = addtime;
             this.InitializeComponent();
-            Console.WriteLine("DefaultStore.MainFontFamily:" + Store.MainFontFamily);
             this.Text.FontFamily = new FontFamily(Store.MainFontFamily);
             if (warning)
             {
