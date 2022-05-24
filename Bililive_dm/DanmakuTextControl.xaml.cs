@@ -25,10 +25,11 @@ namespace Bililive_dm
         {
             _addtime = addtime;
             this.InitializeComponent();
+            Console.WriteLine("DefaultStore.MainFontFamily:" + Store.MainFontFamily);
+            this.Text.FontFamily = new FontFamily(Store.MainFontFamily);
             if (warning)
             {
                 this.LayoutRoot.Background=Brushes.Red;
-                
             }
             var sb = (Storyboard)this.Resources["Storyboard1"];
             Storyboard.SetTarget(sb.Children[2], this);

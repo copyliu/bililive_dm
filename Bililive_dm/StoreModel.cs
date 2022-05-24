@@ -217,8 +217,19 @@ namespace Bililive_dm
                     if (value == _fullScreenMonitor) return;
                     _fullScreenMonitor = value;
                 }
-
                 Store.FullScreenMonitor = _fullScreenMonitor;
+                OnPropertyChanged();
+            }
+        }
+        public string MainFontFamily
+        {
+            get
+            {
+                return _mainFontFamily;
+            }
+            set
+            {
+                Store.MainFontFamily = _mainFontFamily;
                 OnPropertyChanged();
             }
         }
@@ -230,6 +241,7 @@ namespace Bililive_dm
         private double _mainOverlayEffect3; //文字停留
         private double _mainOverlayEffect4; //窗口消失
         private double _mainOverlayFontsize;
+        private string _mainFontFamily;     //设置字体
 
 
         private double _fullOverlayEffect1; //文字速度
@@ -254,6 +266,7 @@ namespace Bililive_dm
             _wtfEngineEnabled = Store.WtfEngineEnabled;
             _displayAffinity = Store.DisplayAffinity;
             _fullScreenMonitor = Store.FullScreenMonitor;
+            _mainFontFamily = Store.MainFontFamily;
         }
 
         public void toStatic()
@@ -271,6 +284,7 @@ namespace Bililive_dm
             Store.WtfEngineEnabled = WtfEngineEnabled;
             Store.DisplayAffinity = DisplayAffinity;
             Store.FullScreenMonitor = FullScreenMonitor;
+            Store.MainFontFamily = MainFontFamily;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
