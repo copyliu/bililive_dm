@@ -95,6 +95,11 @@
                        Margin="0,0,20,0" />
             <ComboBox  x:Name="ScreenSelect"  SelectedValue="{Binding FullScreenMonitor,Mode=TwoWay}"     />
         </DockPanel>
+        <DockPanel>
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.FontFamilySelecter}" VerticalAlignment="Center" Width="159" TextAlignment="Right"
+                       Margin="0,0,20,0" />
+            <ComboBox  x:Name="FontFamilySelecter"  SelectedValue="{Binding MainFontFamily, Mode=TwoWay}" SelectionChanged="FontFamilySelecter_SelectionChanged"     />
+        </DockPanel>
         <CheckBox x:Name="WTFEngineEnable" IsChecked="{Binding WtfEngineEnabled,Mode=TwoWay}" Content="{x:Static properties:Resources.WTFEngineEnable_Content}" />
         <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_EnableNewEngineWarn}" VerticalAlignment="Center" TextAlignment="Right"
                        Margin="0,0,20,0" HorizontalAlignment="Left" />

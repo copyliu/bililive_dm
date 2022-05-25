@@ -19,7 +19,7 @@ namespace Bililive_dm.Properties {
     // 类通过类似于 ResGen 或 Visual Studio 的工具自动生成的。
     // 若要添加或移除成员，请编辑 .ResX 文件，然后重新运行 ResGen
     // (以 /str 作为命令选项)，或重新生成 VS 项目。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -47,8 +47,8 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性，对
-        ///   使用此强类型资源类的所有资源查找执行重写。
+        ///   重写当前线程的 CurrentUICulture 属性
+        ///   重写当前线程的 CurrentUICulture 属性。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -255,6 +255,15 @@ namespace Bililive_dm.Properties {
         public static string EnableRegex_Content {
             get {
                 return ResourceManager.GetString("EnableRegex.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 顯示字體更換 的本地化字符串。
+        /// </summary>
+        public static string FontFamilySelecter {
+            get {
+                return ResourceManager.GetString("FontFamilySelecter", resourceCulture);
             }
         }
         

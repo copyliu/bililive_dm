@@ -505,4 +505,7 @@
   <data name="WatchedCount" xml:space="preserve">
     <value>觀看人次:</value>
   </data>
+  <data name="FontFamilySelecter" xml:space="preserve">
+    <value>顯示字體更換</value>
+  </data>
 </root>
