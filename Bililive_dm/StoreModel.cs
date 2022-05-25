@@ -5,6 +5,8 @@ using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Media;
+using System.Xml.Serialization;
 
 namespace Bililive_dm
 {
@@ -221,15 +223,37 @@ namespace Bililive_dm
                 OnPropertyChanged();
             }
         }
-        public string MainFontFamily
+        public string MainFontFamilyName
         {
             get
             {
-                return _mainFontFamily;
+                if (string.IsNullOrEmpty(_mainFontFamilyName))
+                {
+                    _mainFontFamilyName = "Global User Interface";
+                }
+                return _mainFontFamilyName;
             }
             set
             {
-                Store.MainFontFamily = _mainFontFamily;
+                if (string.IsNullOrEmpty(value))
+                {
+                    _mainFontFamilyName = "Global User Interface";
+                }
+                else
+                {
+                    _mainFontFamilyName = value;
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public FontFamily MainFontFamily
+        {
+            get => new FontFamily(MainFontFamilyName+"");
+            set
+            {
+                this.MainFontFamilyName = value.ToString();
+                DanmakuTextControl.TextFontFamily = value;
                 OnPropertyChanged();
             }
         }
@@ -240,8 +264,7 @@ namespace Bililive_dm
         private double _mainOverlayEffect2; //文字出現
         private double _mainOverlayEffect3; //文字停留
         private double _mainOverlayEffect4; //窗口消失
-        private double _mainOverlayFontsize;
-        private string _mainFontFamily;     //设置字体
+        private double _mainOverlayFontsize; 
 
 
         private double _fullOverlayEffect1; //文字速度
@@ -250,6 +273,7 @@ namespace Bililive_dm
         private bool _wtfEngineEnabled;
         private bool _displayAffinity;
         private string _fullScreenMonitor;
+        private string _mainFontFamilyName;
 
         public StoreModel()
         {
@@ -266,7 +290,6 @@ namespace Bililive_dm
             _wtfEngineEnabled = Store.WtfEngineEnabled;
             _displayAffinity = Store.DisplayAffinity;
             _fullScreenMonitor = Store.FullScreenMonitor;
-            _mainFontFamily = Store.MainFontFamily;
         }
 
         public void toStatic()
@@ -284,7 +307,6 @@ namespace Bililive_dm
             Store.WtfEngineEnabled = WtfEngineEnabled;
             Store.DisplayAffinity = DisplayAffinity;
             Store.FullScreenMonitor = FullScreenMonitor;
-            Store.MainFontFamily = MainFontFamily;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

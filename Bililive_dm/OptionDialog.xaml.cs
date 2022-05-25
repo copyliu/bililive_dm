@@ -51,7 +51,6 @@ namespace Bililive_dm
            
             this.ScreenSelect.ItemsSource = System.Windows.Forms.Screen.AllScreens.Select(p => p.DeviceName).ToList();
             this.FontFamilySelecter.ItemsSource = Fonts.SystemFontFamilies;
-   
 
         }
 
@@ -80,13 +79,9 @@ namespace Bililive_dm
             a.WtfEngineEnabled = DefaultStore.WtfEngineEnabled;
             a.DisplayAffinity = DefaultStore.DisplayAffinity;
             a.FullScreenMonitor = DefaultStore.FullScreenMonitor;
-            a.MainFontFamily = DefaultStore.MainFontFamily;
+            a.MainFontFamily = new FontFamily("Global User Interface");
             a.SaveConfig();
         }
-
-        private void FontFamilySelecter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Store.MainFontFamily = this.FontFamilySelecter.SelectedItem.ToString();
-        }
+ 
     }
 }

@@ -20,12 +20,15 @@ namespace Bililive_dm
     public partial class DanmakuTextControl : UserControl
     {
         private readonly int _addtime;
-
+        /// <summary>
+        /// 使用的字體
+        /// </summary>
+        public static FontFamily TextFontFamily=new FontFamily();
         public DanmakuTextControl(int addtime=0,bool warning=false)
         {
             _addtime = addtime;
             this.InitializeComponent();
-            this.Text.FontFamily = new FontFamily(Store.MainFontFamily);
+            this.Text.FontFamily = TextFontFamily;
             if (warning)
             {
                 this.LayoutRoot.Background=Brushes.Red;

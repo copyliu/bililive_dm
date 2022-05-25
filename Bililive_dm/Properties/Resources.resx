@@ -428,7 +428,7 @@
     <value>側提示出現時拉伸時長</value>
   </data>
   <data name="TextBlock.Text.STextSize" xml:space="preserve">
-    <value>側提示文字字體大小</value>
+    <value>側提示文字字型大小</value>
   </data>
   <data name="TextBlock.Text.SWidth" xml:space="preserve">
     <value>側窗口寬度</value>
@@ -506,6 +506,6 @@
     <value>觀看人次:</value>
   </data>
   <data name="FontFamilySelecter" xml:space="preserve">
-    <value>顯示字體更換</value>
+    <value>側提示字型</value>
   </data>
 </root>

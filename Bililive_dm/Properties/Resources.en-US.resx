@@ -506,6 +506,6 @@ Information:</value>
     <value>Watched:</value>
   </data>
   <data name="FontFamilySelecter" xml:space="preserve">
-    <value>Display Font</value>
+    <value>Sidebar text font</value>
   </data>
 </root>

@@ -19,7 +19,6 @@ namespace Bililive_dm
         public static double MainOverlayEffect3 = 6 - 1.4; //文字停留
         public static double MainOverlayEffect4 = 1; //窗口消失
         public static double MainOverlayFontsize = 18.667;
-        public static string MainFontFamily = "";   //设置字体
 
 
         public static double FullOverlayEffect1 = 400; //文字速度
