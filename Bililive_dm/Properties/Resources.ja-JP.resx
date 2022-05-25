@@ -428,7 +428,7 @@
     <value>ｻｲﾄﾞﾊﾞｰ出現ｱﾆﾒｰｼｮﾝの持続時間</value>
   </data>
   <data name="TextBlock.Text.STextSize" xml:space="preserve">
-    <value>ｻｲﾄﾞﾊﾞｰの文字ｻｲｽﾞ</value>
+    <value>側提示文字字型大小</value>
   </data>
   <data name="TextBlock.Text.SWidth" xml:space="preserve">
     <value>ｻｲﾄﾞﾊﾞｰの幅</value>
@@ -504,5 +504,8 @@
   </data>
   <data name="WatchedCount" xml:space="preserve">
     <value>観客動員数:</value>
+  </data>
+  <data name="FontFamilySelecter" xml:space="preserve">
+    <value>側提示字型</value>
   </data>
 </root>
