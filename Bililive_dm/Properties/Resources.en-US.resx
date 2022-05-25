@@ -428,7 +428,7 @@ Information:</value>
     <value>Sidebar text pop-up duration</value>
   </data>
   <data name="TextBlock.Text.STextSize" xml:space="preserve">
-    <value>Sidebar text size</value>
+    <value>側提示文字字型大小</value>
   </data>
   <data name="TextBlock.Text.SWidth" xml:space="preserve">
     <value>Sidebar width</value>
@@ -504,5 +504,8 @@ Information:</value>
   </data>
   <data name="WatchedCount" xml:space="preserve">
     <value>Watched:</value>
+  </data>
+  <data name="FontFamilySelecter" xml:space="preserve">
+    <value>側提示字型</value>
   </data>
 </root>
