@@ -29,6 +29,8 @@ namespace Bililive_dm
             _addtime = addtime;
             this.InitializeComponent();
             this.Text.FontFamily = TextFontFamily;
+            this.UserName.FontFamily = TextFontFamily;
+            this.sp.FontFamily = TextFontFamily;
             if (warning)
             {
                 this.LayoutRoot.Background=Brushes.Red;
