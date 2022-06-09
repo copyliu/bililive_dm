@@ -14,7 +14,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using BilibiliDM_PluginFramework;
-using BitConverter;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -50,19 +49,6 @@ namespace BiliDMLib
             {
                 if (this.Connected) throw new InvalidOperationException();
                 var channelId = roomId;
-//
-//                var request = WebRequest.Create(RoomInfoUrl + roomId + ".json");
-//                var response = request.GetResponse();
-//
-//                int channelId;
-//                using (var stream = response.GetResponseStream())
-//                using (var sr = new StreamReader(stream))
-//                {
-//                    var json = await sr.ReadToEndAsync();
-//                    Debug.WriteLine(json);
-//                    dynamic jo = JObject.Parse(json);
-//                    channelId = (int) jo.list[0].cid;
-//                }
                
                 if (channelId != lastroomid || ChatHostList.Count==0)
                 {
@@ -262,7 +248,7 @@ namespace BiliDMLib
             {
                 case 3: // (OpHeartbeatReply)
                     {
-                        var viewer = EndianBitConverter.BigEndian.ToUInt32(buffer, 0); //观众人数
+                        var viewer =  (uint)IPAddress.HostToNetworkOrder(BitConverter.ToUInt32(buffer, 0)); //观众人数
                         // Console.WriteLine(viewer);
                         ReceivedRoomCount?.Invoke(this, new ReceivedRoomCountArgs() { UserCount = viewer });
                         break;
@@ -375,16 +361,16 @@ namespace BiliDMLib
             {
 
 
-                var b = EndianBitConverter.BigEndian.GetBytes(buffer.Length);
+                var b = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(buffer.Length));
 
                 await ms.WriteAsync(b, 0, 4);
-                b = EndianBitConverter.BigEndian.GetBytes(magic);
+                b = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(magic));
                 await ms.WriteAsync(b, 0, 2);
-                b = EndianBitConverter.BigEndian.GetBytes(ver);
+                b = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(ver));
                 await ms.WriteAsync(b, 0, 2);
-                b = EndianBitConverter.BigEndian.GetBytes(action);
+                b = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(action));
                 await ms.WriteAsync(b, 0, 4);
-                b = EndianBitConverter.BigEndian.GetBytes(param);
+                b = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(param));
                 await ms.WriteAsync(b, 0, 4);
                 if (playload.Length > 0)
                 {
@@ -449,11 +435,11 @@ namespace BiliDMLib
             if (buffer.Length < 16) { throw new ArgumentException();}
             return new DanmakuProtocol()
             {
-                PacketLength = EndianBitConverter.BigEndian.ToInt32(buffer,0),
-                HeaderLength = EndianBitConverter.BigEndian.ToInt16(buffer, 4),
-                Version = EndianBitConverter.BigEndian.ToInt16(buffer, 6),
-                Action = EndianBitConverter.BigEndian.ToInt32(buffer, 8),
-                Parameter = EndianBitConverter.BigEndian.ToInt32(buffer, 12),
+                PacketLength = IPAddress.HostToNetworkOrder(BitConverter.ToInt32(buffer,0)),
+                HeaderLength = IPAddress.HostToNetworkOrder(BitConverter.ToInt16(buffer, 4)),
+                Version = IPAddress.HostToNetworkOrder(BitConverter.ToInt16(buffer, 6)),
+                Action = IPAddress.HostToNetworkOrder(BitConverter.ToInt32(buffer, 8)),
+                Parameter = IPAddress.HostToNetworkOrder(BitConverter.ToInt32(buffer, 12)),
             };
         }
     }
