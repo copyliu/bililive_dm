@@ -235,7 +235,7 @@
     <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
   </data>
   <data name="MainWindow_MainWindow_NetError" xml:space="preserve">
-    <value>彈幕姬決定下版本開始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1,為保證你能在今後使用彈幕姬, 請安裝最新的 .net framework .</value>
+    <value>彈幕姬正在醞釀一波更新, 將會把.NET運行要求版本提高到至少 .net 4.7.2, 如果你看到此消息, 請盡快安裝最新版本 .net 運行庫</value>
   </data>
   <data name="MainWindow_MainWindow_____Debug模式_" xml:space="preserve">
     <value>  *Debug模式*</value>

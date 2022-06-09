@@ -66,20 +66,20 @@ namespace Bililive_dm
         private Thread releaseThread;
         private Regex FilterRegex;
 
-        private bool net461 = false;
+        private bool net472 = false;
 
-        private void Get45or451FromRegistry()
+        private void Get472FromRegistry()
         {
             using (RegistryKey ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey("SOFTWARE\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full\\"))
             {
                 int releaseKey = Convert.ToInt32(ndpKey?.GetValue("Release"));
-                if (releaseKey >= 394254)
+                if (releaseKey >= 461808)
                 {
-                    net461 = true;
+                    net472 = true;
                 }
                 else
                 {
-                    net461 = false;
+                    net472 = false;
                 }
             }
         }
@@ -99,8 +99,8 @@ namespace Bililive_dm
             merged = Resources.MergedDictionaries;
             merged.Add(new ResourceDictionary());
 
-            Get45or451FromRegistry();
-            if (!net461)
+            Get472FromRegistry();
+            if (!net472)
             {
                 MessageBox.Show(this,
                     Properties.Resources.MainWindow_MainWindow_NetError);
@@ -285,7 +285,7 @@ namespace Bililive_dm
             {
                 _messageQueue.Add("");
             }
-            if (!net461)
+            if (!net472)
             {
                 logging(
                     Properties.Resources.MainWindow_MainWindow_NetError);
