@@ -16,7 +16,7 @@
             <bililiveDm:PluginStatusConverter x:Key="Converter"/>
 
             <DataTemplate x:Key="LogTemplate" >
-                <TextBlock Text="{Binding}" TextWrapping="Wrap" Cursor="Hand" MouseLeftButtonUp="UIElement_OnMouseLeftButtonUp"/>
+                <TextBlock Text="{Binding}" TextWrapping="Wrap" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonUp"/>
             </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
