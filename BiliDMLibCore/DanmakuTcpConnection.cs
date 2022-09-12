@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.IO.Compression;
 using System.IO.Pipelines;
+using System.Linq.Expressions;
 using System.Net;
+using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks.Dataflow;
@@ -11,10 +13,83 @@ using Newtonsoft.Json;
 
 namespace BiliDMLibCore;
 
+public class RoomConnecter
+{
+    private static HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(5) };
+    private static string CIDInfoUrl = "https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id=";
+
+    private class DanmuInfo
+    {
+        public Data data { get; set; }
+
+        public class Data
+        {
+            public string token { get; set; }
+            public List<Host> host_list { get; set; }
+
+        }
+
+        public class Host
+        {
+            public string host { get; set; }
+            public ushort port { get; set; }
+            public ushort wss_port { get; set; }
+            public ushort ws_port { get; set; }
+        }
+    }
+
+    public static async Task<DanmakuTcpConnection> ConnectAsync(int roomId)
+    {
+       
+
+
+            if (roomId > 0)
+            {
+                try
+                {
+                    var info = await httpClient.GetFromJsonAsync<DanmuInfo>(CIDInfoUrl + roomId);
+
+                    var token = info.data.token;
+
+                    foreach (var serverinfo in info.data.host_list)
+                    {
+                        DanmakuTcpConnection dammaku = null;
+                        try
+                        {
+                            dammaku = new DanmakuTcpConnection(serverinfo.host, serverinfo.port , roomId, token);
+                            var _= dammaku.ConnectAsync(CancellationToken.None);
+                            return dammaku;
+                        }
+                        catch (Exception e)
+                        {
+                            dammaku?.Dispose();
+
+                        }
+
+
+
+
+
+                    }
+
+
+                }
+                catch (Exception e)
+                {
+
+
+                }
+            }
+
+            throw new Exception();
+    }
+}
+
 public class DanmakuTcpConnection : IDisposable
 {
     private readonly string _server;
     private readonly int _port;
+    private readonly int _roomId;
     private readonly string _token;
     private Task? _readLoop;
     private readonly Pipe _pipe = new();
@@ -26,10 +101,11 @@ public class DanmakuTcpConnection : IDisposable
     private readonly TcpClient _client;
     private Task? heartbeatLoop;
 
-    public DanmakuTcpConnection(string server, int port, string token)
+    public DanmakuTcpConnection(string server, int port, int roomId,  string token)
     {
         _server = server;
         _port = port;
+        _roomId = roomId;
         _token = token;
         _client = new TcpClient();
     }
@@ -39,8 +115,12 @@ public class DanmakuTcpConnection : IDisposable
         if (_client.Connected == false && _readLoop == null)
         {
             await _client.ConnectAsync(_server, _port, cancellationToken);
-            _readLoop = ExecuteLoop(cancellationToken);
-            await _readLoop;
+            if (await SendJoinChannel(_roomId, _token, cancellationToken))
+            {
+                _readLoop = ExecuteLoop(cancellationToken);
+                await _readLoop;
+            }
+          
         }
 
         else if (_readLoop != null)
@@ -155,7 +235,11 @@ public class DanmakuTcpConnection : IDisposable
                                 }
 
                                 ;
-                                ProcessDanmaku(protocol.Action, new ReadOnlySequence<byte>(danmakubuffer));
+                                var r=ProcessDanmaku(protocol.Action, new ReadOnlySequence<byte>(danmakubuffer));
+                                if (r != null)
+                                {
+                                    this.DanmakuSource.Post(r);
+                                }
                             }
                         }
                         catch (Exception e)
@@ -195,7 +279,11 @@ public class DanmakuTcpConnection : IDisposable
                                 }
 
                                 ;
-                                ProcessDanmaku(protocol.Action, new ReadOnlySequence<byte>(danmakubuffer));
+                                var r=ProcessDanmaku(protocol.Action, new ReadOnlySequence<byte>(danmakubuffer));
+                                if (r != null)
+                                {
+                                    this.DanmakuSource.Post(r);
+                                }
                             }
                         }
                         catch (Exception e)
@@ -205,7 +293,13 @@ public class DanmakuTcpConnection : IDisposable
                         break;
                     }
                     default:
-                        ProcessDanmaku(protocol.Action, buffer);
+                    {
+                        var r= ProcessDanmaku(protocol.Action, buffer.Slice(16));
+                        if (r != null)
+                        {
+                            this.DanmakuSource.Post(r);
+                        }
+                    }
                         break;
                 }
 
@@ -326,7 +420,7 @@ public class DanmakuTcpConnection : IDisposable
     {
     }
 
-    private void ProcessDanmaku(int action, ReadOnlySequence<byte> buffer)
+    private DanmakuModel? ProcessDanmaku(int action, ReadOnlySequence<byte> buffer)
     {
         var debuglog = false;
         var reader = new SequenceReader<byte>(buffer);
@@ -352,7 +446,7 @@ public class DanmakuTcpConnection : IDisposable
 
                 try
                 {
-                    var dama = new DanmakuModel(json, 2);
+                    return  new DanmakuModel(json, 2);
                     // ReceivedDanmaku?.Invoke(this, new ReceivedDanmakuArgs() { Danmaku = dama });
                 }
                 catch (Exception)
@@ -371,6 +465,8 @@ public class DanmakuTcpConnection : IDisposable
                 break;
             }
         }
+
+        return null;
     }
 
     /// <inheritdoc />
