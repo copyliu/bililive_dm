@@ -11,5 +11,8 @@
     <Setting Name="lang" Type="System.String" Scope="User">
       <Value Profile="(Default)">zh</Value>
     </Setting>
+    <Setting Name="idcode" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -45,6 +45,11 @@ namespace Bililive_dm
     /// </summary>
     public partial class MainWindow: StyledWindow
     {
+        enum ConnectMode
+        {
+            RoomID,
+            Code
+        }
         private const int _maxCapacity = 100;
         private readonly Queue<DanmakuModel> _danmakuQueue = new Queue<DanmakuModel>();
 
@@ -67,6 +72,28 @@ namespace Bililive_dm
         private Regex FilterRegex;
 
         private bool net461 = false;
+
+        private ConnectMode _connectMode
+        {
+            get => _connectMode1;
+            set
+            {
+                switch (value)
+                {
+                    case ConnectMode.Code:
+                        this.codepanel.Visibility=Visibility.Visible;
+                        this.roompanel.Visibility = Visibility.Collapsed;
+                        break;
+                    case ConnectMode.RoomID:
+                        this.codepanel.Visibility = Visibility.Collapsed;
+                        this.roompanel.Visibility = Visibility.Visible;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(value), value, null);
+                }
+                _connectMode1 = value;
+            }
+        }
 
         private void Get45or451FromRegistry()
         {
@@ -125,7 +152,7 @@ namespace Bililive_dm
 
             }
 
-
+            _connectMode=ConnectMode.Code;
             try
             {
                 this.RoomId.Text = Properties.Settings.Default.roomId.ToString();
@@ -134,6 +161,15 @@ namespace Bililive_dm
             {
                 this.RoomId.Text = "";
             }
+            try
+            {
+                this.IdenCode.Password = Properties.Settings.Default.idcode.ToString();
+            }
+            catch
+            {
+                this.IdenCode.Password = "";
+            }
+
 
             var cmd_args = Environment.GetCommandLineArgs();
             debug_mode = cmd_args.Contains("-d") || cmd_args.Contains("--debug");
@@ -295,6 +331,7 @@ namespace Bililive_dm
             logging(Properties.Resources.MainWindow_MainWindow_公告2_2);
             logging(Properties.Resources.MainWindow_MainWindow_公告2_3);
             logging(Properties.Resources.MainWindow_MainWindow_公告3);
+            logging(Properties.Resources.MainWindow_MainWindow_公告4);
             logging(Properties.Resources.MainWindow_MainWindow_可以点击日志复制到剪贴板);
             if (debug_mode)
             {
@@ -548,24 +585,44 @@ namespace Bililive_dm
 
         private void overlay_Deactivated(object sender, EventArgs e)
         {
-            if (sender is MainOverlay)
+            if (sender is MainOverlay mainOverlay)
             {
-                (sender as MainOverlay).Topmost = true;
+                mainOverlay.Topmost = true;
             }
         }
 
         private async void connbtn_Click(object sender, RoutedEventArgs e)
         {
             int roomId;
-            try
+            if (_connectMode == ConnectMode.Code && sender!=null)
             {
-                roomId = Convert.ToInt32(RoomId.Text.Trim());
+                try
+                {
+                    roomId = await BOpen.GetRoomIdByCode(this.IdenCode.Password);
+                    RoomId.Text = roomId+"";
+                    SaveCode(this.IdenCode.Password);
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(Properties.Resources.MainWindow_connbtn_Click_獲取直播間房間號失敗__ + exception.Message + "\n"+Properties.Resources.MainWindow_connbtn_Click_請嘗試手動輸入直播間號碼);
+                    this._connectMode=ConnectMode.RoomID;
+                    return;
+                }
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show(Properties.Resources.MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_);
-                return;
+                try
+                {
+                    roomId = Convert.ToInt32(RoomId.Text.Trim());
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(Properties.Resources.MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_);
+                    return;
+                }
             }
+             
+            
             if (roomId > 0)
             {
                 ConnBtn.IsEnabled = false;
@@ -1580,7 +1637,19 @@ namespace Bililive_dm
             }
             //Do whatever you want here..
         }
-
+        private void SaveCode(string code)
+        {
+            try
+            {
+                Properties.Settings.Default.idcode = code;
+                Properties.Settings.Default.Save();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+            //Do whatever you want here..
+        }
         #region Runtime settings
 
         private bool fulloverlay_enabled;
@@ -1594,6 +1663,7 @@ namespace Bililive_dm
         private bool enable_regex = false;
         private string regex = "";
         private bool ignorespam_enabled = false;
+        private ConnectMode _connectMode1;
 
         public bool debug_mode { get; private set; }
 
@@ -1670,6 +1740,11 @@ namespace Bililive_dm
                 App.Current.merged[0] = result;
             }
             merged[0] = new ResourceDictionary();
+        }
+
+        private void UIElement_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://link.bilibili.com/p/center/index#/my-room/start-live"); ;
         }
     }
 }

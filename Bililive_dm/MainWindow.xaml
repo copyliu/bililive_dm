@@ -23,9 +23,17 @@
 
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
-                       VerticalAlignment="Center" Margin="4" />
-            <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666" MinWidth="80" />
+            <StackPanel Orientation="Horizontal" x:Name="codepanel">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.Label_IdenCode}" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown"
+                           VerticalAlignment="Center" Margin="4" />
+                <PasswordBox x:Name="IdenCode"  HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666" MinWidth="120" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed"  x:Name="roompanel">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
+                           VerticalAlignment="Center" Margin="4" />
+                <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666" MinWidth="80" />
+            </StackPanel>
+            
             <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}" VerticalAlignment="Center"
                     Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
 

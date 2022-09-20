@@ -133,6 +133,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Printing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -155,6 +156,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AndroidService.cs" />
+    <Compile Include="BOpen.cs" />
     <Compile Include="FuckMePlugin.cs" />
     <Compile Include="IDanmakuWindow.cs" />
     <Compile Include="LanguageSelector.xaml.cs">
