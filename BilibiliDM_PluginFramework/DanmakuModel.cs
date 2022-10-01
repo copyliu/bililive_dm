@@ -71,11 +71,11 @@ namespace BilibiliDM_PluginFramework
         /// 超管警告
         /// </summary>
         Warning,
+
         /// <summary>
         /// 观看人数, 可能是人次? 
         /// </summary>
         WatchedChange
-
     }
 
     /// <summary>
@@ -107,7 +107,6 @@ namespace BilibiliDM_PluginFramework
         /// 互相关注
         /// </summary>
         MutualFollow = 5,
-
     }
 
     public class DanmakuModel
@@ -154,6 +153,20 @@ namespace BilibiliDM_PluginFramework
         public string UserName { get; set; }
 
         /// <summary>
+        /// 消息触发者用户ID, 弃用
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.Comment"/></item>
+        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
+        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
+        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
+        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
+        /// <item><see cref="MsgTypeEnum.Interact"/></item>
+        /// </list></para>
+        /// </summary>
+        [Obsolete("由于B站开始使用超长UID, 此字段定义已无法满足, 在int范围内的UID会继续赋值, 超范围会赋值为-1, 请使用UserID_long和UserID_str")]
+        public int UserID { get; set; }
+
+        /// <summary>
         /// 消息触发者用户ID
         /// <para>此项有值的消息类型：<list type="bullet">
         /// <item><see cref="MsgTypeEnum.Comment"/></item>
@@ -164,7 +177,20 @@ namespace BilibiliDM_PluginFramework
         /// <item><see cref="MsgTypeEnum.Interact"/></item>
         /// </list></para>
         /// </summary>
-        public int UserID { get; set; }
+        public long UserID_long { get; set; }
+
+        /// <summary>
+        /// 消息触发者用户ID
+        /// <para>此项有值的消息类型：<list type="bullet">
+        /// <item><see cref="MsgTypeEnum.Comment"/></item>
+        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
+        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
+        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
+        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
+        /// <item><see cref="MsgTypeEnum.Interact"/></item>
+        /// </list></para>
+        /// </summary>
+        public string UserID_str { get; set; }
 
         /// <summary>
         /// 用户舰队等级
@@ -334,7 +360,25 @@ namespace BilibiliDM_PluginFramework
                         case "DANMU_MSG":
                             MsgType = MsgTypeEnum.Comment;
                             CommentText = obj["info"][1].ToString();
-                            UserID = obj["info"][2][0].ToObject<int>();
+                            UserID_str = obj["info"][2][0].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
                             UserName = obj["info"][2][1].ToString();
                             isAdmin = obj["info"][2][2].ToString() == "1";
                             isVIP = obj["info"][2][3].ToString() == "1";
@@ -344,7 +388,25 @@ namespace BilibiliDM_PluginFramework
                             MsgType = MsgTypeEnum.GiftSend;
                             GiftName = obj["data"]["giftName"].ToString();
                             UserName = obj["data"]["uname"].ToString();
-                            UserID = obj["data"]["uid"].ToObject<int>();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
                             // Giftrcost = obj["data"]["rcost"].ToString();
                             GiftCount = obj["data"]["num"].ToObject<int>();
                             break;
@@ -367,13 +429,29 @@ namespace BilibiliDM_PluginFramework
                             GiftRanking = new List<GiftRank>();
                             foreach (var v in alltop)
                             {
-                                GiftRanking.Add(new GiftRank()
+                                var item = new GiftRank();
+                                item.uid_str = v["uid"].ToString();
+                                item.UserName = v.Value<string>("uname");
+                                item.coin = v.Value<decimal>("coin");
+                                try
                                 {
-                                    uid = v.Value<int>("uid"),
-                                    UserName = v.Value<string>("uname"),
-                                    coin = v.Value<decimal>("coin")
+                                    item.uid = Convert.ToInt32(item.uid_str);
+                                }
+                                catch (Exception)
+                                {
+                                    item.uid = -1;
+                                }
 
-                                });
+                                try
+                                {
+                                    item.uid_long = Convert.ToInt32(item.uid_str);
+                                }
+                                catch (Exception)
+                                {
+                                    item.uid_long = -1;
+                                }
+
+                                GiftRanking.Add(item);
                             }
 
                             break;
@@ -382,17 +460,52 @@ namespace BilibiliDM_PluginFramework
                         {
                             MsgType = MsgTypeEnum.Welcome;
                             UserName = obj["data"]["uname"].ToString();
-                            UserID = obj["data"]["uid"].ToObject<int>();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
                             isVIP = true;
                             isAdmin = obj["data"]["isadmin"]?.ToString() == "1";
                             break;
-
                         }
                         case "WELCOME_GUARD":
                         {
                             MsgType = MsgTypeEnum.WelcomeGuard;
                             UserName = obj["data"]["username"].ToString();
-                            UserID = obj["data"]["uid"].ToObject<int>();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
                             UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
                             break;
                         }
@@ -404,7 +517,25 @@ namespace BilibiliDM_PluginFramework
                             {
                                 MsgType = MsgTypeEnum.WelcomeGuard;
                                 UserName = match.Groups[1].Value;
-                                UserID = obj["data"]["uid"].ToObject<int>();
+                                UserID_str = obj["data"]["uid"].ToString();
+                                try
+                                {
+                                    UserID = Convert.ToInt32(UserID_str);
+                                }
+                                catch (Exception)
+                                {
+                                    UserID = -1;
+                                }
+
+                                try
+                                {
+                                    UserID_long = Convert.ToInt64(UserID_str);
+                                }
+                                catch (Exception)
+                                {
+                                    UserID_long = -1;
+                                }
+
                                 UserGuardLevel = obj["data"]["privilege_type"].ToObject<int>();
                             }
                             else
@@ -417,7 +548,25 @@ namespace BilibiliDM_PluginFramework
                         case "GUARD_BUY":
                         {
                             MsgType = MsgTypeEnum.GuardBuy;
-                            UserID = obj["data"]["uid"].ToObject<int>();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
                             UserName = obj["data"]["username"].ToString();
                             UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
                             GiftName = UserGuardLevel == 3 ? "舰长" :
@@ -431,7 +580,25 @@ namespace BilibiliDM_PluginFramework
                         {
                             MsgType = MsgTypeEnum.SuperChat;
                             CommentText = obj["data"]["message"]?.ToString();
-                            UserID = obj["data"]["uid"].ToObject<int>();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
                             UserName = obj["data"]["user_info"]["uname"].ToString();
                             Price = obj["data"]["price"].ToObject<decimal>();
                             SCKeepTime = obj["data"]["time"].ToObject<int>();
@@ -441,8 +608,26 @@ namespace BilibiliDM_PluginFramework
                         {
                             MsgType = MsgTypeEnum.Interact;
                             UserName = obj["data"]["uname"].ToString();
-                            UserID = obj["data"]["uid"].ToObject<int>();
-                            InteractType = (InteractTypeEnum) obj["data"]["msg_type"].ToObject<int>();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
+                            InteractType = (InteractTypeEnum)obj["data"]["msg_type"].ToObject<int>();
                             break;
                         }
                         case "WARNING":
@@ -470,7 +655,25 @@ namespace BilibiliDM_PluginFramework
                             {
                                 MsgType = MsgTypeEnum.Comment;
                                 CommentText = obj["info"][1].ToString();
-                                UserID = obj["info"][2][0].ToObject<int>();
+                                UserID_str = obj["info"][2][0].ToString();
+                                try
+                                {
+                                    UserID = Convert.ToInt32(UserID_str);
+                                }
+                                catch (Exception)
+                                {
+                                    UserID = -1;
+                                }
+
+                                try
+                                {
+                                    UserID_long = Convert.ToInt64(UserID_str);
+                                }
+                                catch (Exception)
+                                {
+                                    UserID_long = -1;
+                                }
+
                                 UserName = obj["info"][2][1].ToString();
                                 isAdmin = obj["info"][2][2].ToString() == "1";
                                 isVIP = obj["info"][2][3].ToString() == "1";
@@ -487,19 +690,12 @@ namespace BilibiliDM_PluginFramework
                     }
 
 
-
                     break;
                 }
 
                 default:
                     throw new Exception();
             }
-
-
         }
-
     }
-
-
-
 }
