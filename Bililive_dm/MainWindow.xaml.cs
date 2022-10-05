@@ -325,8 +325,7 @@ namespace Bililive_dm
             Loaded += MainWindow_Loaded;
             Log.Loaded += (sender, args) =>
             {
-                var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
-                sc?.ScrollToEnd();
+                LogScroll.ScrollToEnd();
             };
 
         }
@@ -1047,6 +1046,8 @@ namespace Bililive_dm
                     _messageQueue.Add(DateTime.Now.ToString("T") + " : " + text);
                     //                this.log.Text = string.Join("\n", _messageQueue);
                     //                log.CaretIndex = this.log.Text.Length;
+                    
+                    // sc?.ScrollToEnd();
 
                 }
                 if (savelog_enabled)

@@ -68,23 +68,18 @@
             <TabItem Header="{x:Static properties:Resources.TabItem_Header}">
                 <!--<TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />-->
+                <ScrollViewer x:Name="LogScroll" CanContentScroll="True">
+                    <ItemsControl  x:Name="Log" ItemsSource="{Binding}" ItemTemplate="{StaticResource LogTemplate}" >
 
 
-                <ItemsControl  x:Name="Log" ItemsSource="{Binding}" ItemTemplate="{StaticResource LogTemplate}" >
-
-                    <ItemsControl.Template>
-                        <ControlTemplate>
-                            <ScrollViewer x:Name="LogScroll" CanContentScroll="True">
-                                <ItemsPresenter/>
-                            </ScrollViewer>
-                        </ControlTemplate>
-                    </ItemsControl.Template>
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel IsItemsHost="True"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel IsItemsHost="True"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </ScrollViewer>
+            
 
 
             </TabItem>
