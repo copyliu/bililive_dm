@@ -1644,6 +1644,16 @@ namespace Bililive_dm
             }
         }
 
+        private void IgnoreEmoji_OnChecked(object sender, RoutedEventArgs e)
+        {
+            ignoreemoji_enabled = true;
+        }
+
+        private void IgnoreEmoji_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            ignoreemoji_enabled = false;
+        }
+        
         private void IgnoreSpam_OnChecked(object sender, RoutedEventArgs e)
         {
             ignorespam_enabled = true;
@@ -1689,16 +1699,6 @@ namespace Bililive_dm
                 App.Current.merged[0] = result;
             }
             merged[0] = new ResourceDictionary();
-        }
-
-        private void IgnoreEmoji_OnChecked(object sender, RoutedEventArgs e)
-        {
-            ignoreemoji_enabled = true;
-        }
-
-        private void IgnoreEmoji_OnUnchecked(object sender, RoutedEventArgs e)
-        {
-            ignoreemoji_enabled = false;
         }
     }
 }

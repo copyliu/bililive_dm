@@ -509,6 +509,6 @@
     <value>ｻｲﾄﾞﾊﾞｰの文字ﾌｫﾝﾄ</value>
   </data>
   <data name="IgnoreEmoji.Content" xml:space="preserve">
-    <value>絵文字無視</value>
+    <value>絵文字を無視</value>
   </data>
 </root>
