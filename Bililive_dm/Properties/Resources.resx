@@ -508,4 +508,7 @@
   <data name="FontFamilySelecter" xml:space="preserve">
     <value>側提示字型</value>
   </data>
+  <data name="IgnoreEmoji.Content" xml:space="preserve">
+    <value>屏蔽表情</value>
+  </data>
 </root>

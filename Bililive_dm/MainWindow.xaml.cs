@@ -259,6 +259,22 @@ namespace Bililive_dm
                                     }
 
                                 }
+                                if (danmaku.MsgType == MsgTypeEnum.Comment && ignoreemoji_enabled)
+                                {
+                                    try
+                                    {
+                                        var jobj = (JObject)danmaku.RawDataJToken;
+                                        if (jobj["info"][0][12].Value<int>() != 0)
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+
+                                    }
+
+                                }
                                 ProcDanmaku(danmaku);
                                 if (danmaku.MsgType == MsgTypeEnum.Comment)
                                 {
@@ -402,6 +418,7 @@ namespace Bililive_dm
             SaveLog.IsChecked = savelog_enabled;
             SSTP.IsChecked = sendssp_enabled;
             EnableRegex.IsChecked = enable_regex;
+            IgnoreEmoji.IsChecked = ignoreemoji_enabled;
             IgnoreSpam.IsChecked = ignorespam_enabled;
             ShowItem.IsChecked = showvip_enabled;
             ShowInteract.IsChecked = showInteract_enabled;
@@ -1595,6 +1612,7 @@ namespace Bililive_dm
         private bool enable_regex = false;
         private string regex = "";
         private bool ignorespam_enabled = false;
+        private bool ignoreemoji_enabled = true;
 
         public bool debug_mode { get; private set; }
 
@@ -1671,6 +1689,16 @@ namespace Bililive_dm
                 App.Current.merged[0] = result;
             }
             merged[0] = new ResourceDictionary();
+        }
+
+        private void IgnoreEmoji_OnChecked(object sender, RoutedEventArgs e)
+        {
+            ignoreemoji_enabled = true;
+        }
+
+        private void IgnoreEmoji_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            ignoreemoji_enabled = false;
         }
     }
 }

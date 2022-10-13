@@ -508,4 +508,7 @@ Information:</value>
   <data name="FontFamilySelecter" xml:space="preserve">
     <value>Sidebar text font</value>
   </data>
+  <data name="IgnoreEmoji.Content" xml:space="preserve">
+    <value>Emoji filtering</value>
+  </data>
 </root>

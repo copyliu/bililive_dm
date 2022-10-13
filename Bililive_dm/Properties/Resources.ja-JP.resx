@@ -508,4 +508,7 @@
   <data name="FontFamilySelecter" xml:space="preserve">
     <value>ｻｲﾄﾞﾊﾞｰの文字ﾌｫﾝﾄ</value>
   </data>
+  <data name="IgnoreEmoji.Content" xml:space="preserve">
+    <value>絵文字無視</value>
+  </data>
 </root>
