@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>非B站出品 ©2014-2023 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com</value>
+    <value>©2014-2023 CopyLiu, all rights Not reserved. Report issues: copyliu@gmail.com. En translation by @TigerSHe 大場加奈子(@komoechan)</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>Auto reconnect</value>
@@ -509,6 +509,6 @@ Information:</value>
     <value>Sidebar text font</value>
   </data>
   <data name="IgnoreEmoji.Content" xml:space="preserve">
-    <value>遮蔽表情</value>
+    <value>Emoji filtering</value>
   </data>
 </root>
