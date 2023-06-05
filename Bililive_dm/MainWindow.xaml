@@ -10,7 +10,7 @@
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         xmlns:properties="clr-namespace:Bililive_dm.Properties"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="518" Width="880" FontSize="14.666">
+        Title="B站彈幕姬" Height="518" Width="900" FontSize="14.666">
     <Window.Resources>
         <ResourceDictionary>
             <bililiveDm:PluginStatusConverter x:Key="Converter"/>
