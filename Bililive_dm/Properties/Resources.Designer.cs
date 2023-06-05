@@ -60,7 +60,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 非B站出品 ©2014-2022 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com.
+        ///   Looks up a localized string similar to 非B站出品 ©2014-2023 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com.
         /// </summary>
         public static string ABout_Text {
             get {
@@ -303,7 +303,7 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 屏蔽表情.
+        ///   Looks up a localized string similar to 遮蔽表情.
         /// </summary>
         public static string IgnoreEmoji_Content {
             get {
