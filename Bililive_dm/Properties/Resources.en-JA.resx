@@ -508,34 +508,7 @@
   <data name="FontFamilySelecter" xml:space="preserve">
     <value>側提示字型</value>
   </data>
-  <data name="Label.IdenCode" xml:space="preserve">
-    <value>身份碼(點擊獲取)</value>
-  </data>
-  <data name="MainWindow_connbtn_Click_獲取直播間房間號失敗__" xml:space="preserve">
-    <value>獲取直播間房間號失敗: </value>
-  </data>
-  <data name="MainWindow_connbtn_Click_請嘗試手動輸入直播間號碼" xml:space="preserve">
-    <value>請嘗試手動輸入直播間號碼</value>
-  </data>
-  <data name="BOpen_GetRoomIdByCode_未輸入身份碼" xml:space="preserve">
-    <value>未輸入身份碼</value>
-  </data>
-  <data name="BOpen_GetRoomIdByCode_簽名伺服器離線" xml:space="preserve">
-    <value>簽名伺服器離線</value>
-  </data>
-  <data name="BOpen_GetRoomIdByCode_B站直播中心離線" xml:space="preserve">
-    <value>B站直播中心離線</value>
-  </data>
-  <data name="BOpen_GetRoomIdByCode_B站直播中心返回了無效的房間號" xml:space="preserve">
-    <value>B站直播中心返回了無效的房間號</value>
-  </data>
-  <data name="BOpen_GetRoomIdByCode_B站直播中心返回錯誤" xml:space="preserve">
-    <value>B站直播中心返回錯誤</value>
-  </data>
-  <data name="BOpen_GetRoomIdByCode_獲取身份碼信息出錯" xml:space="preserve">
-    <value>獲取身份碼信息出錯</value>
-  </data>
-  <data name="MainWindow_MainWindow_公告4" xml:space="preserve">
-    <value>公告4: 根據B站對第三方應用的要求, 彈幕姬已改用身份碼進行連接. 請到B站直播中心獲取身份碼.</value>
+  <data name="IgnoreEmoji.Content" xml:space="preserve">
+    <value>屏蔽表情</value>
   </data>
 </root>
