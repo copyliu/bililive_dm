@@ -1612,7 +1612,7 @@ namespace Bililive_dm
         private bool enable_regex = false;
         private string regex = "";
         private bool ignorespam_enabled = false;
-        private bool ignoreemoji_enabled = true;
+        private bool ignoreemoji_enabled = false;
 
         public bool debug_mode { get; private set; }
 

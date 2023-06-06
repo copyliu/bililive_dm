@@ -56,7 +56,7 @@
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="SaveLog"       Content="{x:Static properties:Resources.SaveLog_Content}"    Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="ShowItem"      Content="{x:Static properties:Resources.ShowItem_Content}"   Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="ShowInteract"  Content="{x:Static properties:Resources.Interact_Content}"   Checked="ShowInteract_OnChecked" Unchecked="ShowInteract_OnUnchecked"/>
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="IgnoreEmoji"  Content="{x:Static properties:Resources.IgnoreEmoji_Content}"   Checked="IgnoreEmoji_OnChecked" Unchecked="IgnoreEmoji_OnUnchecked"/>
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="False" x:Name="IgnoreEmoji"  Content="{x:Static properties:Resources.IgnoreEmoji_Content}"   Checked="IgnoreEmoji_OnChecked" Unchecked="IgnoreEmoji_OnUnchecked"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="IgnoreSpam"    Content="{x:Static properties:Resources.IgnoreSpam_Content}" Checked="IgnoreSpam_OnChecked" Unchecked="IgnoreSpam_OnUnchecked"/>
             <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="WindowTop"     Content="{x:Static properties:Resources.WindowTop_Content}"  Click="WindowTop_OnChecked"/>
         </WrapPanel>
