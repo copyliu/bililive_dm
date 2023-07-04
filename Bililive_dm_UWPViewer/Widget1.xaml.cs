@@ -54,7 +54,6 @@ namespace Bililive_dm_UWPViewer
         private SolidColorBrush widgetBackgroundBrush { get; set; }
         private SolidColorBrush TextBrush { get; set; }
         private double requestedOpacity = 1;
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // you will need access to the XboxGameBarWidget, in this case it was passed as a parameter when navigating to the widget page, your implementation may differ.
@@ -65,7 +64,14 @@ namespace Bililive_dm_UWPViewer
             {
                 widget.RequestedOpacityChanged += Widget_RequestedOpacityChanged;
                 widget.RequestedThemeChanged += WidgetOnRequestedThemeChanged;
+                widget.ClickThroughEnabledChanged+=WidgetOnClickThroughEnabledChanged;
             }
+        }
+
+        private void WidgetOnClickThroughEnabledChanged(XboxGameBarWidget sender, object args)
+        {
+            App.Settings.ClickThroughEnabled = widget.ClickThroughEnabled;
+           
         }
 
         private async void WidgetOnRequestedThemeChanged(XboxGameBarWidget sender, object args)
@@ -145,7 +151,7 @@ namespace Bililive_dm_UWPViewer
         {
             
             modellist.Add(m);
-            if (modellist.Count > 50)
+            if (modellist.Count > 5)
             {
                 modellist.RemoveAt(0);
             }
@@ -254,6 +260,16 @@ namespace Bililive_dm_UWPViewer
 
                 }
             }
+
+        }
+
+        private async void Setting_OnClick(object sender, RoutedEventArgs e)
+        {
+            var p = new SettingsDialog();
+            p.DataContext = App.Settings;
+
+            var T =await p.ShowAsync();
+            //事后處理
 
         }
     }

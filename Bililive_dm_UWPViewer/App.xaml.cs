@@ -25,6 +25,10 @@ namespace Bililive_dm_UWPViewer
     {
         private XboxGameBarWidget widget1 = null;
         public static ThemeSetting ThemeSetting=new ThemeSetting();
+        
+        internal static Settings Settings = new Settings();
+        
+        
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。

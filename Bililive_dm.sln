@@ -32,11 +32,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4A268887-E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UWP", "UWP", "{EE38DE68-3D89-4E3C-A4B8-80FBACB3A9E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BiliDMLibCore", "BiliDMLibCore\BiliDMLibCore.csproj", "{B7E76129-E733-4A23-9C56-CDA123D83ACF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BiliDMLibCore", "BiliDMLibCore\BiliDMLibCore.csproj", "{B7E76129-E733-4A23-9C56-CDA123D83ACF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BililliveCmtViewerCore", "BililliveCmtViewerCore\BililliveCmtViewerCore.csproj", "{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BililliveCmtViewerCore", "BililliveCmtViewerCore\BililliveCmtViewerCore.csproj", "{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BililiveCmtViewer.Console", "BililiveCmtViewer.Console\BililiveCmtViewer.Console.csproj", "{A5EE508A-BBDF-4D0F-B4C7-E87AB6FAB280}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BililiveCmtViewer.Console", "BililiveCmtViewer.Console\BililiveCmtViewer.Console.csproj", "{A5EE508A-BBDF-4D0F-B4C7-E87AB6FAB280}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -160,6 +160,7 @@ Global
 		{0A1A8C48-3C84-4030-89C7-7B27643BC789}.Release|x86.ActiveCfg = Release|x86
 		{0A1A8C48-3C84-4030-89C7-7B27643BC789}.Release|x86.Build.0 = Release|x86
 		{708BE32F-3BB5-4D19-A925-B65B61B37C0F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{708BE32F-3BB5-4D19-A925-B65B61B37C0F}.Debug|Any CPU.Build.0 = Debug|x86
 		{708BE32F-3BB5-4D19-A925-B65B61B37C0F}.Debug|ARM.ActiveCfg = Debug|ARM
 		{708BE32F-3BB5-4D19-A925-B65B61B37C0F}.Debug|ARM.Build.0 = Debug|ARM
 		{708BE32F-3BB5-4D19-A925-B65B61B37C0F}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -267,6 +268,7 @@ Global
 		{B7E76129-E733-4A23-9C56-CDA123D83ACF}.Release|x86.Build.0 = Release|Any CPU
 		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Debug|ARM.ActiveCfg = Debug|Any CPU
 		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Debug|ARM.Build.0 = Debug|Any CPU
 		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Debug|ARM64.ActiveCfg = Debug|Any CPU
@@ -285,7 +287,6 @@ Global
 		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Release|x64.Build.0 = Release|Any CPU
 		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Release|x86.ActiveCfg = Release|Any CPU
 		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Release|x86.Build.0 = Release|Any CPU
-		{27A5E42A-CE2F-4BFA-B4B4-A94EBD82979C}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{A5EE508A-BBDF-4D0F-B4C7-E87AB6FAB280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5EE508A-BBDF-4D0F-B4C7-E87AB6FAB280}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5EE508A-BBDF-4D0F-B4C7-E87AB6FAB280}.Debug|ARM.ActiveCfg = Debug|Any CPU

@@ -69,7 +69,11 @@
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
-        <TextBlock Padding="10" HorizontalAlignment="Stretch"  FontSize="18.667" Text="當前氣人值 : N/A" TextWrapping="Wrap" VerticalAlignment="Center" x:Name="Tb" />
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="10"   FontSize="18.667" Text="當前氣人值 : N/A" TextWrapping="Wrap" VerticalAlignment="Center" x:Name="Tb" />
+            <Button Content="⚙️" Click="Setting_OnClick"></Button>
 
+        </StackPanel>
+        
     </Grid>
 </Page>
