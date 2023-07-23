@@ -1,21 +1,21 @@
 ﻿<local:StyledWindow x:Class="Bililive_dm.Selector"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:p="clr-namespace:Bililive_dm.Properties"
-        xmlns:local="clr-namespace:Bililive_dm"
-        DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        mc:Ignorable="d"
-        Title="{x:Static p:Resources.SkinSelector}" Height="240" Width="320">
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:p="clr-namespace:Bililive_dm.Properties"
+                    xmlns:local="clr-namespace:Bililive_dm"
+                    DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                    mc:Ignorable="d"
+                    Title="{x:Static p:Resources.SkinSelector}" Height="240" Width="320">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
         <ListBox Name="list"
@@ -23,9 +23,9 @@
                  Margin="4" Grid.ColumnSpan="2"
                  Loaded="list_Loaded"
                  SelectionChanged="list_SelectionChanged"
-                 MouseDoubleClick="list_MouseDoubleClick" 
-                 ItemsSource="{Binding Themes}"/>
-        <Button Margin="4" Grid.Row="1" Grid.ColumnSpan="1" Content="OK" IsDefault="True" Click="Button_Click"/>
-        <Button Margin="4" Grid.Row="1" Grid.Column="1" Content="Cancel" IsCancel="True"/>
+                 MouseDoubleClick="list_MouseDoubleClick"
+                 ItemsSource="{Binding Themes}" />
+        <Button Margin="4" Grid.Row="1" Grid.ColumnSpan="1" Content="OK" IsDefault="True" Click="Button_Click" />
+        <Button Margin="4" Grid.Row="1" Grid.Column="1" Content="Cancel" IsCancel="True" />
     </Grid>
 </local:StyledWindow>

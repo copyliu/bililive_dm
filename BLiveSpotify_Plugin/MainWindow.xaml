@@ -1,25 +1,26 @@
 ﻿<Window x:Class="BLiveSpotify_Plugin.MainWindow"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:BLiveSpotify_Plugin" Title="Spotify點歌姬"
-             mc:Ignorable="d" Height="140" Width="437">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:BLiveSpotify_Plugin" Title="Spotify點歌姬"
+        mc:Ignorable="d" Height="140" Width="437">
     <StackPanel d:DataContext="{d:DesignInstance local:PluginDataContext }">
-        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10,5,10,0">
+        <StackPanel Orientation="Horizontal" Margin="10,5,10,0">
             <CheckBox Content="已啟用" VerticalAlignment="Center" Margin="0,0,10,0" IsChecked="{Binding Status}" />
 
         </StackPanel>
-      
+
         <StackPanel Orientation="Horizontal">
-            <Label Content="Spotify 登入狀態" Width="150" ></Label>
-            <Label Content="{Binding LoginStatus}" x:Name="login_status" Padding="0,5,0,5"></Label>
-            <Button Content="登入" x:Name="login_btn" Click="Login_btn_OnClick"></Button>
+            <Label Content="Spotify 登入狀態" Width="150" />
+            <Label Content="{Binding LoginStatus}" x:Name="login_status" Padding="0,5,0,5" />
+            <Button Content="登入" x:Name="login_btn" Click="Login_btn_OnClick" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" x:Name="playlist_panel">
-            <Label Content="添加到播放機" Width="150" ></Label>
-            <ComboBox Width="180" x:Name="playlists_electer" DisplayMemberPath="PlaylistName"   SelectedItem="{Binding SelectedPlayList ,Mode=TwoWay}" ></ComboBox>
-            <Button Content="重新整理" x:Name="refresh" Click="Refresh_OnClick"></Button>
+            <Label Content="添加到播放機" Width="150" />
+            <ComboBox Width="180" x:Name="playlists_electer" DisplayMemberPath="PlaylistName"
+                      SelectedItem="{Binding SelectedPlayList ,Mode=TwoWay}" />
+            <Button Content="重新整理" x:Name="refresh" Click="Refresh_OnClick" />
         </StackPanel>
     </StackPanel>
 </Window>

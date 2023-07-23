@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows;
 using BilibiliDM_PluginFramework;
 
@@ -39,7 +37,7 @@ namespace Bililive_dm
         public static double MainOverlayEffect3 = 6 - 1.4; //文字停留
         public static double MainOverlayEffect4 = 1; //窗口消失
         public static double MainOverlayFontsize = 18.667;
-        public static string MainFontFamily = "";   //设置字体
+        public static string MainFontFamily = ""; //设置字体
 
 
         public static double FullOverlayEffect1 = 400; //文字速度
@@ -53,69 +51,65 @@ namespace Bililive_dm
     {
         public static IPAddress GetBroadcastAddress(this IPAddress address, IPAddress subnetMask)
         {
-            byte[] ipAddressBytes = address.GetAddressBytes();
-            byte[] subnetMaskBytes = subnetMask.GetAddressBytes();
+            var ipAddressBytes = address.GetAddressBytes();
+            var subnetMaskBytes = subnetMask.GetAddressBytes();
 
             if (ipAddressBytes.Length != subnetMaskBytes.Length)
                 throw new ArgumentException("Lengths of IP address and subnet mask do not match.");
 
-            byte[] broadcastAddress = new byte[ipAddressBytes.Length];
-            for (int i = 0; i < broadcastAddress.Length; i++)
-            {
+            var broadcastAddress = new byte[ipAddressBytes.Length];
+            for (var i = 0; i < broadcastAddress.Length; i++)
                 broadcastAddress[i] = (byte)(ipAddressBytes[i] | (subnetMaskBytes[i] ^ 255));
-            }
             return new IPAddress(broadcastAddress);
         }
-        public static void PluginExceptionHandler(Exception ex, DMPlugin plugin=null)
+
+        public static void PluginExceptionHandler(Exception ex, DMPlugin plugin = null)
         {
-           
-                if (plugin != null)
+            if (plugin != null)
+            {
+                MessageBox.Show(
+                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
+                    plugin.PluginCont);
+                try
                 {
-                    MessageBox.Show(
-                        "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
-                        plugin.PluginCont);
-                    try
+                    var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+
+                    using (
+                        var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt")
+                    )
                     {
-                        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-
-                        using (
-                            StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt")
-                            )
-                        {
-                            outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
-                            outfile.WriteLine(DateTime.Now + " " + plugin.PluginName + " " + plugin.PluginVer);
-                            outfile.Write(ex.ToString());
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-
+                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(DateTime.Now + " " + plugin.PluginName + " " + plugin.PluginVer);
+                        outfile.Write(ex.ToString());
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    MessageBox.Show(
-               "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
-                    try
-                    {
-                        string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
+                try
+                {
+                    var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                        using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬錯誤報告.txt"))
-                        {
-                            outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
-                            outfile.WriteLine(DateTime.Now + "");
-                            outfile.Write(ex.ToString());
-                        }
-                    }
-                    catch (Exception)
+                    using (var outfile = new StreamWriter(path + @"\B站彈幕姬錯誤報告.txt"))
                     {
+                        outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
+                        outfile.WriteLine(DateTime.Now + "");
+                        outfile.Write(ex.ToString());
                     }
                 }
-           
+                catch (Exception)
+                {
+                }
+            }
         }
+
         public static void ReleaseMemory(bool removePages)
         {
             // release any unused pages
@@ -127,7 +121,6 @@ namespace Bililive_dm
             GC.Collect(GC.MaxGeneration);
             GC.WaitForPendingFinalizers();
             if (removePages)
-            {
                 // as some users have pointed out
                 // removing pages from working set will cause some IO
                 // which lowered user experience for another group of users
@@ -147,7 +140,6 @@ namespace Bililive_dm
                 //
                 // just kidding
                 WINAPI.ReleasePages(Process.GetCurrentProcess().Handle);
-            }
         }
     }
 }

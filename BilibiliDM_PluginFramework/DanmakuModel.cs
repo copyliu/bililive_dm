@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
@@ -8,307 +7,110 @@ using Newtonsoft.Json.Linq;
 namespace BilibiliDM_PluginFramework
 {
     /// <summary>
-    /// 消息类型
+    ///     消息类型
     /// </summary>
     public enum MsgTypeEnum
     {
         /// <summary>
-        /// 彈幕
+        ///     彈幕
         /// </summary>
         Comment,
 
         /// <summary>
-        /// 禮物
+        ///     禮物
         /// </summary>
         GiftSend,
 
         /// <summary>
-        /// 禮物排名
+        ///     禮物排名
         /// </summary>
         GiftTop,
 
         /// <summary>
-        /// 歡迎老爷
+        ///     歡迎老爷
         /// </summary>
         Welcome,
 
         /// <summary>
-        /// 直播開始
+        ///     直播開始
         /// </summary>
         LiveStart,
 
         /// <summary>
-        /// 直播結束
+        ///     直播結束
         /// </summary>
         LiveEnd,
 
         /// <summary>
-        /// 其他
+        ///     其他
         /// </summary>
         Unknown,
 
         /// <summary>
-        /// 欢迎船员
+        ///     欢迎船员
         /// </summary>
         WelcomeGuard,
 
         /// <summary>
-        /// 购买船票（上船）
+        ///     购买船票（上船）
         /// </summary>
         GuardBuy,
 
         /// <summary>
-        /// SC
+        ///     SC
         /// </summary>
         SuperChat,
 
         /// <summary>
-        /// 观众互动信息
+        ///     观众互动信息
         /// </summary>
         Interact,
 
         /// <summary>
-        /// 超管警告
+        ///     超管警告
         /// </summary>
         Warning,
 
         /// <summary>
-        /// 观看人数, 可能是人次? 
+        ///     观看人数, 可能是人次?
         /// </summary>
         WatchedChange
     }
 
     /// <summary>
-    /// 观众互动内容
+    ///     观众互动内容
     /// </summary>
     public enum InteractTypeEnum
     {
         /// <summary>
-        /// 进入
+        ///     进入
         /// </summary>
         Enter = 1,
 
         /// <summary>
-        /// 关注
+        ///     关注
         /// </summary>
         Follow = 2,
 
         /// <summary>
-        /// 分享直播间
+        ///     分享直播间
         /// </summary>
         Share = 3,
 
         /// <summary>
-        /// 特别关注
+        ///     特别关注
         /// </summary>
         SpecialFollow = 4,
 
         /// <summary>
-        /// 互相关注
+        ///     互相关注
         /// </summary>
-        MutualFollow = 5,
+        MutualFollow = 5
     }
 
     public class DanmakuModel
     {
         public static Regex EntryEffRegex = new Regex(@"\<%(.+?)%\>");
-
-        /// <summary>
-        /// 消息類型
-        /// </summary>
-        public MsgTypeEnum MsgType { get; set; }
-
-        public InteractTypeEnum InteractType { get; set; }
-
-
-        /// <summary>
-        /// 彈幕內容
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.Comment"/></item>
-        /// </list></para>
-        /// </summary>
-        public string CommentText { get; set; }
-
-        /// <summary>
-        /// 彈幕用戶
-        /// </summary>
-        [Obsolete("请使用 UserName", true)]
-        public string CommentUser
-        {
-            get { return UserName; }
-            set { UserName = value; }
-        }
-
-        /// <summary>
-        /// 消息触发者用户名
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.Comment"/></item>
-        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
-        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
-        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
-        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
-        /// <item><see cref="MsgTypeEnum.Interact"/></item>
-        /// </list></para>
-        /// </summary>
-        public string UserName { get; set; }
-
-        /// <summary>
-        /// 消息触发者用户ID, 弃用
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.Comment"/></item>
-        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
-        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
-        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
-        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
-        /// <item><see cref="MsgTypeEnum.Interact"/></item>
-        /// </list></para>
-        /// </summary>
-        [Obsolete("由于B站开始使用超长UID, 此字段定义已无法满足, 在int范围内的UID会继续赋值, 超范围会赋值为-1, 请使用UserID_long和UserID_str")]
-        public int UserID { get; set; }
-
-        /// <summary>
-        /// 消息触发者用户ID
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.Comment"/></item>
-        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
-        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
-        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
-        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
-        /// <item><see cref="MsgTypeEnum.Interact"/></item>
-        /// </list></para>
-        /// </summary>
-        public long UserID_long { get; set; }
-
-        /// <summary>
-        /// 消息触发者用户ID
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.Comment"/></item>
-        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
-        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
-        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
-        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
-        /// <item><see cref="MsgTypeEnum.Interact"/></item>
-        /// </list></para>
-        /// </summary>
-        public string UserID_str { get; set; }
-
-        /// <summary>
-        /// 用户舰队等级
-        /// <para>0 为非船员 1 为总督 2 为提督 3 为舰长</para>
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.Comment"/></item>
-        /// <item><see cref="MsgTypeEnum.WelcomeGuard"/></item>
-        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
-        /// </list></para>
-        /// </summary>
-        public int UserGuardLevel { get; set; }
-
-        /// <summary>
-        /// 禮物用戶
-        /// </summary>
-        [Obsolete("请使用 UserName", true)]
-        public string GiftUser
-        {
-            get { return UserName; }
-            set { UserName = value; }
-        }
-
-        /// <summary>
-        /// 禮物名稱
-        /// </summary>
-        public string GiftName { get; set; }
-
-        /// <summary>
-        /// 禮物數量
-        /// </summary>
-        [Obsolete("请使用 GiftCount", true)]
-        public string GiftNum
-        {
-            get { return GiftCount.ToString(); }
-        }
-
-        /// <summary>
-        /// 礼物数量
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
-        /// <item><see cref="MsgTypeEnum.GuardBuy"/></item>
-        /// </list></para>
-        /// <para>此字段也用于标识上船 <see cref="MsgTypeEnum.GuardBuy"/> 的数量（月数）</para>
-        /// </summary>
-        public int GiftCount { get; set; }
-
-        /// <summary>
-        /// 当前房间的礼物积分（Room Cost）
-        /// 因以前出现过不传递rcost的礼物，并且用处不大，所以弃用
-        /// </summary>
-        [Obsolete("如有需要请自行解析RawData", true)]
-        public string Giftrcost
-        {
-            get { return "0"; }
-            set { }
-        }
-
-        /// <summary>
-        /// 禮物排行
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.GiftTop"/></item>
-        /// </list></para>
-        /// </summary>
-        public List<GiftRank> GiftRanking { get; set; }
-
-        /// <summary>
-        /// 该用户是否为房管（包括主播）
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.Comment"/></item>
-        /// <item><see cref="MsgTypeEnum.GiftSend"/></item>
-        /// </list></para>
-        /// </summary>
-        public bool isAdmin { get; set; }
-
-        /// <summary>
-        /// 是否VIP用戶(老爺)
-        /// <para>此项有值的消息类型：<list type="bullet">
-        /// <item><see cref="MsgTypeEnum.Comment"/></item>
-        /// <item><see cref="MsgTypeEnum.Welcome"/></item>
-        /// </list></para>
-        /// </summary>
-        public bool isVIP { get; set; }
-
-        /// <summary>
-        /// <see cref="MsgTypeEnum.LiveStart"/>,<see cref="MsgTypeEnum.LiveEnd"/> 事件对应的房间号
-        /// </summary>
-        public string roomID { get; set; }
-
-        /// <summary>
-        /// 原始数据, 高级开发用
-        /// </summary>
-        [Obsolete("除非确实有需要, 请使用 RawDataJToken 避免多次解析JSON导致性能问题")]
-        public string RawData { get; set; }
-
-        /// <summary>
-        /// 内部用, JSON数据版本号 通常应该是2
-        /// </summary>
-        public int JSON_Version { get; set; }
-
-        /// <summary>
-        /// SC的金额, 如果以后有礼物金额也可以放进去
-        /// </summary>
-        public decimal Price { get; set; }
-
-        /// <summary>
-        /// SC保留时间
-        /// </summary>
-        public int SCKeepTime { get; set; }
-
-        /// <summary>
-        /// 观看人数 可能是人次?
-        /// </summary>
-        public long WatchedCount { get; set; }
-
-        /// <summary>
-        /// 原始数据, 高级开发用, 如果需要用原始的JSON数据, 建议使用这个而不是用RawData
-        /// </summary>
-        public JToken RawDataJToken { get; set; }
 
         public DanmakuModel()
         {
@@ -346,7 +148,7 @@ namespace BilibiliDM_PluginFramework
                     }
 
                     RawDataJToken = obj;
-                    string cmd = obj["cmd"].ToString();
+                    var cmd = obj["cmd"].ToString();
                     switch (cmd)
                     {
                         case "LIVE":
@@ -680,10 +482,8 @@ namespace BilibiliDM_PluginFramework
                                 UserGuardLevel = obj["info"][7].ToObject<int>();
                                 break;
                             }
-                            else
-                            {
-                                MsgType = MsgTypeEnum.Unknown;
-                            }
+
+                            MsgType = MsgTypeEnum.Unknown;
 
                             break;
                         }
@@ -697,5 +497,299 @@ namespace BilibiliDM_PluginFramework
                     throw new Exception();
             }
         }
+
+        /// <summary>
+        ///     消息類型
+        /// </summary>
+        public MsgTypeEnum MsgType { get; set; }
+
+        public InteractTypeEnum InteractType { get; set; }
+
+
+        /// <summary>
+        ///     彈幕內容
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Comment" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        public string CommentText { get; set; }
+
+        /// <summary>
+        ///     彈幕用戶
+        /// </summary>
+        [Obsolete("请使用 UserName", true)]
+        public string CommentUser
+        {
+            get => UserName;
+            set => UserName = value;
+        }
+
+        /// <summary>
+        ///     消息触发者用户名
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Comment" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GiftSend" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Welcome" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.WelcomeGuard" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GuardBuy" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Interact" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        ///     消息触发者用户ID, 弃用
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Comment" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GiftSend" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Welcome" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.WelcomeGuard" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GuardBuy" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Interact" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        [Obsolete("由于B站开始使用超长UID, 此字段定义已无法满足, 在int范围内的UID会继续赋值, 超范围会赋值为-1, 请使用UserID_long和UserID_str")]
+        public int UserID { get; set; }
+
+        /// <summary>
+        ///     消息触发者用户ID
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Comment" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GiftSend" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Welcome" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.WelcomeGuard" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GuardBuy" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Interact" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        public long UserID_long { get; set; }
+
+        /// <summary>
+        ///     消息触发者用户ID
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Comment" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GiftSend" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Welcome" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.WelcomeGuard" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GuardBuy" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Interact" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        public string UserID_str { get; set; }
+
+        /// <summary>
+        ///     用户舰队等级
+        ///     <para>0 为非船员 1 为总督 2 为提督 3 为舰长</para>
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Comment" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.WelcomeGuard" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GuardBuy" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        public int UserGuardLevel { get; set; }
+
+        /// <summary>
+        ///     禮物用戶
+        /// </summary>
+        [Obsolete("请使用 UserName", true)]
+        public string GiftUser
+        {
+            get => UserName;
+            set => UserName = value;
+        }
+
+        /// <summary>
+        ///     禮物名稱
+        /// </summary>
+        public string GiftName { get; set; }
+
+        /// <summary>
+        ///     禮物數量
+        /// </summary>
+        [Obsolete("请使用 GiftCount", true)]
+        public string GiftNum => GiftCount.ToString();
+
+        /// <summary>
+        ///     礼物数量
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GiftSend" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GuardBuy" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        ///     <para>此字段也用于标识上船 <see cref="MsgTypeEnum.GuardBuy" /> 的数量（月数）</para>
+        /// </summary>
+        public int GiftCount { get; set; }
+
+        /// <summary>
+        ///     当前房间的礼物积分（Room Cost）
+        ///     因以前出现过不传递rcost的礼物，并且用处不大，所以弃用
+        /// </summary>
+        [Obsolete("如有需要请自行解析RawData", true)]
+        public string Giftrcost
+        {
+            get => "0";
+            set { }
+        }
+
+        /// <summary>
+        ///     禮物排行
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GiftTop" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        public List<GiftRank> GiftRanking { get; set; }
+
+        /// <summary>
+        ///     该用户是否为房管（包括主播）
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Comment" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.GiftSend" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        public bool isAdmin { get; set; }
+
+        /// <summary>
+        ///     是否VIP用戶(老爺)
+        ///     <para>
+        ///         此项有值的消息类型：
+        ///         <list type="bullet">
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Comment" />
+        ///             </item>
+        ///             <item>
+        ///                 <see cref="MsgTypeEnum.Welcome" />
+        ///             </item>
+        ///         </list>
+        ///     </para>
+        /// </summary>
+        public bool isVIP { get; set; }
+
+        /// <summary>
+        ///     <see cref="MsgTypeEnum.LiveStart" />,<see cref="MsgTypeEnum.LiveEnd" /> 事件对应的房间号
+        /// </summary>
+        public string roomID { get; set; }
+
+        /// <summary>
+        ///     原始数据, 高级开发用
+        /// </summary>
+        [Obsolete("除非确实有需要, 请使用 RawDataJToken 避免多次解析JSON导致性能问题")]
+        public string RawData { get; set; }
+
+        /// <summary>
+        ///     内部用, JSON数据版本号 通常应该是2
+        /// </summary>
+        public int JSON_Version { get; set; }
+
+        /// <summary>
+        ///     SC的金额, 如果以后有礼物金额也可以放进去
+        /// </summary>
+        public decimal Price { get; set; }
+
+        /// <summary>
+        ///     SC保留时间
+        /// </summary>
+        public int SCKeepTime { get; set; }
+
+        /// <summary>
+        ///     观看人数 可能是人次?
+        /// </summary>
+        public long WatchedCount { get; set; }
+
+        /// <summary>
+        ///     原始数据, 高级开发用, 如果需要用原始的JSON数据, 建议使用这个而不是用RawData
+        /// </summary>
+        public JToken RawDataJToken { get; set; }
     }
 }

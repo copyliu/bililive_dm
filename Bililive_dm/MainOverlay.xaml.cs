@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Interop;
 
@@ -9,14 +7,14 @@ namespace Bililive_dm
     using static WINAPI.USER32;
 
     /// <summary>
-    /// MainOverlay.xaml 的互動邏輯
+    ///     MainOverlay.xaml 的互動邏輯
     /// </summary>
     public partial class MainOverlay : Window
     {
         public MainOverlay()
         {
-            this.InitializeComponent();
-            this.Topmost = true;
+            InitializeComponent();
+            Topmost = true;
             // 在此點下方插入建立物件所需的程式碼。
         }
 
@@ -24,7 +22,7 @@ namespace Bililive_dm
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             // http://stackoverflow.com/a/551847
-            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
+            var wndHelper = new WindowInteropHelper(this);
             var exStyles = GetExtendedWindowStyles(wndHelper.Handle);
             exStyles |= ExtendedWindowStyles.ToolWindow;
             SetExtendedWindowStyles(wndHelper.Handle, exStyles);
@@ -35,10 +33,12 @@ namespace Bililive_dm
         {
             SetWindowAffinity();
         }
+
         private void SetWindowAffinity()
         {
-            WindowInteropHelper wndHelper = new WindowInteropHelper(this);
-            SetWindowDisplayAffinity(wndHelper.Handle, Store.DisplayAffinity ? WindowDisplayAffinity.ExcludeFromCapture : 0);
+            var wndHelper = new WindowInteropHelper(this);
+            SetWindowDisplayAffinity(wndHelper.Handle,
+                Store.DisplayAffinity ? WindowDisplayAffinity.ExcludeFromCapture : 0);
         }
     }
 }

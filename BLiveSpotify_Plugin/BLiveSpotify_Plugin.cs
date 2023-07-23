@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,7 +10,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using System.Windows;
 using BilibiliDM_PluginFramework;
 using BLiveSpotify_Plugin.Models;
 using Newtonsoft.Json;
@@ -22,28 +21,24 @@ namespace BLiveSpotify_Plugin
     {
         public MyException(string msg) : base(msg)
         {
-
         }
     }
+
     public class SpotifyLib
     {
+        private string access_token;
+        private readonly HttpClient client = new HttpClient();
+        private DateTime expriedate;
+        private readonly HttpListener listener = new HttpListener();
 
         public string refresh_token { get; set; }
         public string playdevice { get; set; }
-        private string access_token;
-        private DateTime expriedate;
-        private HttpClient client = new HttpClient();
-        private HttpListener listener = new HttpListener();
 
         private async Task<bool> update_token()
         {
-            if (string.IsNullOrWhiteSpace(refresh_token))
-            {
-                return false;
-            }
+            if (string.IsNullOrWhiteSpace(refresh_token)) return false;
 
-            if ((expriedate < DateTime.Now || string.IsNullOrEmpty(access_token)))
-            {
+            if (expriedate < DateTime.Now || string.IsNullOrEmpty(access_token))
                 try
                 {
                     var nv = HttpUtility.ParseQueryString(string.Empty);
@@ -56,27 +51,23 @@ namespace BLiveSpotify_Plugin
                     {
                         var res = await result.Content.ReadAsStringAsync();
                         var jobj = JObject.Parse(res);
-                        this.access_token = jobj["access_token"] + "";
-                        this.expriedate = DateTime.Now.AddSeconds(jobj.Value<int>("expires_in"));
-                        this.refresh_token = jobj["refresh_token"] + "";
-                        this.SaveConfig();
+                        access_token = jobj["access_token"] + "";
+                        expriedate = DateTime.Now.AddSeconds(jobj.Value<int>("expires_in"));
+                        refresh_token = jobj["refresh_token"] + "";
+                        SaveConfig();
                         return true;
                     }
-                    else
-                    {
-                        this.refresh_token = "";
-                        this.SaveConfig();
-                        return false;
-                    }
+
+                    refresh_token = "";
+                    SaveConfig();
+                    return false;
                 }
                 catch (Exception e)
                 {
-                    this.refresh_token = "";
-                    this.SaveConfig();
+                    refresh_token = "";
+                    SaveConfig();
                     return false;
                 }
-
-            }
 
             return true;
         }
@@ -87,62 +78,51 @@ namespace BLiveSpotify_Plugin
             if (await update_token())
             {
                 var request = new HttpRequestMessage(HttpMethod.Get, "https://api.spotify.com/v1/me/player/devices");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", this.access_token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
                 var result = await client.SendAsync(request);
                 if (result.IsSuccessStatusCode)
                 {
                     var txt = await result.Content.ReadAsStringAsync();
                     var jobj = JsonConvert.DeserializeObject<PlayDeviceResponse>(txt);
-                    var results=jobj.devices.Select(p => new PlayDeviceModel()
+                    var results = jobj.devices.Select(p => new PlayDeviceModel
                     {
                         PlaylistId = p.id,
                         PlaylistName = p.name
                     }).ToList();
-                  
+
 
                     return results;
                 }
-                else
-                {
-                    AddLog(await result.Content.ReadAsStringAsync());
-                    throw new MyException("獲取播放機失敗");
 
-
-
-                }
+                AddLog(await result.Content.ReadAsStringAsync());
+                throw new MyException("獲取播放機失敗");
             }
-            else
-            {
-                throw new MyException("授權失效");
-            }
-             
 
+            throw new MyException("授權失效");
         }
 
         public async Task<MusicModel> SearchMusic(string name)
         {
             if (await update_token())
             {
-           
-                var request = new HttpRequestMessage(HttpMethod.Get, $"https://api.spotify.com/v1/search?type=track&include_external=audio&limit=1&q={ HttpUtility.UrlEncode(name)}");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", this.access_token);
+                var request = new HttpRequestMessage(HttpMethod.Get,
+                    $"https://api.spotify.com/v1/search?type=track&include_external=audio&limit=1&q={HttpUtility.UrlEncode(name)}");
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
                 var result = await client.SendAsync(request);
                 if (result.IsSuccessStatusCode)
                 {
                     var txt = await result.Content.ReadAsStringAsync();
                     var jobj = JsonConvert.DeserializeObject<SearchResponse>(txt);
-                    if (jobj.tracks?.items?.Any()==true)
+                    if (jobj.tracks?.items?.Any() == true)
                     {
                         var track = jobj.tracks.items[0];
-                        return new MusicModel()
+                        return new MusicModel
                         {
-                            MusicArtist = string.Join(",", track.artists.Select(p=>p.name)),
+                            MusicArtist = string.Join(",", track.artists.Select(p => p.name)),
                             MusicId = track.uri,
                             MusicName = track.name
                         };
-                        
                     }
-
                 }
                 else
                 {
@@ -154,25 +134,22 @@ namespace BLiveSpotify_Plugin
             {
                 return null;
             }
-             return null;
 
+            return null;
         }
 
         public async Task<bool> WaitLogin()
         {
-            if (!listener.Prefixes.Any())
-            {listener.Prefixes.Add("http://localhost:58263/");}
+            if (!listener.Prefixes.Any()) listener.Prefixes.Add("http://localhost:58263/");
 
-            if (listener.IsListening)
-            {
-                listener.Stop();
-            }
+            if (listener.IsListening) listener.Stop();
             listener.Start();
             var random = new Random();
             var randombyte = new byte[32];
             random.NextBytes(randombyte);
             var code_veri = Utils.Base64UrlEncode(randombyte);
-            var code_cha = Utils.Base64UrlEncode(SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(code_veri))).Replace("=", "");
+            var code_cha = Utils.Base64UrlEncode(SHA256.Create().ComputeHash(Encoding.ASCII.GetBytes(code_veri)))
+                .Replace("=", "");
             var loginargs = new Dictionary<string, string>();
             loginargs["response_type"] = "code";
             loginargs["redirect_uri"] = BLiveSpotify_Plugin.CALLBACK;
@@ -181,19 +158,16 @@ namespace BLiveSpotify_Plugin
             loginargs["scope"] = string.Join(" ", scope);
             loginargs["code_challenge"] = code_cha;
             loginargs["code_challenge_method"] = "S256";
-            var queryString = System.Web.HttpUtility.ParseQueryString(string.Empty);
-            foreach (var loginarg in loginargs)
-            {
-                queryString[loginarg.Key]= loginarg.Value;
-                
-            }
-            System.Diagnostics.Process.Start("https://accounts.spotify.com/authorize?"+queryString); ;
+            var queryString = HttpUtility.ParseQueryString(string.Empty);
+            foreach (var loginarg in loginargs) queryString[loginarg.Key] = loginarg.Value;
+            Process.Start("https://accounts.spotify.com/authorize?" + queryString);
+            ;
             HttpListenerResponse response = null;
             try
             {
                 var context = await listener.GetContextAsync();
                 response = context.Response;
-               
+
                 var ret = HttpUtility.ParseQueryString(context.Request.Url.Query);
                 if (!string.IsNullOrEmpty(ret["code"]))
                 {
@@ -210,15 +184,15 @@ namespace BLiveSpotify_Plugin
                     {
                         var res = await result.Content.ReadAsStringAsync();
                         var jobj = JObject.Parse(res);
-                        this.refresh_token = jobj["refresh_token"] + "";
-                        this.access_token = jobj["access_token"] + "";
-                        this.expriedate = DateTime.Now.AddSeconds(jobj.Value<int>("expires_in"));
-                        this.SaveConfig();
-                        string responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權成功, 請關閉本頁面</BODY></HTML>";
-                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                        refresh_token = jobj["refresh_token"] + "";
+                        access_token = jobj["access_token"] + "";
+                        expriedate = DateTime.Now.AddSeconds(jobj.Value<int>("expires_in"));
+                        SaveConfig();
+                        var responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權成功, 請關閉本頁面</BODY></HTML>";
+                        var buffer = Encoding.UTF8.GetBytes(responseString);
                         response.ContentLength64 = buffer.Length;
                         response.ContentType = "text/html";
-                        System.IO.Stream output = response.OutputStream;
+                        var output = response.OutputStream;
                         await output.WriteAsync(buffer, 0, buffer.Length);
                         await output.FlushAsync();
                         output.Close();
@@ -226,11 +200,11 @@ namespace BLiveSpotify_Plugin
                     }
                     else
                     {
-                        string responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權失敗, 請關閉本頁面</BODY></HTML>";
-                        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                        var responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權失敗, 請關閉本頁面</BODY></HTML>";
+                        var buffer = Encoding.UTF8.GetBytes(responseString);
                         response.ContentLength64 = buffer.Length;
                         response.ContentType = "text/html";
-                        System.IO.Stream output = response.OutputStream;
+                        var output = response.OutputStream;
                         await output.WriteAsync(buffer, 0, buffer.Length);
                         await output.FlushAsync();
                         output.Close();
@@ -239,11 +213,11 @@ namespace BLiveSpotify_Plugin
                 }
 
                 {
-                    string responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權失敗, 請關閉本頁面</BODY></HTML>";
-                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                    var responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權失敗, 請關閉本頁面</BODY></HTML>";
+                    var buffer = Encoding.UTF8.GetBytes(responseString);
                     response.ContentLength64 = buffer.Length;
                     response.ContentType = "text/html;charset=utf-8";
-                    System.IO.Stream output = response.OutputStream;
+                    var output = response.OutputStream;
                     await output.WriteAsync(buffer, 0, buffer.Length);
                     await output.FlushAsync();
                     output.Close();
@@ -254,27 +228,24 @@ namespace BLiveSpotify_Plugin
             {
                 if (response != null)
                 {
-                    string responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權失敗, 請關閉本頁面</BODY></HTML>";
-                    byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
+                    var responseString = "<HTML><META charset=\"UTF-8\"><BODY>授權失敗, 請關閉本頁面</BODY></HTML>";
+                    var buffer = Encoding.UTF8.GetBytes(responseString);
                     response.ContentLength64 = buffer.Length;
                     response.ContentType = "text/html;charset=utf-8";
-                    System.IO.Stream output = response.OutputStream;
+                    var output = response.OutputStream;
                     await output.WriteAsync(buffer, 0, buffer.Length);
                     await output.FlushAsync();
                     output.Close();
-
                 }
-               
+
                 return false;
             }
             finally
             {
                 listener.Stop();
             }
-           
-
-
         }
+
         public static SpotifyLib LoadConfig()
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -288,78 +259,64 @@ namespace BLiveSpotify_Plugin
             {
                 return new SpotifyLib();
             }
-
-
         }
 
         public async Task<bool> AddTrack(string id)
         {
-            if (!string.IsNullOrEmpty(this.playdevice)&&await update_token())
+            if (!string.IsNullOrEmpty(playdevice) && await update_token())
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, $"https://api.spotify.com/v1/me/player/queue?device_id={HttpUtility.UrlEncode(playdevice)}&uri={HttpUtility.UrlEncode(id)}");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", this.access_token);
+                var request = new HttpRequestMessage(HttpMethod.Post,
+                    $"https://api.spotify.com/v1/me/player/queue?device_id={HttpUtility.UrlEncode(playdevice)}&uri={HttpUtility.UrlEncode(id)}");
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
                 var result = await client.SendAsync(request);
                 if (result.IsSuccessStatusCode)
                 {
                     return true;
+                }
 
-                }
-                else
-                {
-                    AddLog(await result.Content.ReadAsStringAsync());
-                    return false;
-                }
-            }
-            else
-            {
+                AddLog(await result.Content.ReadAsStringAsync());
                 return false;
             }
+
+            return false;
 
             return false;
         }
 
         public async Task<bool> NextTrack()
         {
-            if (!string.IsNullOrEmpty(this.playdevice) && await update_token())
+            if (!string.IsNullOrEmpty(playdevice) && await update_token())
             {
-                var request = new HttpRequestMessage(HttpMethod.Post, $"https://api.spotify.com/v1/me/player/next?device_id={HttpUtility.UrlEncode(playdevice)}");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", this.access_token);
+                var request = new HttpRequestMessage(HttpMethod.Post,
+                    $"https://api.spotify.com/v1/me/player/next?device_id={HttpUtility.UrlEncode(playdevice)}");
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", access_token);
                 var result = await client.SendAsync(request);
                 if (result.IsSuccessStatusCode)
                 {
                     return true;
+                }
 
-                }
-                else
-                {
-                    AddLog(await result.Content.ReadAsStringAsync());
-                    return false;
-                }
-            }
-            else
-            {
+                AddLog(await result.Content.ReadAsStringAsync());
                 return false;
             }
 
             return false;
 
+            return false;
         }
 
-        public  void SaveConfig()
+        public void SaveConfig()
         {
             var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             path = Path.Combine(path, "弹幕姬", "Plugins", "BLiveSpotify_Plugin.token");
             try
             {
                 var txt = JsonConvert.SerializeObject(this);
-                File.WriteAllText(path,txt);
-               
+                File.WriteAllText(path, txt);
             }
             catch (Exception e)
             {
-               
             }
-
         }
 
         public void AddLog(string log)
@@ -368,16 +325,12 @@ namespace BLiveSpotify_Plugin
             path = Path.Combine(path, "弹幕姬", "Plugins", "BLiveSpotify_Plugin.log");
             try
             {
-              File.AppendAllText(path,log+"\r\n");
-
+                File.AppendAllText(path, log + "\r\n");
             }
             catch (Exception e)
             {
-
             }
-
         }
-
     }
 
     public class BLiveSpotify_Plugin : DMPlugin
@@ -386,78 +339,78 @@ namespace BLiveSpotify_Plugin
         public const string CALLBACK = "http://localhost:58263/callback";
         private MainWindow mp;
         internal SpotifyLib spotifyLib;
+
         public BLiveSpotify_Plugin()
         {
-            spotifyLib=SpotifyLib.LoadConfig();
-            
-            this.ReceivedDanmaku += OnReceivedDanmaku;
-            this.PluginAuth = "CopyLiu";
-            this.PluginName = "Spotify點歌姬";
-            this.PluginCont = "copyliu@gmail.com";
-            this.PluginVer = "v0.0.1";
-            this.PluginDesc = "驚了還有這個";
+            spotifyLib = SpotifyLib.LoadConfig();
+
+            ReceivedDanmaku += OnReceivedDanmaku;
+            PluginAuth = "CopyLiu";
+            PluginName = "Spotify點歌姬";
+            PluginCont = "copyliu@gmail.com";
+            PluginVer = "v0.0.1";
+            PluginDesc = "驚了還有這個";
         }
 
         public override void Admin()
         {
             base.Admin();
-            this.mp?.Close();
-            this.mp = new MainWindow();
-            this.mp.context.Plugin = this;
-            this.mp.Closed += (sender, args) => this.mp = null;
-            this.mp.Show();
+            mp?.Close();
+            mp = new MainWindow();
+            mp.context.Plugin = this;
+            mp.Closed += (sender, args) => mp = null;
+            mp.Show();
         }
+
         private async void OnReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
         {
             // e.Danmaku.RawDataJToken;
-            if (Status && e.Danmaku.MsgType==MsgTypeEnum.Comment)
+            if (Status && e.Danmaku.MsgType == MsgTypeEnum.Comment)
             {
-                if (e.Danmaku.CommentText?.StartsWith("点歌 ")==true)
+                if (e.Danmaku.CommentText?.StartsWith("点歌 ") == true)
                 {
                     var searchtxt = e.Danmaku.CommentText.Remove(0, 3);
                     if (!string.IsNullOrEmpty(searchtxt))
                     {
-                        var music = await this.spotifyLib.SearchMusic(searchtxt);
+                        var music = await spotifyLib.SearchMusic(searchtxt);
                         if (music != null)
                         {
                             if (!string.IsNullOrEmpty(spotifyLib.playdevice))
                             {
-                                
-                                var ret=await spotifyLib.AddTrack(music.MusicId);
+                                var ret = await spotifyLib.AddTrack(music.MusicId);
                                 ;
                                 if (ret)
                                 {
-                                    this.AddDM("新增播放隊列:" + music.MusicName + " - " + music.MusicArtist,false);
+                                    AddDM("新增播放隊列:" + music.MusicName + " - " + music.MusicArtist);
                                     Log("新增播放隊列:" + music.MusicName + " - " + music.MusicArtist);
                                 }
                                 else
                                 {
-                                    this.AddDM("新增播放隊列失敗", false);
+                                    AddDM("新增播放隊列失敗");
                                     Log("新增播放隊列失敗");
                                 }
                             }
                         }
                         else
                         {
-                            this.AddDM("找不到:"+searchtxt, false);
-                            Log("找不到:"+searchtxt );
+                            AddDM("找不到:" + searchtxt);
+                            Log("找不到:" + searchtxt);
                         }
                     }
-                   
                 }
 
                 if (e.Danmaku.CommentText?.StartsWith("track:") == true)
                 {
-                    var ret = await spotifyLib.AddTrack("spotify:"+e.Danmaku.CommentText);
+                    var ret = await spotifyLib.AddTrack("spotify:" + e.Danmaku.CommentText);
                     ;
                     if (ret)
                     {
-                        this.AddDM("新增播放隊列:" + "spotify:" + e.Danmaku.CommentText, false);
+                        AddDM("新增播放隊列:" + "spotify:" + e.Danmaku.CommentText);
                         Log("新增播放隊列:" + "spotify:" + e.Danmaku.CommentText);
                     }
                     else
                     {
-                        this.AddDM("新增播放隊列失敗", false);
+                        AddDM("新增播放隊列失敗");
                         Log("新增播放隊列失敗");
                     }
                 }
@@ -468,12 +421,12 @@ namespace BLiveSpotify_Plugin
                     ;
                     if (ret)
                     {
-                        this.AddDM("切歌成功");
+                        AddDM("切歌成功");
                         Log("切歌成功");
                     }
                     else
                     {
-                        this.AddDM("切歌失敗", false);
+                        AddDM("切歌失敗");
                         Log("切歌失敗");
                     }
                 }

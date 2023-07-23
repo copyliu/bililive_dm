@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO.Compression;
 using System.IO.Pipelines;
-using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http.Json;
 using System.Net.Sockets;
@@ -15,99 +14,91 @@ namespace BiliDMLibCore;
 
 public class RoomConnecter
 {
-    private static HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(5) };
-    private static string CIDInfoUrl = "https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id=";
+    private static readonly HttpClient httpClient = new() { Timeout = TimeSpan.FromSeconds(5) };
+
+    private static readonly string
+        CIDInfoUrl = "https://api.live.bilibili.com/xlive/web-room/v1/index/getDanmuInfo?id=";
+
+    public static async Task<DanmakuTcpConnection> ConnectAsync(int roomId)
+    {
+        if (roomId > 0)
+            try
+            {
+                var info = await httpClient.GetFromJsonAsync<DanmuInfo>(CIDInfoUrl + roomId);
+
+                var token = info.data.token;
+
+                foreach (var serverinfo in info.data.host_list)
+                {
+                    DanmakuTcpConnection dammaku = null;
+                    try
+                    {
+                        dammaku = new DanmakuTcpConnection(serverinfo.host, serverinfo.port, roomId, token);
+                        var _ = dammaku.ConnectAsync(CancellationToken.None);
+                        return dammaku;
+                    }
+                    catch (Exception e)
+                    {
+                        dammaku?.Dispose();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+            }
+
+        throw new Exception();
+    }
 
     private class DanmuInfo
     {
-        public Data data { get; set; }
+        public Data data { get; }
 
         public class Data
         {
-            public string token { get; set; }
-            public List<Host> host_list { get; set; }
-
+            public string token { get; }
+            public List<Host> host_list { get; }
         }
 
         public class Host
         {
-            public string host { get; set; }
-            public ushort port { get; set; }
+            public string host { get; }
+            public ushort port { get; }
             public ushort wss_port { get; set; }
             public ushort ws_port { get; set; }
         }
-    }
-
-    public static async Task<DanmakuTcpConnection> ConnectAsync(int roomId)
-    {
-       
-
-
-            if (roomId > 0)
-            {
-                try
-                {
-                    var info = await httpClient.GetFromJsonAsync<DanmuInfo>(CIDInfoUrl + roomId);
-
-                    var token = info.data.token;
-
-                    foreach (var serverinfo in info.data.host_list)
-                    {
-                        DanmakuTcpConnection dammaku = null;
-                        try
-                        {
-                            dammaku = new DanmakuTcpConnection(serverinfo.host, serverinfo.port , roomId, token);
-                            var _= dammaku.ConnectAsync(CancellationToken.None);
-                            return dammaku;
-                        }
-                        catch (Exception e)
-                        {
-                            dammaku?.Dispose();
-
-                        }
-
-
-
-
-
-                    }
-
-
-                }
-                catch (Exception e)
-                {
-
-
-                }
-            }
-
-            throw new Exception();
     }
 }
 
 public class DanmakuTcpConnection : IDisposable
 {
-    private readonly string _server;
+    private readonly TcpClient _client;
+    private readonly Pipe _pipe = new();
     private readonly int _port;
     private readonly int _roomId;
+    private readonly string _server;
     private readonly string _token;
     private Task? _readLoop;
-    private readonly Pipe _pipe = new();
-    private short protocolversion = 1;
 
-    public BufferBlock<DanmakuModel> DanmakuSource =
-        new BufferBlock<DanmakuModel>(new DataflowBlockOptions() { EnsureOrdered = true });
+    public BufferBlock<DanmakuModel> DanmakuSource = new(new DataflowBlockOptions { EnsureOrdered = true });
 
-    private readonly TcpClient _client;
     private Task? heartbeatLoop;
+    private readonly short protocolversion = 1;
 
-    public DanmakuTcpConnection(string server, int port, int roomId,  string token)
+    public DanmakuTcpConnection(string server, int port, int roomId, string token)
     {
         _server = server;
         _port = port;
         _roomId = roomId;
         _token = token;
         _client = new TcpClient();
+    }
+
+    /// <inheritdoc />
+    public void Dispose()
+    {
+        _readLoop?.Dispose();
+        _client.Dispose();
     }
 
     public async Task ConnectAsync(CancellationToken cancellationToken)
@@ -120,7 +111,6 @@ public class DanmakuTcpConnection : IDisposable
                 _readLoop = ExecuteLoop(cancellationToken);
                 await _readLoop;
             }
-          
         }
 
         else if (_readLoop != null)
@@ -133,23 +123,20 @@ public class DanmakuTcpConnection : IDisposable
         }
     }
 
-    async Task FillPipeAsync(Socket socket, PipeWriter writer, CancellationToken cancellationToken)
+    private async Task FillPipeAsync(Socket socket, PipeWriter writer, CancellationToken cancellationToken)
     {
         const int minimumBufferSize = 512;
 
         while (true)
         {
             // Allocate at least 512 bytes from the PipeWriter.
-            Memory<byte> memory = writer.GetMemory(minimumBufferSize);
+            var memory = writer.GetMemory(minimumBufferSize);
             try
             {
                 using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(60));
                 using var linked = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, cts.Token);
                 var bytesRead = await socket.ReceiveAsync(memory, SocketFlags.None, linked.Token).ConfigureAwait(false);
-                if (bytesRead == 0)
-                {
-                    break;
-                }
+                if (bytesRead == 0) break;
 
                 // Tell the PipeWriter how much was read from the Socket.
                 writer.Advance(bytesRead);
@@ -164,12 +151,9 @@ public class DanmakuTcpConnection : IDisposable
             }
 
             // Make the data available to the PipeReader.
-            FlushResult result = await writer.FlushAsync(cancellationToken);
+            var result = await writer.FlushAsync(cancellationToken);
 
-            if (result.IsCompleted)
-            {
-                break;
-            }
+            if (result.IsCompleted) break;
         }
 
         // By completing PipeWriter, tell the PipeReader that there's no more data coming.
@@ -180,25 +164,18 @@ public class DanmakuTcpConnection : IDisposable
     private async Task ReadPipeAsync(PipeReader reader, CancellationToken ct)
     {
         while (!ct.IsCancellationRequested)
-        {
             try
             {
                 var result = await reader.ReadAsync(ct);
 
                 var buffer = result.Buffer;
                 var header = DanmakuProtocol.FromBuffer(buffer.Slice(0, 16));
-                if (header == null)
-                {
-                    continue;
-                }
+                if (header == null) continue;
 
-                if (buffer.Length < header.Value.PacketLength)
-                {
-                    continue;
-                }
+                if (buffer.Length < header.Value.PacketLength) continue;
 
                 var protocol = header.Value;
-                heartbeatLoop ??= this.HeartbeatLoop(ct);
+                heartbeatLoop ??= HeartbeatLoop(ct);
 
                 switch (protocol.Version)
                 {
@@ -206,40 +183,29 @@ public class DanmakuTcpConnection : IDisposable
                     case 2 when protocol.Action == 5:
                     {
                         var data = buffer.Slice(16 + 2, header.Value.PacketLength - 16 - 2).ToArray();
-                        var memory = new ReadOnlyMemory<byte>(data); //.NET 7 之后要改 //https://github.com/dotnet/runtime/issues/58216
-                   
+                        var memory =
+                            new ReadOnlyMemory<byte>(
+                                data); //.NET 7 之后要改 //https://github.com/dotnet/runtime/issues/58216
+
                         await using var deflate = new DeflateStream(memory.AsStream(), CompressionMode.Decompress);
                         var headerbuffer = new byte[16];
                         try
                         {
                             while (true)
                             {
-                                
-                                if (await deflate.ReadAsync(headerbuffer, ct) != 16)
-                                {
-                                    throw new Exception();
-                                }
+                                if (await deflate.ReadAsync(headerbuffer, ct) != 16) throw new Exception();
 
                                 var protocol_in = DanmakuProtocol.FromBuffer(new ReadOnlySequence<byte>(headerbuffer));
-                                if (protocol_in == null)
-                                {
-                                    throw new Exception();
-                                }
+                                if (protocol_in == null) throw new Exception();
 
                                 var payloadlength = protocol_in.Value.PacketLength - 16;
 
                                 var danmakubuffer = new byte[payloadlength];
-                                if (await deflate.ReadAsync(danmakubuffer, ct) != payloadlength)
-                                {
-                                    throw new Exception();
-                                }
+                                if (await deflate.ReadAsync(danmakubuffer, ct) != payloadlength) throw new Exception();
 
                                 ;
-                                var r=ProcessDanmaku(protocol.Action, new ReadOnlySequence<byte>(danmakubuffer));
-                                if (r != null)
-                                {
-                                    this.DanmakuSource.Post(r);
-                                }
+                                var r = ProcessDanmaku(protocol.Action, new ReadOnlySequence<byte>(danmakubuffer));
+                                if (r != null) DanmakuSource.Post(r);
                             }
                         }
                         catch (Exception e)
@@ -259,31 +225,19 @@ public class DanmakuTcpConnection : IDisposable
                         {
                             while (true)
                             {
-                                if (await deflate.ReadAsync(headerbuffer, ct) != 16)
-                                {
-                                    throw new Exception();
-                                }
+                                if (await deflate.ReadAsync(headerbuffer, ct) != 16) throw new Exception();
 
                                 var protocol_in = DanmakuProtocol.FromBuffer(new ReadOnlySequence<byte>(headerbuffer));
-                                if (protocol_in == null)
-                                {
-                                    throw new Exception();
-                                }
+                                if (protocol_in == null) throw new Exception();
 
                                 var payloadlength = protocol_in.Value.PacketLength - 16;
 
                                 var danmakubuffer = new byte[payloadlength];
-                                if (await deflate.ReadAsync(danmakubuffer, ct) != payloadlength)
-                                {
-                                    throw new Exception();
-                                }
+                                if (await deflate.ReadAsync(danmakubuffer, ct) != payloadlength) throw new Exception();
 
                                 ;
-                                var r=ProcessDanmaku(protocol.Action, new ReadOnlySequence<byte>(danmakubuffer));
-                                if (r != null)
-                                {
-                                    this.DanmakuSource.Post(r);
-                                }
+                                var r = ProcessDanmaku(protocol.Action, new ReadOnlySequence<byte>(danmakubuffer));
+                                if (r != null) DanmakuSource.Post(r);
                             }
                         }
                         catch (Exception e)
@@ -294,11 +248,8 @@ public class DanmakuTcpConnection : IDisposable
                     }
                     default:
                     {
-                        var r= ProcessDanmaku(protocol.Action, buffer.Slice(16));
-                        if (r != null)
-                        {
-                            this.DanmakuSource.Post(r);
-                        }
+                        var r = ProcessDanmaku(protocol.Action, buffer.Slice(16));
+                        if (r != null) DanmakuSource.Post(r);
                     }
                         break;
                 }
@@ -313,7 +264,6 @@ public class DanmakuTcpConnection : IDisposable
             {
                 break;
             }
-        }
 
         await reader.CompleteAsync();
         _client.Close();
@@ -321,22 +271,19 @@ public class DanmakuTcpConnection : IDisposable
 
     private async Task ExecuteLoop(CancellationToken cancellationToken)
     {
-        Task writing = FillPipeAsync(_client.Client, _pipe.Writer, cancellationToken);
-        Task reading = ReadPipeAsync(_pipe.Reader, cancellationToken);
+        var writing = FillPipeAsync(_client.Client, _pipe.Writer, cancellationToken);
+        var reading = ReadPipeAsync(_pipe.Reader, cancellationToken);
         await Task.WhenAll(reading, writing);
-        if (_client.Connected)
-        {
-            _client.Close();
-        }
+        if (_client.Connected) _client.Close();
     }
 
     private async Task HeartbeatLoop(CancellationToken cancellationToken)
     {
         try
         {
-            while (this._client.Connected)
+            while (_client.Connected)
             {
-                await this.SendHeartbeatAsync(cancellationToken);
+                await SendHeartbeatAsync(cancellationToken);
                 await Task.Delay(30000, cancellationToken);
             }
         }
@@ -352,19 +299,16 @@ public class DanmakuTcpConnection : IDisposable
         Debug.WriteLine("Message Sent: Heartbeat");
     }
 
-    Task SendSocketDataAsync(int action, string body, CancellationToken ct)
+    private Task SendSocketDataAsync(int action, string body, CancellationToken ct)
     {
         return SendSocketDataAsync(0, 16, protocolversion, action, 1, body, ct);
     }
 
-    async Task SendSocketDataAsync(int packetlength, short magic, short ver, int action, int param, string body,
+    private async Task SendSocketDataAsync(int packetlength, short magic, short ver, int action, int param, string body,
         CancellationToken ct)
     {
         var playload = Encoding.UTF8.GetBytes(body);
-        if (packetlength == 0)
-        {
-            packetlength = playload.Length + 16;
-        }
+        if (packetlength == 0) packetlength = playload.Length + 16;
 
         var buffer = new byte[packetlength];
         using var ms = new MemoryStream(buffer);
@@ -379,10 +323,7 @@ public class DanmakuTcpConnection : IDisposable
         await ms.WriteAsync(b, ct);
         b = BitConverter.GetBytes(IPAddress.HostToNetworkOrder(param));
         await ms.WriteAsync(b, ct);
-        if (playload.Length > 0)
-        {
-            await ms.WriteAsync(playload, ct);
-        }
+        if (playload.Length > 0) await ms.WriteAsync(playload, ct);
 
         await _client.Client.SendAsync(buffer, SocketFlags.None);
     }
@@ -439,14 +380,11 @@ public class DanmakuTcpConnection : IDisposable
             case 5: //playerCommand (OpSendMsgReply)
             {
                 var json = Encoding.UTF8.GetString(buffer);
-                if (debuglog)
-                {
-                    Console.WriteLine(json);
-                }
+                if (debuglog) Console.WriteLine(json);
 
                 try
                 {
-                    return  new DanmakuModel(json, 2);
+                    return new DanmakuModel(json, 2);
                     // ReceivedDanmaku?.Invoke(this, new ReceivedDanmakuArgs() { Danmaku = dama });
                 }
                 catch (Exception)
@@ -460,19 +398,8 @@ public class DanmakuTcpConnection : IDisposable
             {
                 break;
             }
-            default:
-            {
-                break;
-            }
         }
 
         return null;
-    }
-
-    /// <inheritdoc />
-    public void Dispose()
-    {
-        _readLoop?.Dispose();
-        _client.Dispose();
     }
 }

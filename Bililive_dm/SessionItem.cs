@@ -6,13 +6,13 @@ namespace Bililive_dm
 {
     public class SessionItem : INotifyPropertyChanged
     {
-        private string _userName;
         private string _item;
         private decimal _num;
+        private string _userName;
 
         public string UserName
         {
-            get { return _userName; }
+            get => _userName;
             set
             {
                 if (value == _userName) return;
@@ -23,7 +23,7 @@ namespace Bililive_dm
 
         public string Item
         {
-            get { return _item; }
+            get => _item;
             set
             {
                 if (value == _item) return;
@@ -34,7 +34,7 @@ namespace Bililive_dm
 
         public decimal num
         {
-            get { return _num; }
+            get => _num;
             set
             {
                 if (value == _num) return;

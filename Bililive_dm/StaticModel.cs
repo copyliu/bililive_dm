@@ -5,15 +5,22 @@ using Bililive_dm.Annotations;
 
 namespace Bililive_dm
 {
-    public class StaticModel:INotifyPropertyChanged
+    public class StaticModel : INotifyPropertyChanged
     {
+        private long _danmakuCountRaw;
+        private long _danmakuCountShow;
+        private long _userCount;
+
+        private readonly HashSet<string> UserSet;
+
         public StaticModel()
         {
-            UserSet=new HashSet<string>(    );
+            UserSet = new HashSet<string>();
         }
+
         public long DanmakuCountRaw
         {
-            get { return _danmakuCountRaw; }
+            get => _danmakuCountRaw;
             set
             {
                 if (value == _danmakuCountRaw) return;
@@ -25,7 +32,7 @@ namespace Bililive_dm
         public long DanmakuCountShow
 
         {
-            get { return _danmakuCountShow; }
+            get => _danmakuCountShow;
             set
             {
                 if (value == _danmakuCountShow) return;
@@ -34,16 +41,9 @@ namespace Bililive_dm
             }
         }
 
-        private HashSet<string> UserSet;
-        private long _danmakuCountRaw;
-        private long _danmakuCountShow;
-        private long _userCount;
+        public long UserCount => UserSet.Count;
 
-        public long UserCount
-        {
-            get { return UserSet.Count; }
-          
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void AddUser(string user)
         {
@@ -51,12 +51,10 @@ namespace Bililive_dm
             OnPropertyChanged(nameof(UserCount));
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));  
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public void ClearUser()

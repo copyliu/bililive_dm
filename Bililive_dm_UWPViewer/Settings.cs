@@ -4,10 +4,10 @@ using System.Runtime.CompilerServices;
 
 namespace Bililive_dm_UWPViewer;
 
-public class Settings:INotifyPropertyChanged
+public class Settings : INotifyPropertyChanged
 {
-    private bool _hideWhenTrans;
     private bool _clickThroughEnabled;
+    private bool _hideWhenTrans;
 
     public bool HideWhenTrans
     {

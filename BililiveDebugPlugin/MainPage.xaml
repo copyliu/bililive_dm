@@ -2,71 +2,73 @@
     x:Class="BililiveDebugPlugin.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:BililiveDebugPlugin"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:bililiveDebugPlugin="clr-namespace:BililiveDebugPlugin"
     xmlns:linq="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json"
-    mc:Ignorable="d" d:DesignWidth="698" d:DesignHeight="326" Title="彈幕姬開發人員小工具" >
+    mc:Ignorable="d" d:DesignWidth="698" d:DesignHeight="326" Title="彈幕姬開發人員小工具">
     <Window.Resources>
-        <bililiveDebugPlugin:MethodToValueConverter x:Key="MethodToValueConverter"/>
-        <HierarchicalDataTemplate DataType="{x:Type linq:JArray}" ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
-            <TextBlock Text="Array">
-            </TextBlock>
+        <bililiveDebugPlugin:MethodToValueConverter x:Key="MethodToValueConverter" />
+        <HierarchicalDataTemplate DataType="{x:Type linq:JArray}"
+                                  ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
+            <TextBlock Text="Array" />
         </HierarchicalDataTemplate>
-        <HierarchicalDataTemplate DataType="{x:Type linq:JProperty}" ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
+        <HierarchicalDataTemplate DataType="{x:Type linq:JProperty}"
+                                  ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Key: "/>
-                <TextBox Text="{Binding Path=Name, Mode=OneWay}"/>
+                <TextBlock Text="Key: " />
+                <TextBox Text="{Binding Path=Name, Mode=OneWay}" />
             </StackPanel>
         </HierarchicalDataTemplate>
-        <HierarchicalDataTemplate DataType="{x:Type linq:JObject}" ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
-            <TextBlock Text="Object">
-            </TextBlock>
+        <HierarchicalDataTemplate DataType="{x:Type linq:JObject}"
+                                  ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
+            <TextBlock Text="Object" />
         </HierarchicalDataTemplate>
-        <HierarchicalDataTemplate DataType="{x:Type linq:JConstructor}" ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
-            <TextBlock Text="Constructor">
-            </TextBlock>
+        <HierarchicalDataTemplate DataType="{x:Type linq:JConstructor}"
+                                  ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
+            <TextBlock Text="Constructor" />
         </HierarchicalDataTemplate>
-        <HierarchicalDataTemplate DataType="{x:Type linq:JRaw}" ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
-            <TextBlock Text="Raw">
-            </TextBlock>
+        <HierarchicalDataTemplate DataType="{x:Type linq:JRaw}"
+                                  ItemsSource="{Binding Converter={StaticResource MethodToValueConverter}, ConverterParameter='Children'}">
+            <TextBlock Text="Raw" />
         </HierarchicalDataTemplate>
         <DataTemplate DataType="{x:Type linq:JValue}">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Path: "/>
-                <TextBox Text="{Binding Path=Path, Mode=OneWay}"></TextBox>
+                <TextBlock Text="Path: " />
+                <TextBox Text="{Binding Path=Path, Mode=OneWay}" />
 
-                <TextBlock Text="{Binding Type,Mode=OneWay}"></TextBlock>
-                <TextBlock Text=": "/>
-                <TextBox Text="{Binding Path=Value, Mode=OneWay}"/>
+                <TextBlock Text="{Binding Type,Mode=OneWay}" />
+                <TextBlock Text=": " />
+                <TextBox Text="{Binding Path=Value, Mode=OneWay}" />
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
     <Grid d:DataContext="{d:DesignInstance bililiveDebugPlugin:PluginDataContext}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="36*"/>
-            <RowDefinition Height="17*"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="36*" />
+            <RowDefinition Height="17*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="195"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="195" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10,5,10,0">
             <CheckBox Content="接收数据" VerticalAlignment="Center" Margin="0,0,10,0" IsChecked="{Binding Status}" />
-            <Button Content="清空内容" VerticalAlignment="Center" Click="ClearClicked"></Button>
+            <Button Content="清空内容" VerticalAlignment="Center" Click="ClearClicked" />
         </StackPanel>
-        <ListView Grid.Row="1" Grid.Column="0" Margin="10" x:Name="ListView" ItemsSource="{Binding DataList}" SelectionChanged="ListView_OnSelected" >
-
-        </ListView>
-        <TreeView Grid.Column="1" Grid.Row="1" Margin="10" x:Name="TreeView" ItemsSource="{Binding Selected.RawDataJToken}">
+        <ListView Grid.Row="1" Grid.Column="0" Margin="10" x:Name="ListView" ItemsSource="{Binding DataList}"
+                  SelectionChanged="ListView_OnSelected" />
+        <TreeView Grid.Column="1" Grid.Row="1" Margin="10" x:Name="TreeView"
+                  ItemsSource="{Binding Selected.RawDataJToken}">
             <TreeView.ItemContainerStyle>
                 <Style TargetType="{x:Type TreeViewItem}">
                     <Setter Property="IsExpanded" Value="True" />
                 </Style>
             </TreeView.ItemContainerStyle>
         </TreeView>
-        <TextBox Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" Margin="10,0,10,10" Text="{Binding Mode=OneWay, Converter={StaticResource MethodToValueConverter}, ConverterParameter='ToString', Path=Selected.RawDataJToken}"></TextBox>
+        <TextBox Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto" TextWrapping="NoWrap" Margin="10,0,10,10"
+                 Text="{Binding Mode=OneWay, Converter={StaticResource MethodToValueConverter}, ConverterParameter='ToString', Path=Selected.RawDataJToken}" />
     </Grid>
 </Window>

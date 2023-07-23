@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Globalization;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Data;
-using BilibiliDM_PluginFramework;
 using BLiveSpotify_Plugin.Annotations;
 
 namespace BLiveSpotify_Plugin
@@ -14,7 +8,6 @@ namespace BLiveSpotify_Plugin
     {
         public string PlaylistId { get; set; }
         public string PlaylistName { get; set; }
-        
     }
 
     public class MusicModel
@@ -23,10 +16,11 @@ namespace BLiveSpotify_Plugin
         public string MusicName { get; set; }
         public string MusicArtist { get; set; }
     }
-    public class PluginDataContext:INotifyPropertyChanged
+
+    public class PluginDataContext : INotifyPropertyChanged
     {
         private PlayDeviceModel _selectedPlayList;
-         
+
 
         public PlayDeviceModel SelectedPlayList
         {
@@ -34,14 +28,13 @@ namespace BLiveSpotify_Plugin
             set
             {
                 if (Equals(value, _selectedPlayList)) return;
-              
-                var spotifyObj = this.Plugin.spotifyLib;
+
+                var spotifyObj = Plugin.spotifyLib;
                 if (spotifyObj != null)
                 {
                     spotifyObj.playdevice = value?.PlaylistId;
                     spotifyObj.SaveConfig();
                     _selectedPlayList = value;
-
                 }
 
                 OnPropertyChanged();
@@ -59,16 +52,12 @@ namespace BLiveSpotify_Plugin
             get => Plugin?.Status == true;
             set
             {
-                if (Plugin == null) { return; }
+                if (Plugin == null) return;
 
                 if (value)
-                {
-                    this.Plugin.Start();
-                }
+                    Plugin.Start();
                 else
-                {
-                    this.Plugin.Stop();
-                }
+                    Plugin.Stop();
                 OnPropertyChanged();
             }
         }
@@ -80,7 +69,5 @@ namespace BLiveSpotify_Plugin
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        
     }
 }

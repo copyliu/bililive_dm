@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Security.Permissions;
 
 namespace Bililive_dm
@@ -7,19 +8,23 @@ namespace Bililive_dm
     [ComVisible(true)]
     public class ObjectForScriptingHelper
     {
-        MainWindow mExternalWPF;
+        private MainWindow mExternalWPF;
+
         public ObjectForScriptingHelper(MainWindow w)
         {
-            this.mExternalWPF = w;
-        }
-        public void OpenGitHub()
-        {
-            System.Diagnostics.Process.Start("https://github.com/copyliu/bililive_dm"); ;
-        }
-        public void OpenUWPStore()
-        {
-            System.Diagnostics.Process.Start("https://www.microsoft.com/store/apps/9PBVHQH1P2BV"); ;
+            mExternalWPF = w;
         }
 
+        public void OpenGitHub()
+        {
+            Process.Start("https://github.com/copyliu/bililive_dm");
+            ;
+        }
+
+        public void OpenUWPStore()
+        {
+            Process.Start("https://www.microsoft.com/store/apps/9PBVHQH1P2BV");
+            ;
+        }
     }
 }

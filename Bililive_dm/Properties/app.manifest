@@ -1,53 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <assembly manifestVersion="1.0" xmlns="urn:schemas-microsoft-com:asm.v1">
-  <assemblyIdentity version="1.0.0.0" name="MyApplication.app" />
-  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
-    <security>
-      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
-        <!-- UAC 清单选项
-             如果想要更改 Windows 用户帐户控制级别，请使用
-             以下节点之一替换 requestedExecutionLevel 节点。n
-        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
-        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
-        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+    <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>
+    <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+        <security>
+            <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+                <!-- UAC 清单选项
+                     如果想要更改 Windows 用户帐户控制级别，请使用
+                     以下节点之一替换 requestedExecutionLevel 节点。n
+                <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+                <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+                <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+        
+                    指定 requestedExecutionLevel 元素将禁用文件和注册表虚拟化。
+                    如果你的应用程序需要此虚拟化来实现向后兼容性，则删除此
+                    元素。
+                -->
+                <requestedExecutionLevel level="asInvoker" uiAccess="false"/>
+            </requestedPrivileges>
+            <applicationRequestMinimum>
+                <defaultAssemblyRequest permissionSetReference="Custom"/>
+                <PermissionSet class="System.Security.PermissionSet" version="1" ID="Custom" SameSite="site"
+                               Unrestricted="true"/>
+            </applicationRequestMinimum>
+        </security>
+    </trustInfo>
 
-            指定 requestedExecutionLevel 元素将禁用文件和注册表虚拟化。
-            如果你的应用程序需要此虚拟化来实现向后兼容性，则删除此
-            元素。
-        -->
-        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
-      </requestedPrivileges>
-      <applicationRequestMinimum>
-        <defaultAssemblyRequest permissionSetReference="Custom" />
-        <PermissionSet class="System.Security.PermissionSet" version="1" ID="Custom" SameSite="site" Unrestricted="true" />
-      </applicationRequestMinimum>
-    </security>
-  </trustInfo>
-  
-  <!-- 指示该应用程序可以感知 DPI 且 Windows 在 DPI 较高时将不会对其进行
-       自动缩放。Windows Presentation Foundation (WPF)应用程序自动感知 DPI，无需
-       选择加入。选择加入此设置的 Windows 窗体应用程序(目标设定为 .NET Framework 4.6 )还应
-       在其 app.config 中将 "EnableWindowsFormsHighDpiAutoResizing" 设置设置为 "true"。-->
-  <!--
-  <application xmlns="urn:schemas-microsoft-com:asm.v3">
-    <windowsSettings>
-      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true</dpiAware>
-    </windowsSettings>
-  </application>
-  -->
-  <!-- 启用 Windows 公共控件和对话框的主题(Windows XP 和更高版本) -->
-  <!--
-  <dependency>
-    <dependentAssembly>
-      <assemblyIdentity
-          type="win32"
-          name="Microsoft.Windows.Common-Controls"
-          version="6.0.0.0"
-          processorArchitecture="*"
-          publicKeyToken="6595b64144ccf1df"
-          language="*"
-        />
-    </dependentAssembly>
-  </dependency>
-  -->
+    <!-- 指示该应用程序可以感知 DPI 且 Windows 在 DPI 较高时将不会对其进行
+         自动缩放。Windows Presentation Foundation (WPF)应用程序自动感知 DPI，无需
+         选择加入。选择加入此设置的 Windows 窗体应用程序(目标设定为 .NET Framework 4.6 )还应
+         在其 app.config 中将 "EnableWindowsFormsHighDpiAutoResizing" 设置设置为 "true"。-->
+    <!--
+    <application xmlns="urn:schemas-microsoft-com:asm.v3">
+      <windowsSettings>
+        <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true</dpiAware>
+      </windowsSettings>
+    </application>
+    -->
+    <!-- 启用 Windows 公共控件和对话框的主题(Windows XP 和更高版本) -->
+    <!--
+    <dependency>
+      <dependentAssembly>
+        <assemblyIdentity
+            type="win32"
+            name="Microsoft.Windows.Common-Controls"
+            version="6.0.0.0"
+            processorArchitecture="*"
+            publicKeyToken="6595b64144ccf1df"
+            language="*"
+          />
+      </dependentAssembly>
+    </dependency>
+    -->
 </assembly>

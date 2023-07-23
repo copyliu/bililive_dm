@@ -1,23 +1,23 @@
 ﻿using System;
-using BilibiliDM_PluginFramework.Annotations;
 using System.ComponentModel;
+using BilibiliDM_PluginFramework.Annotations;
 
 namespace BilibiliDM_PluginFramework
 {
     public class GiftRank : INotifyPropertyChanged
     {
-        private string _userName;
         private decimal _coin;
         private int _uid;
         private string _uid_str;
         private long _uidLong;
+        private string _userName;
 
         /// <summary>
-        /// 用戶名
+        ///     用戶名
         /// </summary>
         public string UserName
         {
-            get { return _userName; }
+            get => _userName;
             set
             {
                 if (value == _userName) return;
@@ -25,12 +25,13 @@ namespace BilibiliDM_PluginFramework
                 OnPropertyChanged(nameof(UserName));
             }
         }
+
         /// <summary>
-        /// 花銷
+        ///     花銷
         /// </summary>
         public decimal coin
         {
-            get { return _coin; }
+            get => _coin;
             set
             {
                 if (value == _coin) return;
@@ -38,14 +39,15 @@ namespace BilibiliDM_PluginFramework
                 OnPropertyChanged(nameof(coin));
             }
         }
+
         /// <summary>
-        /// UID 弃用
+        ///     UID 弃用
         /// </summary>
         [Obsolete("由于B站开始使用超长UID, 此字段定义已无法满足, 在int范围内的UID会继续赋值, 超范围会赋值为-1, 请使用uid_long和uid_str")]
 
         public int uid
         {
-            get { return _uid; }
+            get => _uid;
             set
             {
                 if (value == _uid) return;
@@ -66,11 +68,11 @@ namespace BilibiliDM_PluginFramework
         }
 
         /// <summary>
-        /// UID
+        ///     UID
         /// </summary>
         public string uid_str
         {
-            get { return _uid_str; }
+            get => _uid_str;
             set
             {
                 if (value == _uid_str) return;
@@ -78,6 +80,7 @@ namespace BilibiliDM_PluginFramework
                 OnPropertyChanged(nameof(uid_str));
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]

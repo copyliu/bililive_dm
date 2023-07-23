@@ -3,19 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Bililive_dm"  ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow"  SizeToContent="WidthAndHeight"
+        ResizeMode="NoResize" WindowStartupLocation="CenterOwner" WindowStyle="SingleBorderWindow"
+        SizeToContent="WidthAndHeight"
         mc:Ignorable="d"
         Title="LanguageSelector">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="22"/>
+            <RowDefinition />
+            <RowDefinition Height="22" />
         </Grid.RowDefinitions>
         <WrapPanel Margin="5" Grid.Row="0">
-            <RadioButton Content="中文" x:Name="cn"></RadioButton>
-            <RadioButton Content="日本語" x:Name="jp"></RadioButton>
-            <RadioButton Content="English" x:Name="en"></RadioButton>
+            <RadioButton Content="中文" x:Name="cn" />
+            <RadioButton Content="日本語" x:Name="jp" />
+            <RadioButton Content="English" x:Name="en" />
         </WrapPanel>
-        <Button Content="OK" Grid.RowSpan="1" Grid.Row="1" Click="Button_Click"/>
+        <Button Content="OK" Grid.Row="1" Click="Button_Click" />
     </Grid>
 </Window>

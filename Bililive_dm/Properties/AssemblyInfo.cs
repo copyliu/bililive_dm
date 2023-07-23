@@ -1,6 +1,4 @@
 ﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -40,7 +38,7 @@ using System.Windows;
     ResourceDictionaryLocation.SourceAssembly //泛用資源字典的位置
     //(用於當資源不在頁面、
     // 應用程式，或任何特定主題的資源字典)
-    )]
+)]
 
 
 // 組件的版本資訊是由下列四項值構成:

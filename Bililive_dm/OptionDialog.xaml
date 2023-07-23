@@ -5,12 +5,13 @@
     xmlns:bililiveDm="clr-namespace:Bililive_dm"
     xmlns:properties="clr-namespace:Bililive_dm.Properties"
     mc:Ignorable="d"
-    x:Class="Bililive_dm.OptionDialog" 
+    x:Class="Bililive_dm.OptionDialog"
     x:Name="Window" FontSize="14.666">
 
     <StackPanel x:Name="LayoutRoot" d:DataContext="{d:DesignInstance bililiveDm:StoreModel}">
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SXOffset}" VerticalAlignment="Center" Width="159" TextAlignment="Right"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SXOffset}"
+                       VerticalAlignment="Center" Width="159" TextAlignment="Right"
                        Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding MainOverlayXoffset,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" />
@@ -18,7 +19,8 @@
                     Value="{Binding MainOverlayXoffset,Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SYOffset}" VerticalAlignment="Center" Width="159" TextAlignment="Right"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SYOffset}"
+                       VerticalAlignment="Center" Width="159" TextAlignment="Right"
                        Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding MainOverlayYoffset, Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" />
@@ -26,7 +28,8 @@
                     Value="{Binding MainOverlayYoffset, Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SWidth}" VerticalAlignment="Center" Width="159" TextAlignment="Right"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SWidth}"
+                       VerticalAlignment="Center" Width="159" TextAlignment="Right"
                        Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding MainOverlayWidth,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" />
@@ -42,7 +45,8 @@
                     Value="{Binding MainOverlayEffect1,Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SEff2Time}" VerticalAlignment="Center" Width="159"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SEff2Time}"
+                       VerticalAlignment="Center" Width="159"
                        TextAlignment="Right" Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding MainOverlayEffect2,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" />
@@ -50,7 +54,8 @@
                     Value="{Binding MainOverlayEffect2,Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SKeepTime}" VerticalAlignment="Center" Width="159"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SKeepTime}"
+                       VerticalAlignment="Center" Width="159"
                        TextAlignment="Right" Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding MainOverlayEffect3,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" />
@@ -58,15 +63,17 @@
                     Value="{Binding MainOverlayEffect3,Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SEff3Time}" VerticalAlignment="Center" Width="159"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SEff3Time}"
+                       VerticalAlignment="Center" Width="159"
                        TextAlignment="Right" Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding MainOverlayEffect4,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" />
-            <Slider VerticalAlignment="Center" Maximum="5" 
+            <Slider VerticalAlignment="Center" Maximum="5"
                     Value="{Binding MainOverlayEffect4,Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_STextSize}" VerticalAlignment="Center" Width="159"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_STextSize}"
+                       VerticalAlignment="Center" Width="159"
                        TextAlignment="Right" Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding MainOverlayFontsize,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged,ValidatesOnExceptions=True}" />
@@ -74,12 +81,14 @@
                     Value="{Binding MainOverlayFontsize,Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.FontFamilySelecter}" VerticalAlignment="Center" Width="159" TextAlignment="Right"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.FontFamilySelecter}"
+                       VerticalAlignment="Center" Width="159" TextAlignment="Right"
                        Margin="0,0,20,0" />
-            <ComboBox  x:Name="FontFamilySelecter"  SelectedValue="{Binding MainFontFamily, Mode=TwoWay}"   />
+            <ComboBox x:Name="FontFamilySelecter" SelectedValue="{Binding MainFontFamily, Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_FTextSize}" VerticalAlignment="Center" Width="159" TextAlignment="Right"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_FTextSize}"
+                       VerticalAlignment="Center" Width="159" TextAlignment="Right"
                        Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding FullOverlayFontsize,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged,ValidatesOnExceptions=True}" />
@@ -87,7 +96,8 @@
                     Value="{Binding FullOverlayFontsize,Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_FSpeed}" VerticalAlignment="Center" Width="159" TextAlignment="Right"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_FSpeed}"
+                       VerticalAlignment="Center" Width="159" TextAlignment="Right"
                        Margin="0,0,20,0" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
                      Text="{Binding FullOverlayEffect1,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" />
@@ -96,21 +106,25 @@
         </DockPanel>
         <DockPanel>
 
-            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.ScreenSelecter}" VerticalAlignment="Center" Width="159" TextAlignment="Right"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.ScreenSelecter}"
+                       VerticalAlignment="Center" Width="159" TextAlignment="Right"
                        Margin="0,0,20,0" />
-            <ComboBox  x:Name="ScreenSelect"  SelectedValue="{Binding FullScreenMonitor,Mode=TwoWay}"     />
+            <ComboBox x:Name="ScreenSelect" SelectedValue="{Binding FullScreenMonitor,Mode=TwoWay}" />
         </DockPanel>
-       
-        <CheckBox x:Name="WTFEngineEnable" IsChecked="{Binding WtfEngineEnabled,Mode=TwoWay}" Content="{x:Static properties:Resources.WTFEngineEnable_Content}" />
-        <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_EnableNewEngineWarn}" VerticalAlignment="Center" TextAlignment="Right"
-                       Margin="0,0,20,0" HorizontalAlignment="Left" />
+
+        <CheckBox x:Name="WTFEngineEnable" IsChecked="{Binding WtfEngineEnabled,Mode=TwoWay}"
+                  Content="{x:Static properties:Resources.WTFEngineEnable_Content}" />
+        <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_EnableNewEngineWarn}"
+                   VerticalAlignment="Center" TextAlignment="Right"
+                   Margin="0,0,20,0" HorizontalAlignment="Left" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
             <Button Content="{x:Static properties:Resources.Button_Content_Text}" Click="ButtonBase_OnClick" />
-            <Button Content="{x:Static properties:Resources.Button_Content_Default}" Click="ButtonBase_OnClick2" Grid.Column="1" />
+            <Button Content="{x:Static properties:Resources.Button_Content_Default}" Click="ButtonBase_OnClick2"
+                    Grid.Column="1" />
 
         </Grid>
 

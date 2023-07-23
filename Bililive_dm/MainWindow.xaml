@@ -1,149 +1,193 @@
 ﻿<local:StyledWindow x:Class="Bililive_dm.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:biliDmLib="clr-namespace:BiliDMLib;assembly=BiliDMLib"
-        xmlns:local="clr-namespace:Bililive_dm"
-        xmlns:bililiveDm="clr-namespace:Bililive_dm"
-        xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
-        xmlns:s="clr-namespace:System;assembly=mscorlib"
-        xmlns:properties="clr-namespace:Bililive_dm.Properties"
-        mc:Ignorable="d"
-        Title="B站彈幕姬" Height="518" Width="900" FontSize="14.666">
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:local="clr-namespace:Bililive_dm"
+                    xmlns:bililiveDm="clr-namespace:Bililive_dm"
+                    xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
+                    xmlns:properties="clr-namespace:Bililive_dm.Properties"
+                    mc:Ignorable="d"
+                    Title="B站彈幕姬" Height="518" Width="900" FontSize="14.666">
     <Window.Resources>
         <ResourceDictionary>
-            <bililiveDm:PluginStatusConverter x:Key="Converter"/>
+            <bililiveDm:PluginStatusConverter x:Key="Converter" />
 
-            <DataTemplate x:Key="LogTemplate" >
-                <TextBlock Text="{Binding}" TextWrapping="Wrap" Cursor="Hand" MouseLeftButtonDown="UIElement_OnMouseLeftButtonUp"/>
+            <DataTemplate x:Key="LogTemplate">
+                <TextBlock Text="{Binding}" TextWrapping="Wrap" Cursor="Hand"
+                           MouseLeftButtonDown="UIElement_OnMouseLeftButtonUp" />
             </DataTemplate>
         </ResourceDictionary>
     </Window.Resources>
 
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.LiveRoomAddr}"
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
+                       Text="{x:Static properties:Resources.LiveRoomAddr}"
                        VerticalAlignment="Center" Margin="4" />
-            <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666" MinWidth="80" />
-            <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}" VerticalAlignment="Center"
+            <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666"
+                     MinWidth="80" />
+            <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}"
+                    VerticalAlignment="Center"
                     Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
 
-            <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0" VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70"/>
+            <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0"
+                    VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70" />
             <Button x:Name="Test" Content="{x:Static properties:Resources.Test_Content}" VerticalAlignment="Center"
                     Click="Test_OnClick" Margin="28,0,0,0" MinWidth="70" />
 
             <Button Name="Skin" Content="{x:Static properties:Resources.ChangeSkin}"
-                    VerticalAlignment="Center" Margin="28,0,0,0" MinWidth="70" Click="Skin_Click"/>
+                    VerticalAlignment="Center" Margin="28,0,0,0" MinWidth="70" Click="Skin_Click" />
 
         </StackPanel>
         <WrapPanel VerticalAlignment="Center" DockPanel.Dock="Top" Orientation="Horizontal">
             <StackPanel Orientation="Horizontal">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text}" VerticalAlignment="Center" Margin="3" />
-                <TextBlock  x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
-                            VerticalAlignment="Center" />
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
+                           Text="{x:Static properties:Resources.TextBlock_Text}" VerticalAlignment="Center" Margin="3" />
+                <TextBlock x:Name="OnlineBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
+                           VerticalAlignment="Center" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="18,0,0,0">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{x:Static properties:Resources.WatchedCount}" VerticalAlignment="Center" Margin="3" />
-                <TextBlock  x:Name="WatchedBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
-                            VerticalAlignment="Center" />
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
+                           Text="{x:Static properties:Resources.WatchedCount}" VerticalAlignment="Center" Margin="3" />
+                <TextBlock x:Name="WatchedBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Ø"
+                           VerticalAlignment="Center" />
             </StackPanel>
 
-            <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"  Checked="SideBar_Checked"
-                VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center"                   x:Name="Full"          Content="{x:Static properties:Resources.Full_Content}"       Checked="Full_Checked" Unchecked="Full_Unchecked" />
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="AutoReconnect" Content="{x:Static properties:Resources.AutoReconnect_Content}"/>
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="SaveLog"       Content="{x:Static properties:Resources.SaveLog_Content}"    Checked="SaveLog_OnChecked" Unchecked="SaveLog_OnUnchecked"/>
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="ShowItem"      Content="{x:Static properties:Resources.ShowItem_Content}"   Checked="ShowItem_OnChecked" Unchecked="ShowItem_OnUnchecked"/>
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="True" x:Name="ShowInteract"  Content="{x:Static properties:Resources.Interact_Content}"   Checked="ShowInteract_OnChecked" Unchecked="ShowInteract_OnUnchecked"/>
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center"  IsChecked="False" x:Name="IgnoreEmoji"  Content="{x:Static properties:Resources.IgnoreEmoji_Content}"   Checked="IgnoreEmoji_OnChecked" Unchecked="IgnoreEmoji_OnUnchecked"/>
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="IgnoreSpam"    Content="{x:Static properties:Resources.IgnoreSpam_Content}" Checked="IgnoreSpam_OnChecked" Unchecked="IgnoreSpam_OnUnchecked"/>
-            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="WindowTop"     Content="{x:Static properties:Resources.WindowTop_Content}"  Click="WindowTop_OnChecked"/>
+            <CheckBox x:Name="SideBar" Content="{x:Static properties:Resources.SideBar_Content}"
+                      Checked="SideBar_Checked"
+                      VerticalAlignment="Center" Unchecked="SideBar_Unchecked" Margin="28,0,0,0" />
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center" x:Name="Full"
+                      Content="{x:Static properties:Resources.Full_Content}" Checked="Full_Checked"
+                      Unchecked="Full_Unchecked" />
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="True" x:Name="AutoReconnect"
+                      Content="{x:Static properties:Resources.AutoReconnect_Content}" />
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="True" x:Name="SaveLog"
+                      Content="{x:Static properties:Resources.SaveLog_Content}" Checked="SaveLog_OnChecked"
+                      Unchecked="SaveLog_OnUnchecked" />
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="True" x:Name="ShowItem"
+                      Content="{x:Static properties:Resources.ShowItem_Content}" Checked="ShowItem_OnChecked"
+                      Unchecked="ShowItem_OnUnchecked" />
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="True" x:Name="ShowInteract"
+                      Content="{x:Static properties:Resources.Interact_Content}" Checked="ShowInteract_OnChecked"
+                      Unchecked="ShowInteract_OnUnchecked" />
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="IgnoreEmoji"
+                      Content="{x:Static properties:Resources.IgnoreEmoji_Content}" Checked="IgnoreEmoji_OnChecked"
+                      Unchecked="IgnoreEmoji_OnUnchecked" />
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="IgnoreSpam"
+                      Content="{x:Static properties:Resources.IgnoreSpam_Content}" Checked="IgnoreSpam_OnChecked"
+                      Unchecked="IgnoreSpam_OnUnchecked" />
+            <CheckBox Margin="2.5,0" VerticalAlignment="Center" IsChecked="False" x:Name="WindowTop"
+                      Content="{x:Static properties:Resources.WindowTop_Content}" Click="WindowTop_OnChecked" />
         </WrapPanel>
         <DockPanel DockPanel.Dock="Bottom">
-            <Button DockPanel.Dock="Right" Content="🌐" Click="SelectLanguage" Padding="0"></Button>
-            <TextBlock Text="{x:Static properties:Resources.ABout_Text}" VerticalAlignment="Center"/>
+            <Button DockPanel.Dock="Right" Content="🌐" Click="SelectLanguage" Padding="0" />
+            <TextBlock Text="{x:Static properties:Resources.ABout_Text}" VerticalAlignment="Center" />
 
         </DockPanel>
-        <TabControl x:Name="TabControl" >
+        <TabControl x:Name="TabControl">
             <TabItem Header="{x:Static properties:Resources.TabItem_Header}">
                 <!--<TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />-->
                 <ScrollViewer x:Name="LogScroll" CanContentScroll="True">
-                    <ItemsControl  x:Name="Log" ItemsSource="{Binding}" ItemTemplate="{StaticResource LogTemplate}" >
+                    <ItemsControl x:Name="Log" ItemsSource="{Binding}" ItemTemplate="{StaticResource LogTemplate}">
 
 
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <VirtualizingStackPanel IsItemsHost="True"/>
+                                <VirtualizingStackPanel IsItemsHost="True" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                     </ItemsControl>
                 </ScrollViewer>
-            
 
 
             </TabItem>
 
-            <TabItem  Header="{x:Static properties:Resources.RankTabItem_Header}">
+            <TabItem Header="{x:Static properties:Resources.RankTabItem_Header}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <DataGrid CanUserAddRows="False" x:Name="DataGrid2"  IsReadOnly="True" AutoGenerateColumns="False"
-                        d:DataContext="{d:DesignInstance bililiveDm:SessionItem}" Grid.Row="0">
+                    <DataGrid CanUserAddRows="False" x:Name="DataGrid2" IsReadOnly="True" AutoGenerateColumns="False"
+                              d:DataContext="{d:DesignInstance bililiveDm:SessionItem}" Grid.Row="0">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="{x:Static properties:Resources.DataGridTextColumn_Header1}"/>
-                            <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="{x:Static properties:Resources.DataGridTextColumn_Header2}" SortDirection="Descending"/>
-                            <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="{x:Static properties:Resources.DataGridTextColumn_Header3}" SortDirection="Descending"/>
+                            <DataGridTextColumn Binding="{Binding UserName}"
+                                                ClipboardContentBinding="{Binding UserName}"
+                                                Header="{x:Static properties:Resources.DataGridTextColumn_Header1}" />
+                            <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}"
+                                                Header="{x:Static properties:Resources.DataGridTextColumn_Header2}"
+                                                SortDirection="Descending" />
+                            <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}"
+                                                Header="{x:Static properties:Resources.DataGridTextColumn_Header3}"
+                                                SortDirection="Descending" />
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel x:Name="StaticPanel" HorizontalAlignment="Center" Grid.Row="1">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_R1}" Width="250"></TextBlock>
-                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountRaw}" Width="100" TextAlignment="Right"></TextBlock>
+                            <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_R1}" Width="250" />
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountRaw}" Width="100"
+                                       TextAlignment="Right" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="{x:Static properties:Resources.TextBlock_Text_R2}" Width="250"></TextBlock>
-                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountShow}" Width="100" TextAlignment="Right"></TextBlock>
+                            <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_R2}" Width="250" />
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding DanmakuCountShow}" Width="100"
+                                       TextAlignment="Right" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="{x:Static properties:Resources.TextBlock_Text_R3}" Width="250"></TextBlock>
-                            <TextBlock HorizontalAlignment="Right" Text="{Binding UserCount}" Width="100" TextAlignment="Right"></TextBlock>
+                            <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_R3}" Width="250" />
+                            <TextBlock HorizontalAlignment="Right" Text="{Binding UserCount}" Width="100"
+                                       TextAlignment="Right" />
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center" Grid.Row="2" >
-                        <Button x:Name="ClearMe" Content="{x:Static properties:Resources.ClearMe_Content}" HorizontalAlignment="Right" VerticalAlignment="Center"
-                     Click="ClearMe_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe2" Content="{x:Static properties:Resources.ClearMe2_Content}" HorizontalAlignment="Right" VerticalAlignment="Center"
-                    Click="ClearMe2_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe4" Content="{x:Static properties:Resources.ClearMe4_Content}" HorizontalAlignment="Right" VerticalAlignment="Center"
-                    Click="ClearMe4_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
-                        <Button x:Name="ClearMe3" Content="{x:Static properties:Resources.ClearMe3_Content}" HorizontalAlignment="Right" VerticalAlignment="Center"
-                      Click="ClearMe3_OnClick"  DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                    <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center" Grid.Row="2">
+                        <Button x:Name="ClearMe" Content="{x:Static properties:Resources.ClearMe_Content}"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Click="ClearMe_OnClick" DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe2" Content="{x:Static properties:Resources.ClearMe2_Content}"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Click="ClearMe2_OnClick" DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe4" Content="{x:Static properties:Resources.ClearMe4_Content}"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Click="ClearMe4_OnClick" DockPanel.Dock="Bottom" Margin="0,0,4,0" />
+                        <Button x:Name="ClearMe3" Content="{x:Static properties:Resources.ClearMe3_Content}"
+                                HorizontalAlignment="Right" VerticalAlignment="Center"
+                                Click="ClearMe3_OnClick" DockPanel.Dock="Bottom" Margin="0,0,4,0" />
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Header="{x:Static properties:Resources.TabItem_Header_Setting}">
                 <Grid VerticalAlignment="Top">
-                    <bililiveDm:OptionDialog x:Name="OptionDialog"/>
+                    <bililiveDm:OptionDialog x:Name="OptionDialog" />
                     <Canvas Width="0" Height="0" HorizontalAlignment="Left" VerticalAlignment="Bottom">
                         <StackPanel Canvas.Top="115">
                             <FrameworkElement.Resources>
                                 <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource {x:Type CheckBox}}">
-                                    <Setter Property="Margin" Value="5,0"/>
-                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Margin" Value="5,0" />
+                                    <Setter Property="Padding" Value="0" />
                                 </Style>
                             </FrameworkElement.Resources>
 
-                            <CheckBox x:Name="DisplayAffinity" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="{Binding DisplayAffinity,Mode=TwoWay}" Panel.ZIndex="1" Content="{x:Static properties:Resources.DisplayAffinity_Content}" />
+                            <CheckBox x:Name="DisplayAffinity" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                      IsChecked="{Binding DisplayAffinity,Mode=TwoWay}" Panel.ZIndex="1"
+                                      Content="{x:Static properties:Resources.DisplayAffinity_Content}" />
 
-                            <CheckBox Content="{x:Static properties:Resources.SSTP_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="1" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
-                            <CheckBox Content="{x:Static properties:Resources.ShowError_Content}" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="1" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
-                            <CheckBox Content="{x:Static properties:Resources.EnableRegex_Content}" x:Name="EnableRegex"  HorizontalAlignment="Left" VerticalAlignment="Top" Panel.ZIndex="1" Checked="Enableregex_OnChecked" Unchecked="Enableregex_OnUnchecked"/>
-                            <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5" TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395" Panel.ZIndex="1" TextChanged="Regex_OnTextChanged" />
+                            <CheckBox Content="{x:Static properties:Resources.SSTP_Content}" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="1"
+                                      Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked" />
+                            <CheckBox Content="{x:Static properties:Resources.ShowError_Content}"
+                                      HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError"
+                                      IsChecked="False" Panel.ZIndex="1" Checked="ShowError_OnChecked"
+                                      Unchecked="ShowError_OnUnchecked" />
+                            <CheckBox Content="{x:Static properties:Resources.EnableRegex_Content}"
+                                      x:Name="EnableRegex" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                      Panel.ZIndex="1" Checked="Enableregex_OnChecked"
+                                      Unchecked="Enableregex_OnUnchecked" />
+                            <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5"
+                                     TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395"
+                                     Panel.ZIndex="1" TextChanged="Regex_OnTextChanged" />
                             <!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
                         </StackPanel>
                     </Canvas>
@@ -152,23 +196,38 @@
             <TabItem Header="{x:Static properties:Resources.TabItem_Header_Plugin}">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Margin="0 2" Orientation="Horizontal">
-                        <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_PluginDir}" VerticalAlignment="Center"></TextBlock>
-                        <Button Margin="5 0" Click="OpenPluginFolder_OnClick" Content="{x:Static properties:Resources.Btn_Text_OpenPluginDir}"></Button>
+                        <TextBlock Text="{x:Static properties:Resources.TextBlock_Text_PluginDir}"
+                                   VerticalAlignment="Center" />
+                        <Button Margin="5 0" Click="OpenPluginFolder_OnClick"
+                                Content="{x:Static properties:Resources.Btn_Text_OpenPluginDir}" />
                     </StackPanel>
-                    <DataGrid CanUserAddRows="False" x:Name="PluginGrid"  IsReadOnly="True" AutoGenerateColumns="False" DockPanel.Dock="Top" SelectionMode="Single" SelectionUnit="FullRow"
-                  d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">
+                    <DataGrid CanUserAddRows="False" x:Name="PluginGrid" IsReadOnly="True" AutoGenerateColumns="False"
+                              DockPanel.Dock="Top" SelectionMode="Single" SelectionUnit="FullRow"
+                              d:DataContext="{d:DesignInstance bilibiliDmPluginFramework:DMPlugin}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin1}"/>
-                            <DataGridTextColumn Binding="{Binding PluginDesc}" ClipboardContentBinding="{Binding PluginDesc}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin2}"/>
-                            <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin3}"/>
-                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource Converter}}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin4}"/>
-                            <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin5}"/>
+                            <DataGridTextColumn Binding="{Binding PluginName}"
+                                                ClipboardContentBinding="{Binding PluginName}"
+                                                Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin1}" />
+                            <DataGridTextColumn Binding="{Binding PluginDesc}"
+                                                ClipboardContentBinding="{Binding PluginDesc}"
+                                                Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin2}" />
+                            <DataGridTextColumn Binding="{Binding PluginAuth}"
+                                                ClipboardContentBinding="{Binding PluginAuth}"
+                                                Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin3}" />
+                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource Converter}}"
+                                                Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin4}" />
+                            <DataGridTextColumn Binding="{Binding PluginVer}"
+                                                ClipboardContentBinding="{Binding PluginVer}"
+                                                Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin5}" />
                         </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginEnabvle}" Click="Plugin_Enable"/>
-                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginStop}" Click="Plugin_Disable"/>
-                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginAdmin}" Click="Plugin_admin"/>
+                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginEnabvle}"
+                                          Click="Plugin_Enable" />
+                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginStop}"
+                                          Click="Plugin_Disable" />
+                                <MenuItem Header="{x:Static properties:Resources.MenuItem_Header_PluginAdmin}"
+                                          Click="Plugin_admin" />
 
                             </ContextMenu>
                         </DataGrid.ContextMenu>
@@ -180,7 +239,6 @@
 
             </TabItem>
         </TabControl>
-
 
 
     </DockPanel>

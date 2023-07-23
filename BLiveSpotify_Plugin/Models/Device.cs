@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BLiveSpotify_Plugin.Models
 {
     internal class Device
     {
-        public string  id { get; set; }
+        public string id { get; set; }
         public string name { get; set; }
     }
 
@@ -19,14 +15,15 @@ namespace BLiveSpotify_Plugin.Models
 
     internal class SearchResponse
     {
+        public TrackResponse tracks { get; set; }
+
         public class Track
         {
             public string id { get; set; }
             public string name { get; set; }
             public List<Artist> artists { get; set; }
             public string uri { get; set; }
-
-    }
+        }
 
         public class Artist
         {
@@ -38,7 +35,5 @@ namespace BLiveSpotify_Plugin.Models
         {
             public List<Track> items { get; set; }
         }
-        public TrackResponse tracks { get; set; }
     }
-
 }

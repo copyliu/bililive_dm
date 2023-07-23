@@ -13,70 +13,70 @@ namespace Bililive_dm
     {
         public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
             "Fill",
-            typeof (Brush),
-            typeof (OutlinedTextBlock),
+            typeof(Brush),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(
             "Stroke",
-            typeof (Brush),
-            typeof (OutlinedTextBlock),
+            typeof(Brush),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(Brushes.Black, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
             "StrokeThickness",
-            typeof (double),
-            typeof (OutlinedTextBlock),
+            typeof(double),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(1d, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty FontFamilyProperty = TextElement.FontFamilyProperty.AddOwner(
-            typeof (OutlinedTextBlock),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty FontSizeProperty = TextElement.FontSizeProperty.AddOwner(
-            typeof (OutlinedTextBlock),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty FontStretchProperty = TextElement.FontStretchProperty.AddOwner(
-            typeof (OutlinedTextBlock),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty FontStyleProperty = TextElement.FontStyleProperty.AddOwner(
-            typeof (OutlinedTextBlock),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty FontWeightProperty = TextElement.FontWeightProperty.AddOwner(
-            typeof (OutlinedTextBlock),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
             "Text",
-            typeof (string),
-            typeof (OutlinedTextBlock),
+            typeof(string),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextInvalidated));
 
         public static readonly DependencyProperty TextAlignmentProperty = DependencyProperty.Register(
             "TextAlignment",
-            typeof (TextAlignment),
-            typeof (OutlinedTextBlock),
+            typeof(TextAlignment),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty TextDecorationsProperty = DependencyProperty.Register(
             "TextDecorations",
-            typeof (TextDecorationCollection),
-            typeof (OutlinedTextBlock),
+            typeof(TextDecorationCollection),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty TextTrimmingProperty = DependencyProperty.Register(
             "TextTrimming",
-            typeof (TextTrimming),
-            typeof (OutlinedTextBlock),
+            typeof(TextTrimming),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(OnFormattedTextUpdated));
 
         public static readonly DependencyProperty TextWrappingProperty = DependencyProperty.Register(
             "TextWrapping",
-            typeof (TextWrapping),
-            typeof (OutlinedTextBlock),
+            typeof(TextWrapping),
+            typeof(OutlinedTextBlock),
             new FrameworkPropertyMetadata(TextWrapping.NoWrap, OnFormattedTextUpdated));
 
         private FormattedText formattedText;
@@ -84,119 +84,119 @@ namespace Bililive_dm
 
         public OutlinedTextBlock()
         {
-            this.TextDecorations = new TextDecorationCollection();
+            TextDecorations = new TextDecorationCollection();
         }
 
         public Brush Fill
         {
-            get { return (Brush) GetValue(FillProperty); }
-            set { SetValue(FillProperty, value); }
+            get => (Brush)GetValue(FillProperty);
+            set => SetValue(FillProperty, value);
         }
 
         public FontFamily FontFamily
         {
-            get { return (FontFamily) GetValue(FontFamilyProperty); }
-            set { SetValue(FontFamilyProperty, value); }
+            get => (FontFamily)GetValue(FontFamilyProperty);
+            set => SetValue(FontFamilyProperty, value);
         }
 
-        [TypeConverter(typeof (FontSizeConverter))]
+        [TypeConverter(typeof(FontSizeConverter))]
         public double FontSize
         {
-            get { return (double) GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
+            get => (double)GetValue(FontSizeProperty);
+            set => SetValue(FontSizeProperty, value);
         }
 
         public FontStretch FontStretch
         {
-            get { return (FontStretch) GetValue(FontStretchProperty); }
-            set { SetValue(FontStretchProperty, value); }
+            get => (FontStretch)GetValue(FontStretchProperty);
+            set => SetValue(FontStretchProperty, value);
         }
 
         public FontStyle FontStyle
         {
-            get { return (FontStyle) GetValue(FontStyleProperty); }
-            set { SetValue(FontStyleProperty, value); }
+            get => (FontStyle)GetValue(FontStyleProperty);
+            set => SetValue(FontStyleProperty, value);
         }
 
         public FontWeight FontWeight
         {
-            get { return (FontWeight) GetValue(FontWeightProperty); }
-            set { SetValue(FontWeightProperty, value); }
+            get => (FontWeight)GetValue(FontWeightProperty);
+            set => SetValue(FontWeightProperty, value);
         }
 
         public Brush Stroke
         {
-            get { return (Brush) GetValue(StrokeProperty); }
-            set { SetValue(StrokeProperty, value); }
+            get => (Brush)GetValue(StrokeProperty);
+            set => SetValue(StrokeProperty, value);
         }
 
         public double StrokeThickness
         {
-            get { return (double) GetValue(StrokeThicknessProperty); }
-            set { SetValue(StrokeThicknessProperty, value); }
+            get => (double)GetValue(StrokeThicknessProperty);
+            set => SetValue(StrokeThicknessProperty, value);
         }
 
         public string Text
         {
-            get { return (string) GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => (string)GetValue(TextProperty);
+            set => SetValue(TextProperty, value);
         }
 
         public TextAlignment TextAlignment
         {
-            get { return (TextAlignment) GetValue(TextAlignmentProperty); }
-            set { SetValue(TextAlignmentProperty, value); }
+            get => (TextAlignment)GetValue(TextAlignmentProperty);
+            set => SetValue(TextAlignmentProperty, value);
         }
 
         public TextDecorationCollection TextDecorations
         {
-            get { return (TextDecorationCollection) this.GetValue(TextDecorationsProperty); }
-            set { this.SetValue(TextDecorationsProperty, value); }
+            get => (TextDecorationCollection)GetValue(TextDecorationsProperty);
+            set => SetValue(TextDecorationsProperty, value);
         }
 
         public TextTrimming TextTrimming
         {
-            get { return (TextTrimming) GetValue(TextTrimmingProperty); }
-            set { SetValue(TextTrimmingProperty, value); }
+            get => (TextTrimming)GetValue(TextTrimmingProperty);
+            set => SetValue(TextTrimmingProperty, value);
         }
 
         public TextWrapping TextWrapping
         {
-            get { return (TextWrapping) GetValue(TextWrappingProperty); }
-            set { SetValue(TextWrappingProperty, value); }
+            get => (TextWrapping)GetValue(TextWrappingProperty);
+            set => SetValue(TextWrappingProperty, value);
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            this.EnsureGeometry();
+            EnsureGeometry();
 
-            drawingContext.DrawGeometry(this.Fill, new Pen(this.Stroke, this.StrokeThickness), this.textGeometry);
+            drawingContext.DrawGeometry(Fill, new Pen(Stroke, StrokeThickness), textGeometry);
         }
 
         protected override Size MeasureOverride(Size availableSize)
         {
-            this.EnsureFormattedText();
+            EnsureFormattedText();
 
             // constrain the formatted text according to the available size
             // the Math.Min call is important - without this constraint (which seems arbitrary, but is the maximum allowable text width), things blow up when availableSize is infinite in both directions
             // the Math.Max call is to ensure we don't hit zero, which will cause MaxTextHeight to throw
-            this.formattedText.MaxTextWidth = Math.Min(3579139, availableSize.Width);
-            this.formattedText.MaxTextHeight = Math.Max(0.0001d, availableSize.Height);
+            formattedText.MaxTextWidth = Math.Min(3579139, availableSize.Width);
+            formattedText.MaxTextHeight = Math.Max(0.0001d, availableSize.Height);
 
             // return the desired size
-            return new Size(this.formattedText.Width, this.formattedText.Height);
+            return new Size(formattedText.Width, formattedText.Height);
         }
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            this.EnsureFormattedText();
+            EnsureFormattedText();
 
             // update the formatted text with the final size
-            this.formattedText.MaxTextWidth = finalSize.Width;
-            this.formattedText.MaxTextHeight = finalSize.Height;
+            formattedText.MaxTextWidth = finalSize.Width;
+            formattedText.MaxTextHeight = finalSize.Height;
 
             // need to re-generate the geometry now that the dimensions have changed
-            this.textGeometry = null;
+            textGeometry = null;
 
             return finalSize;
         }
@@ -204,7 +204,7 @@ namespace Bililive_dm
         private static void OnFormattedTextInvalidated(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs e)
         {
-            var outlinedTextBlock = (OutlinedTextBlock) dependencyObject;
+            var outlinedTextBlock = (OutlinedTextBlock)dependencyObject;
             outlinedTextBlock.formattedText = null;
             outlinedTextBlock.textGeometry = null;
 
@@ -215,7 +215,7 @@ namespace Bililive_dm
         private static void OnFormattedTextUpdated(DependencyObject dependencyObject,
             DependencyPropertyChangedEventArgs e)
         {
-            var outlinedTextBlock = (OutlinedTextBlock) dependencyObject;
+            var outlinedTextBlock = (OutlinedTextBlock)dependencyObject;
             outlinedTextBlock.UpdateFormattedText();
             outlinedTextBlock.textGeometry = null;
 
@@ -225,50 +225,41 @@ namespace Bililive_dm
 
         private void EnsureFormattedText()
         {
-            if (this.formattedText != null || this.Text == null)
-            {
-                return;
-            }
+            if (formattedText != null || Text == null) return;
 
-            this.formattedText = new FormattedText(
-                this.Text,
+            formattedText = new FormattedText(
+                Text,
                 CultureInfo.CurrentUICulture,
-                this.FlowDirection,
-                new Typeface(this.FontFamily, this.FontStyle, this.FontWeight, FontStretches.Normal),
-                this.FontSize,
+                FlowDirection,
+                new Typeface(FontFamily, FontStyle, FontWeight, FontStretches.Normal),
+                FontSize,
                 Brushes.Black);
 
-            this.UpdateFormattedText();
+            UpdateFormattedText();
         }
 
         private void UpdateFormattedText()
         {
-            if (this.formattedText == null)
-            {
-                return;
-            }
+            if (formattedText == null) return;
 
-            this.formattedText.MaxLineCount = this.TextWrapping == TextWrapping.NoWrap ? 1 : int.MaxValue;
-            this.formattedText.TextAlignment = this.TextAlignment;
-            this.formattedText.Trimming = this.TextTrimming;
+            formattedText.MaxLineCount = TextWrapping == TextWrapping.NoWrap ? 1 : int.MaxValue;
+            formattedText.TextAlignment = TextAlignment;
+            formattedText.Trimming = TextTrimming;
 
-            this.formattedText.SetFontSize(this.FontSize);
-            this.formattedText.SetFontStyle(this.FontStyle);
-            this.formattedText.SetFontWeight(this.FontWeight);
-            this.formattedText.SetFontFamily(this.FontFamily);
-            this.formattedText.SetFontStretch(this.FontStretch);
-            this.formattedText.SetTextDecorations(this.TextDecorations);
+            formattedText.SetFontSize(FontSize);
+            formattedText.SetFontStyle(FontStyle);
+            formattedText.SetFontWeight(FontWeight);
+            formattedText.SetFontFamily(FontFamily);
+            formattedText.SetFontStretch(FontStretch);
+            formattedText.SetTextDecorations(TextDecorations);
         }
 
         private void EnsureGeometry()
         {
-            if (this.textGeometry != null)
-            {
-                return;
-            }
+            if (textGeometry != null) return;
 
-            this.EnsureFormattedText();
-            this.textGeometry = this.formattedText.BuildGeometry(new Point(0, 0));
+            EnsureFormattedText();
+            textGeometry = formattedText.BuildGeometry(new Point(0, 0));
         }
     }
 }

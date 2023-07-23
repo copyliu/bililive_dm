@@ -1,8 +1,8 @@
-﻿using BilibiliDM_PluginFramework;
-using BililiveAudioCmtPlayer.Annotations;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using BilibiliDM_PluginFramework;
+using BililiveAudioCmtPlayer.Annotations;
 
 namespace BililiveAudioCmtPlayer
 {
@@ -10,26 +10,26 @@ namespace BililiveAudioCmtPlayer
     {
         public string ItemName { get; set; }
         public DanmakuModel Model { get; set; }
-        public override string ToString() => ItemName;
+
+        public override string ToString()
+        {
+            return ItemName;
+        }
     }
+
     public class PluginDataContext : INotifyPropertyChanged
     {
-        private DanmakuModel _selected;
         private ObservableCollection<DMItem> _dataList;
+        private DanmakuModel _selected;
 
 
         public PluginDataContext()
         {
-            this.DataList = new ObservableCollection<DMItem>();
+            DataList = new ObservableCollection<DMItem>();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         public DMPlugin Plugin { get; set; }
+
         public ObservableCollection<DMItem> DataList
         {
             get => _dataList;
@@ -57,18 +57,22 @@ namespace BililiveAudioCmtPlayer
             get => Plugin?.Status == true;
             set
             {
-                if (Plugin == null) { return; }
+                if (Plugin == null) return;
 
                 if (value)
-                {
-                    this.Plugin.Start();
-                }
+                    Plugin.Start();
                 else
-                {
-                    this.Plugin.Stop();
-                }
+                    Plugin.Stop();
                 OnPropertyChanged();
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

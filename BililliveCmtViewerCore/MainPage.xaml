@@ -1,27 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BililliveCmtViewerCore.MainPage" Title="B站彈幕姬·現代版">
-    <StackLayout  Spacing="6" Margin="20,0"
-            >
+    <StackLayout Spacing="6" Margin="20,0">
 
         <FlexLayout Direction="Row"
-                AlignItems="Center"
-                Wrap="Wrap">
+                    AlignItems="Center"
+                    Wrap="Wrap">
             <!-- <HorizontalStackLayout>-->
-            <Label Text="直播间地址"  SemanticProperties.HeadingLevel="Level2"
-                FontSize="18"></Label>
-            <HorizontalStackLayout  Padding="30,0"  VerticalOptions="Center">
-                <Label Text="https://live.bilibili.com/"  VerticalOptions="Center" SemanticProperties.HeadingLevel="Level2"
-                FontSize="18"></Label>
-                <Entry WidthRequest="150"  VerticalOptions="Center" x:Name="roomId"></Entry>
+            <Label Text="直播间地址" SemanticProperties.HeadingLevel="Level2"
+                   FontSize="18" />
+            <HorizontalStackLayout Padding="30,0" VerticalOptions="Center">
+                <Label Text="https://live.bilibili.com/" VerticalOptions="Center"
+                       SemanticProperties.HeadingLevel="Level2"
+                       FontSize="18" />
+                <Entry WidthRequest="150" VerticalOptions="Center" x:Name="roomId" />
             </HorizontalStackLayout>
-            <Button Text="連線"></Button>
+            <Button Text="連線" />
             <!--  </HorizontalStackLayout>-->
         </FlexLayout>
         <ListView Margin="0,6" x:Name="mainLog"
-            VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-            ></ListView>
+                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
         <!--
         <ScrollView>
             <VerticalStackLayout 

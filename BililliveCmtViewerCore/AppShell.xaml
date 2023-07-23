@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <Shell
     x:Class="BililliveCmtViewerCore.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -8,18 +9,16 @@
     <FlyoutItem Title="本體">
         <Tab>
             <ShellContent
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="設置"
-                >
+    <FlyoutItem Title="設置">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="插件"
-                >
+    <FlyoutItem Title="插件">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
         </Tab>

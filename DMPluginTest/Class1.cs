@@ -1,44 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
+using BilibiliDM_PluginFramework;
 
 namespace DMPluginTest
 {
-    public class Class1 : BilibiliDM_PluginFramework.DMPlugin
+    public class Class1 : DMPlugin
     {
         public Class1()
         {
-            this.Connected += Class1_Connected;
-            this.Disconnected += Class1_Disconnected;
-            this.ReceivedDanmaku += Class1_ReceivedDanmaku;
-            this.ReceivedRoomCount += Class1_ReceivedRoomCount;
-            this.PluginAuth = "示例作者";
-            this.PluginName = "示例插件";
-            this.PluginCont = "example@example.com";
-            this.PluginVer = "v0.0.1";
+            Connected += Class1_Connected;
+            Disconnected += Class1_Disconnected;
+            ReceivedDanmaku += Class1_ReceivedDanmaku;
+            ReceivedRoomCount += Class1_ReceivedRoomCount;
+            PluginAuth = "示例作者";
+            PluginName = "示例插件";
+            PluginCont = "example@example.com";
+            PluginVer = "v0.0.1";
         }
 
 
-        private void Class1_ReceivedRoomCount(object sender, BilibiliDM_PluginFramework.ReceivedRoomCountArgs e)
+        private void Class1_ReceivedRoomCount(object sender, ReceivedRoomCountArgs e)
         {
-           
         }
 
-        private void Class1_ReceivedDanmaku(object sender, BilibiliDM_PluginFramework.ReceivedDanmakuArgs e)
-        {
-            throw new NotImplementedException();
-            this.Log("BBB");
-            this.AddDM("bbb",true);
-        }
-
-        private void Class1_Disconnected(object sender, BilibiliDM_PluginFramework.DisconnectEvtArgs e)
+        private void Class1_ReceivedDanmaku(object sender, ReceivedDanmakuArgs e)
         {
             throw new NotImplementedException();
+            Log("BBB");
+            AddDM("bbb", true);
         }
 
-        private void Class1_Connected(object sender, BilibiliDM_PluginFramework.ConnectedEvtArgs e)
+        private void Class1_Disconnected(object sender, DisconnectEvtArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Class1_Connected(object sender, ConnectedEvtArgs e)
         {
             throw new NotImplementedException();
         }
@@ -47,7 +43,7 @@ namespace DMPluginTest
         {
             base.Admin();
             Console.WriteLine("Hello World");
-            this.Log("BBB");
+            Log("BBB");
         }
 
         public override void Stop()
@@ -55,7 +51,7 @@ namespace DMPluginTest
             base.Stop();
             //請勿使用任何阻塞方法
             Console.WriteLine("Plugin Stoped!");
-            this.Log("BBB");
+            Log("BBB");
         }
 
         public override void Start()
@@ -63,7 +59,7 @@ namespace DMPluginTest
             base.Start();
             //請勿使用任何阻塞方法
             Console.WriteLine("Plugin Started!");
-            this.Log("BBB");
+            Log("BBB");
         }
     }
 }

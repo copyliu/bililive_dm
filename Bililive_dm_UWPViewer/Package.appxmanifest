@@ -1,101 +1,115 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Package
-  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
-  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
-  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
-  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
-  xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
-  IgnorableNamespaces="uap uap3 mp uap4">
+        xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+        xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+        xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+        xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+        IgnorableNamespaces="uap uap3 mp uap4">
 
-  <Identity
-    Name="38862CopyLiu.B"
-    Publisher="CN=B2B24A43-5C35-415F-9661-54323D87303A"
-    Version="1.0.32.0" />
+    <Identity
+            Name="38862CopyLiu.B"
+            Publisher="CN=B2B24A43-5C35-415F-9661-54323D87303A"
+            Version="1.0.32.0"/>
 
-  <mp:PhoneIdentity PhoneProductId="f57dcf91-5309-49bf-8c99-64c775582b55" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+    <mp:PhoneIdentity PhoneProductId="f57dcf91-5309-49bf-8c99-64c775582b55"
+                      PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
-  <Properties>
-    <DisplayName>B站弹幕姬提词板</DisplayName>
-    <PublisherDisplayName>CopyLiu</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
-  </Properties>
+    <Properties>
+        <DisplayName>B站弹幕姬提词板</DisplayName>
+        <PublisherDisplayName>CopyLiu</PublisherDisplayName>
+        <Logo>Assets\StoreLogo.png</Logo>
+    </Properties>
 
-  <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
-  </Dependencies>
+    <Dependencies>
+        <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0"/>
+    </Dependencies>
 
-  <Resources>
-    <Resource Language="x-generate"/>
-  </Resources>
+    <Resources>
+        <Resource Language="x-generate"/>
+    </Resources>
 
-  <Applications>
-    <Application Id="App"
-      Executable="$targetnametoken$.exe"
-      EntryPoint="Bililive_dm_UWPViewer.App">
-      <uap:VisualElements
-        DisplayName="B站弹幕姬提词板"
-        Square150x150Logo="Assets\Square150x150Logo.png"
-        Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="B站弹幕姬提词板, 需要配合B站弹幕姬本体使用"
-        BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
-        <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badge"/>
-      </uap:VisualElements>
-      <Extensions>
-        <uap3:Extension Category="windows.appExtension">
-          <uap3:AppExtension Name="microsoft.gameBarUIExtension"
-                             Id="BiliLiveDMUWP"
-                             DisplayName="B站弹幕姬提词板"
-                             Description="B站弹幕姬凶箱插件, 你需要启动弹幕姬并连接到直播间"
-                             PublicFolder="GameBar">
-            <uap3:Properties>
-              <GameBarWidget Type="Standard">
-                <HomeMenuVisible>true</HomeMenuVisible>
-                <PinningSupported>true</PinningSupported>
-                <Window>
-                  <Size>
-                    <Height>400</Height>
-                    <Width>300</Width>
-                    <MinHeight>200</MinHeight>
-                    <MinWidth>150</MinWidth>
-                    <MaxHeight>800</MaxHeight>
-                    <MaxWidth>400</MaxWidth>
-                  </Size>
-                  <ResizeSupported>
-                    <Horizontal>true</Horizontal>
-                    <Vertical>true</Vertical>
-                  </ResizeSupported>
-                </Window>
-              </GameBarWidget>
-            </uap3:Properties>
-          </uap3:AppExtension>
-        </uap3:Extension>
-      </Extensions>
-    </Application>
-  </Applications>
-  <Extensions>
-    <!-- Enlighten COM on where to find Metadata Based Marshaling (MBM) data for the Game Bar private types 
-       <Path> is a required element (by VS) and has to point to a binary in the package, but it's not used when the class id is
-       00000355-0000-0000-C000-000000000046 (MBM). Due to that we just put the Microsoft.Gaming.XboxGameBar.winmd here. -->
-    <Extension Category="windows.activatableClass.proxyStub">
-      <ProxyStub ClassId="00000355-0000-0000-C000-000000000046">
-        <Path>Microsoft.Gaming.XboxGameBar.winmd</Path>
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetAuthHost" InterfaceId="DC263529-B12F-469E-BB35-B94069F5B15A" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetControlHost" InterfaceId="C309CAC7-8435-4082-8F37-784523747047" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetForegroundWorkerHost" InterfaceId="DDB52B57-FA83-420C-AFDE-6FA556E18B83" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetForegroundWorkerPrivate" InterfaceId="42BACDFC-BB28-4E71-99B4-24C034C7B7E0" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarNavigationKeyCombo" InterfaceId="5EEA3DBF-09BB-42A5-B491-CF561E33C172" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetActivatedEventArgsPrivate" InterfaceId="782535A7-9407-4572-BFCB-316B4086F102" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost" InterfaceId="5D12BC93-212B-4B9F-9091-76B73BF56525" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost2" InterfaceId="28717C8B-D8E8-47A8-AF47-A1D5263BAE9B" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost3" InterfaceId="3F5A3F12-C1E4-4942-B80D-3117BC948E29" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost4" InterfaceId="FA696D9E-2501-4B01-B26F-4BB85344740F" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate" InterfaceId="22ABA97F-FB0F-4439-9BDD-2C67B2D5AA8F" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate2" InterfaceId="B2F7DB8C-7540-48DA-9B46-4E60CE0D9DEB" />
-        <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate3" InterfaceId="4FB89FB6-7CB8-489D-8408-2269E6C733A1" />
-      </ProxyStub>
-    </Extension>
-  </Extensions>
+    <Applications>
+        <Application Id="App"
+                     Executable="$targetnametoken$.exe"
+                     EntryPoint="Bililive_dm_UWPViewer.App">
+            <uap:VisualElements
+                    DisplayName="B站弹幕姬提词板"
+                    Square150x150Logo="Assets\Square150x150Logo.png"
+                    Square44x44Logo="Assets\Square44x44Logo.png"
+                    Description="B站弹幕姬提词板, 需要配合B站弹幕姬本体使用"
+                    BackgroundColor="transparent">
+                <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png"
+                                 Square310x310Logo="Assets\LargeTile.png"/>
+                <uap:SplashScreen Image="Assets\SplashScreen.png"/>
+                <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badge"/>
+            </uap:VisualElements>
+            <Extensions>
+                <uap3:Extension Category="windows.appExtension">
+                    <uap3:AppExtension Name="microsoft.gameBarUIExtension"
+                                       Id="BiliLiveDMUWP"
+                                       DisplayName="B站弹幕姬提词板"
+                                       Description="B站弹幕姬凶箱插件, 你需要启动弹幕姬并连接到直播间"
+                                       PublicFolder="GameBar">
+                        <uap3:Properties>
+                            <GameBarWidget Type="Standard">
+                                <HomeMenuVisible>true</HomeMenuVisible>
+                                <PinningSupported>true</PinningSupported>
+                                <Window>
+                                    <Size>
+                                        <Height>400</Height>
+                                        <Width>300</Width>
+                                        <MinHeight>200</MinHeight>
+                                        <MinWidth>150</MinWidth>
+                                        <MaxHeight>800</MaxHeight>
+                                        <MaxWidth>400</MaxWidth>
+                                    </Size>
+                                    <ResizeSupported>
+                                        <Horizontal>true</Horizontal>
+                                        <Vertical>true</Vertical>
+                                    </ResizeSupported>
+                                </Window>
+                            </GameBarWidget>
+                        </uap3:Properties>
+                    </uap3:AppExtension>
+                </uap3:Extension>
+            </Extensions>
+        </Application>
+    </Applications>
+    <Extensions>
+        <!-- Enlighten COM on where to find Metadata Based Marshaling (MBM) data for the Game Bar private types 
+           <Path> is a required element (by VS) and has to point to a binary in the package, but it's not used when the class id is
+           00000355-0000-0000-C000-000000000046 (MBM). Due to that we just put the Microsoft.Gaming.XboxGameBar.winmd here. -->
+        <Extension Category="windows.activatableClass.proxyStub">
+            <ProxyStub ClassId="00000355-0000-0000-C000-000000000046">
+                <Path>Microsoft.Gaming.XboxGameBar.winmd</Path>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetAuthHost"
+                           InterfaceId="DC263529-B12F-469E-BB35-B94069F5B15A"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetControlHost"
+                           InterfaceId="C309CAC7-8435-4082-8F37-784523747047"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetForegroundWorkerHost"
+                           InterfaceId="DDB52B57-FA83-420C-AFDE-6FA556E18B83"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetForegroundWorkerPrivate"
+                           InterfaceId="42BACDFC-BB28-4E71-99B4-24C034C7B7E0"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarNavigationKeyCombo"
+                           InterfaceId="5EEA3DBF-09BB-42A5-B491-CF561E33C172"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetActivatedEventArgsPrivate"
+                           InterfaceId="782535A7-9407-4572-BFCB-316B4086F102"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost"
+                           InterfaceId="5D12BC93-212B-4B9F-9091-76B73BF56525"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost2"
+                           InterfaceId="28717C8B-D8E8-47A8-AF47-A1D5263BAE9B"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost3"
+                           InterfaceId="3F5A3F12-C1E4-4942-B80D-3117BC948E29"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetHost4"
+                           InterfaceId="FA696D9E-2501-4B01-B26F-4BB85344740F"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate"
+                           InterfaceId="22ABA97F-FB0F-4439-9BDD-2C67B2D5AA8F"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate2"
+                           InterfaceId="B2F7DB8C-7540-48DA-9B46-4E60CE0D9DEB"/>
+                <Interface Name="Microsoft.Gaming.XboxGameBar.Private.IXboxGameBarWidgetPrivate3"
+                           InterfaceId="4FB89FB6-7CB8-489D-8408-2269E6C733A1"/>
+            </ProxyStub>
+        </Extension>
+    </Extensions>
 </Package>

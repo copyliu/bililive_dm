@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-<local:Widget1 x:Name="Widget1"></local:Widget1>
+        <local:Widget1 x:Name="Widget1" />
     </Grid>
 </Page>

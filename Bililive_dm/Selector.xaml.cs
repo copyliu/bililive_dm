@@ -1,38 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Bililive_dm
 {
     /// <summary>
-    /// Selector.xaml 的交互逻辑
+    ///     Selector.xaml 的交互逻辑
     /// </summary>
-    public partial class Selector: StyledWindow
+    public partial class Selector : StyledWindow
     {
-        static readonly List<KeyValuePair<string, ResourceDictionary>> STATIC = new List<KeyValuePair<string, ResourceDictionary>>();
-        static void addStaticTheme(string theme, string variant = "NormalColor", ResourceDictionary dict = null)
-        {
-            variant = string.IsNullOrWhiteSpace(variant) ? theme : theme + "." + variant;
-
-            STATIC.Add(new KeyValuePair<string, ResourceDictionary>(variant, dict ?? new ResourceDictionary
-            {
-                Source =
-                new Uri($"/PresentationFramework.{theme},Version=0.0.0.0,PublicKeyToken=31bf3856ad364e35;component/Themes/{variant}.xaml",
-                UriKind.Relative)
-            }));
-        }
+        private static readonly List<KeyValuePair<string, ResourceDictionary>> STATIC =
+            new List<KeyValuePair<string, ResourceDictionary>>();
 
         static Selector()
         {
@@ -46,11 +27,27 @@ namespace Bililive_dm
             addStaticTheme("Classic", null, (ResourceDictionary)Application.Current.Resources["Classic"]);
         }
 
-        public List<KeyValuePair<string, ResourceDictionary>> Themes { get; }
         public Selector()
         {
             Themes = STATIC.ToList();
             InitializeComponent();
+        }
+
+        public List<KeyValuePair<string, ResourceDictionary>> Themes { get; }
+
+        private ResourceDictionary selected => (ResourceDictionary)list.SelectedValue;
+
+        private static void addStaticTheme(string theme, string variant = "NormalColor", ResourceDictionary dict = null)
+        {
+            variant = string.IsNullOrWhiteSpace(variant) ? theme : theme + "." + variant;
+
+            STATIC.Add(new KeyValuePair<string, ResourceDictionary>(variant, dict ?? new ResourceDictionary
+            {
+                Source =
+                    new Uri(
+                        $"/PresentationFramework.{theme},Version=0.0.0.0,PublicKeyToken=31bf3856ad364e35;component/Themes/{variant}.xaml",
+                        UriKind.Relative)
+            }));
         }
 
         public event Action<ResourceDictionary> PreviewTheme;
@@ -60,8 +57,6 @@ namespace Bililive_dm
             DialogResult = true;
             Close();
         }
-
-        ResourceDictionary selected => (ResourceDictionary)list.SelectedValue;
 
         public ResourceDictionary Select()
         {
