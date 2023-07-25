@@ -18,35 +18,32 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context1}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="0" Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context2}" ></local:LiveRoom>
         </Border>
 
         <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context3}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
-        </Border>
-        <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context4}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context6}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context5}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context7}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context8}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context9}" ></local:LiveRoom>
         </Border>
 
 

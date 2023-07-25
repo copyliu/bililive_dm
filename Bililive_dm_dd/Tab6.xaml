@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Bililive_dm_dd"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="800" d:DataContext="{d:DesignInstance local:Tab6}">
     <Grid >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -18,23 +18,23 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="2" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context1}"></local:LiveRoom>
         </Border>
         <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context2}" ></local:LiveRoom>
         </Border>
 
         <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context3}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="2" Grid.Column="0" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context4}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="2" Grid.Column="1" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context5}" ></local:LiveRoom>
         </Border>
         <Border Grid.Row="2" Grid.Column="2" BorderBrush="Black" BorderThickness="1,1,1,1">
-            <local:LiveRoom ></local:LiveRoom>
+            <local:LiveRoom DataContext="{Binding Context6}" ></local:LiveRoom>
         </Border>
 
 

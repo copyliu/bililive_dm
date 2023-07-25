@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -11,6 +13,7 @@ namespace Bililive_dm_dd
         public LiveRoom()
         {
             InitializeComponent();
+           
         }
 
         private void UIElement_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)

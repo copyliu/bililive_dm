@@ -53,6 +53,8 @@
     <Compile Include="LiveRoom.xaml.cs">
       <DependentUpon>LiveRoom.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\RoomContext.cs" />
+    <Compile Include="Statics.cs" />
     <Compile Include="Tab4.xaml.cs">
       <DependentUpon>Tab4.xaml</DependentUpon>
     </Compile>
@@ -101,6 +103,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BilibiliDM_PluginFramework\BilibiliDM_PluginFramework.csproj">
+      <Project>{62fe6607-fe23-4df0-bf23-9fb7d70c829a}</Project>
+      <Name>BilibiliDM_PluginFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BiliDMLib\BiliDMLib.csproj">
+      <Project>{76778870-a6f5-43f4-9baa-dec0473f217e}</Project>
+      <Name>BiliDMLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,7 +10,7 @@
 <DockPanel DockPanel.Dock="Top">
     <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
         <Button  Content="连接" VerticalAlignment="Center"
-               Margin="28,0,0,0" MinWidth="70" />
+               Margin="28,0,0,0" MinWidth="70" Click="ConnectBtn_Clicked" />
         <Button Content="自动布局" VerticalAlignment="Center"
                 Margin="28,0,0,0" MinWidth="70" />
 
@@ -25,7 +25,7 @@
 
         </DockPanel>
         <DockPanel>
-    <local:Tab6></local:Tab6>
+    <local:Tab6 x:Name="Tab6"></local:Tab6>
 </DockPanel>
 
       
