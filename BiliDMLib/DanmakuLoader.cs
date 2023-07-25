@@ -351,7 +351,7 @@ namespace BiliDMLib
         private async Task<bool> SendJoinChannel(int channelId, string token, CancellationToken ct)
         {
             var packetModel = new
-                { roomid = channelId, uid = 0, protover = 3, key = token, platform = "danmuji", type = 2 };
+                { roomid = channelId, uid = 2, protover = 3, key = token, platform = "danmuji", type = 2 };
 
 
             var playload = JsonConvert.SerializeObject(packetModel);
