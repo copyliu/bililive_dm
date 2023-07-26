@@ -22,6 +22,7 @@ using System.Windows.Threading;
 using System.Xml.Serialization;
 using BilibiliDM_PluginFramework;
 using BiliDMLib;
+using Bililive_dm.Annotations;
 using Bililive_dm.Properties;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
@@ -887,6 +888,7 @@ namespace Bililive_dm
         }
 
         // ReSharper disable once MemberCanBePrivate.Global
+        [PublicAPI]
         public void SendSSP(string msg)
         {
             if (SSTP.Dispatcher.CheckAccess())
@@ -963,6 +965,7 @@ namespace Bililive_dm
 
 // ReSharper disable once InconsistentNaming
 #pragma warning disable IDE1006 // 命名样式
+        [PublicAPI]
         public void logging(string text)
 #pragma warning restore IDE1006 // 命名样式
         {
@@ -1020,6 +1023,7 @@ namespace Bililive_dm
         }
 
         // ReSharper disable once MemberCanBePrivate.Global
+        [PublicAPI]
         public void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false,
             int? keeptime = null, bool red = false)
         {
@@ -1596,6 +1600,10 @@ namespace Bililive_dm
         private bool _ignoreemojiEnabled;
 
         private bool DebugMode { get; }
+        
+        // ReSharper disable once InconsistentNaming
+        [PublicAPI]
+        public bool debug_mode => DebugMode;
 
         #endregion
     }
