@@ -287,7 +287,13 @@ namespace Bililive_dm
             _settings.toStatic();
 
             Loaded += MainWindow_Loaded;
-            Log.Loaded += (sender, args) => { LogScroll.ScrollToEnd(); };
+            // Log.Loaded += (sender, args) => { LogScroll.ScrollToEnd(); };
+            Log.Loaded += (sender, args) =>
+            {
+                var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
+                sc?.ScrollToEnd();
+            };
+
         }
 
         private Collection<ResourceDictionary> Merged { get; }
