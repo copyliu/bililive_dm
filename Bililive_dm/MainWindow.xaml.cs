@@ -886,7 +886,8 @@ namespace Bililive_dm
             if (rawoutput_mode) Logging(danmakuModel.RawDataJToken.ToString());
         }
 
-        private void SendSSP(string msg)
+        // ReSharper disable once MemberCanBePrivate.Global
+        public void SendSSP(string msg)
         {
             if (SSTP.Dispatcher.CheckAccess())
             {
