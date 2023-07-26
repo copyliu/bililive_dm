@@ -1018,7 +1018,8 @@ namespace Bililive_dm
             }
         }
 
-        private void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false,
+        // ReSharper disable once MemberCanBePrivate.Global
+        public void AddDMText(string user, string text, bool warn = false, bool foreceenablefullscreen = false,
             int? keeptime = null, bool red = false)
         {
             if (!_showerrorEnabled && warn) return;
