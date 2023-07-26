@@ -960,6 +960,14 @@ namespace Bililive_dm
                 ShowError.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => Errorlogging(text)));
         }
 
+// ReSharper disable once InconsistentNaming
+#pragma warning disable IDE1006 // 命名样式
+        public void logging(string text)
+#pragma warning restore IDE1006 // 命名样式
+        {
+            this.Logging(text);
+            
+        }
         private void Logging(string text)
         {
             if (Log.Dispatcher.CheckAccess())
