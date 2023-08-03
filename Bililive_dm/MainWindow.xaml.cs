@@ -1122,7 +1122,7 @@ namespace Bililive_dm
             //            overlay.Show();
             _fulloverlayEnabled = true;
             OpenFullOverlay();
-            _fulloverlay.Show();
+            //_fulloverlay.Show();
         }
 
         private void SideBar_Checked(object sender, RoutedEventArgs e)
