@@ -21,6 +21,7 @@ namespace BiliDMLib
     {
         private static int lastroomid;
         private static string token = "";
+        private static string buvid3 = "";
         private static string lastserver;
         private static readonly HttpClient httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
         private static List<Tuple<string, int>> ChatHostList = new List<Tuple<string, int>>();
@@ -75,6 +76,11 @@ namespace BiliDMLib
                     {
                         var req = await httpClient.GetStringAsync(CIDInfoUrl + channelId);
                         var roomobj = JObject.Parse(req);
+
+                        var freq = await httpClient.GetStringAsync("https://api.bilibili.com/x/frontend/finger/spi");
+                        var fobj = JObject.Parse(freq);
+                        buvid3 = fobj["data"]?["b_3"] +"";
+                        
                         token = roomobj["data"]["token"] + "";
 
                         var serverlist = roomobj["data"]["host_list"].Value<JArray>();
@@ -134,7 +140,7 @@ namespace BiliDMLib
                 NetStream = Stream.Synchronized(Client.GetStream());
                 cancellationTokenSource = new CancellationTokenSource();
 
-                if (await SendJoinChannel(channelId, token, cancellationTokenSource.Token))
+                if (await SendJoinChannel(channelId, token,  buvid3, cancellationTokenSource.Token))
                 {
                     Connected = true;
                     _ = ReceiveMessageLoop(cancellationTokenSource.Token);
@@ -348,10 +354,10 @@ namespace BiliDMLib
             }
         }
 
-        private async Task<bool> SendJoinChannel(int channelId, string token, CancellationToken ct)
+        private async Task<bool> SendJoinChannel(int channelId, string token,string buvid, CancellationToken ct)
         {
             var packetModel = new
-                { roomid = channelId, uid = 2, protover = 3, key = token, platform = "danmuji", type = 2 };
+                { roomid = channelId, uid = 0, protover = 3, buvid=buvid, key = token, platform = "danmuji", type = 2 };
 
 
             var playload = JsonConvert.SerializeObject(packetModel);
