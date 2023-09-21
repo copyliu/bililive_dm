@@ -533,6 +533,6 @@ Information:</value>
     <value>{0} liked your room.</value>
   </data>
   <data name="LiveRoomCode" xml:space="preserve">
-    <value>主播身份碼(在開播頁面獲取)</value>
+    <value>Room Code (available on Bilibili Live Center)</value>
   </data>
 </root>
