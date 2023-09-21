@@ -512,24 +512,27 @@ Information:</value>
     <value>Emoji filtering</value>
   </data>
   <data name="BOpen_GetRoomIdByCode_B站直播中心返回了無效的房間號" xml:space="preserve">
-    <value>B站直播中心返回了無效的房間號</value>
+    <value>Bilibili Live Center returning invalid room ID</value>
   </data>
   <data name="BOpen_GetRoomIdByCode_B站直播中心返回錯誤" xml:space="preserve">
-    <value>B站直播中心返回錯誤</value>
+    <value>Bilibili Live center return error</value>
   </data>
   <data name="BOpen_GetRoomIdByCode_B站直播中心離線" xml:space="preserve">
-    <value>B站直播中心離線</value>
+    <value>Bilibili Live Center offline</value>
   </data>
   <data name="BOpen_GetRoomIdByCode_未輸入身份碼" xml:space="preserve">
-    <value>未輸入身份碼</value>
+    <value>Missing room code</value>
   </data>
   <data name="BOpen_GetRoomIdByCode_獲取身份碼信息出錯" xml:space="preserve">
-    <value>獲取身份碼信息出錯</value>
+    <value>Error getting room information</value>
   </data>
   <data name="BOpen_GetRoomIdByCode_簽名伺服器離線" xml:space="preserve">
-    <value>簽名伺服器離線</value>
+    <value>Signature server offline</value>
   </data>
   <data name="InteractType_Text6" xml:space="preserve">
-    <value>{0} 點了讚</value>
+    <value>{0} liked your room.</value>
+  </data>
+  <data name="LiveRoomCode" xml:space="preserve">
+    <value>主播身份碼(在開播頁面獲取)</value>
   </data>
 </root>
