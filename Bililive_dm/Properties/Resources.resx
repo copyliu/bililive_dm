@@ -532,4 +532,7 @@
   <data name="InteractType_Text6" xml:space="preserve">
     <value>{0} 點了讚</value>
   </data>
+  <data name="LiveRoomCode" xml:space="preserve">
+    <value>主播身份碼(在開播頁面獲取)</value>
+  </data>
 </root>

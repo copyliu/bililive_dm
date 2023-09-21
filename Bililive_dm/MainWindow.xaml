@@ -36,7 +36,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" x:Name="OPMPannel">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
-                           Text="主播身份碼(在開播頁面獲取)"
+                           Text="{x:Static properties:Resources.LiveRoomCode}"
                            VerticalAlignment="Center" Margin="4" />
                 <PasswordBox x:Name="OPCode" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666"
                          MinWidth="120" MaxWidth="120"  />

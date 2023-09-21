@@ -456,6 +456,15 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 主播身份碼(在開播頁面獲取).
+        /// </summary>
+        public static string LiveRoomCode {
+            get {
+                return ResourceManager.GetString("LiveRoomCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 正在自動重連....
         /// </summary>
         public static string MainWindow_b_Disconnected_正在自动重连___ {
