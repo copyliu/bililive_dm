@@ -14,7 +14,7 @@ namespace Bililive_dm
     {
         public int room_id { get; set; }
         public string uface { get; set; }
-        public int uid { get; set; }
+        public long uid { get; set; }
         public string uname { get; set; }
     }
 
