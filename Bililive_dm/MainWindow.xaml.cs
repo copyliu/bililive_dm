@@ -47,6 +47,11 @@ namespace Bililive_dm
         private readonly DanmakuLoader _b = new DanmakuLoader();
 
         /// <summary>
+        ///     彈幕連接實例
+        /// </summary>
+        private  OpenDanmakuLoader _bopm = null;
+
+        /// <summary>
         ///     消息隊列
         /// </summary>
         private readonly Queue<DanmakuModel> _danmakuQueue = new Queue<DanmakuModel>();
@@ -68,7 +73,7 @@ namespace Bililive_dm
 
         private bool _net461;
         public MainOverlay Overlay;
-
+        private bool _isOpm = true;
         public MainWindow()
         {
             InitializeComponent();
@@ -113,6 +118,15 @@ namespace Bililive_dm
             catch
             {
                 RoomId.Text = "";
+            }
+
+            try
+            {
+                OPCode.Password = Settings.Default.roomCode + "";
+            }
+            catch (Exception e)
+            {
+                OPCode.Password = "";
             }
 
             var cmdArgs = Environment.GetCommandLineArgs();
@@ -855,6 +869,9 @@ namespace Bililive_dm
                         case InteractTypeEnum.MutualFollow:
                             text = Properties.Resources.InteractType_Text5;
                             break;
+                        case InteractTypeEnum.Like:
+                            text = Properties.Resources.InteractType_Text6;
+                            break;
                         default:
                             text = Properties.Resources.InteractType_Unknown;
                             break;
@@ -934,11 +951,21 @@ namespace Bililive_dm
                     AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身,
                         Properties.Resources.MainWindow_b_Disconnected_正在自动重连___, true);
                     await Task.Delay(TimeSpan.FromSeconds(0.5));
-                    connbtn_Click(null, null);
+                    if (_isOpm)
+                    {
+                       OPMConnBtn_OnClick(null,null);
+                    }
+                    else
+                    {
+                        connbtn_Click(null, null);
+                    }
+                  
                 }
                 else
                 {
                     ConnBtn.IsEnabled = true;
+                    OPMConnBtn.IsEnabled = true;
+                    DisableOPM.IsEnabled = true;
                 }
             }
             else
@@ -1612,5 +1639,149 @@ namespace Bililive_dm
         public bool debug_mode => DebugMode;
 
         #endregion
+
+        private void DisableOPM_OnChecked(object sender, RoutedEventArgs e)
+        {
+           this.OPMPannel.Visibility=Visibility.Collapsed;
+           this.OldConnPanel.Visibility = Visibility.Visible;
+           _isOpm = false;
+        }
+
+        private void DisableOPM_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            this.OPMPannel.Visibility = Visibility.Visible;
+            this.OldConnPanel.Visibility = Visibility.Collapsed;
+            _isOpm = true;
+        }
+
+        private async void OPMConnBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+
+            if (_bopm != null)
+            {
+                _bopm.Disconnected -= b_Disconnected;
+                _bopm.ReceivedDanmaku -= b_ReceivedDanmaku;
+                _bopm.ReceivedRoomCount -= b_ReceivedRoomCount;
+                _bopm.LogMessage -= b_LogMessage;
+                _bopm.Dispose();
+            }
+            OPMConnBtn.IsEnabled = false;
+            OPMDisconnBtn.IsEnabled = true;
+            DisableOPM.IsEnabled = false;
+           
+            var roomcode = this.OPCode.Password?.Trim();
+            Tuple<string, List<string>,int> info;
+            try
+            {
+                info = await BOpen.GetRoomInfoByCode(roomcode + "");
+            }
+            catch (Exception exception)
+            {
+               this.logging(exception.Message);
+               MessageBox.Show(exception.Message);
+               OPMConnBtn.IsEnabled = true;
+               OPMDisconnBtn.IsEnabled = true;
+               DisableOPM.IsEnabled = true;
+               return;
+            }
+
+            try
+            {
+             
+                var connectresult = false;
+                this._bopm = new OpenDanmakuLoader(info.Item1, info.Item2);
+                _bopm.Disconnected += b_Disconnected;
+                _bopm.ReceivedDanmaku += b_ReceivedDanmaku;
+                _bopm.ReceivedRoomCount += b_ReceivedRoomCount;
+                _bopm.LogMessage += b_LogMessage;
+                var trytime = 0;
+                Logging(Properties.Resources.MainWindow_connbtn_Click_正在连接);
+
+                if (DebugMode) Logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_, info.Item3));
+                connectresult = await _bopm.ConnectAsync();
+                if (!connectresult && _b.Error != null) // 如果连接不成功并且出错了
+                    Logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_出錯, _b.Error));
+                while (!connectresult && sender == null && AutoReconnect.IsChecked == true)
+                {
+                    if (trytime > 5)
+                        break;
+                    trytime++;
+
+                    await Task.Delay(1000); // 稍等一下
+                    Logging(Properties.Resources.MainWindow_connbtn_Click_正在连接);
+                    connectresult = await _bopm.ConnectAsync();
+                }
+                if (connectresult)
+                {
+                    Errorlogging(Properties.Resources.MainWindow_connbtn_Click_連接成功);
+                    AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身,
+                        Properties.Resources.MainWindow_connbtn_Click_連接成功, true);
+                    SendSSP(Properties.Resources.MainWindow_connbtn_Click_連接成功);
+                    _ranking.Clear();
+                    SaveRoomCode(roomcode);
+
+                    foreach (var dmPlugin in App.Plugins)
+                        new Thread(() =>
+                        {
+                            try
+                            {
+                                dmPlugin.MainConnected(info.Item3);
+                            }
+                            catch (Exception ex)
+                            {
+                                Utils.PluginExceptionHandler(ex, dmPlugin);
+                            }
+                        }).Start();
+                }
+                else
+                {
+                    Logging(Properties.Resources.MainWindow_connbtn_Click_連接失敗);
+                    SendSSP(Properties.Resources.MainWindow_connbtn_Click_連接失敗);
+                    AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身,
+                        Properties.Resources.MainWindow_connbtn_Click_連接失敗, true);
+
+                    OPMDisconnBtn.IsEnabled = true;
+                    DisableOPM.IsEnabled = true;
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(Properties.Resources.MainWindow_connbtn_Click_連接失敗);
+
+            }
+            
+        }
+
+        private void SaveRoomCode(string roomcode)
+        {
+            try
+            {
+                Settings.Default.roomCode = roomcode;
+                Settings.Default.Save();
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+
+        private void OPMDisconnBtn_OnClickDisconnbtn_OnClick(object sender, RoutedEventArgs e)
+        {
+           _bopm?.Disconnect();
+           OPMConnBtn.IsEnabled = true;
+           DisableOPM.IsEnabled = true;
+           foreach (var dmPlugin in App.Plugins)
+               new Thread(() =>
+               {
+                   try
+                   {
+                       dmPlugin.MainDisconnected();
+                   }
+                   catch (Exception ex)
+                   {
+                       Utils.PluginExceptionHandler(ex, dmPlugin);
+                   }
+               }).Start();
+        }
     }
 }

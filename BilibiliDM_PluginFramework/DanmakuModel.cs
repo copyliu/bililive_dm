@@ -105,7 +105,11 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         ///     互相关注
         /// </summary>
-        MutualFollow = 5
+        MutualFollow = 5,
+        /// <summary>
+        /// 點讚
+        /// </summary>
+        Like = 6
     }
 
     public class DanmakuModel
@@ -451,6 +455,146 @@ namespace BilibiliDM_PluginFramework
                             WatchedCount = obj["data"]["num"].ToObject<int>();
                             break;
                         }
+                        
+                        #region B站開放平台
+                        
+                        case "LIVE_OPEN_PLATFORM_DM":
+                            MsgType = MsgTypeEnum.Comment;
+                            CommentText = obj["data"]["msg"].ToString();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
+                            UserName =  obj["data"]["uname"].ToString();
+                            isAdmin = false;
+                            isVIP = false;
+                            UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
+                            break;
+                        case "LIVE_OPEN_PLATFORM_SEND_GIFT":
+                            MsgType = MsgTypeEnum.GiftSend;
+                            GiftName = obj["data"]["gift_name"].ToString();
+                            UserName = obj["data"]["uname"].ToString();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
+                            // Giftrcost = obj["data"]["rcost"].ToString();
+                            GiftCount = obj["data"]["num"].ToObject<int>();
+                            break;
+                        case "LIVE_OPEN_PLATFORM_SUPER_CHAT":
+                            MsgType = MsgTypeEnum.SuperChat;
+                            CommentText = obj["data"]["message"]?.ToString();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
+                            UserName = obj["data"]["uname"].ToString();
+                            Price = obj["data"]["rmb"].ToObject<decimal>();
+                            SCKeepTime = obj["data"]["end_time"].ToObject<int>() -
+                                         obj["data"]["start_time"].ToObject<int>();
+                            break;
+                        case "LIVE_OPEN_PLATFORM_SUPER_CHAT_DEL":
+                            break;
+                        case "LIVE_OPEN_PLATFORM_GUARD":
+                            MsgType = MsgTypeEnum.GuardBuy;
+                            UserID_str = obj["data"]["user_info"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
+                            UserName = obj["data"]["user_info"]["uname"].ToString();
+                            UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
+                            GiftName = UserGuardLevel == 3 ? "舰长" :
+                                UserGuardLevel == 2 ? "提督" :
+                                UserGuardLevel == 1 ? "总督" : "";
+                            GiftCount = obj["data"]["num"].ToObject<int>();
+                            break;
+                        case "LIVE_OPEN_PLATFORM_LIKE":
+                            MsgType = MsgTypeEnum.Interact;
+                            UserName = obj["data"]["uname"].ToString();
+                            UserID_str = obj["data"]["uid"].ToString();
+                            try
+                            {
+                                UserID = Convert.ToInt32(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID = -1;
+                            }
+
+                            try
+                            {
+                                UserID_long = Convert.ToInt64(UserID_str);
+                            }
+                            catch (Exception)
+                            {
+                                UserID_long = -1;
+                            }
+
+                            InteractType = InteractTypeEnum.Like;
+                            break;
+                        #endregion
+                        
+                        
                         default:
                         {
                             if (cmd.StartsWith("DANMU_MSG")) // "高考"fix

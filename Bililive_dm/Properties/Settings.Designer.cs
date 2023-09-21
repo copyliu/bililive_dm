@@ -57,5 +57,17 @@ namespace Bililive_dm.Properties {
                 this["lang"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string roomCode {
+            get {
+                return ((string)(this["roomCode"]));
+            }
+            set {
+                this["roomCode"] = value;
+            }
+        }
     }
 }

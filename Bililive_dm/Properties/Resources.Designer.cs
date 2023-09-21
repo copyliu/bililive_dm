@@ -18,7 +18,7 @@ namespace Bililive_dm.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -74,6 +74,60 @@ namespace Bililive_dm.Properties {
         public static string AutoReconnect_Content {
             get {
                 return ResourceManager.GetString("AutoReconnect.Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to B站直播中心返回了無效的房間號.
+        /// </summary>
+        public static string BOpen_GetRoomIdByCode_B站直播中心返回了無效的房間號 {
+            get {
+                return ResourceManager.GetString("BOpen_GetRoomIdByCode_B站直播中心返回了無效的房間號", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to B站直播中心返回錯誤.
+        /// </summary>
+        public static string BOpen_GetRoomIdByCode_B站直播中心返回錯誤 {
+            get {
+                return ResourceManager.GetString("BOpen_GetRoomIdByCode_B站直播中心返回錯誤", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to B站直播中心離線.
+        /// </summary>
+        public static string BOpen_GetRoomIdByCode_B站直播中心離線 {
+            get {
+                return ResourceManager.GetString("BOpen_GetRoomIdByCode_B站直播中心離線", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 未輸入身份碼.
+        /// </summary>
+        public static string BOpen_GetRoomIdByCode_未輸入身份碼 {
+            get {
+                return ResourceManager.GetString("BOpen_GetRoomIdByCode_未輸入身份碼", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 獲取身份碼信息出錯.
+        /// </summary>
+        public static string BOpen_GetRoomIdByCode_獲取身份碼信息出錯 {
+            get {
+                return ResourceManager.GetString("BOpen_GetRoomIdByCode_獲取身份碼信息出錯", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 簽名伺服器離線.
+        /// </summary>
+        public static string BOpen_GetRoomIdByCode_簽名伺服器離線 {
+            get {
+                return ResourceManager.GetString("BOpen_GetRoomIdByCode_簽名伺服器離線", resourceCulture);
             }
         }
         
@@ -371,6 +425,15 @@ namespace Bililive_dm.Properties {
         public static string InteractType_Text5 {
             get {
                 return ResourceManager.GetString("InteractType_Text5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} 點了讚.
+        /// </summary>
+        public static string InteractType_Text6 {
+            get {
+                return ResourceManager.GetString("InteractType_Text6", resourceCulture);
             }
         }
         

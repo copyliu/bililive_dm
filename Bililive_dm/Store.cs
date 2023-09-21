@@ -24,6 +24,7 @@ namespace Bililive_dm
         public static bool WtfEngineEnabled = true;
         public static bool DisplayAffinity = false;
         public static string FullScreenMonitor = null;
+        public static string SESSDATA_Value = "";
     }
 
 
@@ -39,12 +40,14 @@ namespace Bililive_dm
         public static double MainOverlayFontsize = 18.667;
         public static string MainFontFamily = ""; //设置字体
 
-
         public static double FullOverlayEffect1 = 400; //文字速度
         public static double FullOverlayFontsize = 35;
         public static bool WtfEngineEnabled = true;
         public static bool DisplayAffinity = false;
         public static string FullScreenMonitor = null;
+        
+        
+        public static string SESSDATA_Value = "";
     }
 
     public static class Utils

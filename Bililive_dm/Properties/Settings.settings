@@ -1,16 +1,19 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="Bililive_dm.Properties" GeneratedClassName="Settings">
-    <Profiles/>
-    <Settings>
-        <Setting Name="roomId" Type="System.Int32" Scope="User">
-            <Value Profile="(Default)">0</Value>
-        </Setting>
-        <Setting Name="ignorespam" Type="System.Boolean" Scope="User">
-            <Value Profile="(Default)">False</Value>
-        </Setting>
-        <Setting Name="lang" Type="System.String" Scope="User">
-            <Value Profile="(Default)">zh</Value>
-        </Setting>
-    </Settings>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Bililive_dm.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="roomId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ignorespam" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="lang" Type="System.String" Scope="User">
+      <Value Profile="(Default)">zh</Value>
+    </Setting>
+    <Setting Name="roomCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
 </SettingsFile>
+

@@ -1,519 +1,535 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <!-- 
-      Microsoft ResX Schema 
-      
-      Version 2.0
-      
-      The primary goals of this format is to allow a simple XML format 
-      that is mostly human readable. The generation and parsing of the 
-      various data types are done through the TypeConverter classes 
-      associated with the data types.
-      
-      Example:
-      
-      ... ado.net/XML headers & schema ...
-      <resheader name="resmimetype">text/microsoft-resx</resheader>
-      <resheader name="version">2.0</resheader>
-      <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-      <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-      <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-      <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-      <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-          <value>[base64 mime encoded serialized .NET Framework object]</value>
-      </data>
-      <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-          <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-          <comment>This is a comment</comment>
-      </data>
-                  
-      There are any number of "resheader" rows that contain simple 
-      name/value pairs.
-      
-      Each data row contains a name, and value. The row also contains a 
-      type or mimetype. Type corresponds to a .NET class that support 
-      text/value conversion through the TypeConverter architecture. 
-      Classes that don't support this are serialized and stored with the 
-      mimetype set.
-      
-      The mimetype is used for serialized objects, and tells the 
-      ResXResourceReader how to depersist the object. This is currently not 
-      extensible. For a given mimetype the value must be set accordingly:
-      
-      Note - application/x-microsoft.net.object.binary.base64 is the format 
-      that the ResXResourceWriter will generate, however the reader can 
-      read any of the formats listed below.
-      
-      mimetype: application/x-microsoft.net.object.binary.base64
-      value   : The object must be serialized with 
-              : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-              : and then encoded with base64 encoding.
-      
-      mimetype: application/x-microsoft.net.object.soap.base64
-      value   : The object must be serialized with 
-              : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-              : and then encoded with base64 encoding.
-  
-      mimetype: application/x-microsoft.net.object.bytearray.base64
-      value   : The object must be serialized into a byte array 
-              : using a System.ComponentModel.TypeConverter
-              : and then encoded with base64 encoding.
-      -->
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root"
-                xmlns="">
-        <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
             <xsd:complexType>
-                <xsd:choice maxOccurs="unbounded">
-                    <xsd:element name="metadata">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" use="required" type="xsd:string"/>
-                            <xsd:attribute name="type" type="xsd:string"/>
-                            <xsd:attribute name="mimetype" type="xsd:string"/>
-                            <xsd:attribute ref="xml:space"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="assembly">
-                        <xsd:complexType>
-                            <xsd:attribute name="alias" type="xsd:string"/>
-                            <xsd:attribute name="name" type="xsd:string"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="data">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-                            <xsd:attribute ref="xml:space"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="resheader">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required"/>
-                        </xsd:complexType>
-                    </xsd:element>
-                </xsd:choice>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-            PublicKeyToken=b77a5c561934e089
-        </value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral,
-            PublicKeyToken=b77a5c561934e089
-        </value>
-    </resheader>
-    <data name="ABout.Text" xml:space="preserve">
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ABout.Text" xml:space="preserve">
     <value>非B站出品 ©2014-2023 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com</value>
   </data>
-    <data name="AutoReconnect.Content" xml:space="preserve">
+  <data name="AutoReconnect.Content" xml:space="preserve">
     <value>自動重連</value>
   </data>
-    <data name="Button.Content.Default" xml:space="preserve">
+  <data name="Button.Content.Default" xml:space="preserve">
     <value>還原默認</value>
   </data>
-    <data name="Button.Content.Text" xml:space="preserve">
+  <data name="Button.Content.Text" xml:space="preserve">
     <value>測試效果</value>
   </data>
-    <data name="ClearMe.Content" xml:space="preserve">
+  <data name="ClearMe.Content" xml:space="preserve">
     <value>清空投喂統計</value>
   </data>
-    <data name="ClearMe2.Content" xml:space="preserve">
+  <data name="ClearMe2.Content" xml:space="preserve">
     <value>清空彈幕統計</value>
   </data>
-    <data name="ClearMe3.Content" xml:space="preserve">
+  <data name="ClearMe3.Content" xml:space="preserve">
     <value>清空用戶統計</value>
   </data>
-    <data name="ClearMe4.Content" xml:space="preserve">
+  <data name="ClearMe4.Content" xml:space="preserve">
     <value>清空彈幕統計(總)</value>
   </data>
-    <data name="ConnBtn.Content" xml:space="preserve">
+  <data name="ConnBtn.Content" xml:space="preserve">
     <value>連線</value>
   </data>
-    <data name="DataGridTextColumn.Header.Plugin1" xml:space="preserve">
+  <data name="DataGridTextColumn.Header.Plugin1" xml:space="preserve">
     <value>外掛程式名稱</value>
   </data>
-    <data name="DataGridTextColumn.Header.Plugin2" xml:space="preserve">
+  <data name="DataGridTextColumn.Header.Plugin2" xml:space="preserve">
     <value>外掛程式描述</value>
   </data>
-    <data name="DataGridTextColumn.Header.Plugin3" xml:space="preserve">
+  <data name="DataGridTextColumn.Header.Plugin3" xml:space="preserve">
     <value>外掛程式作者</value>
   </data>
-    <data name="DataGridTextColumn.Header.Plugin4" xml:space="preserve">
+  <data name="DataGridTextColumn.Header.Plugin4" xml:space="preserve">
     <value>外掛程式狀態</value>
   </data>
-    <data name="DataGridTextColumn.Header.Plugin5" xml:space="preserve">
+  <data name="DataGridTextColumn.Header.Plugin5" xml:space="preserve">
     <value>外掛程式版本</value>
   </data>
-    <data name="DataGridTextColumn.Header1" xml:space="preserve">
+  <data name="DataGridTextColumn.Header1" xml:space="preserve">
     <value>用戶名</value>
   </data>
-    <data name="DataGridTextColumn.Header2" xml:space="preserve">
+  <data name="DataGridTextColumn.Header2" xml:space="preserve">
     <value>數量</value>
   </data>
-    <data name="DataGridTextColumn.Header3" xml:space="preserve">
+  <data name="DataGridTextColumn.Header3" xml:space="preserve">
     <value>物品</value>
   </data>
-    <data name="DisconnBtn.Content" xml:space="preserve">
+  <data name="DisconnBtn.Content" xml:space="preserve">
     <value>斷開</value>
   </data>
-    <data name="EnableRegex.Content" xml:space="preserve">
+  <data name="EnableRegex.Content" xml:space="preserve">
     <value>規則運算式過濾 符合規則運算式的彈幕將不會出現在任何地方直接丟棄</value>
   </data>
-    <data name="FontSizeValidationRule_Validate_不可为空" xml:space="preserve">
+  <data name="FontSizeValidationRule_Validate_不可为空" xml:space="preserve">
     <value>不可為空</value>
   </data>
-    <data name="FontSizeValidationRule_Validate_不是数字" xml:space="preserve">
+  <data name="FontSizeValidationRule_Validate_不是数字" xml:space="preserve">
     <value>不是數字</value>
   </data>
-    <data name="FontSizeValidationRule_Validate_必须是正数" xml:space="preserve">
+  <data name="FontSizeValidationRule_Validate_必须是正数" xml:space="preserve">
     <value>必須是正數</value>
   </data>
-    <data name="Full.Content" xml:space="preserve">
+  <data name="Full.Content" xml:space="preserve">
     <value>彈幕</value>
   </data>
-    <data name="IgnoreSpam.Content" xml:space="preserve">
+  <data name="IgnoreSpam.Content" xml:space="preserve">
     <value>遮蔽刷屏(α)</value>
   </data>
-    <data name="LiveRoomAddr" xml:space="preserve">
+  <data name="LiveRoomAddr" xml:space="preserve">
     <value>直播間地址: https://live.bilibili.com/</value>
   </data>
-    <data name="MainWindow_b_Disconnected_正在自动重连___" xml:space="preserve">
+  <data name="MainWindow_b_Disconnected_正在自动重连___" xml:space="preserve">
     <value>正在自動重連...</value>
   </data>
-    <data name="MainWindow_b_Disconnected_連接被斷開" xml:space="preserve">
+  <data name="MainWindow_b_Disconnected_連接被斷開" xml:space="preserve">
     <value>連線被斷開</value>
   </data>
-    <data name="MainWindow_b_Disconnected_連接被斷開__开发者信息_0_" xml:space="preserve">
+  <data name="MainWindow_b_Disconnected_連接被斷開__开发者信息_0_" xml:space="preserve">
     <value>連線被斷開: 開發者資訊{0}</value>
   </data>
-    <data name="MainWindow_b_ReceivedRoomCount_" xml:space="preserve">
+  <data name="MainWindow_b_ReceivedRoomCount_" xml:space="preserve">
     <value>當前人氣值：{0}</value>
   </data>
-    <data name="MainWindow_connbtn_Click_" xml:space="preserve">
+  <data name="MainWindow_connbtn_Click_" xml:space="preserve">
     <value>連接房間號：{0}</value>
   </data>
-    <data name="MainWindow_connbtn_Click_ID非法" xml:space="preserve">
+  <data name="MainWindow_connbtn_Click_ID非法" xml:space="preserve">
     <value>ID不合法</value>
   </data>
-    <data name="MainWindow_connbtn_Click_出錯" xml:space="preserve">
+  <data name="MainWindow_connbtn_Click_出錯" xml:space="preserve">
     <value>出錯資訊：{0}</value>
   </data>
-    <data name="MainWindow_connbtn_Click_彈幕姬本身" xml:space="preserve">
+  <data name="MainWindow_connbtn_Click_彈幕姬本身" xml:space="preserve">
     <value>彈幕姬報告</value>
   </data>
-    <data name="MainWindow_connbtn_Click_正在连接" xml:space="preserve">
+  <data name="MainWindow_connbtn_Click_正在连接" xml:space="preserve">
     <value>正在連線</value>
   </data>
-    <data name="MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_" xml:space="preserve">
+  <data name="MainWindow_connbtn_Click_请输入房间号_房间号是_数_字_" xml:space="preserve">
     <value>請輸入房間編碼,房間編碼是!數!字!</value>
   </data>
-    <data name="MainWindow_connbtn_Click_連接失敗" xml:space="preserve">
+  <data name="MainWindow_connbtn_Click_連接失敗" xml:space="preserve">
     <value>連線失敗</value>
   </data>
-    <data name="MainWindow_connbtn_Click_連接成功" xml:space="preserve">
+  <data name="MainWindow_connbtn_Click_連接成功" xml:space="preserve">
     <value>連線成功</value>
   </data>
-    <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
+  <data name="MainWindow_MainWindow_Closed_报错" xml:space="preserve">
     <value>請有空發給聯繫方式 {0} 謝謝</value>
   </data>
-    <data name="MainWindow_MainWindow_Closed_插件錯誤" xml:space="preserve">
+  <data name="MainWindow_MainWindow_Closed_插件錯誤" xml:space="preserve">
     <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
   </data>
-    <data name="MainWindow_MainWindow_NetError" xml:space="preserve">
+  <data name="MainWindow_MainWindow_NetError" xml:space="preserve">
     <value>彈幕姬決定下版本開始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1,為保證你能在今後使用彈幕姬, 請安裝最新的 .net framework .</value>
   </data>
-    <data name="MainWindow_MainWindow_____Debug模式_" xml:space="preserve">
+  <data name="MainWindow_MainWindow_____Debug模式_" xml:space="preserve">
     <value>  *Debug模式*</value>
   </data>
-    <data name="MainWindow_MainWindow_____傻逼版本_" xml:space="preserve">
+  <data name="MainWindow_MainWindow_____傻逼版本_" xml:space="preserve">
     <value>  *弱智版本*</value>
   </data>
-    <data name="MainWindow_MainWindow_____原始数据输出_" xml:space="preserve">
+  <data name="MainWindow_MainWindow_____原始数据输出_" xml:space="preserve">
     <value>  *原始資料輸出*</value>
   </data>
-    <data name="MainWindow_MainWindow____版本号__" xml:space="preserve">
+  <data name="MainWindow_MainWindow____版本号__" xml:space="preserve">
     <value>  版本號:</value>
   </data>
-    <data name="MainWindow_MainWindow____编译时间__" xml:space="preserve">
+  <data name="MainWindow_MainWindow____编译时间__" xml:space="preserve">
     <value>  編譯時間:</value>
   </data>
-    <data name="MainWindow_MainWindow_你的打开方式不正确" xml:space="preserve">
+  <data name="MainWindow_MainWindow_你的打开方式不正确" xml:space="preserve">
     <value>你的打開方式不正確</value>
   </data>
-    <data name="MainWindow_MainWindow_公告1" xml:space="preserve">
+  <data name="MainWindow_MainWindow_公告1" xml:space="preserve">
     <value>公告1: 由於廉價的證書供應商被某虎公司搞死了於是沒錢買證書了, 所以使用本軟體時可能會跳安全提示請無需理會.</value>
   </data>
-    <data name="MainWindow_MainWindow_公告2" xml:space="preserve">
+  <data name="MainWindow_MainWindow_公告2" xml:space="preserve">
     <value>公告2: 最近出現了一些所謂彈幕姬後續版, 聲稱本軟體已經不再更新, 並自稱後續版是原作者開發是新版云云.</value>
   </data>
-    <data name="MainWindow_MainWindow_公告2_2" xml:space="preserve">
+  <data name="MainWindow_MainWindow_公告2_2" xml:space="preserve">
     <value>對此進行澄清, 彈幕姬從來也不會有任何的所謂後續版, 原作者直播間ID是5051, 任何非本人所開發的軟體的一切問題均不能解答.</value>
   </data>
-    <data name="MainWindow_MainWindow_公告2_3" xml:space="preserve">
+  <data name="MainWindow_MainWindow_公告2_3" xml:space="preserve">
     <value>也請用戶在諮詢時, 確認清楚你所使用的軟體類型, 向正確的關係者諮詢. 謝謝.</value>
   </data>
-    <data name="MainWindow_MainWindow_公告3" xml:space="preserve">
+  <data name="MainWindow_MainWindow_公告3" xml:space="preserve">
     <value>公告3: 投喂記錄不會在彈幕模式上出現, 這不是bug</value>
   </data>
-    <data name="MainWindow_MainWindow_可以点击日志复制到剪贴板" xml:space="preserve">
+  <data name="MainWindow_MainWindow_可以点击日志复制到剪贴板" xml:space="preserve">
     <value>可以點擊日誌複製到剪貼簿</value>
   </data>
-    <data name="MainWindow_MainWindow_当前为Debug模式" xml:space="preserve">
+  <data name="MainWindow_MainWindow_当前为Debug模式" xml:space="preserve">
     <value>當前為Debug模式</value>
   </data>
-    <data name="MainWindow_OpenPluginFolder_OnClick_" xml:space="preserve">
+  <data name="MainWindow_OpenPluginFolder_OnClick_" xml:space="preserve">
     <value>打開外掛程式資料夾出錯
 信息</value>
   </data>
-    <data name="MainWindow_OpenPluginFolder_OnClick_打开插件文件夹出错" xml:space="preserve">
+  <data name="MainWindow_OpenPluginFolder_OnClick_打开插件文件夹出错" xml:space="preserve">
     <value>打開外掛程式資料夾出錯</value>
   </data>
-    <data name="MainWindow_Plugin_Disable_插件報錯2" xml:space="preserve">
+  <data name="MainWindow_Plugin_Disable_插件報錯2" xml:space="preserve">
     <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
   </data>
-    <data name="MainWindow_Plugin_Enable_插件報錯" xml:space="preserve">
+  <data name="MainWindow_Plugin_Enable_插件報錯" xml:space="preserve">
     <value>外掛程式{0}遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該外掛程式作者 {1}, 聯繫方式 {2}</value>
   </data>
-    <data name="MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝" xml:space="preserve">
+  <data name="MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝" xml:space="preserve">
     <value>請有空發給聯繫方式 {0} 謝謝</value>
   </data>
-    <data name="MainWindow_ProcDanmaku__0__购买了__1__x__2_" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku__0__购买了__1__x__2_" xml:space="preserve">
     <value>{0} 購買了 {1} x {2}</value>
   </data>
-    <data name="MainWindow_ProcDanmaku__0__赠送的___1__x__2_" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku__0__赠送的___1__x__2_" xml:space="preserve">
     <value>{0} 贈送的: {1} x {2}</value>
   </data>
-    <data name="MainWindow_ProcDanmaku__VIP前綴" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku__VIP前綴" xml:space="preserve">
     <value>[爺]</value>
   </data>
-    <data name="MainWindow_ProcDanmaku__管理員前綴_" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku__管理員前綴_" xml:space="preserve">
     <value>[管]</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_" xml:space="preserve">
     <value>上船:{0} 購買了 {1} x {2}</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_总督" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_总督" xml:space="preserve">
     <value>總督</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_提督" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_提督" xml:space="preserve">
     <value>提督</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_收到彈幕__0__1__2__說___3_" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_收到彈幕__0__1__2__說___3_" xml:space="preserve">
     <value>收到彈幕:{0}{1}{2} 說: {3}</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_收到道具" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_收到道具" xml:space="preserve">
     <value>收到道具</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_收到道具__0__赠送的___1__x__2_" xml:space="preserve">
     <value>收到道具:{0} 贈送的: {1} x {2}</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_欢迎_0____1__2_" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_欢迎_0____1__2_" xml:space="preserve">
     <value>歡迎{0}: {1} 進入直播間</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_舰长" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_舰长" xml:space="preserve">
     <value>艦長</value>
   </data>
-    <data name="MainWindow_Test_OnClick_彈幕姬測試" xml:space="preserve">
+  <data name="MainWindow_Test_OnClick_彈幕姬測試" xml:space="preserve">
     <value>彈幕姬測試</value>
   </data>
-    <data name="MainWindow_Test_OnClick_插件彈幕測試" xml:space="preserve">
+  <data name="MainWindow_Test_OnClick_插件彈幕測試" xml:space="preserve">
     <value>外掛程式彈幕測試</value>
   </data>
-    <data name="MainWindow_Test_OnClick_這不是個測試" xml:space="preserve">
+  <data name="MainWindow_Test_OnClick_這不是個測試" xml:space="preserve">
     <value>這不是個測試</value>
   </data>
-    <data name="MainWindow_Test_OnClick_這是一個測試" xml:space="preserve">
+  <data name="MainWindow_Test_OnClick_這是一個測試" xml:space="preserve">
     <value>這是一個測試</value>
   </data>
-    <data name="MainWindow_UIElement_OnMouseLeftButtonUp_本行记录已复制到剪贴板" xml:space="preserve">
+  <data name="MainWindow_UIElement_OnMouseLeftButtonUp_本行记录已复制到剪贴板" xml:space="preserve">
     <value>本行記錄已複製到剪貼簿</value>
   </data>
-    <data name="MenuItem.Header.PluginAdmin" xml:space="preserve">
+  <data name="MenuItem.Header.PluginAdmin" xml:space="preserve">
     <value>管理</value>
   </data>
-    <data name="MenuItem.Header.PluginEnabvle" xml:space="preserve">
+  <data name="MenuItem.Header.PluginEnabvle" xml:space="preserve">
     <value>啟用外掛程式</value>
   </data>
-    <data name="MenuItem.Header.PluginStop" xml:space="preserve">
+  <data name="MenuItem.Header.PluginStop" xml:space="preserve">
     <value>停用外掛程式</value>
   </data>
-    <data name="RankTabItem.Header" xml:space="preserve">
+  <data name="RankTabItem.Header" xml:space="preserve">
     <value>投喂榜</value>
   </data>
-    <data name="SaveLog.Content" xml:space="preserve">
+  <data name="SaveLog.Content" xml:space="preserve">
     <value>保存日誌</value>
   </data>
-    <data name="ShowError.Content" xml:space="preserve">
+  <data name="ShowError.Content" xml:space="preserve">
     <value>顯示出錯信息</value>
   </data>
-    <data name="ShowItem.Content" xml:space="preserve">
+  <data name="ShowItem.Content" xml:space="preserve">
     <value>道具老爺</value>
   </data>
-    <data name="SideBar.Content" xml:space="preserve">
+  <data name="SideBar.Content" xml:space="preserve">
     <value>側邊欄</value>
   </data>
-    <data name="SSTP.Content" xml:space="preserve">
+  <data name="SSTP.Content" xml:space="preserve">
     <value>偽春菜聯動</value>
   </data>
-    <data name="SuperChatLogName" xml:space="preserve">
+  <data name="SuperChatLogName" xml:space="preserve">
     <value>醒目留言:{0}{1}{2} 說: {3}</value>
   </data>
-    <data name="TabItem.Header" xml:space="preserve">
+  <data name="TabItem.Header" xml:space="preserve">
     <value>首頁</value>
   </data>
-    <data name="TabItem.Header.Plugin" xml:space="preserve">
+  <data name="TabItem.Header.Plugin" xml:space="preserve">
     <value>外掛程式</value>
   </data>
-    <data name="TabItem.Header.Setting" xml:space="preserve">
+  <data name="TabItem.Header.Setting" xml:space="preserve">
     <value>設置</value>
   </data>
-    <data name="TabItem.Header.Web" xml:space="preserve">
+  <data name="TabItem.Header.Web" xml:space="preserve">
     <value>說明</value>
   </data>
-    <data name="Test.Content" xml:space="preserve">
+  <data name="Test.Content" xml:space="preserve">
     <value>測試效果</value>
   </data>
-    <data name="TextBlock.Text" xml:space="preserve">
+  <data name="TextBlock.Text" xml:space="preserve">
     <value>人氣值:</value>
   </data>
-    <data name="TextBlock.Text.EnableNewEngineWarn" xml:space="preserve">
+  <data name="TextBlock.Text.EnableNewEngineWarn" xml:space="preserve">
     <value>注意: 新彈幕引擎下文字速度選項無效</value>
   </data>
-    <data name="TextBlock.Text.FSpeed" xml:space="preserve">
+  <data name="TextBlock.Text.FSpeed" xml:space="preserve">
     <value>彈幕模式文字速度</value>
   </data>
-    <data name="TextBlock.Text.FTextSize" xml:space="preserve">
+  <data name="TextBlock.Text.FTextSize" xml:space="preserve">
     <value>彈幕模式文字大小</value>
   </data>
-    <data name="TextBlock.Text.PluginDir" xml:space="preserve">
+  <data name="TextBlock.Text.PluginDir" xml:space="preserve">
     <value>外掛程式目錄: 我的文件\弹幕姬\Plugins</value>
   </data>
-    <data name="TextBlock.Text.R1" xml:space="preserve">
+  <data name="TextBlock.Text.R1" xml:space="preserve">
     <value>總共收到彈幕(原始資料)</value>
   </data>
-    <data name="TextBlock.Text.R2" xml:space="preserve">
+  <data name="TextBlock.Text.R2" xml:space="preserve">
     <value>總共收到彈幕(已顯示)</value>
   </data>
-    <data name="TextBlock.Text.R3" xml:space="preserve">
+  <data name="TextBlock.Text.R3" xml:space="preserve">
     <value>參與評論的用戶</value>
   </data>
-    <data name="TextBlock.Text.SEff2Time" xml:space="preserve">
+  <data name="TextBlock.Text.SEff2Time" xml:space="preserve">
     <value>側提示文字出現時長</value>
   </data>
-    <data name="TextBlock.Text.SEff3Time" xml:space="preserve">
+  <data name="TextBlock.Text.SEff3Time" xml:space="preserve">
     <value>側提示文字消失時長</value>
   </data>
-    <data name="TextBlock.Text.SEffTime" xml:space="preserve">
+  <data name="TextBlock.Text.SEffTime" xml:space="preserve">
     <value>側提示出現時拉伸時長</value>
   </data>
-    <data name="TextBlock.Text.SKeepTime" xml:space="preserve">
+  <data name="TextBlock.Text.SKeepTime" xml:space="preserve">
     <value>側提示文字停留時長</value>
   </data>
-    <data name="TextBlock.Text.SShowTime" xml:space="preserve">
+  <data name="TextBlock.Text.SShowTime" xml:space="preserve">
     <value>側提示出現時拉伸時長</value>
   </data>
-    <data name="TextBlock.Text.STextSize" xml:space="preserve">
+  <data name="TextBlock.Text.STextSize" xml:space="preserve">
     <value>側提示文字字型大小</value>
   </data>
-    <data name="TextBlock.Text.SWidth" xml:space="preserve">
+  <data name="TextBlock.Text.SWidth" xml:space="preserve">
     <value>側窗口寬度</value>
   </data>
-    <data name="TextBlock.Text.SXOffset" xml:space="preserve">
+  <data name="TextBlock.Text.SXOffset" xml:space="preserve">
     <value>側窗口X偏移</value>
   </data>
-    <data name="TextBlock.Text.SYOffset" xml:space="preserve">
+  <data name="TextBlock.Text.SYOffset" xml:space="preserve">
     <value>側窗口Y偏移</value>
   </data>
-    <data name="WindowTop.Content" xml:space="preserve">
+  <data name="WindowTop.Content" xml:space="preserve">
     <value>窗口置頂</value>
   </data>
-    <data name="WTFEngineEnable.Content" xml:space="preserve">
+  <data name="WTFEngineEnable.Content" xml:space="preserve">
     <value>彈幕模式使用新彈幕引擎(Windows 8 以上)</value>
   </data>
-    <data name="MainWindow_ProcDanmaku____SuperChat___" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku____SuperChat___" xml:space="preserve">
     <value>!!!SuperChat!!!</value>
   </data>
-    <data name="DisplayAffinity.Content" xml:space="preserve">
+  <data name="DisplayAffinity.Content" xml:space="preserve">
     <value>彈幕姬視窗資料保護</value>
   </data>
-    <data name="InteractType_Text1" xml:space="preserve">
+  <data name="InteractType_Text1" xml:space="preserve">
     <value>{0} 進入了直播間</value>
   </data>
-    <data name="InteractType_Text2" xml:space="preserve">
+  <data name="InteractType_Text2" xml:space="preserve">
     <value>{0} 關注了直播間</value>
   </data>
-    <data name="InteractType_Text3" xml:space="preserve">
+  <data name="InteractType_Text3" xml:space="preserve">
     <value>{0} 分享了直播間</value>
   </data>
-    <data name="InteractType_Text4" xml:space="preserve">
+  <data name="InteractType_Text4" xml:space="preserve">
     <value>{0} 將直播間加入到了特別關注</value>
   </data>
-    <data name="InteractType_Text5" xml:space="preserve">
+  <data name="InteractType_Text5" xml:space="preserve">
     <value>{0} 現在是相互關注</value>
   </data>
-    <data name="InteractType_Unknown" xml:space="preserve">
+  <data name="InteractType_Unknown" xml:space="preserve">
     <value>{0} 发生了未知的互动事件</value>
   </data>
-    <data name="Interact_Content" xml:space="preserve">
+  <data name="Interact_Content" xml:space="preserve">
     <value>觀客互動</value>
   </data>
-    <data name="ScreenSelecter" xml:space="preserve">
+  <data name="ScreenSelecter" xml:space="preserve">
     <value>彈幕模式使用熒幕</value>
   </data>
-    <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
+  <data name="Btn_Text_OpenPluginDir" xml:space="preserve">
     <value>打開外掛程式資料夾</value>
   </data>
-    <data name="ChangeSkin" xml:space="preserve">
+  <data name="ChangeSkin" xml:space="preserve">
     <value>更換主題</value>
   </data>
-    <data name="SkinSelector" xml:space="preserve">
+  <data name="SkinSelector" xml:space="preserve">
     <value>主題選擇器</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_超管警告" xml:space="preserve">
     <value>超管警告</value>
   </data>
-    <data name="MainWindow_ProcDanmaku___SSPCommentFormat" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku___SSPCommentFormat" xml:space="preserve">
     <value>\_q{0}\n\_q\f[height,20]{1}</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_歡迎老爺__0__進入直播間" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_歡迎老爺__0__進入直播間" xml:space="preserve">
     <value>歡迎老爺 {0} 進入直播間</value>
   </data>
-    <data name="MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間" xml:space="preserve">
+  <data name="MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間" xml:space="preserve">
     <value>歡迎老爺和管理員 {0} 進入直播間</value>
   </data>
-    <data name="Plugin_DataGrid_Status_On" xml:space="preserve">
+  <data name="Plugin_DataGrid_Status_On" xml:space="preserve">
     <value>已啟用</value>
   </data>
-    <data name="Plugin_DataGrid_Status_Off" xml:space="preserve">
+  <data name="Plugin_DataGrid_Status_Off" xml:space="preserve">
     <value>未啟用</value>
   </data>
-    <data name="WatchedCount" xml:space="preserve">
+  <data name="WatchedCount" xml:space="preserve">
     <value>觀看人次:</value>
   </data>
-    <data name="FontFamilySelecter" xml:space="preserve">
+  <data name="FontFamilySelecter" xml:space="preserve">
     <value>側提示字型</value>
   </data>
-    <data name="IgnoreEmoji.Content" xml:space="preserve">
+  <data name="IgnoreEmoji.Content" xml:space="preserve">
     <value>遮蔽表情</value>
+  </data>
+  <data name="BOpen_GetRoomIdByCode_B站直播中心返回了無效的房間號" xml:space="preserve">
+    <value>B站直播中心返回了無效的房間號</value>
+  </data>
+  <data name="BOpen_GetRoomIdByCode_B站直播中心返回錯誤" xml:space="preserve">
+    <value>B站直播中心返回錯誤</value>
+  </data>
+  <data name="BOpen_GetRoomIdByCode_B站直播中心離線" xml:space="preserve">
+    <value>B站直播中心離線</value>
+  </data>
+  <data name="BOpen_GetRoomIdByCode_未輸入身份碼" xml:space="preserve">
+    <value>未輸入身份碼</value>
+  </data>
+  <data name="BOpen_GetRoomIdByCode_獲取身份碼信息出錯" xml:space="preserve">
+    <value>獲取身份碼信息出錯</value>
+  </data>
+  <data name="BOpen_GetRoomIdByCode_簽名伺服器離線" xml:space="preserve">
+    <value>簽名伺服器離線</value>
+  </data>
+  <data name="InteractType_Text6" xml:space="preserve">
+    <value>{0} 點了讚</value>
   </data>
 </root>

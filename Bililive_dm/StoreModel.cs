@@ -33,6 +33,7 @@ namespace Bililive_dm
 
         private double _mainOverlayYoffset;
         private bool _wtfEngineEnabled;
+        private string _sessdataValue;
 
         public StoreModel()
         {
@@ -49,6 +50,8 @@ namespace Bililive_dm
             _wtfEngineEnabled = Store.WtfEngineEnabled;
             _displayAffinity = Store.DisplayAffinity;
             _fullScreenMonitor = Store.FullScreenMonitor;
+            _sessdataValue=Store.SESSDATA_Value;
+            
         }
 
         public double MainOverlayXoffset
@@ -258,6 +261,17 @@ namespace Bililive_dm
             {
                 MainFontFamilyName = value.ToString();
                 DanmakuTextControl.TextFontFamily = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SESSDATAValue
+        {
+            get => _sessdataValue;
+            set
+            {
+                if (value == _sessdataValue) return;
+                _sessdataValue = value;
                 OnPropertyChanged();
             }
         }

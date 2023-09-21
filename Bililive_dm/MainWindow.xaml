@@ -22,17 +22,32 @@
 
     <DockPanel>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal" DockPanel.Dock="Top">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
-                       Text="{x:Static properties:Resources.LiveRoomAddr}"
-                       VerticalAlignment="Center" Margin="4" />
-            <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666"
-                     MinWidth="80" />
-            <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}"
-                    VerticalAlignment="Center"
-                    Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
+            <StackPanel Orientation="Horizontal" Visibility="Collapsed" x:Name="OldConnPanel" >
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
+                           Text="{x:Static properties:Resources.LiveRoomAddr}"
+                           VerticalAlignment="Center" Margin="4" />
+                <TextBox x:Name="RoomId" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666"
+                         MinWidth="80" />
+                <Button x:Name="ConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}"
+                        VerticalAlignment="Center"
+                        Click="connbtn_Click" Margin="28,0,0,0" MinWidth="70" />
+                <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0"
+                        VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" x:Name="OPMPannel">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap"
+                           Text="主播身份碼(在開播頁面獲取)"
+                           VerticalAlignment="Center" Margin="4" />
+                <PasswordBox x:Name="OPCode" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666"
+                         MinWidth="120" MaxWidth="120"  />
+                <Button x:Name="OPMConnBtn" Content="{x:Static properties:Resources.ConnBtn_Content}"
+                        VerticalAlignment="Center"
+                        Click="OPMConnBtn_OnClick" Margin="28,0,0,0" MinWidth="70" />
+                <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0"
+                        VerticalAlignment="Center" x:Name="OPMDisconnBtn" Click="OPMDisconnBtn_OnClickDisconnbtn_OnClick" MinWidth="70" />
+            </StackPanel>
 
-            <Button Content="{x:Static properties:Resources.DisconnBtn_Content}" Margin="28,0,0,0"
-                    VerticalAlignment="Center" x:Name="DisconnBtn" Click="Disconnbtn_OnClick" MinWidth="70" />
+           
             <Button x:Name="Test" Content="{x:Static properties:Resources.Test_Content}" VerticalAlignment="Center"
                     Click="Test_OnClick" Margin="28,0,0,0" MinWidth="70" />
 
@@ -194,6 +209,18 @@
                             <TextBox HorizontalAlignment="Left" x:Name="Regex" Height="55" Margin="5"
                                      TextWrapping="Wrap" Text="(哔哩哔哩)|(干杯)" VerticalAlignment="Top" Width="395"
                                      Panel.ZIndex="1" TextChanged="Regex_OnTextChanged" />
+                            <CheckBox Content="停用開放平台(使用野生接口)"
+                                      x:Name="DisableOPM" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                      Panel.ZIndex="1" Checked="DisableOPM_OnChecked"
+                                      Unchecked="DisableOPM_OnUnchecked" />
+                            <!-- <StackPanel Orientation="Horizontal"> -->
+                            <!--     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" -->
+                            <!--                Text="野生餅乾 SESSDATA 的值" -->
+                            <!--                VerticalAlignment="Center" Margin="4" /> -->
+                            <!--     <TextBox x:Name="SESSDATA" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="14.666" -->
+                            <!--              MinWidth="80" /> -->
+                            <!-- </StackPanel> -->
+
                             <!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
                         </StackPanel>
                     </Canvas>
