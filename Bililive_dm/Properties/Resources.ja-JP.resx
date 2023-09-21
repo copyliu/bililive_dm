@@ -533,6 +533,6 @@
     <value>{0} さんは「いいね」とクリックした。</value>
   </data>
   <data name="LiveRoomCode" xml:space="preserve">
-    <value>主播身份碼(在開播頁面獲取)</value>
+    <value>チャンネルコード（ビリビリライブセンターで取得）</value>
   </data>
 </root>
