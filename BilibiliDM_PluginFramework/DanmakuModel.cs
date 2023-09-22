@@ -509,7 +509,7 @@ namespace BilibiliDM_PluginFramework
                             }
 
                             // Giftrcost = obj["data"]["rcost"].ToString();
-                            GiftCount = obj["data"]["num"].ToObject<int>();
+                            GiftCount = obj["data"]["gift_num"].ToObject<int>();
                             break;
                         case "LIVE_OPEN_PLATFORM_SUPER_CHAT":
                             MsgType = MsgTypeEnum.SuperChat;
