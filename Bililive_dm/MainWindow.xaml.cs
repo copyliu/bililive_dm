@@ -1678,6 +1678,7 @@ namespace Bililive_dm
             catch (Exception exception)
             {
                this.logging(exception.Message);
+               this.logging(exception+"");
                MessageBox.Show(exception.Message);
                OPMConnBtn.IsEnabled = true;
                OPMDisconnBtn.IsEnabled = true;
