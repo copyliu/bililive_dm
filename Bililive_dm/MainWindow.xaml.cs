@@ -1716,6 +1716,7 @@ namespace Bililive_dm
                 if (connectresult)
                 {
                     Errorlogging(Properties.Resources.MainWindow_connbtn_Click_連接成功);
+                    Errorlogging(string.Format(Properties.Resources.MainWindow_connbtn_Click_,info.Item3) );
                     AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身,
                         Properties.Resources.MainWindow_connbtn_Click_連接成功, true);
                     SendSSP(Properties.Resources.MainWindow_connbtn_Click_連接成功);
