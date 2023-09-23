@@ -97,7 +97,7 @@ namespace Bililive_dm
                 }
                 else
                 {
-                    throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_B站直播中心返回錯誤);
+                    throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_B站直播中心返回錯誤+":"+jo.message);
                 }
 
             }

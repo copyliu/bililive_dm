@@ -282,15 +282,15 @@ namespace Bililive_dm
         {
             try
             {
-                var isoStore = IsolatedStorageFile.GetStore(IsolatedStorageScope.User |
-                                                            IsolatedStorageScope.Domain |
-                                                            IsolatedStorageScope.Assembly, null, null);
-                var settingsreader =
-                    new XmlSerializer(typeof(StoreModel));
-                var reader =
-                    new StreamWriter(new IsolatedStorageFileStream("settings.xml", FileMode.Create, isoStore));
-                settingsreader.Serialize(reader, this);
-                reader.Close();
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                path = Path.Combine(path, "弹幕姬");
+                Directory.CreateDirectory(path);
+                var settingsreader = new XmlSerializer(typeof(StoreModel));
+                using (var wri = new StreamWriter(Path.Combine(path, "settings.xml"), false))
+                {
+                    settingsreader.Serialize(wri, this);
+                    wri.Close();
+                }
             }
             catch (Exception)
             {
