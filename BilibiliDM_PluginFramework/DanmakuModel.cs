@@ -566,8 +566,8 @@ namespace BilibiliDM_PluginFramework
                             GiftName = UserGuardLevel == 3 ? "舰长" :
                                 UserGuardLevel == 2 ? "提督" :
                                 UserGuardLevel == 1 ? "总督" : "";
-                            GiftCount = obj["data"]["num"].ToObject<int>();
-                            break;
+                            GiftCount = obj["data"]["guard_num"].ToObject<int>();
+                            break; 
                         case "LIVE_OPEN_PLATFORM_LIKE":
                             MsgType = MsgTypeEnum.Interact;
                             UserName = obj["data"]["uname"].ToString();
