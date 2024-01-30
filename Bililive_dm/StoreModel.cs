@@ -250,6 +250,9 @@ namespace Bililive_dm
                     _mainFontFamilyName = "Global User Interface";
                 else
                     _mainFontFamilyName = value;
+                OnPropertyChanged(nameof(MainFontFamilyName));
+                OnPropertyChanged(nameof(MainFontFamily));
+                DanmakuTextControl.TextFontFamily = MainFontFamily;
             }
         }
 
