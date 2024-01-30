@@ -237,7 +237,7 @@ namespace BiliDMLib
 
         private async Task SendHeartbeatAsync(CancellationToken ct)
         {
-            await SendSocketDataAsync(2, "[object Object]", ct);
+            await SendSocketDataAsync(2, _auth, ct);
             Debug.WriteLine("Message Sent: Heartbeat");
         }
 

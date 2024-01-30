@@ -803,6 +803,36 @@ namespace Bililive_dm
                             AddDMText(string.Format(Properties.Resources.MainWindow_ProcDanmaku_上船__0__购买了__1__x__2_,
                                 danmakuModel.UserName, danmakuModel.GiftName, danmakuModel.GiftCount), null, true);
                     }));
+                    if (_isOpm)
+                    {
+                        lock (_sessionItems)
+                        {
+                            var query =
+                                _sessionItems.Where(
+                                    p => p.UserName == danmakuModel.UserName && p.Item == danmakuModel.GiftName).ToArray();
+                            if (query.Any())
+                                Dispatcher.BeginInvoke(
+                                    new Action(() => query.First().num += Convert.ToDecimal(danmakuModel.GiftCount)));
+                            else
+                                Dispatcher.BeginInvoke(new Action(() =>
+                                {
+                                    lock (_sessionItems)
+                                    {
+                                        _sessionItems.Add(
+                                            new SessionItem
+                                            {
+                                                Item = danmakuModel.GiftName,
+                                                UserName = danmakuModel.UserName,
+                                                num = Convert.ToDecimal(danmakuModel.GiftCount)
+                                            }
+                                        );
+                                    }
+                                }));
+                            break;
+                        }
+                    }
+                    
+                    
                     break;
                 }
                 case MsgTypeEnum.Welcome:
@@ -915,14 +945,31 @@ namespace Bililive_dm
         [PublicAPI]
         public void SendSSP(string msg)
         {
-            if (SSTP.Dispatcher.CheckAccess())
+            SSTP.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() =>
             {
-                if (SSTP.IsChecked == true) SSTPProtocol.SendSSPMsg(msg);
-            }
-            else
+                try
+                {
+                    SSTPProtocol.SendSSPMsg(msg);
+                }
+                catch (Exception e)
+                {
+                   
+                }
+            }));
+            Task.Run(() =>
             {
-                SSTP.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => SendSSP(msg)));
-            }
+                try
+                {
+                    Live2DViewerExProtocol.SendMsg(msg);
+                }
+                catch (Exception e)
+                {
+
+                }
+            });
+          
+
+            
         }
 
         private async void b_Disconnected(object sender, DisconnectEvtArgs args)

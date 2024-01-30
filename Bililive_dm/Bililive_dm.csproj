@@ -162,6 +162,7 @@
     <Compile Include="LanguageSelector.xaml.cs">
       <DependentUpon>LanguageSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Live2DViewerExProtocol.cs" />
     <Compile Include="ObjectForScriptingHelper.cs" />
     <Compile Include="OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
