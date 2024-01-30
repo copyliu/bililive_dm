@@ -7,7 +7,7 @@ using System.Net.Http.Json;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks.Dataflow;
-using Microsoft.Toolkit.HighPerformance;
+using CommunityToolkit.HighPerformance;
 using Newtonsoft.Json;
 
 namespace BiliDMLibCore;
