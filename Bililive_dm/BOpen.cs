@@ -30,25 +30,37 @@ namespace Bililive_dm
         public string game_id { get; set; }
     }
 
-    public class BOpenRoomInfo
+    public class BOpenRoomInfo: BOpenApiResponse
+    {
+        public Data data { get; set; }
+    }
+
+    public class BOpenApiResponse
     {
         public int code { get; set; }
         public string message { get; set; }
         public string request_id { get; set; }
-        public Data data { get; set; }
     }
-
     public class WebsocketInfo
     {
         public string auth_body { get; set; }
-        public List<string> wss_link { get; set; }
+        public string[] wss_link { get; set; }
+    }
+
+    public struct RoomInfoData
+    {
+        public string auth;
+        public string[] server;
+        public int roomid;
+        public string game_id;
+
     }
 
     public static class BOpen
     {
         private static HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromSeconds(5) };
 
-        public static async Task<Tuple<string,List<string>, int>> GetRoomInfoByCode(string code)
+        public static async Task<RoomInfoData> GetRoomInfoByCode(string code)
         {
 
 
@@ -89,8 +101,13 @@ namespace Bililive_dm
                     var roomid = jo.data?.anchor_info?.room_id;
                     if (roomid > 0 && !string.IsNullOrEmpty(jo?.data?.websocket_info?.auth_body))
                     {
-                        return new Tuple<string, List<string>,int>(jo?.data.websocket_info.auth_body,
-                            jo.data.websocket_info.wss_link,roomid.Value);
+                        return new RoomInfoData()
+                        {
+                            auth = jo?.data.websocket_info.auth_body,
+                            server = jo.data.websocket_info.wss_link,
+                            roomid = roomid.Value,
+                            game_id = jo.data.game_info.game_id
+                        };
                     }
                     throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_B站直播中心返回了無效的房間號);
 
@@ -110,5 +127,61 @@ namespace Bililive_dm
                 throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_獲取身份碼信息出錯, e);
             }
         }
+
+        public static async Task<bool> HeartBeat(string gameid)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(gameid))
+                {
+                    return false;
+                }
+
+                var param = JsonConvert.SerializeObject(new { game_id = gameid }, Formatting.None);
+                var req = await httpClient.PostAsync("https://bopen.ceve-market.org/sign", new StringContent(param));
+                if (!req.IsSuccessStatusCode)
+                {
+                    throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_簽名伺服器離線);
+                }
+
+                var sign = JObject.Parse(await req.Content.ReadAsStringAsync());
+
+                var req2 = new HttpRequestMessage(HttpMethod.Post, "https://live-open.biliapi.com/v2/app/heartbeat");
+                req2.Content = new StringContent(param, Encoding.UTF8, "application/json");
+                req2.Content.Headers.Remove("Content-Type"); // "{application/json; charset=utf-8}"
+                req2.Content.Headers.Add("Content-Type", "application/json");
+                foreach (var kv in sign)
+                {
+                    req2.Headers.Add(kv.Key, kv.Value + "");
+                }
+                req2.Headers.Add("Accept", "application/json");
+                var resp = await httpClient.SendAsync(req2);
+                if (!resp.IsSuccessStatusCode)
+                {
+                    throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_B站直播中心離線);
+                }
+                var jo = JsonConvert.DeserializeObject<BOpenApiResponse>(await resp.Content.ReadAsStringAsync());
+
+                if (jo.code == 0)
+                {
+                    return true;
+
+                }
+                else
+                {
+                    throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_B站直播中心返回錯誤 + ":" + jo.message);
+                }
+
+            }
+            catch (NotSupportedException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_獲取身份碼信息出錯, e);
+            }
+        }
+
     }
 }

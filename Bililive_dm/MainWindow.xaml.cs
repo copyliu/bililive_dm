@@ -74,6 +74,7 @@ namespace Bililive_dm
         private bool _net461;
         public MainOverlay Overlay;
         private bool _isOpm = true;
+        private Task _bopenHeartBeatTask = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -308,8 +309,46 @@ namespace Bililive_dm
                 var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
                 sc?.ScrollToEnd();
             };
-
+            _bopenHeartBeatTask = BOpenHeartBeatTask();
         }
+
+       async Task BOpenHeartBeatTask()
+        {
+           
+            while (true)
+            {
+                Task delay=Task.Delay(TimeSpan.FromSeconds(20));
+
+                try
+                {
+                    if (!string.IsNullOrEmpty(_bopm?.GameId))
+                    {
+                        if (await BOpen.HeartBeat(_bopm?.GameId))
+                        {
+                            _bopm?.PlatformHeartBeatOk();
+                        }
+                    }
+
+
+                  
+                }
+                catch (Exception e)
+                {
+                    delay = Task.Delay(TimeSpan.FromSeconds(10));
+                }
+
+                // timer.IsEnabled
+                try
+                {
+                    await delay;
+                }
+                catch (Exception e)
+                {
+                    
+                }
+            }
+        }
+
 
         private Collection<ResourceDictionary> Merged { get; }
 
@@ -1718,7 +1757,7 @@ namespace Bililive_dm
             DisableOPM.IsEnabled = false;
            
             var roomcode = this.OPCode.Password?.Trim();
-            Tuple<string, List<string>,int> info;
+            RoomInfoData info;
             try
             {
                 info = await BOpen.GetRoomInfoByCode(roomcode + "");
@@ -1738,7 +1777,7 @@ namespace Bililive_dm
             {
              
                 var connectresult = false;
-                this._bopm = new OpenDanmakuLoader(info.Item1, info.Item2);
+                this._bopm = new OpenDanmakuLoader(info.auth, info.server, info.game_id);
                 _bopm.Disconnected += b_Disconnected;
                 _bopm.ReceivedDanmaku += b_ReceivedDanmaku;
                 _bopm.ReceivedRoomCount += b_ReceivedRoomCount;
@@ -1746,7 +1785,7 @@ namespace Bililive_dm
                 var trytime = 0;
                 Logging(Properties.Resources.MainWindow_connbtn_Click_正在连接);
 
-                if (DebugMode) Logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_, info.Item3));
+                if (DebugMode) Logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_, info.roomid));
                 connectresult = await _bopm.ConnectAsync();
                 if (!connectresult && _b.Error != null) // 如果连接不成功并且出错了
                     Logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_出錯, _b.Error));
@@ -1763,7 +1802,7 @@ namespace Bililive_dm
                 if (connectresult)
                 {
                     Errorlogging(Properties.Resources.MainWindow_connbtn_Click_連接成功);
-                    Errorlogging(string.Format(Properties.Resources.MainWindow_connbtn_Click_,info.Item3) );
+                    Errorlogging(string.Format(Properties.Resources.MainWindow_connbtn_Click_,info.roomid) );
                     AddDMText(Properties.Resources.MainWindow_connbtn_Click_彈幕姬本身,
                         Properties.Resources.MainWindow_connbtn_Click_連接成功, true);
                     SendSSP(Properties.Resources.MainWindow_connbtn_Click_連接成功);
@@ -1775,7 +1814,7 @@ namespace Bililive_dm
                         {
                             try
                             {
-                                dmPlugin.MainConnected(info.Item3);
+                                dmPlugin.MainConnected(info.roomid);
                             }
                             catch (Exception ex)
                             {

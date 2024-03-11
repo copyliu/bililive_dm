@@ -18,7 +18,7 @@ namespace BiliDMLib
     public class OpenDanmakuLoader:IDisposable
     {
         private readonly string _auth;
-        private readonly List<string> _server;
+        private readonly string[] _server;
         private TcpClient _client;
         private Stream NetStream;
         private readonly int defaultport = 2243;
@@ -29,10 +29,16 @@ namespace BiliDMLib
         public event LogMessageEvt LogMessage;
         private readonly bool debuglog = true;
         public bool Connected { get; private set; }
+        public string GameId { get; set; }
         
         private CancellationTokenSource cancellationTokenSource;
+        private Timer PlatformHeartBeatTimer;
 
-        
+        public void PlatformHeartBeatOk()
+        {
+            PlatformHeartBeatTimer?.Change(TimeSpan.FromMinutes(1), Timeout.InfiniteTimeSpan);
+        }
+
         public void Disconnect()
         {
             Connected = false;
@@ -47,7 +53,8 @@ namespace BiliDMLib
 
             NetStream = null;
         }
-                public async Task<bool> ConnectAsync()
+
+        public async Task<bool> ConnectAsync()
         {
             try
             {
@@ -62,13 +69,13 @@ namespace BiliDMLib
                         server.Add(uri);
                     }
                 }
-              
-                
+
+
 
                 _client = new TcpClient();
                 var random = new Random();
                 var idx = random.Next(server.Count);
-                await _client.ConnectAsync(server[idx].Host, defaultport);  
+                await _client.ConnectAsync(server[idx].Host, defaultport);
 
                 NetStream = Stream.Synchronized(_client.GetStream());
                 cancellationTokenSource = new CancellationTokenSource();
@@ -77,7 +84,8 @@ namespace BiliDMLib
                 {
                     Connected = true;
                     _ = ReceiveMessageLoop(cancellationTokenSource.Token);
-                
+                     PlatformHeartBeatTimer = new Timer(state => cancellationTokenSource.Cancel(),null,TimeSpan.FromMinutes(1), System.Threading.Timeout.InfiniteTimeSpan);
+                     
                     return true;
                 }
 
@@ -89,6 +97,7 @@ namespace BiliDMLib
                 throw;
             }
         }
+
         private void _disconnect(Exception ex)
         {
             if (Connected)
@@ -107,9 +116,9 @@ namespace BiliDMLib
         
         private async Task ReceiveMessageLoop(CancellationToken ct)
         {
-            Task heartbeatLoop = null;
             try
             {
+                _ = HeartbeatLoop(cancellationTokenSource.Token);
                 var stableBuffer = new byte[16];
                 var buffer = new byte[4096];
                 while (Connected)
@@ -124,7 +133,7 @@ namespace BiliDMLib
                     buffer = new byte[payloadlength];
 
                     await NetStream.ReadBAsync(buffer, 0, payloadlength, ct);
-                    if (heartbeatLoop == null) heartbeatLoop = HeartbeatLoop(cancellationTokenSource.Token);
+                    
                     if (protocol.Version == 2 && protocol.Action == 5) // 处理deflate消息
                         using (var ms = new MemoryStream(buffer, 2, payloadlength - 2)) // Skip 0x78 0xDA
                         using (var deflate = new DeflateStream(ms, CompressionMode.Decompress))
@@ -277,11 +286,13 @@ namespace BiliDMLib
             return true;
         }
         
-        public OpenDanmakuLoader(string auth, List<string> server)
+        public OpenDanmakuLoader(string auth, string[] server,string gameId)
         {
             _auth = auth;
             _server = server;
+            GameId=gameId;
             
+
         }
 
 
