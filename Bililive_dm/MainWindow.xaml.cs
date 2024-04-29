@@ -327,6 +327,10 @@ namespace Bililive_dm
                         {
                             _bopm?.PlatformHeartBeatOk();
                         }
+                        else
+                        {
+                            _bopm?.ForceDisconnect();
+                        }
                     }
 
 

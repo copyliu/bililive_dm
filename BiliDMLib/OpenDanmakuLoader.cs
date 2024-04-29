@@ -50,7 +50,7 @@ namespace BiliDMLib
             {
             }
 
-
+            GameId = null;
             NetStream = null;
         }
 
@@ -110,6 +110,7 @@ namespace BiliDMLib
                 _client.Close();
 
                 NetStream = null;
+                GameId = null;
                 Disconnected?.Invoke(this, new DisconnectEvtArgs { Error = ex });
             }
         }
@@ -305,6 +306,11 @@ namespace BiliDMLib
         {
             _client?.Dispose();
             NetStream?.Dispose();
+        }
+
+        public void ForceDisconnect()
+        {
+            this.cancellationTokenSource.Cancel();
         }
     }
 }

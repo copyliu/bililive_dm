@@ -72,7 +72,7 @@ namespace Bililive_dm
                 }
 
                 var param = JsonConvert.SerializeObject(new { code = code, app_id = 1651388990835 }, Formatting.None);
-                var req = await httpClient.PostAsync("https://bopen.ceve-market.org/sign", new StringContent(param));
+                var req = await httpClient.PostAsync("https://bopen.ceve-market.org/sign", new StringContent(param, Encoding.UTF8, "application/json"));
                 if (!req.IsSuccessStatusCode)
                 {
                     throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_簽名伺服器離線);
@@ -169,7 +169,8 @@ namespace Bililive_dm
                 }
                 else
                 {
-                    throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_B站直播中心返回錯誤 + ":" + jo.message);
+                    return false;
+                    // throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_B站直播中心返回錯誤 + ":" + jo.message);
                 }
 
             }
@@ -183,5 +184,33 @@ namespace Bililive_dm
             }
         }
 
+
+        public static async Task<bool> HeartBeat_Server(string gameid)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(gameid))
+                {
+                    return false;
+                }
+
+                var param = JsonConvert.SerializeObject(new { gameId = gameid }, Formatting.None);
+                var req = await httpClient.PostAsync("http://localhost.ceve-market.org:5218/heartbeat", new StringContent(param,Encoding.UTF8,"application/json"));
+                if (!req.IsSuccessStatusCode)
+                {
+                    throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_簽名伺服器離線);
+                }
+
+                return true;
+            }
+            catch (NotSupportedException)
+            {
+                throw;
+            }
+            catch (Exception e)
+            {
+                throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_簽名伺服器離線, e);
+            }
+        }
     }
 }
