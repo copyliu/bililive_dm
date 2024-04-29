@@ -4,13 +4,14 @@
         xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
         xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+        xmlns:uap4="http://schemas.microsoft.com/appx/manifest/uap/windows10/4"
         xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
         IgnorableNamespaces="uap uap3 mp uap4">
 
     <Identity
             Name="38862CopyLiu.B"
             Publisher="CN=B2B24A43-5C35-415F-9661-54323D87303A"
-            Version="1.0.32.0"/>
+            Version="1.0.34.0"/>
 
     <mp:PhoneIdentity PhoneProductId="f57dcf91-5309-49bf-8c99-64c775582b55"
                       PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
@@ -37,7 +38,7 @@
                     DisplayName="B站弹幕姬提词板"
                     Square150x150Logo="Assets\Square150x150Logo.png"
                     Square44x44Logo="Assets\Square44x44Logo.png"
-                    Description="B站弹幕姬提词板, 需要配合B站弹幕姬本体使用"
+                    Description="B站弹幕姬提词板, 需要配合B站弹幕姬本体使用."
                     BackgroundColor="transparent">
                 <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png"
                                  Square310x310Logo="Assets\LargeTile.png"/>
