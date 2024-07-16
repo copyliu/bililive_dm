@@ -213,6 +213,10 @@ namespace BiliDMLib
                         var dama = new DanmakuModel(json, 2);
                         ReceivedDanmaku?.Invoke(this, new ReceivedDanmakuArgs { Danmaku = dama });
                     }
+                    catch (NotSupportedException e)
+                    {
+                        
+                    }
                     catch (Exception)
                     {
                         // ignored

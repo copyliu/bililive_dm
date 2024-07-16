@@ -74,7 +74,13 @@ namespace BilibiliDM_PluginFramework
         /// <summary>
         ///     观看人数, 可能是人次?
         /// </summary>
-        WatchedChange
+        WatchedChange,
+        /// <summary>
+        /// 开放平台关闭通知 
+        /// </summary>
+        OPConnectionEnd
+        
+        
     }
 
     /// <summary>
@@ -592,9 +598,13 @@ namespace BilibiliDM_PluginFramework
 
                             InteractType = InteractTypeEnum.Like;
                             break;
+
+                        case "LIVE_OPEN_PLATFORM_INTERACTION_END":
+                            this.MsgType=MsgTypeEnum.OPConnectionEnd;
+                            break;
                         #endregion
-                        
-                        
+
+
                         default:
                         {
                             if (cmd.StartsWith("DANMU_MSG")) // "高考"fix
