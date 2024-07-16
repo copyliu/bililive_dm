@@ -535,4 +535,7 @@ Information:</value>
   <data name="LiveRoomCode" xml:space="preserve">
     <value>Room Code (available on Bilibili Live Center)</value>
   </data>
+  <data name="MainWindow_MainWindow_B站開放平台通知__本次使用已結束__請重新連線_" xml:space="preserve">
+    <value>B站開放平台通知: 本次使用已結束, 請重新連線.</value>
+  </data>
 </root>
