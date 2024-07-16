@@ -34,6 +34,7 @@ namespace Bililive_dm
         private double _mainOverlayYoffset;
         private bool _wtfEngineEnabled;
         private string _sessdataValue;
+        private double _mainOverlayHeight;
 
         public StoreModel()
         {
@@ -45,6 +46,7 @@ namespace Bililive_dm
             _mainOverlayEffect2 = Store.MainOverlayEffect2;
             _mainOverlayEffect1 = Store.MainOverlayEffect1;
             _mainOverlayWidth = Store.MainOverlayWidth;
+            _mainOverlayHeight = Store.MainOverlayHeight;
             _mainOverlayXoffset = Store.MainOverlayXoffset;
             _mainOverlayYoffset = Store.MainOverlayYoffset;
             _wtfEngineEnabled = Store.WtfEngineEnabled;
@@ -88,6 +90,24 @@ namespace Bililive_dm
 
 
                 OnPropertyChanged();
+            }
+        }
+
+        public double MainOverlayHeight
+        {
+            get => _mainOverlayHeight;
+            set
+            {
+                if (value.Equals(_mainOverlayHeight)) return;
+                _mainOverlayHeight = value;
+                var mainOverlay = ((MainWindow)Application.Current.MainWindow)?.Overlay;
+                if (mainOverlay != null)
+                {
+                    mainOverlay.Height = value > 0 ? value:SystemParameters.WorkArea.Height;
+                }
+
+                OnPropertyChanged();
+                
             }
         }
 
@@ -310,6 +330,7 @@ namespace Bililive_dm
             Store.MainOverlayEffect2 = MainOverlayEffect2;
             Store.MainOverlayEffect1 = MainOverlayEffect1;
             Store.MainOverlayWidth = MainOverlayWidth;
+            Store.MainOverlayHeight = MainOverlayHeight;
             Store.MainOverlayXoffset = MainOverlayXoffset;
             Store.MainOverlayYoffset = MainOverlayYoffset;
             Store.WtfEngineEnabled = WtfEngineEnabled;

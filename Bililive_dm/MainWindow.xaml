@@ -8,7 +8,7 @@
                     xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
                     xmlns:properties="clr-namespace:Bililive_dm.Properties"
                     mc:Ignorable="d"
-                    Title="B站彈幕姬" Height="518" Width="900" FontSize="14.666">
+                    Title="B站彈幕姬" Height="545" Width="900" FontSize="14.666">
     <Window.Resources>
         <ResourceDictionary>
             <bililiveDm:PluginStatusConverter x:Key="Converter" />
@@ -100,7 +100,7 @@
             <TextBlock Text="{x:Static properties:Resources.ABout_Text}" VerticalAlignment="Center" />
 
         </DockPanel>
-        <TabControl x:Name="TabControl">
+        <TabControl x:Name="TabControl" SelectionChanged="TabControl_OnSelectionChanged">
             <TabItem Header="{x:Static properties:Resources.TabItem_Header}">
                 <!--<TextBox x:Name="log" TextWrapping="Wrap" DockPanel.Dock="Top" IsReadOnly="True" 
                  VerticalScrollBarVisibility="Auto"  />-->
@@ -179,7 +179,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <TabItem Header="{x:Static properties:Resources.TabItem_Header_Setting}">
+            <TabItem Header="{x:Static properties:Resources.TabItem_Header_Setting}" x:Name="SettingsPage">
                 <Grid VerticalAlignment="Top">
                     <bililiveDm:OptionDialog x:Name="OptionDialog" />
                     <Canvas Width="0" Height="0" HorizontalAlignment="Left" VerticalAlignment="Bottom">

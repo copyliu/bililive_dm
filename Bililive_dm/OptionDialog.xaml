@@ -37,6 +37,15 @@
                     Value="{Binding MainOverlayWidth,Mode=TwoWay}" />
         </DockPanel>
         <DockPanel>
+            <TextBlock TextWrapping="Wrap" Text="{x:Static properties:Resources.TextBlock_Text_SHeight}"
+                       VerticalAlignment="Center" Width="159" TextAlignment="Right"
+                       Margin="0,0,20,0" />
+            <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"
+                     Text="{Binding MainOverlayHeight,Mode=TwoWay,StringFormat=N2,UpdateSourceTrigger=PropertyChanged}" />
+            <Slider VerticalAlignment="Center" Maximum="2000"
+                    Value="{Binding MainOverlayHeight,Mode=TwoWay}" />
+        </DockPanel>
+        <DockPanel>
             <TextBlock TextWrapping="Wrap" VerticalAlignment="Center" Width="159" TextAlignment="Right"
                        Margin="0,0,20,0" Text="{x:Static properties:Resources.TextBlock_Text_SEffTime}" />
             <TextBox TextWrapping="Wrap" DockPanel.Dock="Right" VerticalAlignment="Center" Width="70" Margin="38,0,0,0"

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     x:Class="Bililive_dm.MainOverlay"
     x:Name="Window" ShowInTaskbar="False" Loaded="Window_Loaded"
-    Title="MainOverlay" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
+    Title="MainOverlay" WindowStyle="None" AllowsTransparency="True"  BorderBrush="Red" >
 
     <StackPanel x:Name="LayoutRoot" VerticalAlignment="Bottom" SnapsToDevicePixels="True" />
 </Window>

@@ -1240,6 +1240,15 @@ namespace Bililive_dm.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 側窗口高度.
+        /// </summary>
+        public static string TextBlock_Text_SHeight {
+            get {
+                return ResourceManager.GetString("TextBlock_Text_SHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 側提示文字停留時長.
         /// </summary>
         public static string TextBlock_Text_SKeepTime {

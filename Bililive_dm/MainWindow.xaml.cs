@@ -585,7 +585,7 @@ namespace Bililive_dm
             Overlay.Topmost = true;
             Overlay.Top = SystemParameters.WorkArea.Top + Store.MainOverlayXoffset;
             Overlay.Left = SystemParameters.WorkArea.Right - Store.MainOverlayWidth + Store.MainOverlayYoffset;
-            Overlay.Height = SystemParameters.WorkArea.Height;
+            Overlay.Height = Store.MainOverlayHeight > 0 ? Store.MainOverlayHeight:SystemParameters.WorkArea.Height ;
             Overlay.Width = Store.MainOverlayWidth;
             _settings.PropertyChanged += Overlay.OnPropertyChanged;
         }
@@ -1915,6 +1915,26 @@ namespace Bililive_dm
                        Utils.PluginExceptionHandler(ex, dmPlugin);
                    }
                }).Start();
+        }
+
+        private void TabControl_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Contains(this.SettingsPage))
+            {
+                if (Overlay != null)
+                {
+                    Overlay.BorderThickness = new Thickness(1);
+                }
+               
+                
+            }
+            else
+            {
+                if (Overlay != null)
+                {
+                    Overlay.BorderThickness = new Thickness(0);
+                }
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ namespace Bililive_dm
         public static double MainOverlayXoffset = 0;
         public static double MainOverlayYoffset = 0;
         public static double MainOverlayWidth = 250;
+        public static double MainOverlayHeight = 0;
         public static double MainOverlayEffect1 = 0.8; //拉伸
         public static double MainOverlayEffect2 = 1.4 - 0.8; //文字出現
         public static double MainOverlayEffect3 = 6 - 1.4; //文字停留
@@ -33,6 +34,7 @@ namespace Bililive_dm
         public static double MainOverlayXoffset = 0;
         public static double MainOverlayYoffset = 0;
         public static double MainOverlayWidth = 250;
+        public static double MainOverlayHeight = 0;
         public static double MainOverlayEffect1 = 0.8; //拉伸
         public static double MainOverlayEffect2 = 1.4 - 0.8; //文字出現
         public static double MainOverlayEffect3 = 6 - 1.4; //文字停留

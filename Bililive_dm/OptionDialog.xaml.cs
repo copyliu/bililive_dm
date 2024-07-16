@@ -53,6 +53,7 @@ namespace Bililive_dm
             a.MainOverlayEffect4 = DefaultStore.MainOverlayEffect4;
             a.MainOverlayFontsize = DefaultStore.MainOverlayFontsize;
             a.MainOverlayWidth = DefaultStore.MainOverlayWidth;
+            a.MainOverlayHeight = DefaultStore.MainOverlayHeight;
             a.MainOverlayXoffset = DefaultStore.MainOverlayXoffset;
             a.MainOverlayYoffset = DefaultStore.MainOverlayYoffset;
             a.WtfEngineEnabled = DefaultStore.WtfEngineEnabled;
