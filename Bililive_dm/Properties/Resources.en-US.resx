@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>非B站出品 ©2014-2024 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com</value>
+    <value>©2014-2024 CopyLiu, all rights Not reserved. Report issues: copyliu@gmail.com. En translation by @TigerSHe 大場加奈子(@komoechan)</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>Auto reconnect</value>
@@ -536,9 +536,9 @@ Information:</value>
     <value>Room Code (available on Bilibili Live Center)</value>
   </data>
   <data name="MainWindow_MainWindow_B站開放平台通知__本次使用已結束__請重新連線_" xml:space="preserve">
-    <value>B站開放平台通知: 本次使用已結束, 請重新連線.</value>
+    <value>Bilibili Open Platform notification: Connection must close now, please connect again.</value>
   </data>
   <data name="TextBlock_Text_SHeight" xml:space="preserve">
-    <value>側窗口高度</value>
+    <value>Sidebar height</value>
   </data>
 </root>
