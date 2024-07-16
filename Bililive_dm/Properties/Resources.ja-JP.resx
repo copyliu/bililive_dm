@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ABout.Text" xml:space="preserve">
-    <value>非B站出品 ©2014-2024 CopyLiu 放棄所有權利 房間編號5051 問題反饋 copyliu@gmail.com</value>
+    <value>©2014-2024 CopyLiu All Rights Not Reserved, フィードバック: copyliu@gmail.com 日本語翻訳: @komoechan</value>
   </data>
   <data name="AutoReconnect.Content" xml:space="preserve">
     <value>自動再接続</value>
@@ -536,9 +536,9 @@
     <value>チャンネルコード（ビリビリライブセンターで取得）</value>
   </data>
   <data name="MainWindow_MainWindow_B站開放平台通知__本次使用已結束__請重新連線_" xml:space="preserve">
-    <value>B站開放平台通知: 本次使用已結束, 請重新連線.</value>
+    <value>ビリビリからの注意：ご利用は終了しました。再接続してください。</value>
   </data>
   <data name="TextBlock_Text_SHeight" xml:space="preserve">
-    <value>側窗口高度</value>
+    <value>ｻｲﾄﾞﾊﾞｰの高</value>
   </data>
 </root>
