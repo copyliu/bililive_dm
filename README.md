@@ -7,6 +7,10 @@ bililive_dm
 
 根據B站官方統計, 本工具30天使用主播超過25萬. 是B站直播間彈幕工具中最老牌的.
 
+
+[![Star History Chart](https://api.star-history.com/svg?repos=copyliu/bililive_dm&type=Date)](https://star-history.com/#copyliu/bililive_dm&Date)
+
+
 安裝
 =======
 
