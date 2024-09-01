@@ -1,35 +1,35 @@
-bililive_dm
+b站弹幕姬(旬
 =======
 
-[![Build status](https://ci.appveyor.com/api/projects/status/4ung75nx9remwc7j?svg=true&passingText=%E7%BC%96%E8%AF%91%20-%20%E7%A8%B3%20&pendingText=%E5%B0%8F%E5%9C%9F%E8%B1%86%E7%82%B8%E4%BA%86%20&failingText=%E6%88%91%E6%84%9F%E8%A7%89%E5%8D%9C%E8%A1%8C%20)](https://ci.appveyor.com/project/copyliu/bililive-dm) [![Crowdin](https://badges.crowdin.net/bililivedm/localized.svg)](https://crowdin.com/project/bililivedm)
+哔哩哔哩非官方弹幕姬软件十周年特别版。
 
-这是一个奇妙B站直播間彈幕工具. WTFPL授權.
+## Q&A
 
-根據B站官方統計, 本工具30天使用主播超過25萬. 是B站直播間彈幕工具中最老牌的.
+### “旬”是什么意思？
 
+就是十（decade）的意思，表示这是十周年特别版(ry
 
-[![Star History Chart](https://api.star-history.com/svg?repos=copyliu/bililive_dm&type=Date)](https://star-history.com/#copyliu/bililive_dm&Date)
+### 开发十周年特别版的动机是什么？有什么特殊的地方吗？
 
+十年前，也就是 2014 年的 8 月 31 日，copyliu 发布了弹幕姬的第一个公开版本，自那之后的十年间发生了很多事情，但弹幕姬本身的技术架构却基本没什么大改动……这十年间偶尔也会有一些好心人贡献一些新特性新功能，但总体来说它确实欠缺了很多当今的软件普遍该有的特点，无论是功能、健壮性还是易用性和可扩展性（以及卖相）；之前我们也试图对其进行一些较大的改动，但因为时间仓促缺少 QA 导致当时未能及时发现一些影响既有用户使用的潜在问题，于是不得不退回修改前的版本。
 
-安裝
-=======
+本次十周年特别版将作为一个独立分支进行开发，以便进行功能特性方面的快速迭代；当合适的时机来临时再研究怎么合并回主干。
 
-[请点击此链接安装](https://soft.ceve-market.org/bilibili_dm/Bililive_dm.application) 
+### 十周年特别版都会有什么样的功能特性？
 
-翻譯
-=======
-日本語: 大場加奈子 [@komoechan](https://twitter.com/komoechan)
+目前已经计划开发如下功能/特性：
+* 一个正常能用的皮肤管理器
+* 一个正经的可扩展架构
+* 脚本编程支持
+* 一个支持多个分发源的插件下载和管理模块
+* 网页互操作功能
 
-English: [TigerSHe1998](https://github.com/TigerSHe1998) 大場加奈子([@komoechan](https://twitter.com/komoechan))
+其中，第一期会先实现 VBScript 和 JScript(ECMAScript 3)、Chakra(ECMAScript 5) 支持，其它语言、版本的支持将作为未来的长期研究目标。
 
-插件開發
-=======
-請見 [弹幕姬插件开发](https://github.com/copyliu/bililive_dm/wiki/%E5%BC%B9%E5%B9%95%E5%A7%AC%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
+### 有可能支持 macOS 吗？
 
-感謝
-======
-<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="Jetbrains_logo" height="150">
+当前弹幕姬的技术架构是以 .NET Framework 为基础的，并且强依赖若干 Windows 特性；向其它平台移植需要投入调研成本，目前已经有了大致方向，但仍需要一定的时间和精力进行研究试错。
 
-感謝由 [JetBrains](https://www.jetbrains.com) 提供的 [開源許可證](https://www.jetbrains.com/community/opensource/) 
+### 考虑过使用 Web 前端技术来进行重构吗？
 
-此項目自豪地使用 [Rider](https://www.jetbrains.com/rider/) 進行開發.
+既有的插件都是基于 .NET Framework 并且存在相当数量强烈依赖对 WPF 进行反射访问的，使用 Web 前端技术来进行重构不现实。
