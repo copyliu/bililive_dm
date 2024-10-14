@@ -169,6 +169,7 @@
     </Compile>
     <Compile Include="PluginStatusConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Properties\IOleServiceProvider.cs" />
     <Compile Include="Selector.xaml.cs">
       <DependentUpon>Selector.xaml</DependentUpon>
     </Compile>
