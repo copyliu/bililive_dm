@@ -30,7 +30,7 @@
     <MinimumRequiredVersion>1.1.1.122</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>124</ApplicationRevision>
+    <ApplicationRevision>126</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -330,28 +330,28 @@
       <Version>13.0.1</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <PublishFile Include="brolib_x64">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-    <PublishFile Include="brolib_x86">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>Assembly</FileType>
-    </PublishFile>
-  </ItemGroup>
+  <!-- <ItemGroup> -->
+  <!--   <PublishFile Include="brolib_x64"> -->
+  <!--     <Visible>False</Visible> -->
+  <!--     <Group> -->
+  <!--     </Group> -->
+  <!--     <TargetPath> -->
+  <!--     </TargetPath> -->
+  <!--     <PublishState>Include</PublishState> -->
+  <!--     <IncludeHash>True</IncludeHash> -->
+  <!--     <FileType>Assembly</FileType> -->
+  <!--   </PublishFile> -->
+  <!--   <PublishFile Include="brolib_x86"> -->
+  <!--     <Visible>False</Visible> -->
+  <!--     <Group> -->
+  <!--     </Group> -->
+  <!--     <TargetPath> -->
+  <!--     </TargetPath> -->
+  <!--     <PublishState>Include</PublishState> -->
+  <!--     <IncludeHash>True</IncludeHash> -->
+  <!--     <FileType>Assembly</FileType> -->
+  <!--   </PublishFile> -->
+  <!-- </ItemGroup> -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="BeforePublish">
     <Error Condition="'$(Configuration)' != 'Release' Or '$(PlatformName)' != 'AnyCPU'" Text="不得发布Debug版!" />
