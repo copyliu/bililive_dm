@@ -11,7 +11,7 @@
     <Identity
             Name="38862CopyLiu.B"
             Publisher="CN=B2B24A43-5C35-415F-9661-54323D87303A"
-            Version="1.0.34.0"/>
+            Version="1.0.36.0"/>
 
     <mp:PhoneIdentity PhoneProductId="f57dcf91-5309-49bf-8c99-64c775582b55"
                       PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
