@@ -223,10 +223,15 @@ namespace Bililive_dm
                             if (!_danmakuQueue.Any()) continue;
                             var danmaku = _danmakuQueue.Dequeue();
 
-                            if (danmaku.MsgType == MsgTypeEnum.OPConnectionEnd)
+                            if (danmaku.MsgType == MsgTypeEnum.OPConnectionEnd )
                             {
-                                logging(Properties.Resources.MainWindow_MainWindow_B站開放平台通知__本次使用已結束__請重新連線_);
-                                _bopm?.ForceDisconnect();
+                                var gameid = danmaku.RawDataJToken["data"]?["game_id"]?.ToString();
+                                if (!string.IsNullOrEmpty(gameid) && gameid == this._bopm?.GameId)
+                                {
+                                    logging(Properties.Resources.MainWindow_MainWindow_B站開放平台通知__本次使用已結束__請重新連線_);
+                                    _bopm?.ForceDisconnect();
+                                }
+                              
                             }
                             
                             if (danmaku.MsgType == MsgTypeEnum.Comment && _enableRegex)
