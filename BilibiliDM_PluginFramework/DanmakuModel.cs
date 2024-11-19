@@ -602,6 +602,20 @@ namespace BilibiliDM_PluginFramework
                         case "LIVE_OPEN_PLATFORM_INTERACTION_END":
                             this.MsgType=MsgTypeEnum.OPConnectionEnd;
                             break;
+                        case "LIVE_OPEN_PLATFORM_LIVE_ROOM_ENTER":
+                                MsgType = MsgTypeEnum.Interact;
+                                UserName = obj["data"]["uname"].ToString();
+                                UserID_str = obj["data"]["uid"].ToString();
+                                try
+                                {
+                                    UserID = Convert.ToInt32(UserID_str);
+                                }
+                                catch (Exception)
+                                {
+                                    UserID = -1;
+                                }
+                                InteractType = InteractTypeEnum.Enter;
+                                break;
                         #endregion
 
 
