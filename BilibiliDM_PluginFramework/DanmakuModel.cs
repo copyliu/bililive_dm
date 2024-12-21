@@ -467,25 +467,7 @@ namespace BilibiliDM_PluginFramework
                         case "LIVE_OPEN_PLATFORM_DM":
                             MsgType = MsgTypeEnum.Comment;
                             CommentText = obj["data"]["msg"].ToString();
-                            UserID_str = obj["data"]["uid"].ToString();
-                            try
-                            {
-                                UserID = Convert.ToInt32(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID = -1;
-                            }
-
-                            try
-                            {
-                                UserID_long = Convert.ToInt64(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID_long = -1;
-                            }
-
+                           
                             UserName =  obj["data"]["uname"].ToString();
                             isAdmin = false;
                             isVIP = false;
@@ -495,24 +477,7 @@ namespace BilibiliDM_PluginFramework
                             MsgType = MsgTypeEnum.GiftSend;
                             GiftName = obj["data"]["gift_name"].ToString();
                             UserName = obj["data"]["uname"].ToString();
-                            UserID_str = obj["data"]["uid"].ToString();
-                            try
-                            {
-                                UserID = Convert.ToInt32(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID = -1;
-                            }
-
-                            try
-                            {
-                                UserID_long = Convert.ToInt64(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID_long = -1;
-                            }
+                           
 
                             // Giftrcost = obj["data"]["rcost"].ToString();
                             GiftCount = obj["data"]["gift_num"].ToObject<int>();
@@ -520,24 +485,7 @@ namespace BilibiliDM_PluginFramework
                         case "LIVE_OPEN_PLATFORM_SUPER_CHAT":
                             MsgType = MsgTypeEnum.SuperChat;
                             CommentText = obj["data"]["message"]?.ToString();
-                            UserID_str = obj["data"]["uid"].ToString();
-                            try
-                            {
-                                UserID = Convert.ToInt32(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID = -1;
-                            }
-
-                            try
-                            {
-                                UserID_long = Convert.ToInt64(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID_long = -1;
-                            }
+                          
 
                             UserName = obj["data"]["uname"].ToString();
                             Price = obj["data"]["rmb"].ToObject<decimal>();
@@ -548,24 +496,7 @@ namespace BilibiliDM_PluginFramework
                             break;
                         case "LIVE_OPEN_PLATFORM_GUARD":
                             MsgType = MsgTypeEnum.GuardBuy;
-                            UserID_str = obj["data"]["user_info"]["uid"].ToString();
-                            try
-                            {
-                                UserID = Convert.ToInt32(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID = -1;
-                            }
-
-                            try
-                            {
-                                UserID_long = Convert.ToInt64(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID_long = -1;
-                            }
+                          
 
                             UserName = obj["data"]["user_info"]["uname"].ToString();
                             UserGuardLevel = obj["data"]["guard_level"].ToObject<int>();
@@ -577,49 +508,41 @@ namespace BilibiliDM_PluginFramework
                         case "LIVE_OPEN_PLATFORM_LIKE":
                             MsgType = MsgTypeEnum.Interact;
                             UserName = obj["data"]["uname"].ToString();
-                            UserID_str = obj["data"]["uid"].ToString();
-                            try
-                            {
-                                UserID = Convert.ToInt32(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID = -1;
-                            }
-
-                            try
-                            {
-                                UserID_long = Convert.ToInt64(UserID_str);
-                            }
-                            catch (Exception)
-                            {
-                                UserID_long = -1;
-                            }
+                          
 
                             InteractType = InteractTypeEnum.Like;
                             break;
 
-                        case "LIVE_OPEN_PLATFORM_INTERACTION_END":
+                            case "LIVE_OPEN_PLATFORM_INTERACTION_END":
                             this.MsgType=MsgTypeEnum.OPConnectionEnd;
                             break;
                         case "LIVE_OPEN_PLATFORM_LIVE_ROOM_ENTER":
                                 MsgType = MsgTypeEnum.Interact;
                                 UserName = obj["data"]["uname"].ToString();
-                                UserID_str = obj["data"]["uid"].ToString();
-                                try
-                                {
-                                    UserID = Convert.ToInt32(UserID_str);
-                                }
-                                catch (Exception)
-                                {
-                                    UserID = -1;
-                                }
                                 InteractType = InteractTypeEnum.Enter;
                                 break;
-                        #endregion
+
+                        case "OPEN_LIVEROOM_INTERACT_WORD":
+                        {
+                            MsgType = MsgTypeEnum.Interact;
+                            UserName = obj["data"]["uname"].ToString();
+                           
 
 
-                        default:
+                            InteractType = InteractTypeEnum.Follow;
+                            break;
+                        }
+                        case "OPEN_LIVEROOM_WARNING":
+                        {
+                            MsgType = MsgTypeEnum.Warning;
+                            CommentText = obj["data"]["msg"]?.ToString();
+
+                            break;
+                        }
+                            #endregion
+
+
+                            default:
                         {
                             if (cmd.StartsWith("DANMU_MSG")) // "高考"fix
                             {
