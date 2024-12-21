@@ -25,7 +25,7 @@ namespace Bililive_dm
             Text.FontFamily = TextFontFamily;
             UserName.FontFamily = TextFontFamily;
             sp.FontFamily = TextFontFamily;
-            if (warning) LayoutRoot.Background = Brushes.Red;
+            if (warning) LayoutRoot.Background = Brushes.OrangeRed;
             var sb = (Storyboard)Resources["Storyboard1"];
             Storyboard.SetTarget(sb.Children[2], this);
 
