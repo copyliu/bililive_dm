@@ -2,26 +2,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:liveStreamerCmtHelper="clr-namespace:LiveStreamerCmtHelper"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LiveStreamerCmtHelper.MainWindow"
         Title="LiveStreamerCmtHelper">
-   <StackPanel Spacing="6" Margin="20,0">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Spacing="6" Margin="20,0">
 
-        <StackPanel  Orientation="Horizontal">
-            <!-- <HorizontalStackLayout>-->
-            <Label Content="直播间地址"
-                   FontSize="18" />
             <StackPanel  Orientation="Horizontal">
-                <Label Content="https://live.bilibili.com/" 
+                <!-- <HorizontalStackLayout>-->
+                <Label Content="B站主播身份码"
                        FontSize="18" />
-                <TextBox  x:Name="roomId" />
+                <TextBox  x:Name="RoomCode"  Width="200" PasswordChar="*"  />
+             
+                <Button Content="连接" />
+                <!--  </HorizontalStackLayout>-->
             </StackPanel>
-            <Button Content="連線" />
-            <!--  </HorizontalStackLayout>-->
-        </StackPanel>
-        <StackPanel Margin="0,6" x:Name="mainLog"
-                 />
-        <!--
+          
+            <!--
         <ScrollView>
             <VerticalStackLayout 
             Spacing="25" 
@@ -57,6 +55,28 @@
             </VerticalStackLayout>
         </ScrollView>
 -->
-    </StackPanel>
+        </StackPanel>
+      
+        <ScrollViewer DockPanel.Dock="Bottom">
+            <ItemsControl  x:Name="MainLog" ItemsSource="{Binding LogItems} " x:DataType="liveStreamerCmtHelper:MainViewModel">
+                <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,10,0,0"
+                            CornerRadius="5"
+                            BorderBrush="Gray" BorderThickness="1"
+                            Padding="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding  LogTime}"/>
+                            <TextBlock Text="{Binding LogName }"/>
+                            <TextBlock Text="{Binding LogContent }"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+    
+
 
 </Window>
