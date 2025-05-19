@@ -491,10 +491,10 @@
     <value>\_q{0}\n\_q\f[height,20]{1}</value>
   </data>
   <data name="MainWindow_ProcDanmaku_歡迎老爺__0__進入直播間" xml:space="preserve">
-    <value>[マスター] {1}さん 入室した</value>
+    <value>[マスター] {0}さん 入室した</value>
   </data>
   <data name="MainWindow_ProcDanmaku_歡迎老爺和管理員__0__進入直播間" xml:space="preserve">
-    <value>[マスター][管理者] {1}さん 入室した</value>
+    <value>[マスター][管理者] {0}さん 入室した</value>
   </data>
   <data name="Plugin_DataGrid_Status_On" xml:space="preserve">
     <value>有効</value>
