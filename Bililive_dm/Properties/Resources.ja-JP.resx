@@ -542,6 +542,6 @@
     <value>ｻｲﾄﾞﾊﾞｰの高</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin6" xml:space="preserve">
-    <value>檔案名</value>
+    <value>ファイル名</value>
   </data>
 </root>
