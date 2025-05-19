@@ -291,7 +291,8 @@ namespace Bililive_dm
             Logging(Properties.Resources.MainWindow_MainWindow_可以点击日志复制到剪贴板);
             if (DebugMode) Logging(Properties.Resources.MainWindow_MainWindow_当前为Debug模式);
 
-            Task.Run(InitPlugins);
+            //Task.Run(InitPlugins);
+            InitPlugins();
 
             try
             {
