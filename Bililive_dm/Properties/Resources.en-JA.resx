@@ -541,4 +541,7 @@
   <data name="TextBlock_Text_SHeight" xml:space="preserve">
     <value>側窗口高度</value>
   </data>
+  <data name="DataGridTextColumn.Header.Plugin6" xml:space="preserve">
+    <value>檔案名</value>
+  </data>
 </root>
