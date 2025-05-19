@@ -167,6 +167,7 @@
     <Compile Include="OptionDialog.xaml.cs">
       <DependentUpon>OptionDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PluginFileNameConverter.cs" />
     <Compile Include="PluginStatusConverter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\IOleServiceProvider.cs" />

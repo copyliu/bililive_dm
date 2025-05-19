@@ -12,7 +12,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <bililiveDm:PluginStatusConverter x:Key="Converter" />
-
+            <bililiveDm:PluginFileNameConverter x:Key="FilenameConverter" />
             <DataTemplate x:Key="LogTemplate">
                 <TextBlock Text="{Binding}" TextWrapping="Wrap" Cursor="Hand"
                            MouseLeftButtonDown="UIElement_OnMouseLeftButtonUp" />
@@ -252,6 +252,8 @@
                             <DataGridTextColumn Binding="{Binding PluginVer}"
                                                 ClipboardContentBinding="{Binding PluginVer}"
                                                 Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin5}" />
+                            <DataGridTextColumn  Binding="{Binding Converter={StaticResource FilenameConverter}}"
+                                                 Header="{x:Static properties:Resources.DataGridTextColumn_Header_Plugin6}"  />
                         </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>

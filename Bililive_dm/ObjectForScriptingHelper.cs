@@ -23,7 +23,7 @@ namespace Bililive_dm
 
         public void OpenUWPStore()
         {
-            Process.Start("https://www.microsoft.com/store/apps/9PBVHQH1P2BV");
+            Process.Start("https://apps.microsoft.com/detail/9PBVHQH1P2BV");
             ;
         }
     }

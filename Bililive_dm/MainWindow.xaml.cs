@@ -291,7 +291,7 @@ namespace Bililive_dm
             Logging(Properties.Resources.MainWindow_MainWindow_可以点击日志复制到剪贴板);
             if (DebugMode) Logging(Properties.Resources.MainWindow_MainWindow_当前为Debug模式);
 
-            InitPlugins();
+            Task.Run(InitPlugins);
 
             try
             {
@@ -1460,7 +1460,11 @@ namespace Bililive_dm
 
         private void InitPlugins()
         {
-            App.Plugins.Add(new MobileService());
+            this.Dispatcher.Invoke(() =>
+            {
+                App.Plugins.Add(new MobileService());
+            });
+          
             var path = "";
             try
             {
@@ -1503,7 +1507,7 @@ namespace Bililive_dm
                                 $"插件{exportedType.FullName}({plugin.PluginName})加载完毕，用时{sw.ElapsedMilliseconds}ms");
                         }
 
-                        App.Plugins.Add(plugin);
+                        this.Dispatcher.Invoke(() => App.Plugins.Add(plugin));
                     }
                 }
                 catch (Exception ex)
@@ -1513,32 +1517,39 @@ namespace Bililive_dm
             }
 
             foreach (var plugin in App.Plugins)
-                try
+            {
+                Task.Run(() =>
                 {
-                    plugin.Inited();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(
-                        string.Format(Properties.Resources.MainWindow_Plugin_Disable_插件報錯2, plugin.PluginName,
-                            plugin.PluginAuth, plugin.PluginCont));
                     try
                     {
-                        var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-                        using (var outfile = new StreamWriter(desktop + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                        plugin.Inited();
+                    }
+                    catch (Exception ex)
+                    {
+                        this.Dispatcher.Invoke(() => MessageBox.Show(
+                            string.Format(Properties.Resources.MainWindow_Plugin_Disable_插件報錯2, plugin.PluginName,
+                                plugin.PluginAuth, plugin.PluginCont)));
+                        try
                         {
-                            outfile.WriteLine(DateTime.Now + " " + string.Format(
-                                Properties.Resources.MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝, plugin.PluginCont));
-                            outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
-                            outfile.Write(ex.ToString());
+                            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+                            using (var outfile =
+                                   new StreamWriter(desktop + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                            {
+                                outfile.WriteLine(DateTime.Now + " " + string.Format(
+                                    Properties.Resources.MainWindow_Plugin_Enable_請有空發給聯繫方式__0__謝謝, plugin.PluginCont));
+                                outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
+                                outfile.Write(ex.ToString());
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            // ignored
                         }
                     }
-                    catch (Exception)
-                    {
-                        // ignored
-                    }
-                }
+                });
+
+            }
         }
 
         private void OpenPluginFolder_OnClick(object sender, RoutedEventArgs e)
