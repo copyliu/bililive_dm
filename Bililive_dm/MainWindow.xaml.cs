@@ -1519,8 +1519,7 @@ namespace Bililive_dm
 
             foreach (var plugin in App.Plugins)
             {
-                Task.Run(() =>
-                {
+               
                     try
                     {
                         plugin.Inited();
@@ -1548,7 +1547,7 @@ namespace Bililive_dm
                             // ignored
                         }
                     }
-                });
+               
 
             }
         }
