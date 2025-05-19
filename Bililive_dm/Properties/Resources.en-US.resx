@@ -542,6 +542,6 @@ Information:</value>
     <value>Sidebar height</value>
   </data>
   <data name="DataGridTextColumn.Header.Plugin6" xml:space="preserve">
-    <value>檔案名</value>
+    <value>Filename</value>
   </data>
 </root>
