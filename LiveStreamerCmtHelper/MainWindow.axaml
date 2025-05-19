@@ -2,8 +2,81 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:liveStreamerCmtHelper="clr-namespace:LiveStreamerCmtHelper"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="LiveStreamerCmtHelper.MainWindow"
         Title="LiveStreamerCmtHelper">
-    Welcome to Avalonia!
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Spacing="6" Margin="20,0">
+
+            <StackPanel  Orientation="Horizontal">
+                <!-- <HorizontalStackLayout>-->
+                <Label Content="B站主播身份码"
+                       FontSize="18" />
+                <TextBox  x:Name="RoomCode"  Width="200" PasswordChar="*"  />
+             
+                <Button Content="连接" />
+                <!--  </HorizontalStackLayout>-->
+            </StackPanel>
+          
+            <!--
+        <ScrollView>
+            <VerticalStackLayout 
+            Spacing="25" 
+            Padding="30,0" 
+            VerticalOptions="Center">
+
+                <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="200"
+                HorizontalOptions="Center" />
+
+                <Label 
+                Text="Hello, World!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+                <Label 
+                Text="Welcome to .NET Multi-platform App UI"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+                <Button 
+                x:Name="CounterBtn"
+                Text="Click me"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnCounterClicked"
+                HorizontalOptions="Center" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+-->
+        </StackPanel>
+      
+        <ScrollViewer DockPanel.Dock="Bottom">
+            <ItemsControl  x:Name="MainLog" ItemsSource="{Binding LogItems} " x:DataType="liveStreamerCmtHelper:MainViewModel">
+                <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,10,0,0"
+                            CornerRadius="5"
+                            BorderBrush="Gray" BorderThickness="1"
+                            Padding="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding  LogTime}"/>
+                            <TextBlock Text="{Binding LogName }"/>
+                            <TextBlock Text="{Binding LogContent }"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </DockPanel>
+    
+
+
 </Window>
