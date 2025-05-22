@@ -1,0 +1,117 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Bililive_dm/Bililive_dm.csproj'
+
+env:
+  Name: Bililive_dm
+  Solution_Name: Bililive_dm.sln
+  Project_Name: Bililive_dm\Bililive_dm.csproj
+
+jobs:
+  pre-release:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        fetch-tags: true
+
+    - name: Get previous version
+      id: previous_version
+      run: |
+        $prev_version = git describe --tags $(git rev-list --tags --max-count=1)
+        Write-Output Previous Version: $prev_version
+        Write-Output "prev_version=$prev_version" >> $env:GITHUB_OUTPUT
+      continue-on-error: true
+
+    - name: Get version
+      id: version
+      run: |
+        Invoke-WebRequest https://github.com/BrandonStudio/GitHubActionScripts/raw/main/getMSBuildApplicationVersion.py -OutFile getVersion.py
+        $version = python getVersion.py ${{ env.Project_Name }}
+        $version = "v" + $version
+        Write-Output Current Version: $version
+        Write-Output "version=$version" >> $env:GITHUB_OUTPUT
+
+    outputs:
+      prev_version: ${{ steps.previous_version.outputs.prev_version }}
+      version: ${{ steps.version.outputs.version }}
+
+  release:
+    runs-on: windows-latest
+    needs: pre-release
+    if: ${{ needs.pre-release.outputs.prev_version != needs.pre-release.outputs.version }}
+    env:
+      CURRENT_VERSION: ${{ needs.pre-release.outputs.version }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Setup .NET Framework 4.6.1
+      run: |
+        Invoke-WebRequest ${{ env.download_url }} -OutFile ${{ env.outfile }}
+        Start-Process -Wait ${{ env.outfile }} -ArgumentList "/install /quiet"
+      env:
+        download_url: https://go.microsoft.com/fwlink/?linkid=2099470
+        outfile: dotnet461tgpkg.exe
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build Dependency
+      run: cmd.exe /c "cd wtf_lib_builder && Build_Release.bat"
+
+    - name: Build
+      run: msbuild /r /p:Configuration=Release ${{ env.Project_Name }}
+
+    - name: Create release
+      id: create_release
+      uses: BrandonStudio/tag-and-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.CURRENT_VERSION }}
+        release_name: Release ${{ env.CURRENT_VERSION }}
+        draft: true
+        prerelease: false
+        body: |
+          # Changes
+        discussion_category_name: 'Announcements'
+        generate_release_notes: true
+
+    - name: Trim url
+      id: trim_url
+      run: |
+        $url = "${{ steps.create_release.outputs.upload_url }}"
+        $url = [regex]::Replace($url, "assets(?!.*assets).*", "assets?name")
+        Write-Output "upload_url=$url" >> $env:GITHUB_OUTPUT
+
+    - name: Upload pdb
+      run: >
+        Invoke-WebRequest -Method Post ${{ steps.trim_url.outputs.upload_url }}=${{ env.Name }}-${{ env.CURRENT_VERSION }}.pdb
+        -Headers @{ "Authorization"="token ${{ secrets.GITHUB_TOKEN }}"; "Content-Type"="application/octet-stream" }
+        -InFile Bililive_dm\bin\Release\${{ env.Name }}.pdb
+
+    - name: Package and upload other assets
+      env:
+        ARCHIVE_NAME: ${{ env.Name }}-${{ env.CURRENT_VERSION }}-portable.zip
+        UPLOAD_URL: ${{ steps.trim_url.outputs.upload_url }}
+      run: |
+        Set-Location Bililive_dm\bin\Release
+        Remove-Item ${{ env.Name }}.pdb
+        Remove-Item ${{ env.Name }}.application
+        Remove-Item app.publish -Recurse
+        Compress-Archive -Path * -DestinationPath ..\${{ env.ARCHIVE_NAME }}
+        Invoke-WebRequest -Method Post ${{ env.UPLOAD_URL }}=${{ env.ARCHIVE_NAME }} `
+        -Headers @{ "Authorization"="token ${{ secrets.GITHUB_TOKEN }}"; "Content-Type"="application/octet-stream" } `
+        -InFile ..\${{ env.ARCHIVE_NAME }}
