@@ -152,14 +152,7 @@ namespace Bililive_dm
             }
             else
             {
-                Title += Properties.Resources.MainWindow_MainWindow_____傻逼版本_;
-#if !DEBUG
-                if(!(Debugger.IsAttached || offlineMode))
-                {
-                    MessageBox.Show(Application.Current.MainWindow, Properties.Resources.MainWindow_MainWindow_你的打开方式不正确);
-                    this.Close();
-                }
-#endif
+                Title += Properties.Resources.MainWindow_MainWindow____版本号__;
             }
 
             if (DebugMode) Title += Properties.Resources.MainWindow_MainWindow_____Debug模式_;
