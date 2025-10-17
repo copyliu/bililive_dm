@@ -1117,6 +1117,33 @@ namespace Bililive_dm
             this.Logging(text);
             
         }
+
+        private void LoggingError(string text)
+        {
+            if (!_savelogEnabled) return;
+            try
+            {
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+
+                path = Path.Combine(path, "弹幕姬");
+                Directory.CreateDirectory(path);
+                using (
+                    var outfile =
+                    new StreamWriter(Path.Combine(path, DateTime.Now.ToString("yyyy-MM-dd") + ".info.txt"), true)
+                )
+                {
+                    outfile.WriteLine(DateTime.Now.ToString("T") + " : " + text);
+                }
+
+               
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+        
         private void Logging(string text)
         {
             if (Log.Dispatcher.CheckAccess())
@@ -1513,7 +1540,7 @@ namespace Bililive_dm
                 }
                 catch (Exception ex)
                 {
-                    if (DebugMode) Logging("加载出错：" + ex);
+                    if (DebugMode) LoggingError("加载出错：" + ex);
                 }
             }
 
@@ -1812,7 +1839,9 @@ namespace Bililive_dm
                 if (DebugMode) Logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_, info.roomid));
                 connectresult = await _bopm.ConnectAsync();
                 if (!connectresult && _b.Error != null) // 如果连接不成功并且出错了
-                    Logging(string.Format(Properties.Resources.MainWindow_connbtn_Click_出錯, _b.Error));
+                {
+                    LoggingError(string.Format(Properties.Resources.MainWindow_connbtn_Click_出錯, _b.Error));
+                }
                 while (!connectresult && sender == null && AutoReconnect.IsChecked == true)
                 {
                     if (trytime > 5)
