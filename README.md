@@ -26,10 +26,3 @@ English: [TigerSHe1998](https://github.com/TigerSHe1998) 大場加奈子([@komoe
 =======
 請見 [弹幕姬插件开发](https://github.com/copyliu/bililive_dm/wiki/%E5%BC%B9%E5%B9%95%E5%A7%AC%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91)
 
-感謝
-======
-<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="Jetbrains_logo" height="150">
-
-感謝由 [JetBrains](https://www.jetbrains.com) 提供的 [開源許可證](https://www.jetbrains.com/community/opensource/) 
-
-此項目自豪地使用 [Rider](https://www.jetbrains.com/rider/) 進行開發.
