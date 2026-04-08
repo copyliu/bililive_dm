@@ -44,7 +44,15 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore Bililive_dm.sln
 
-      - name: Build solution
+      - name: Build wtf_lib
+        run: |
+          msbuild wtf_lib_builder/wtf_lib_builder.vcxproj `
+            /p:Configuration=${{ matrix.configuration }} `
+            /p:Platform="${{ matrix.platform }}" `
+            /m `
+            /v:minimal
+
+      - name: Build Bililive_dm
         run: |
           msbuild Bililive_dm/Bililive_dm.csproj `
             /p:Configuration=${{ matrix.configuration }} `
