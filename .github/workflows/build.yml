@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         configuration: [Release]
-        platform: ["Any CPU"]
+        platform: ["AnyCPU"]
 
     steps:
       - name: Install .Net 4.6.1
