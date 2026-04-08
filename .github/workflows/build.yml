@@ -46,7 +46,7 @@ jobs:
 
       - name: Build solution
         run: |
-          msbuild Bililive_dm.sln `
+          msbuild Bililive_dm/Bililive_dm.csproj `
             /p:Configuration=${{ matrix.configuration }} `
             /p:Platform="${{ matrix.platform }}" `
             /m `
