@@ -26,5 +26,10 @@ namespace Bililive_dm
             Process.Start("https://apps.microsoft.com/detail/9PBVHQH1P2BV");
             ;
         }
+        public void OpenAFD()
+        {
+            Process.Start("https://afdian.com/a/copyliu");
+            ;
+        }
     }
 }
