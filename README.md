@@ -3,6 +3,8 @@ bililive_dm
 
 [![Build status](https://ci.appveyor.com/api/projects/status/4ung75nx9remwc7j?svg=true&passingText=%E7%BC%96%E8%AF%91%20-%20%E7%A8%B3%20&pendingText=%E5%B0%8F%E5%9C%9F%E8%B1%86%E7%82%B8%E4%BA%86%20&failingText=%E6%88%91%E6%84%9F%E8%A7%89%E5%8D%9C%E8%A1%8C%20)](https://ci.appveyor.com/project/copyliu/bililive-dm) [![Crowdin](https://badges.crowdin.net/bililivedm/localized.svg)](https://crowdin.com/project/bililivedm)
 
+[![爱发电](https://pic1.afdiancdn.com/static/img/welcome/button-sponsorme.png)](https://ifdian.net/a/copyliu)
+
 这是一个奇妙B站直播間彈幕工具. WTFPL授權.
 
 根據B站官方統計, 本工具30天使用主播超過25萬. 是B站直播間彈幕工具中最老牌的.
