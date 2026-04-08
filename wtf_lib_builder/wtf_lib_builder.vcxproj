@@ -44,7 +44,7 @@
       <Command>Build_Debug.bat</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>del Debug\wtf_lib_builder.tlog\wtf_lib_builder.lastbuildstate</Command>
+      <Command>del $(IntDir)$(ProjectName).tlog\$(ProjectName).lastbuildstate</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -52,7 +52,7 @@
       <Command>Build_Release.bat</Command>
     </PreBuildEvent>
     <PostBuildEvent>
-      <Command>del Release\wtf_lib_builder.tlog\wtf_lib_builder.lastbuildstate</Command>
+      <Command>del $(IntDir)$(ProjectName).tlog\$(ProjectName).lastbuildstate</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
