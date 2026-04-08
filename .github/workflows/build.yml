@@ -19,6 +19,10 @@ jobs:
         platform: ["Any CPU"]
 
     steps:
+      - name: Install .Net 4.6.1
+        shell: cmd
+        run: choco install netfx-4.6.1-devpack -y
+        
       - name: Checkout code
         uses: actions/checkout@v4
         with:
