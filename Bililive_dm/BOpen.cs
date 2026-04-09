@@ -166,9 +166,28 @@ namespace Bililive_dm
                 {
                     return false;
                 }
-
+                HttpResponseMessage req;
                 var param = JsonConvert.SerializeObject(new { game_id = gameid }, Formatting.None);
-                var req = await httpClient.PostAsync("https://bopen.ceve-market.org/sign", new StringContent(param));
+                try
+                {
+                    req = await httpClient.PostAsync("https://soft.ceve-market.org/bopen/sign", new StringContent(param, Encoding.UTF8, "application/json"));
+                    if (!req.IsSuccessStatusCode)
+                    {
+                        throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_簽名伺服器離線);
+                    }
+                }
+                catch (Exception e)
+                {
+                    try
+                    {
+                        req = await httpClient.PostAsync("https://bopen.ceve-market.org/sign", new StringContent(param, Encoding.UTF8, "application/json"));
+                    }
+                    catch (Exception e1)
+                    {
+                        throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_簽名伺服器離線, e1);
+                    }
+
+                }
                 if (!req.IsSuccessStatusCode)
                 {
                     throw new NotSupportedException(Resources.BOpen_GetRoomIdByCode_簽名伺服器離線);
