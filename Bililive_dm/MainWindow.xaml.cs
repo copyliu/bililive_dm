@@ -77,22 +77,28 @@ namespace Bililive_dm
         private bool _isOpm = true;
         private Task _bopenHeartBeatTask = null;
 
-        [DllImport("ntdll.dll", EntryPoint = "wine_get_version", CallingConvention = CallingConvention.Cdecl)]
-        private static extern IntPtr wine_get_version();
         public MainWindow()
         {
             InitializeComponent();
             try
             {
                
-                IntPtr ptr = wine_get_version();
-                if ( ptr != IntPtr.Zero){
+              
+                if ( WineDetector.IsRunningUnderWine()){
                     System.Windows.Media.RenderOptions.ProcessRenderMode = System.Windows.Interop.RenderMode.SoftwareOnly;
+
+                    this.AllowsTransparency = false;
+                    this.Full.IsEnabled = false;
+                }
+                else
+                {
+                    
+
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-               
+                
             }
 
 

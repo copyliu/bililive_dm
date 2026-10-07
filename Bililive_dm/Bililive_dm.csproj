@@ -30,7 +30,7 @@
     <MinimumRequiredVersion>1.1.1.135</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>137</ApplicationRevision>
+    <ApplicationRevision>138</ApplicationRevision>
     <ApplicationVersion>1.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -182,6 +182,7 @@
     <Compile Include="Properties\USER32.cs" />
     <Compile Include="Properties\WINAPI.cs" />
     <Compile Include="StyledWindow.cs" />
+    <Compile Include="WineDetector.cs" />
     <Compile Include="WtfDanmakuWindow.cs">
       <SubType>Form</SubType>
     </Compile>
